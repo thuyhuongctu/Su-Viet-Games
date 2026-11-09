@@ -13,7 +13,7 @@ duy nhất, không cần cài đặt, thiết kế ưu tiên màn hình dọc đ
 Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
 
 1. **Kiến thiết**: chạm công trình ở thanh dưới rồi chạm ô đất trống để dựng —
-   lò gốm Chu Đậu, xưởng dệt lụa, bè ngọc trai, trạm trầm hương… sản xuất
+   lò gốm, xưởng dệt lụa, bè ngọc trai, trạm trầm hương… sản xuất
    hàng hóa; cầu tàu (đặt ven bờ) đón thêm thuyền; kho tăng sức chứa.
    **Chạm vào công trình đã dựng** để mở bảng **nâng cấp theo bậc** (tối đa
    cấp 3, hiện sao ★ trên nóc): lò xưởng cấp 2 nhanh gấp rưỡi, cấp 3 gấp
@@ -26,7 +26,7 @@ Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
    cộng thêm). Đủ danh vọng, triều đình thăng bến từ **Trang nhỏ** → **Trang
    Vân Đồn** → **Trấn Vân Đồn** → 👑 **Đệ Nhất Thương Cảng Đại Việt**, mỗi lần
    ban thưởng và mở công trình mới.
-4. **Biến cố**: bão trên vịnh khiến mọi việc đình trệ; **giặc Tàu Ô** cướp
+4. **Biến cố**: bão trên vịnh khiến mọi việc đình trệ; **giặc biển** cướp
    bến nếu chưa dựng Vọng lâu thủy binh; đoàn cống sứ ghé ngang biếu quà.
 5. **Cống phẩm triều đình** (từ cấp Trang Vân Đồn): chiếu chỉ định kỳ đòi
    dâng tiến sản vật trong hạn định — dâng kịp được ban thưởng lớn và
@@ -36,7 +36,7 @@ Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
    mặt hàng, trả giá cao nhất và tặng thêm danh vọng khi rời bến.
 
 Nút **📖** trên thanh trên mở **Sổ sử ký** — tóm lược sử liệu thật về
-Vân Đồn: chiếu lập trang 1149, gốm Chu Đậu xuất khẩu, trận Vân Đồn 1288
+Vân Đồn: chiếu lập trang 1149, gốm Đại Việt xuất khẩu, trận Vân Đồn 1288
 của Trần Khánh Dư. Nút **🏆** mở **Bảng thành tích**: thống kê cả ván
 (thuyền đã tiếp, quan tiền tích lũy, hàng sản xuất, cống phẩm, thời gian
 trấn thủ…) và 6 **danh hiệu** để chinh phục — từ *Thần buôn* đến
@@ -60,7 +60,12 @@ thuyền lương của **Trương Văn Hổ**.
 ## Chất liệu lịch sử — văn hóa
 
 - Chiếu lập trang Vân Đồn 1149 thời Lý Anh Tông (Đại Việt sử ký toàn thư)
-- Gốm Chu Đậu, lụa, ngọc trai, trầm hương — các mặt hàng xuất khẩu nổi tiếng
+- Gốm Đại Việt, lụa, ngọc trai, trầm hương — các mặt hàng xuất khẩu nổi tiếng
+- **Ghi chú niên đại** (sửa 10/11/2026): gốm hoa lam Chu Đậu ra đời cuối thế kỷ 14,
+  rực rỡ thế kỷ 15–16, nên trong game lò gốm gọi chung là «gốm Đại Việt»; «giặc
+  Tàu Ô» là tên gọi cướp biển thế kỷ 18–19, nên bến Vân Đồn gọi là «giặc biển»;
+  thuyền Phượng Hỏa và Đô đốc T'Hương là nhân vật hư cấu. Sổ sử ký trong game có
+  mục «Chỗ trò chơi giản lược» nói rõ các điểm này.
 - Kiến trúc mái ngói cong đầu đao, hoa văn sóng nước thời Lý trên giao diện
 - Bảng màu lấy từ gốm men ngọc (celadon), nâu đất, đỏ son, vàng đồng
 
