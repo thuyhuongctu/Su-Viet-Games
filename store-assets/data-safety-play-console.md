@@ -80,10 +80,12 @@ Bỏ qua toàn bộ. Không tick bất kỳ loại dữ liệu nào.
 - **Chọn từ 13 tuổi trở lên** → thủ tục nhẹ hơn nhiều, mà vẫn không ngăn học
   sinh nhỏ tuổi chơi được.
 
-Game hướng tới học sinh phổ thông và sinh viên, nên **13+ là lựa chọn hợp lý và
-ít rủi ro nhất**. Chỉ chọn nhóm dưới 13 nếu bạn thực sự muốn app xuất hiện
-trong mục *Teacher Approved / Kids* của CH Play và chấp nhận quy trình duyệt
-ngặt hơn.
+**Đã quyết (10/11/2026): game không dành cho trẻ em.** Ở mục Target audience chỉ
+tick hai nhóm **16–17** và **18 trở lên**; không tick nhóm nào dưới 16. Trang
+chính sách riêng tư ghi cùng nội dung này.
+
+(Ghi chú cũ: game hướng tới học sinh phổ thông và sinh viên, nên 13+ từng là
+lựa chọn được cân nhắc.)
 
 ---
 

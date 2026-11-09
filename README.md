@@ -67,7 +67,7 @@ software: see [License](#license-and-third-party-components).
 </tr>
 <tr>
 <td><b>Portal</b> — the games on a chronological timeline, in a shared visual identity drawn from Lý–Trần ceramics.</td>
-<td><b>Vân Đồn (1149)</b> — the port after several rounds of construction: piers, Chu Đậu kilns, silk workshops, shrines and a naval watchtower.</td>
+<td><b>Vân Đồn (1149)</b> — the port after several rounds of construction: piers, pottery kilns, silk workshops, shrines and a naval watchtower.</td>
 </tr>
 <tr>
 <td><img src="docs/screenshots/bac-hai-dao-captains.jpg" alt="Captain selection screen showing four illustrated captains and their abilities"></td>
@@ -101,7 +101,7 @@ software: see [License](#license-and-third-party-components).
 In 1149 King Lý Anh Tông issued an edict establishing Vân Đồn, the first
 international trading port of Đại Việt. The player develops the port from a
 fishing hamlet: building piers for merchant ships arriving from Song China,
-Japan, Java and Siam; opening Chu Đậu pottery kilns, silk workshops and pearl
+Japan, Java and Siam; opening pottery kilns, silk workshops and pearl
 rafts; collecting tax revenue; weathering storms; and repelling raids. The game
 includes tiered building upgrades, royal tribute quests, an in-game history
 codex, an achievements board, and a separate challenge mode recreating the
