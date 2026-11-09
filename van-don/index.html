@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Vân Đồn — Đệ Nhất Thương Cảng</title>
-<meta name="description" content="Game xây dựng thương cảng Vân Đồn thời Lý (1149): dựng cầu tàu đón thuyền Tống, Nhật, Java, Xiêm; xây lò gốm Chu Đậu, xưởng lụa, bè ngọc trai. Chơi miễn phí trên trình duyệt, hỗ trợ điện thoại.">
+<meta name="description" content="Game xây dựng thương cảng Vân Đồn thời Lý (1149): dựng cầu tàu đón thuyền Tống, Nhật, Java, Xiêm; xây lò gốm, xưởng lụa, bè ngọc trai. Chơi miễn phí trên trình duyệt, hỗ trợ điện thoại.">
 <meta property="og:title" content="Vân Đồn — Đệ Nhất Thương Cảng">
 <meta property="og:description" content="Dựng lại thời huy hoàng của thương cảng đầu tiên Đại Việt. Chơi ngay trên trình duyệt!">
 <style>
@@ -189,14 +189,23 @@
         <p>Suốt các triều Lý – Trần – Lê, thuyền buôn Tống, Nhật Bản, Nam Dương
         đến Vân Đồn đổi chác gốm sứ, lụa, trầm hương, ngọc trai. Khảo cổ tại
         Quan Lạn, Cống Đông tìm thấy hàng vạn mảnh gốm thương mại các thời.</p></div>
-      <div class="suItem"><h3>🏺 Gốm Chu Đậu</h3>
-        <p>Dòng gốm hoa lam nổi tiếng của Đại Việt (Hải Dương ngày nay), theo
-        thuyền buôn từ các cảng Đông Bắc tỏa đi khắp Đông Nam Á, Trung Đông —
-        một chiếc bình gốm Chu Đậu hiện còn ở bảo tàng Topkapi (Thổ Nhĩ Kỳ).</p></div>
+      <div class="suItem"><h3>🏺 Gốm Đại Việt qua Vân Đồn</h3>
+        <p>Vân Đồn vừa trung chuyển gốm sứ Trung Hoa, vừa là cửa ngõ đưa gốm
+        Đại Việt ra biển: men nâu thời Trần, rồi men lam thời Lê sơ. Dòng gốm hoa
+        lam <b>Chu Đậu</b> (Hải Dương ngày nay) ra đời cuối thế kỷ 14, rực rỡ nhất
+        thế kỷ 15–16, tức hơn hai trăm năm sau chiếu lập trang; một chiếc bình
+        Chu Đậu hiện còn ở bảo tàng Topkapi (Thổ Nhĩ Kỳ).</p></div>
       <div class="suItem"><h3>🗼 Trấn giữ cửa biển</h3>
         <p>Vân Đồn cũng là tiền đồn phòng thủ: năm 1288, Trần Khánh Dư phục kích
         đoàn thuyền lương của Trương Văn Hổ tại vùng biển Vân Đồn – Cửa Lục,
-        góp phần làm nên đại thắng Bạch Đằng.</p></div>
+        góp phần làm nên đại thắng Bạch Đằng. Năm 1349, nhà Trần đặt quan trấn,
+        quan lộ, sát hải sứ và quân Bình Hải ở <b>trấn Vân Đồn</b>.</p></div>
+      <div class="suItem"><h3>📌 Chỗ trò chơi giản lược</h3>
+        <p>Ván chơi gói nhiều thế kỷ vào một bến: từ trang thời Lý (1149) đến
+        trấn thời Trần (1349) và thời thịnh của gốm hoa lam thời Lê sơ. Giá hàng,
+        thuế bến và danh vọng là số của trò chơi, không phải số liệu lịch sử.
+        Thuyền <b>Phượng Hỏa</b> và Đô đốc T'Hương là nhân vật hư cấu của bộ game
+        (<i>Bắc Hải Đảo</i>, 1780), ghé bến như một vị khách vượt thời gian.</p></div>
       <p style="text-align:center;margin-top:14px">
         <button id="btn1288b" class="ghost">⚔️ Vào trận 1288</button>
         <button id="btnSuClose">Gấp sổ lại</button></p>
@@ -223,7 +232,7 @@
       xin vào Hải Đông buôn bán. Vua xuống chiếu: <i>«Cho lập trang ở nơi hải đảo,
       gọi là <b>Vân Đồn</b>, để mua bán hàng hóa quý, dâng tiến sản vật địa phương.»</i></p>
       <p>Khanh là quan trấn thủ được giao trọng trách ấy. Từ một bãi cát ven vịnh,
-      hãy dựng <b>cầu tàu</b> đón thương thuyền bốn phương, mở <b>lò gốm Chu Đậu</b>,
+      hãy dựng <b>cầu tàu</b> đón thương thuyền bốn phương, mở <b>lò gốm</b>,
       <b>xưởng lụa</b>, <b>bè ngọc trai</b> — thu thuế cho quốc khố, tích danh vọng
       để Vân Đồn xưng danh <b class="son">Đệ Nhất Thương Cảng Đại Việt</b>.</p>
       <p style="text-align:center;margin-top:14px">
@@ -373,7 +382,7 @@ musicBtnUI();
 
 // ---------- Hàng hóa ----------
 const GOODS = [
-  { id:'gom',  ic:'🏺', name:'Gốm Chu Đậu', price:26, lv:1 },
+  { id:'gom',  ic:'🏺', name:'Gốm Đại Việt', price:26, lv:1 },
   { id:'lua',  ic:'🧵', name:'Lụa tơ tằm',  price:48, lv:2 },
   { id:'ngoc', ic:'🦪', name:'Ngọc trai',   price:95, lv:3 },
   { id:'tram', ic:'🌿', name:'Trầm hương',  price:150, lv:3 },
@@ -422,7 +431,7 @@ const LEVELS = [
 const BUILDS = [
   { id:'cau',  ic:'⚓', name:'Cầu tàu',        cost:120, lv:1, shore:true,
     desc:'Thêm một chỗ cho thuyền cập bến' },
-  { id:'logom',ic:'🏺', name:'Lò gốm Chu Đậu', cost:150, lv:1, make:'gom',  rate:6,
+  { id:'logom',ic:'🏺', name:'Lò gốm', cost:150, lv:1, make:'gom',  rate:6,
     desc:'Nung 1 gốm mỗi 6 nhịp' },
   { id:'kho',  ic:'🏛️', name:'Kho hàng',       cost:100, lv:1, cap:30,
     desc:'+30 sức chứa hàng hóa' },
@@ -437,7 +446,7 @@ const BUILDS = [
   { id:'tram', ic:'🌿', name:'Trạm trầm hương',cost:500, lv:3, make:'tram', rate:17,
     desc:'Gom 1 trầm mỗi 17 nhịp' },
   { id:'vong', ic:'🗼', name:'Vọng lâu thủy binh', cost:380, lv:3, guard:true,
-    desc:'Đẩy lui giặc Tàu Ô, +8 danh vọng' },
+    desc:'Đẩy lui giặc biển, +8 danh vọng' },
 ];
 
 // ---------- Trạng thái ----------
@@ -624,11 +633,11 @@ function updateEvents(dt){
     if(countB('vong')>0){
       const gain=4+4*sumLvl('vong');
       game.rep+=gain; game.guardN++; sfx('gong'); checkLevel();
-      toast(`🗼 Vọng lâu phát hiện <b>giặc Tàu Ô</b>! Thủy binh đẩy lui — <b>+${gain} danh vọng</b>.`,4200);
+      toast(`🗼 Vọng lâu phát hiện <b>giặc biển</b>! Thủy binh đẩy lui — <b>+${gain} danh vọng</b>.`,4200);
     } else {
       const loss=Math.min(game.gold, Math.max(30, Math.round(game.gold*0.15)));
       game.gold-=loss; sfx('bad');
-      toast(`☠️ <b>Giặc Tàu Ô cướp bến!</b> Mất <b>${loss} quan</b>. Hãy dựng Vọng lâu thủy binh!`,4200);
+      toast(`☠️ <b>Giặc biển cướp bến!</b> Mất <b>${loss} quan</b>. Hãy dựng Vọng lâu thủy binh!`,4200);
     }
   } else {
     const bonus=60+game.level*40; game.gold+=bonus; game.earned+=bonus; sfx('coin');
@@ -695,7 +704,7 @@ function renderStats(){
     ['💰 Quan tiền tích lũy', game.earned.toLocaleString('vi-VN')+' quan'],
     ['🏺 Món hàng sản xuất', game.prodN],
     ['📜 Cống phẩm dâng đúng hạn', game.tribOk],
-    ['🗼 Lần đẩy lui giặc Tàu Ô', game.guardN],
+    ['🗼 Lần đẩy lui giặc biển', game.guardN],
     ['🔥 Lần Phượng Hỏa ghé bến', game.phoenixN],
     ['🏗️ Công trình (tổng cấp)', builds+' ('+lvls+')'],
     ['⏳ Thời gian trấn thủ', fmtPlayT(game.playT)],
