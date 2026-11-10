@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Vân Đồn 3D — Dạo Bến Thương Cảng (1149)</title>
-<meta name="description" content="Vân Đồn 3D: vào vai quan trấn thủ, tự đi lại trên bến Vân Đồn, mua hàng ở lò xưởng, bán cho thương thuyền Tống, Nhật Bản, Trảo Oa, Xiêm La và định mức thuế cảng. Bản thử nghiệm.">
+<meta name="description" content="Vân Đồn 3D: vào vai quan trấn thủ, tự đi lại trên bến Vân Đồn, mua hàng ở lò xưởng, bán cho thương thuyền Tống, Tam Phật Tề, Trảo Oa, Xiêm La và định mức thuế cảng. Bản thử nghiệm.">
 <meta name="theme-color" content="#241708">
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" href="../icons/icon-192.png">
@@ -136,7 +136,7 @@
       <button class="btn pri" id="btnStart" type="button">⚓ Ra bến</button>
       <a class="btn" href="../van-don/index.html" style="text-decoration:none;display:inline-flex;align-items:center">Bản 2D dựng bến</a>
     </div>
-    <p class="note">Bản thử nghiệm. Mức thuế, giá cả, nhịp phiên chợ và nhân vật «Nữ thương chủ» là hư cấu của
+    <p class="note">Bản thử nghiệm. Mức thuế, giá cả, nhịp phiên chợ, chức «quan trấn thủ» và nhân vật «Nữ thương chủ» là hư cấu của
     trò chơi, không phải sử liệu. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
     <p class="note" id="bestLine" style="text-align:center"></p>
   </div>
@@ -184,8 +184,8 @@ const GOODS = [
 const NATIONS = [
   { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0,
     look:{ robe:0xe8d9b0, trim:0xc94b3c, hat:'mu', hatColor:0x1c1c1c } },
-  { id:'nhat', name:'Nhật Bản', who:'Thương nhân Nhật Bản',   flag:0xf2e8d5, sail:0xb8452f, prefs:['gom','tram'], mult:1.15,
-    look:{ robe:0x7a2a22, trim:0xf2e8d5, sash:0x1c1c1c } },
+  { id:'nhat', name:'Tam Phật Tề', who:'Thương nhân Tam Phật Tề', flag:0x7a2a22, sail:0xc7772e, prefs:['gom','tram'], mult:1.15,
+    look:{ robe:0x8a4a2a, trim:0xd9a441, hat:'khan', hatColor:0x7a2a22, skin:0xc8956a } },
   { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1,
     look:{ robe:0x3f7a4f, trim:0xd9a441, hat:'khan', hatColor:0xd9a441, skin:0xc8956a } },
   { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05,
@@ -320,7 +320,7 @@ const places = [];   // điểm tương tác
   drum.rotation.z = Math.PI/2; drum.position.set(x+9.5,2.4,z+3); scene.add(drum);
   box(0.4,2.4,0.4,0x5c3d24,x+9.5,1.2,z+2.2); box(0.4,2.4,0.4,0x5c3d24,x+9.5,1.2,z+3.8);
   solids.push({x,z,r:8.5}); }
-// Bè ngọc trai (mé đông, sát mép nước)
+// Bến mò ngọc trai (mé đông, sát mép nước)
 { const x=58, z=2;
   box(12,0.5,8,0x7a5a36,x+2,-0.2,z+13);
   for(let i=0;i<3;i++) box(0.3,0.3,8,0x5c3d24,x-2+i*4,0.1,z+13);
@@ -478,8 +478,8 @@ function addPlace(def){
 }
 addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      npc:{ robe:0x8a5a33, trim:0x5c3d24, hat:'non', hatColor:0xd8c49a, beard:0xd9d4c8, skin:0xe0b48a } });
 addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   npc:{ robe:0x9ec5ab, trim:0xf2e8d5, sash:0xa5402e, female:true } });
-addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Phường trưởng đi trầm', npc:{ robe:0x4f6a45, trim:0xd9a441, hat:'khan', hatColor:0x5c3d24, beard:0x2a1a12, skin:0xdcae84 } });
-addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bè ngọc trai',  who:'Thợ lặn ngọc trai',  npc:{ robe:0x2f6f73, trim:0xf2e8d5, hat:'non', hatColor:0xd8c49a, skin:0xd9a878 } });
+addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Chủ trạm trầm hương', npc:{ robe:0x4f6a45, trim:0xd9a441, hat:'khan', hatColor:0x5c3d24, beard:0x2a1a12, skin:0xdcae84 } });
+addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bến mò ngọc trai', who:'Thợ lặn mò ngọc trai',  npc:{ robe:0x2f6f73, trim:0xf2e8d5, hat:'non', hatColor:0xd8c49a, skin:0xd9a878 } });
 addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', npc:{ robe:0x31476b, trim:0x9ec5ab, hat:'mu', hatColor:0x1c1c1c } });
 addPlace({ id:'bia-su',   kind:'stele', x:-58, z:-0.5, tag:'Bia sử', who:'Bia đá' });
 label('Bia sử', 9, (()=>{ const g=new THREE.Group(); g.position.set(-58,0,-4); scene.add(g); return g; })(), 0.8);
@@ -602,10 +602,13 @@ function renderDlg(){
     btns = `<button class="btn pri" type="button" data-a="end">🥁 Đánh trống kết phiên</button>` + btns;
   } else {
     title = 'Bia sử Vân Đồn';
-    body = `Năm <b>1149</b>, đời vua <b>Lý Anh Tông</b>, thuyền buôn ba nước Trảo Oa, Lộ Lạc, Xiêm La vào Hải Đông xin ở lại buôn bán.
-      Vua cho lập trang ở nơi hải đảo, gọi là <b>Vân Đồn</b>, để mua bán hàng hóa quý và dâng tiến sản vật địa phương (theo <i>Đại Việt sử ký toàn thư</i>).<br><br>
-      Năm <b>1288</b>, Trần Khánh Dư đánh tan đoàn thuyền lương của Trương Văn Hổ tại đây.<br><br>
-      <b>Chỗ trò chơi giản lược:</b> mức thuế 5–15–30%, giá hàng và nhịp sáu phiên chợ là số liệu của trò chơi. Gốm trong game gọi chung là «gốm Đại Việt».`;
+    body = `Năm Kỷ Tỵ (<b>1149</b>), đời vua <b>Lý Anh Tông</b>, mùa xuân, tháng 2, thuyền buôn ba nước Trảo Oa, Lộ Lạc, Xiêm La vào Hải Đông xin cư trú buôn bán.
+      Triều đình bèn cho lập trang ở nơi hải đảo, gọi là <b>Vân Đồn</b>, để mua bán hàng hóa quý, dâng tiến sản vật địa phương (theo <i>Đại Việt sử ký toàn thư</i>).<br><br>
+      Năm 1184, người buôn Xiêm La và <b>Tam Phật Tề</b> vào Vân Đồn xin buôn bán. Năm 1348, thuyền Đồ Bồ đến đây ngầm mua ngọc trai.
+      Đầu năm <b>1288</b>, Trần Khánh Dư đánh tan đoàn thuyền lương của Trương Văn Hổ ở vùng biển này. Năm <b>1349</b>, nhà Trần đặt quan trấn, quan lộ, sát hải sứ và quân Bình Hải ở trấn Vân Đồn.<br><br>
+      <b>Chỗ trò chơi giản lược:</b> năm 1149 Vân Đồn mới là trang, nên «quan trấn thủ», Nhà thuế quan và thư lại là cách dựng của trò chơi; mức thuế 5–15–30%, giá hàng và nhịp sáu phiên chợ là số liệu của trò chơi.
+      Trang phục nhân vật được cách điệu, không phục dựng theo hiện vật. Tên Xiêm La chép theo <i>Toàn thư</i>, dù vương quốc của người Thái đến thế kỷ 13 mới lập.
+      Trầm hương là hàng trung chuyển, không phải sản vật của đảo; ngọc trai là ngọc mò ngoài biển. Gốm trong game gọi chung là «gốm Đại Việt».`;
   }
   $('dlgTitle').textContent = title; $('dlgBody').innerHTML = body; $('dlgRows').innerHTML = rows; $('dlgBtns').innerHTML = btns;
 }

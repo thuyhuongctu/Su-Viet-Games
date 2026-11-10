@@ -26,9 +26,10 @@ trading port of Vân Đồn in 1149 to the pirate seas of the Gulf of Tonkin
 in 1780. Play offline, with no ads and no data collection.
 
 🏮 VÂN ĐỒN — THE FIRST TRADING PORT (1149)
-Build the kingdom's first international trading port, founded by royal
-edict of King Lý Anh Tông. Welcome merchant ships from Song China, Japan,
-Java and Siam; open pottery kilns, silk workshops and pearl rafts; weather
+Build the trading port founded in 1149 under King Lý Anh Tông, commonly
+regarded as the kingdom's first international port. Welcome merchant ships
+from Song China, Srivijaya, Java and Siam; open pottery kilns, silk workshops
+and pearl-diving stations; weather
 storms and repel raiders. Rise from a fishing hamlet to the First Trading
 Port of Đại Việt — then test yourself in a challenge mode recreating the
 historic Battle of Vân Đồn (1288).
