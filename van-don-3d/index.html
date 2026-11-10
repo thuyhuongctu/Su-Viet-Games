@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Vân Đồn 3D — Dạo Bến Thương Cảng (1149)</title>
+<meta name="description" content="Vân Đồn 3D: vào vai quan trấn thủ, tự đi lại trên bến Vân Đồn, mua hàng ở lò xưởng, bán cho thương thuyền Tống, Nhật Bản, Trảo Oa, Xiêm La và định mức thuế cảng. Bản thử nghiệm.">
+<meta name="theme-color" content="#241708">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../icons/icon-192.png">
+<style>
+  :root{
+    --panel:#241708; --panel2:#31200d; --son:#a5402e; --dong:#d9a441;
+    --nga:#f2e8d5; --celadon:#9ec5ab; --edge:#5c3d24;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--panel);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--nga);
+    touch-action:none;-webkit-user-select:none;user-select:none}
+  .serif{font-family:Georgia,"Times New Roman","Noto Serif",serif}
+  canvas#game{display:block;position:absolute;inset:0;width:100%;height:100%}
+  button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+  /* ---------- Thanh trên ---------- */
+  #hud{position:absolute;left:0;right:0;top:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+    padding:8px 8px 6px;background:linear-gradient(#241708ee,#24170800);pointer-events:none;z-index:5}
+  .chip{background:#241708d9;border:1px solid var(--edge);border-radius:999px;
+    padding:5px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+  .chip b{color:var(--dong)}
+  #sun{position:absolute;left:8px;right:8px;top:100%;height:5px;border-radius:3px;
+    background:#0006;overflow:hidden}
+  #sunBar{height:100%;width:100%;background:linear-gradient(90deg,var(--son),var(--dong))}
+  #btnHome{pointer-events:auto;margin-left:auto;background:#241708d9;color:var(--nga);
+    border:1px solid var(--edge);border-radius:999px;min-width:44px;min-height:44px;
+    font-size:18px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+
+  /* ---------- Nút hành động và cần điều khiển ---------- */
+  #act{position:absolute;right:16px;bottom:calc(28px + env(safe-area-inset-bottom));z-index:6;
+    min-width:132px;min-height:56px;padding:10px 16px;border-radius:16px;border:2px solid var(--dong);
+    background:var(--son);color:#fff;font-size:16px;font-weight:700;display:none;
+    box-shadow:0 6px 18px #0008}
+  #stick{position:absolute;left:18px;bottom:calc(24px + env(safe-area-inset-bottom));width:124px;height:124px;
+    border-radius:50%;background:#24170866;border:2px solid #d9a44188;z-index:6;display:none;touch-action:none}
+  #knob{position:absolute;left:37px;top:37px;width:50px;height:50px;border-radius:50%;
+    background:var(--dong);opacity:.9;pointer-events:none}
+  #hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));
+    font-size:12px;color:#f2e8d5cc;background:#241708b3;padding:4px 10px;border-radius:999px;
+    z-index:4;pointer-events:none;white-space:nowrap}
+  #toast{position:absolute;left:50%;top:86px;transform:translateX(-50%);max-width:min(92vw,520px);
+    background:#241708f2;border:1px solid var(--dong);border-radius:12px;padding:10px 14px;
+    font-size:14px;line-height:1.45;text-align:center;z-index:8;opacity:0;transition:opacity .25s;
+    pointer-events:none}
+  #toast.on{opacity:1}
+
+  /* ---------- Bảng hội thoại ---------- */
+  #dlg{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));
+    width:min(96vw,560px);max-height:72vh;overflow:auto;background:#241708f7;border:2px solid var(--dong);
+    border-radius:16px;padding:14px;z-index:9;display:none;touch-action:pan-y}
+  #dlg h2{font-size:18px;color:var(--dong);margin-bottom:4px}
+  #dlg .who{font-size:12px;color:var(--celadon);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
+  #dlg .body{font-size:14px;line-height:1.5;margin-bottom:10px}
+  .row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #5c3d2488;font-size:14px}
+  .row .lbl{flex:1;min-width:0}
+  .row small{display:block;color:#f2e8d5aa;font-size:12px}
+  .btn{min-height:44px;min-width:44px;padding:8px 14px;border-radius:12px;border:1px solid var(--dong);
+    background:var(--panel2);color:var(--nga);font-size:14px;font-weight:600}
+  .btn.pri{background:var(--son);color:#fff}
+  .btn.on{background:var(--dong);color:#241708}
+  .btn:disabled{opacity:.4;cursor:default}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
+  /* ---------- Màn phủ ---------- */
+  .ov{position:absolute;inset:0;background:#160d04ee;z-index:20;display:flex;align-items:center;
+    justify-content:center;padding:16px;overflow:auto;touch-action:pan-y}
+  .card{width:min(94vw,560px);background:var(--panel);border:2px solid var(--dong);border-radius:18px;
+    padding:20px 18px;text-align:center;max-height:94vh;overflow:auto}
+  .card h1{font-size:26px;color:var(--dong);line-height:1.2}
+  .card h1 small{display:block;font-size:14px;color:var(--celadon);letter-spacing:.12em;margin-top:6px}
+  .card p{font-size:14px;line-height:1.55;margin:10px 0;text-align:left}
+  .card ul{text-align:left;font-size:14px;line-height:1.55;margin:8px 0 8px 20px}
+  .card .note{font-size:12px;color:#f2e8d5aa}
+  .big{font-size:34px;color:var(--dong);font-weight:700;margin:6px 0}
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="Bến Vân Đồn nhìn từ trên cao, có nhân vật quan trấn thủ đi lại"></canvas>
+
+<div id="hud">
+  <span class="chip">📜 Phiên <b id="hRound">1</b>/6</span>
+  <span class="chip">🪙 <b id="hMoney">0</b> quan</span>
+  <span class="chip">⭐ <b id="hRep">0</b></span>
+  <span class="chip">🧺 <b id="hCarry">0</b>/10</span>
+  <span class="chip">⚖️ Thuế <b id="hTax">15</b>%</span>
+  <a id="btnHome" href="../index.html" aria-label="Về cổng trò chơi">🏠</a>
+  <div id="sun"><div id="sunBar"></div></div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="hint">Phím W A S D hoặc mũi tên để đi · E để nói chuyện</div>
+<div id="stick" aria-hidden="true"><div id="knob"></div></div>
+<button id="act" type="button">Nói chuyện</button>
+
+<div id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+  <div class="who" id="dlgWho"></div>
+  <h2 class="serif" id="dlgTitle"></h2>
+  <div class="body" id="dlgBody"></div>
+  <div id="dlgRows"></div>
+  <div class="btns" id="dlgBtns"></div>
+</div>
+
+<div class="ov" id="ovStart">
+  <div class="card">
+    <h1 class="serif">Vân Đồn 3D<small>DẠO BẾN THƯƠNG CẢNG · 1149</small></h1>
+    <p>Khanh là quan trấn thủ trang Vân Đồn. Lần này khanh <b>tự đi lại trên bến</b>: ghé lò xưởng
+    mua hàng, mang ra cầu tàu bán cho thương thuyền bốn phương, và định mức thuế cảng.</p>
+    <ul>
+      <li>Đi lại: phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái. Đến gần người nào thì bấm nút đỏ (hoặc phím E) để gặp.</li>
+      <li>Mỗi thương nhân <b>chuộng hai mặt hàng</b> và trả giá cao cho đúng hàng đó.</li>
+      <li>Khanh chỉ mang được <b>10 kiện</b> mỗi chuyến, và mỗi phiên chợ có hạn giờ.</li>
+      <li>Ở <b>Nhà thuế quan</b>: thuế cao thu nhiều trên mỗi kiện, nhưng phiên sau thuyền mua ít đi.</li>
+      <li>Sau <b>6 phiên</b>, triều đình xét công theo quan tiền và danh vọng.</li>
+    </ul>
+    <p class="note">Bản thử nghiệm. Trò chơi giản lược lịch sử: mức thuế, giá cả và nhịp phiên chợ là số liệu
+    của trò chơi, không phải sử liệu. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
+    <div class="btns" style="justify-content:center">
+      <button class="btn pri" id="btnStart" type="button">⚓ Ra bến</button>
+      <a class="btn" href="../van-don/index.html" style="text-decoration:none;display:inline-flex;align-items:center">Bản 2D dựng bến</a>
+    </div>
+    <p class="note" id="bestLine" style="text-align:center"></p>
+  </div>
+</div>
+
+<div class="ov" id="ovRound" style="display:none">
+  <div class="card">
+    <h1 class="serif" id="rdTitle"></h1>
+    <div id="rdBody"></div>
+    <div class="btns" style="justify-content:center">
+      <button class="btn pri" id="btnNext" type="button">Sang phiên kế</button>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="ovEnd" style="display:none">
+  <div class="card">
+    <h1 class="serif" id="endTitle"></h1>
+    <div class="big" id="endScore"></div>
+    <div id="endBody"></div>
+    <div class="btns" style="justify-content:center">
+      <button class="btn pri" id="btnAgain" type="button">Chơi lại</button>
+      <a class="btn" href="../index.html" style="text-decoration:none;display:inline-flex;align-items:center">Về cổng trò chơi</a>
+    </div>
+  </div>
+</div>
+
+<script src="../lib/three.min.js"></script>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const rand = (a,b) => a + Math.random()*(b-a);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+// =====================================================================
+//  DỮ LIỆU — cùng mặt hàng và thương thuyền với bản 2D
+// =====================================================================
+const GOODS = [
+  { id:'gom',  ic:'🏺', name:'Gốm Đại Việt', price:26 },
+  { id:'lua',  ic:'🧵', name:'Lụa tơ tằm',   price:48 },
+  { id:'ngoc', ic:'🦪', name:'Ngọc trai',    price:95 },
+  { id:'tram', ic:'🌿', name:'Trầm hương',   price:150 },
+];
+const NATIONS = [
+  { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0 },
+  { id:'nhat', name:'Nhật Bản', who:'Thương nhân Nhật Bản',   flag:0xf2e8d5, sail:0xb8452f, prefs:['gom','tram'], mult:1.15 },
+  { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1 },
+  { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05 },
+];
+const G = id => GOODS.find(g => g.id===id);
+const ROUNDS = 6, CARRY = 10, ROUND_SEC = 80, COST_RATE = 0.55;
+const TAX = { 5:{demand:1.15, rep:2}, 15:{demand:1.0, rep:0}, 30:{demand:0.85, rep:-3} };
+const TITLES = [
+  { min:0,    name:'Trang nhỏ ven vịnh',  text:'Bến còn thưa thuyền. Triều đình ghi nhận công khai phá, mong khanh gắng hơn ở nhiệm kỳ sau.' },
+  { min:4000, name:'Trang Vân Đồn',       text:'Sứ thần đọc chiếu: bến cát nay chính thức mang tên Trang Vân Đồn.' },
+  { min:9000, name:'Trấn Vân Đồn',        text:'Danh tiếng bến cảng vang tới kinh sư. Vua thăng Vân Đồn làm Trấn.' },
+  { min:15000, name:'Đệ Nhất Thương Cảng', text:'Thuyền buôn mười phương nối đuôi vào vịnh. Tên tuổi khanh lưu vào quốc sử.' },
+];
+const BEST_KEY = 'van-don-3d-best';
+
+const costOf = g => Math.round(g.price * COST_RATE);
+const sellPrice = (nat, g) => Math.round(g.price * nat.mult * (nat.prefs.includes(g.id) ? 1.3 : 0.75));
+
+// =====================================================================
+//  TRẠNG THÁI
+// =====================================================================
+const S = {
+  running:false, paused:true, round:1, money:150, rep:0, tax:15, nextTax:15,
+  carry:{gom:0,lua:0,ngoc:0,tram:0}, t:ROUND_SEC,
+  demand:{}, absent:null, tribute:null,
+  stat:{ sold:0, taxIncome:0, spent:0, income:0 },
+};
+const carryN = () => GOODS.reduce((n,g) => n + S.carry[g.id], 0);
+
+function newRound(){
+  S.tax = S.nextTax;
+  S.t = ROUND_SEC;
+  S.stat = { sold:0, taxIncome:0, spent:0, income:0 };
+  const f = TAX[S.tax].demand;
+  S.demand = {};
+  for(const n of NATIONS){
+    S.demand[n.id] = {};
+    for(const g of GOODS) S.demand[n.id][g.id] = Math.round((n.prefs.includes(g.id) ? 6 : 2) * f);
+  }
+  // Biến cố: bão ở phiên 2 hoặc 4, chiếu đòi cống phẩm ở phiên 3 và 5
+  S.absent = (S.round===2 || S.round===4) && Math.random()<0.75 ? pick(NATIONS).id : null;
+  S.tribute = (S.round===3 || S.round===5) ? { good:pick(['gom','lua']), n:4, done:false } : null;
+  applyRoundToWorld();
+  renderHUD();
+}
+
+// =====================================================================
+//  CẢNH 3D
+// =====================================================================
+const cv = $('game');
+const renderer = new THREE.WebGLRenderer({ canvas:cv, antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio||1, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xbcd9d2);
+scene.fog = new THREE.Fog(0xbcd9d2, 90, 230);
+const camera = new THREE.PerspectiveCamera(50, 1, 1, 500);
+scene.add(new THREE.HemisphereLight(0xfff4dc, 0x6b5a3a, 0.62));
+const sunL = new THREE.DirectionalLight(0xffe2b0, 0.5); sunL.position.set(-40,70,30); scene.add(sunL);
+
+const M = c => new THREE.MeshLambertMaterial({ color:c });
+function box(w,h,d,c,x,y,z,parent){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), M(c)); m.position.set(x,y,z);
+  (parent||scene).add(m); return m;
+}
+function label(text, y, parent, scale){
+  const c = document.createElement('canvas'); c.width = 512; c.height = 96;
+  const x = c.getContext('2d');
+  x.font = 'bold 44px Georgia, serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  const w = Math.min(500, x.measureText(text).width + 44);
+  x.fillStyle = 'rgba(36,23,8,.86)';
+  x.beginPath(); x.roundRect ? x.roundRect(256-w/2, 12, w, 72, 20) : x.rect(256-w/2, 12, w, 72); x.fill();
+  x.strokeStyle = '#d9a441'; x.lineWidth = 3; x.stroke();
+  x.fillStyle = '#f2e8d5'; x.fillText(text, 256, 50);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map:new THREE.CanvasTexture(c), depthTest:false }));
+  const s = scale||1; sp.scale.set(16*s, 3*s, 1); sp.position.y = y; sp.renderOrder = 5;
+  parent.add(sp); return sp;
+}
+
+// ----- Biển, bãi cát, đất trong -----
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(600,600), M(0x3f8f86));
+sea.rotation.x = -Math.PI/2; sea.position.y = -0.6; scene.add(sea);
+box(150,2,70,0xd8c49a, 0,-1,-24);           // bãi cát
+box(150,2.2,36,0x86a86a, 0,-1,-42);         // đất trong
+// Núi đá vôi ngoài vịnh
+for(const [x,z,r,h] of [[-80,70,10,34],[-40,95,14,46],[20,110,12,40],[70,80,11,36],[110,60,9,28],[-120,50,12,38],[0,140,16,52]]){
+  const m = new THREE.Mesh(new THREE.ConeGeometry(r,h,7), M(0x5f7d68)); m.position.set(x,h/2-2,z); scene.add(m);
+  const cap = new THREE.Mesh(new THREE.ConeGeometry(r*0.62,h*0.5,7), M(0x4a6a55)); cap.position.set(x,h*0.72,z); scene.add(cap);
+}
+// Đồi sau bến
+for(const [x,z,r,h] of [[-55,-70,26,22],[0,-78,34,28],[58,-70,26,20]]){
+  const m = new THREE.Mesh(new THREE.ConeGeometry(r,h,8), M(0x6f9560)); m.position.set(x,h/2-1,z); scene.add(m);
+}
+function tree(x,z){
+  box(0.7,3,0.7,0x5c3d24,x,1.5,z);
+  const t = new THREE.Mesh(new THREE.ConeGeometry(2.4,5,7), M(0x3f7a4f)); t.position.set(x,5,z); scene.add(t);
+}
+for(const [x,z] of [[-66,-40],[-58,-52],[-30,-54],[28,-55],[44,-50],[66,-44],[60,-30],[-68,-22],[4,-55],[-10,-50]]) tree(x,z);
+
+// ----- Nhà mái cong -----
+function house(x,z,w,d,h,wall,roof){
+  const g = new THREE.Group(); g.position.set(x,0,z); scene.add(g);
+  box(w,h,d,wall,0,h/2,0,g);
+  const r = new THREE.Mesh(new THREE.ConeGeometry(Math.max(w,d)*0.82, h*0.75, 4), M(roof));
+  r.rotation.y = Math.PI/4; r.position.y = h + h*0.36; r.scale.set(1,1,d/w); g.add(r);
+  box(w*0.24,h*0.6,0.3,0x3a2412,0,h*0.3,d/2+0.1,g);  // cửa
+  return g;
+}
+const solids = [];   // vật cản hình tròn: {x,z,r}
+const places = [];   // điểm tương tác
+
+// Lò gốm: vòm lò và ống khói
+{ const x=-40, z=-30;
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(5.5,12,8,0,Math.PI*2,0,Math.PI/2), M(0xa5623c));
+  dome.position.set(x,0,z); scene.add(dome);
+  box(1.6,7,1.6,0x7a4426,x+3.6,3.5,z-2);
+  box(2.2,2.4,0.4,0x241708,x,1.2,z+5.3);
+  for(let i=0;i<5;i++) box(1,1.2,1,0xc98a5a,x-7+i*1.4,0.6,z+4+ (i%2)*1.2);
+  solids.push({x,z,r:6.5}); }
+// Xưởng dệt lụa
+{ const x=-14, z=-32; house(x,z,11,8,5,0xe6d5ae,0x8a3a2a);
+  for(let i=0;i<4;i++) box(0.25,4.2,2.2,[0xc94b3c,0xd9a441,0x9ec5ab,0xf2e8d5][i],x-7.5,2.6,z-3+i*2.2);
+  solids.push({x,z,r:7.5}); }
+// Trạm trầm hương
+{ const x=14, z=-32; house(x,z,10,8,5,0xcdb07a,0x4f6a45);
+  tree(x+8,z-3); tree(x+9.5,z+3);
+  solids.push({x,z,r:7}); }
+// Nhà thuế quan (giữa bến) và trống
+{ const x=0, z=-10; house(x,z,14,9,6,0xead9b2,0xa5402e);
+  box(0.5,9,0.5,0x5c3d24,x-9,4.5,z+2); box(3,2,0.2,0xa5402e,x-7.4,8,z+2);   // cờ
+  const drum = new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,1.6,14), M(0x8a2f22));
+  drum.rotation.z = Math.PI/2; drum.position.set(x+9.5,2.4,z+3); scene.add(drum);
+  box(0.4,2.4,0.4,0x5c3d24,x+9.5,1.2,z+2.2); box(0.4,2.4,0.4,0x5c3d24,x+9.5,1.2,z+3.8);
+  solids.push({x,z,r:8.5}); }
+// Bè ngọc trai (mé đông, sát mép nước)
+{ const x=58, z=2;
+  box(12,0.5,8,0x7a5a36,x+2,-0.2,z+13);
+  for(let i=0;i<3;i++) box(0.3,0.3,8,0x5c3d24,x-2+i*4,0.1,z+13);
+  house(x,z-6,7,6,4,0xd9c9a0,0x2f6f73);
+  solids.push({x,z:z-6,r:5.2}); }
+// Bia sử (mé tây)
+{ const x=-58, z=-4;
+  box(4,0.8,2.4,0x8f8f86,x,0.4,z); box(2.6,6,0.7,0xa9a99e,x,3.8,z);
+  solids.push({x,z,r:2.6}); }
+
+// ----- Cầu tàu và thuyền buôn -----
+const SHORE_Z = 11, PIER_LEN = 20, PIER_W = 5.5;
+const piers = [];
+const ships = {};
+NATIONS.forEach((n,i) => {
+  const x = -39 + i*26;
+  box(PIER_W,0.6,PIER_LEN,0x7a5a36,x,0.1,SHORE_Z+PIER_LEN/2-0.5);
+  for(let k=0;k<4;k++){ box(0.5,3,0.5,0x4a301a,x-PIER_W/2,-0.6,SHORE_Z+2+k*5.4); box(0.5,3,0.5,0x4a301a,x+PIER_W/2,-0.6,SHORE_Z+2+k*5.4); }
+  piers.push({ x, z0:SHORE_Z-1, z1:SHORE_Z+PIER_LEN-0.8 });
+  // Thuyền
+  const g = new THREE.Group(); g.position.set(x+9, 0, SHORE_Z+PIER_LEN-5); scene.add(g);
+  const hull = box(6,2.4,15,0x5c3d24,0,0.4,0,g);
+  box(4.6,1.4,3,0x4a301a,0,2.2,-5.6,g); box(4.2,1,2.4,0x4a301a,0,1.9,6.2,g);
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.25,0.3,13,8), M(0x3a2412)); mast.position.y = 7.5; g.add(mast);
+  const sail = new THREE.Mesh(new THREE.PlaneGeometry(7,8), new THREE.MeshLambertMaterial({ color:n.sail, side:THREE.DoubleSide }));
+  sail.position.set(0,8,0.2); sail.rotation.y = Math.PI/2; g.add(sail);
+  for(let k=0;k<4;k++) box(0.12,0.12,7,0x3a2412,0,5+k*2,0.2,g);
+  box(0.1,1.2,2,n.flag,0,14.2,1,g);
+  label('Thuyền '+n.name, 17, g, 0.6);
+  ships[n.id] = g; g.userData.hull = hull;
+});
+
+// ----- Người -----
+function person(robe, hat, hatType){
+  const g = new THREE.Group();
+  const legL = box(0.55,1.5,0.55,0x3a2412,-0.4,0.75,0,g), legR = box(0.55,1.5,0.55,0x3a2412,0.4,0.75,0,g);
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.75,1.15,2.3,10), M(robe)); body.position.y = 2.5; g.add(body);
+  const armL = box(0.4,1.7,0.4,robe,-1.05,2.7,0,g), armR = box(0.4,1.7,0.4,robe,1.05,2.7,0,g);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.72,12,10), M(0xe8b98a)); head.position.y = 4.25; g.add(head);
+  if(hatType==='non'){ const h = new THREE.Mesh(new THREE.ConeGeometry(1.5,0.9,12), M(hat)); h.position.y = 5.1; g.add(h); }
+  else if(hatType==='quan'){ box(1.3,0.6,1.3,hat,0,5.0,0,g); box(2.6,0.14,0.5,hat,0,5.0,-0.5,g); }
+  else { const h = new THREE.Mesh(new THREE.SphereGeometry(0.78,10,8,0,Math.PI*2,0,Math.PI/2), M(hat)); h.position.y = 4.45; g.add(h); }
+  g.userData = { legL, legR, armL, armR, phase:rand(0,6) };
+  scene.add(g); return g;
+}
+function animate(p, moving, dt){
+  const u = p.userData; u.phase += dt * (moving ? 11 : 2);
+  const a = moving ? Math.sin(u.phase)*0.7 : 0;
+  u.legL.rotation.x = a; u.legR.rotation.x = -a; u.armL.rotation.x = -a*0.8; u.armR.rotation.x = a*0.8;
+  if(!moving) p.position.y = Math.sin(u.phase)*0.04;
+}
+
+const player = person(0x7a1f1f, 0x1c1c1c, 'quan');
+player.position.set(0,0,2);
+
+function addPlace(def){
+  const npc = def.npc ? person(def.npc[0], def.npc[1], def.npc[2]) : null;
+  if(npc){ npc.position.set(def.x,0,def.z); npc.rotation.y = def.face||0; label(def.tag, 7, npc, 0.8); }
+  places.push(Object.assign({}, def, { npc })); if(npc) solids.push({ x:def.x, z:def.z, r:1.3 });
+}
+addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      npc:[0x8a5a33,0xd8c49a,'non'] });
+addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   npc:[0x9ec5ab,0xd8c49a,'non'] });
+addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Phường trưởng đi trầm', npc:[0x4f6a45,0x3a2412,'khan'] });
+addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bè ngọc trai',  who:'Thợ lặn ngọc trai',  npc:[0x2f6f73,0xd8c49a,'non'] });
+addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', npc:[0x31476b,0x1c1c1c,'quan'] });
+addPlace({ id:'bia-su',   kind:'stele', x:-58, z:-0.5, tag:'Bia sử', who:'Bia đá' });
+label('Bia sử', 9, (()=>{ const g=new THREE.Group(); g.position.set(-58,0,-4); scene.add(g); return g; })(), 0.8);
+NATIONS.forEach((n,i) => addPlace({ id:'tn-'+n.id, kind:'merchant', nat:n, x:piers[i].x, z:SHORE_Z+PIER_LEN-5,
+  tag:n.name, who:n.who, face:Math.PI, npc:[n.sail, n.flag, 'khan'] }));
+
+function applyRoundToWorld(){
+  for(const n of NATIONS){
+    const here = S.absent !== n.id;
+    ships[n.id].visible = here;
+    const p = places.find(p => p.id==='tn-'+n.id); p.npc.visible = here; p.off = !here;
+  }
+}
+
+// =====================================================================
+//  ĐI LẠI
+// =====================================================================
+const keys = {};
+addEventListener('keydown', e => {
+  keys[e.code] = true;
+  if(e.code==='KeyE' || e.code==='Enter' || e.code==='Space'){ if(!dlgOpen && S.running && !S.paused){ e.preventDefault(); interact(); } }
+  if(e.code==='Escape' && dlgOpen) closeDlg();
+});
+addEventListener('keyup', e => { keys[e.code] = false; });
+addEventListener('blur', () => { for(const k in keys) keys[k] = false; });
+
+const IS_TOUCH = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+const stick = { on:false, id:null, x:0, z:0 };
+if(IS_TOUCH){
+  $('stick').style.display = 'block'; $('hint').style.display = 'none';
+  const el = $('stick'), kn = $('knob');
+  const move = e => {
+    const r = el.getBoundingClientRect(); let dx = e.clientX-(r.left+r.width/2), dy = e.clientY-(r.top+r.height/2);
+    const len = Math.hypot(dx,dy), max = r.width/2-14; if(len>max){ dx *= max/len; dy *= max/len; }
+    stick.x = dx/max; stick.z = dy/max; kn.style.transform = `translate(${dx}px,${dy}px)`;
+  };
+  const end = () => { stick.on = false; stick.x = stick.z = 0; kn.style.transform = ''; };
+  el.addEventListener('pointerdown', e => { stick.on = true; stick.id = e.pointerId; el.setPointerCapture(e.pointerId); move(e); });
+  el.addEventListener('pointermove', e => { if(stick.on && e.pointerId===stick.id) move(e); });
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+}
+
+function walkable(x,z){
+  if(z <= SHORE_Z-0.5) return x>-70 && x<70 && z>-58;                      // trên bờ
+  for(const p of piers) if(Math.abs(x-p.x) < PIER_W/2-0.5 && z < p.z1) return true;   // trên cầu tàu
+  return false;
+}
+function blocked(x,z){
+  if(!walkable(x,z)) return true;
+  for(const s of solids){ if(Math.hypot(x-s.x, z-s.z) < s.r + 0.9) return true; }
+  return false;
+}
+const SPEED = 15;
+let nearest = null;
+function updatePlayer(dt){
+  let dx = (keys.KeyD||keys.ArrowRight?1:0) - (keys.KeyA||keys.ArrowLeft?1:0) + stick.x;
+  let dz = (keys.KeyS||keys.ArrowDown?1:0) - (keys.KeyW||keys.ArrowUp?1:0) + stick.z;
+  const len = Math.hypot(dx,dz); const moving = len > 0.15 && !dlgOpen;
+  if(moving){
+    const k = Math.min(1,len)/len; dx *= k; dz *= k;
+    const nx = player.position.x + dx*SPEED*dt, nz = player.position.z + dz*SPEED*dt;
+    if(!blocked(nx, player.position.z)) player.position.x = nx;
+    if(!blocked(player.position.x, nz)) player.position.z = nz;
+    player.rotation.y = Math.atan2(dx, dz);
+  }
+  animate(player, moving, dt);
+  // Điểm tương tác gần nhất
+  nearest = null; let best = 6.5;
+  for(const p of places){ if(p.off) continue;
+    const d = Math.hypot(player.position.x-p.x, player.position.z-p.z); if(d < best){ best = d; nearest = p; } }
+  const a = $('act');
+  if(nearest && !dlgOpen){ a.style.display = 'block'; a.textContent = (nearest.kind==='stele' ? 'Đọc ' : 'Gặp ') + nearest.tag; }
+  else a.style.display = 'none';
+}
+$('act').addEventListener('click', () => interact());
+
+// =====================================================================
+//  HỘI THOẠI: MUA, BÁN, THUẾ, BIA SỬ
+// =====================================================================
+let dlgOpen = false, dlgPlace = null;
+function openDlg(p){ dlgOpen = true; dlgPlace = p; $('dlg').style.display = 'block'; $('hint').style.display = 'none'; renderDlg(); }
+function closeDlg(){ dlgOpen = false; dlgPlace = null; $('dlg').style.display = 'none'; }
+function interact(){ if(nearest && !dlgOpen) openDlg(nearest); }
+function rowHTML(lbl, small, btns){ return `<div class="row"><div class="lbl">${lbl}<small>${small}</small></div>${btns}</div>`; }
+
+function renderDlg(){
+  const p = dlgPlace; if(!p) return;
+  $('dlgWho').textContent = p.who; let rows = '', body = '', title = p.tag;
+  let btns = '<button class="btn" type="button" data-a="close">Đi tiếp</button>';
+  if(p.kind==='shop'){
+    const g = G(p.good), c = costOf(g), room = CARRY - carryN(), max = Math.min(room, Math.floor(S.money/c));
+    body = `Hàng tại xưởng: <b>${g.ic} ${g.name}</b>, giá <b>${c} quan</b> một kiện. Khanh còn chỗ cho <b>${room}</b> kiện.`;
+    const fans = NATIONS.filter(n => n.prefs.includes(g.id)).map(n => n.name).join(', ');
+    rows = rowHTML(`${g.ic} ${g.name}`, `Được chuộng ở thuyền: ${fans}`,
+      `<button class="btn" type="button" data-a="buy" data-n="1" ${max<1?'disabled':''}>Mua 1</button>
+       <button class="btn pri" type="button" data-a="buy" data-n="${max}" ${max<1?'disabled':''}>Mua ${Math.max(max,0)}</button>`);
+    if(max<1) body += room<1 ? ' <b>Gánh đã đầy.</b>' : ' <b>Không đủ quan tiền.</b>';
+  } else if(p.kind==='merchant'){
+    const n = p.nat;
+    body = `Thuyền <b>${n.name}</b> chuộng <b>${n.prefs.map(id => G(id).name).join('</b> và <b>')}</b>. Thuế cảng phiên này: <b>${S.tax}%</b>, thu thêm trên mỗi kiện bán ra.`;
+    for(const g of GOODS){
+      const have = S.carry[g.id], want = S.demand[n.id][g.id], pr = sellPrice(n,g), k = Math.min(have, want);
+      const pref = n.prefs.includes(g.id);
+      rows += rowHTML(`${g.ic} ${g.name}${pref?' ⭐':''}`, `Trả ${pr} quan/kiện · còn mua ${want} · khanh có ${have}`,
+        `<button class="btn ${pref?'pri':''}" type="button" data-a="sell" data-g="${g.id}" ${k<1?'disabled':''}>Bán ${k}</button>`);
+    }
+  } else if(p.kind==='customs'){
+    body = `Thuế cảng đang áp dụng: <b>${S.tax}%</b>. Mức khanh chọn dưới đây có hiệu lực <b>từ phiên sau</b>.`;
+    rows = rowHTML('⚖️ Mức thuế phiên sau', 'Thuế thấp: thuyền mua nhiều hơn, thêm danh vọng. Thuế cao: thu nhiều mỗi kiện, thuyền mua ít đi, mất danh vọng.',
+      [5,15,30].map(t => `<button class="btn ${S.nextTax===t?'on':''}" type="button" data-a="tax" data-t="${t}" aria-pressed="${S.nextTax===t}">${t}%</button>`).join(''));
+    if(S.tribute && !S.tribute.done){
+      const g = G(S.tribute.good), ok = S.carry[g.id] >= S.tribute.n;
+      rows += rowHTML(`📜 Chiếu đòi cống phẩm: ${S.tribute.n} kiện ${g.name}`, `Dâng trong phiên này: +15 danh vọng. Khanh đang có ${S.carry[g.id]}.`,
+        `<button class="btn pri" type="button" data-a="tribute" ${ok?'':'disabled'}>Dâng</button>`);
+    }
+    btns = `<button class="btn pri" type="button" data-a="end">🥁 Đánh trống kết phiên</button>` + btns;
+  } else {
+    title = 'Bia sử Vân Đồn';
+    body = `Năm <b>1149</b>, đời vua <b>Lý Anh Tông</b>, thuyền buôn ba nước Trảo Oa, Lộ Lạc, Xiêm La vào Hải Đông xin ở lại buôn bán.
+      Vua cho lập trang ở nơi hải đảo, gọi là <b>Vân Đồn</b>, để mua bán hàng hóa quý và dâng tiến sản vật địa phương (theo <i>Đại Việt sử ký toàn thư</i>).<br><br>
+      Năm <b>1288</b>, Trần Khánh Dư đánh tan đoàn thuyền lương của Trương Văn Hổ tại đây.<br><br>
+      <b>Chỗ trò chơi giản lược:</b> mức thuế 5–15–30%, giá hàng và nhịp sáu phiên chợ là số liệu của trò chơi. Gốm trong game gọi chung là «gốm Đại Việt».`;
+  }
+  $('dlgTitle').textContent = title; $('dlgBody').innerHTML = body; $('dlgRows').innerHTML = rows; $('dlgBtns').innerHTML = btns;
+}
+$('dlg').addEventListener('click', e => {
+  const b = e.target.closest('button[data-a]'); if(!b || b.disabled) return;
+  const a = b.dataset.a, p = dlgPlace;
+  if(a==='close') return closeDlg();
+  if(a==='buy'){ buy(p.good, +b.dataset.n); }
+  if(a==='sell'){ sell(p.nat, b.dataset.g); }
+  if(a==='tax'){ S.nextTax = +b.dataset.t; toast(`Từ phiên sau, thuế cảng là <b>${S.nextTax}%</b>.`); }
+  if(a==='tribute'){ giveTribute(); }
+  if(a==='end'){ closeDlg(); return endRound(); }
+  renderHUD(); renderDlg();
+});
+
+function buy(goodId, n){
+  const g = G(goodId), c = costOf(g); n = Math.min(n, CARRY-carryN(), Math.floor(S.money/c)); if(n<1) return 0;
+  S.money -= c*n; S.carry[goodId] += n; S.stat.spent += c*n; return n;
+}
+function sell(nat, goodId){
+  const g = G(goodId), k = Math.min(S.carry[goodId], S.demand[nat.id][goodId]); if(k<1) return 0;
+  const pr = sellPrice(nat,g), tax = Math.round(pr*k*S.tax/100);
+  S.carry[goodId] -= k; S.demand[nat.id][goodId] -= k;
+  S.money += pr*k + tax; S.stat.income += pr*k; S.stat.taxIncome += tax; S.stat.sold += k;
+  if(nat.prefs.includes(goodId)) S.rep += k;
+  toast(`Bán <b>${k} ${g.name}</b> cho thuyền ${nat.name}: <b>+${pr*k}</b> quan, thuế cảng <b>+${tax}</b>.`);
+  return k;
+}
+function giveTribute(){
+  const t = S.tribute; if(!t || t.done || S.carry[t.good] < t.n) return false;
+  S.carry[t.good] -= t.n; t.done = true; S.rep += 15;
+  toast('Sứ thần nhận cống phẩm: <b>+15 danh vọng</b>.'); return true;
+}
+
+// =====================================================================
+//  PHIÊN CHỢ
+// =====================================================================
+function renderHUD(){
+  $('hRound').textContent = S.round; $('hMoney').textContent = S.money; $('hRep').textContent = S.rep;
+  $('hCarry').textContent = carryN(); $('hTax').textContent = S.tax;
+}
+let toastT = 0;
+function toast(html, ms){ const t = $('toast'); t.innerHTML = html; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms||2600); }
+const score = () => S.money + S.rep*10;
+
+function endRound(){
+  S.paused = true; closeDlg();
+  const st = S.stat, tx = TAX[S.tax]; S.rep = Math.max(0, S.rep + tx.rep);
+  let lines = `<p>Bán được <b>${st.sold}</b> kiện, thu <b>${st.income}</b> quan tiền hàng và <b>${st.taxIncome}</b> quan thuế cảng (thuế ${S.tax}%). Tiền mua hàng: <b>${st.spent}</b> quan.</p>`;
+  if(tx.rep) lines += `<p>Thuế ${S.tax}%: danh vọng <b>${tx.rep>0?'+':''}${tx.rep}</b>.</p>`;
+  if(S.tribute) lines += S.tribute.done ? '' : `<p>Khanh <b>lỡ hạn cống phẩm</b>: danh vọng −8.</p>`;
+  if(S.tribute && !S.tribute.done) S.rep = Math.max(0, S.rep-8);
+  const left = carryN(); if(left) lines += `<p>Còn <b>${left}</b> kiện trong gánh, mang sang phiên sau.</p>`;
+  if(S.round >= ROUNDS){ renderHUD(); return finish(); }
+  S.round++; newRound();
+  lines += `<p><b>Phiên ${S.round}</b>: thuế cảng <b>${S.tax}%</b>.`;
+  if(S.absent) lines += ` Bão ngoài vịnh: thuyền <b>${NATIONS.find(n => n.id===S.absent).name}</b> không vào bến.`;
+  if(S.tribute) lines += ` Triều đình xuống chiếu đòi <b>${S.tribute.n} kiện ${G(S.tribute.good).name}</b>, dâng tại Nhà thuế quan.`;
+  lines += '</p>';
+  $('rdTitle').textContent = `Hết phiên ${S.round-1}`; $('rdBody').innerHTML = lines; $('ovRound').style.display = 'flex';
+}
+$('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'none'; S.paused = false; });
+
+function finish(){
+  S.running = false; const sc = score();
+  let title = TITLES[0]; for(const t of TITLES) if(sc >= t.min) title = t;
+  let best = 0; try{ best = +localStorage.getItem(BEST_KEY) || 0; if(sc > best) localStorage.setItem(BEST_KEY, String(sc)); }catch(e){}
+  $('endTitle').textContent = title.name; $('endScore').textContent = sc + ' điểm';
+  $('endBody').innerHTML = `<p>${title.text}</p>
+    <p><b>${S.money}</b> quan tiền + <b>${S.rep}</b> danh vọng × 10.${sc>best && best ? ' Kỷ lục mới của khanh.' : (best ? ` Kỷ lục cũ: ${best} điểm.` : '')}</p>
+    <p><b>Ngẫm lại:</b> khanh đã chọn mang hàng nào cho thuyền nào, và vì sao? Mức thuế nào cho khanh nhiều nhất khi gánh hàng có hạn?
+    Thuế cao thu nhiều trên mỗi kiện nhưng làm thuyền mua ít đi: đó là đánh đổi mà mọi thương cảng đều phải cân nhắc.</p>`;
+  $('ovEnd').style.display = 'flex';
+}
+function start(){
+  Object.assign(S, { running:true, paused:false, round:1, money:150, rep:0, tax:15, nextTax:15, carry:{gom:0,lua:0,ngoc:0,tram:0} });
+  player.position.set(0,0,2); player.rotation.y = 0; newRound();
+  $('ovStart').style.display = 'none'; $('ovEnd').style.display = 'none'; $('ovRound').style.display = 'none';
+  toast('Phiên 1 bắt đầu. Ghé <b>lò xưởng</b> mua hàng rồi mang ra <b>cầu tàu</b>.', 4200);
+}
+$('btnStart').addEventListener('click', start); $('btnAgain').addEventListener('click', start);
+try{ const b = +localStorage.getItem(BEST_KEY); if(b) $('bestLine').textContent = `Kỷ lục của khanh: ${b} điểm`; }catch(e){}
+
+// =====================================================================
+//  VÒNG LẶP
+// =====================================================================
+function fit(){
+  const w = innerWidth, h = innerHeight; renderer.setSize(w,h,false);
+  camera.aspect = w/h; camera.fov = w < h ? 62 : 48; camera.updateProjectionMatrix();
+}
+addEventListener('resize', fit); fit();
+const camOff = new THREE.Vector3(0, 34, 30);
+let last = performance.now(), tt = 0;
+function loop(now){
+  const dt = Math.min(0.05, (now-last)/1000); last = now; tt += dt;
+  if(S.running && !S.paused){
+    updatePlayer(dt);
+    if(!dlgOpen){ S.t -= dt; if(S.t <= 0){ toast('Trống thu không: hết giờ phiên chợ.'); endRound(); } }
+    $('sunBar').style.width = clamp(S.t/ROUND_SEC*100, 0, 100) + '%';
+  } else { $('act').style.display = 'none'; animate(player, false, dt); }
+  for(const p of places) if(p.npc && p.npc.visible) animate(p.npc, false, dt);
+  for(const n of NATIONS){ const s = ships[n.id]; s.position.y = Math.sin(tt*1.3 + s.position.x)*0.25; s.rotation.z = Math.sin(tt*0.9 + s.position.x)*0.03; }
+  sea.position.y = -0.6 + Math.sin(tt*0.8)*0.08;
+  camera.position.lerp(new THREE.Vector3().copy(player.position).add(camOff), 0.12);
+  camera.lookAt(player.position.x, 2, player.position.z - 2);
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+camera.position.copy(player.position).add(camOff);
+requestAnimationFrame(loop);
+
+// Cửa cho kiểm thử tự động
+window.__vd = { S, GOODS, NATIONS, places, player, buy, sell, giveTribute, endRound, start, score, costOf, sellPrice, blocked, openDlg, closeDlg };
+</script>
+</body>
+</html>
