@@ -1,9 +1,9 @@
 # 🏮 Vân Đồn — Đệ Nhất Thương Cảng
 
-Game **xây dựng thương cảng** lấy bối cảnh lịch sử có thật: năm 1149, vua
-**Lý Anh Tông** xuống chiếu lập trang **Vân Đồn** — thương cảng đầu tiên của
-Đại Việt — sau khi thuyền buôn ba nước Trảo Oa (Java), Lộ Lạc, Xiêm La xin
-vào Hải Đông buôn bán.
+Game **xây dựng thương cảng** lấy bối cảnh lịch sử có thật: năm 1149, đời vua
+**Lý Anh Tông**, triều đình cho lập trang **Vân Đồn** — thường được coi là thương
+cảng quốc tế đầu tiên của Đại Việt — sau khi thuyền buôn ba nước Trảo Oa (Java),
+Lộ Lạc, Xiêm La vào Hải Đông xin cư trú buôn bán.
 
 **Chơi ngay:** mở [`index.html`](index.html) bằng trình duyệt — một file HTML
 duy nhất, không cần cài đặt, thiết kế ưu tiên màn hình dọc điện thoại.
@@ -13,13 +13,13 @@ duy nhất, không cần cài đặt, thiết kế ưu tiên màn hình dọc đ
 Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
 
 1. **Kiến thiết**: chạm công trình ở thanh dưới rồi chạm ô đất trống để dựng —
-   lò gốm, xưởng dệt lụa, bè ngọc trai, trạm trầm hương… sản xuất
+   lò gốm, xưởng dệt lụa, bến mò ngọc trai, trạm trầm hương… sản xuất
    hàng hóa; cầu tàu (đặt ven bờ) đón thêm thuyền; kho tăng sức chứa.
    **Chạm vào công trình đã dựng** để mở bảng **nâng cấp theo bậc** (tối đa
    cấp 3, hiện sao ★ trên nóc): lò xưởng cấp 2 nhanh gấp rưỡi, cấp 3 gấp
    đôi; kho thêm +30 sức chứa mỗi cấp; cầu tàu thu thuế cao hơn; chợ, đền,
    vọng lâu mạnh dần theo cấp.
-2. **Giao thương**: thương thuyền **Tống, Nhật Bản, Trảo Oa, Xiêm La** lần
+2. **Giao thương**: thương thuyền **Tống, Tam Phật Tề, Trảo Oa, Xiêm La** lần
    lượt cập bến, mỗi nước chuộng mặt hàng khác nhau và trả giá khác nhau —
    hàng trong kho tự động bán ra thu **quan tiền**.
 3. **Danh vọng & thăng cấp**: mỗi thuyền rời bến cho danh vọng (đền thần biển
@@ -36,7 +36,7 @@ Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
    mặt hàng, trả giá cao nhất và tặng thêm danh vọng khi rời bến.
 
 Nút **📖** trên thanh trên mở **Sổ sử ký** — tóm lược sử liệu thật về
-Vân Đồn: chiếu lập trang 1149, gốm Đại Việt xuất khẩu, trận Vân Đồn 1288
+Vân Đồn: việc lập trang năm 1149, gốm Đại Việt xuất khẩu, trận Vân Đồn 1288
 của Trần Khánh Dư. Nút **🏆** mở **Bảng thành tích**: thống kê cả ván
 (thuyền đã tiếp, quan tiền tích lũy, hàng sản xuất, cống phẩm, thời gian
 trấn thủ…) và 6 **danh hiệu** để chinh phục — từ *Thần buôn* đến
@@ -59,7 +59,13 @@ thuyền lương của **Trương Văn Hổ**.
 
 ## Chất liệu lịch sử — văn hóa
 
-- Chiếu lập trang Vân Đồn 1149 thời Lý Anh Tông (Đại Việt sử ký toàn thư)
+- Việc lập trang Vân Đồn năm 1149 đời Lý Anh Tông (Đại Việt sử ký toàn thư)
+- **Rà soát sử liệu** (10/11/2026): thuyền «Nhật Bản» đổi thành «Tam Phật Tề», vì
+  *Toàn thư* chép Tam Phật Tề đến Vân Đồn năm 1184 còn không chép thuyền Nhật ở
+  Vân Đồn thời Lý–Trần; «bè ngọc trai» đổi thành «bến mò ngọc trai» (thời ấy chưa
+  có nghề nuôi cấy); bỏ lời «chiếu» đặt trong ngoặc kép (sử chỉ chép «bèn cho lập
+  trang»); Sổ sử ký thêm các mốc 1184, 1348, 1360 và ghi chú về tên Xiêm La, Lộ Lạc,
+  trầm hương, chức «quan trấn thủ».
 - Gốm Đại Việt, lụa, ngọc trai, trầm hương — các mặt hàng xuất khẩu nổi tiếng
 - **Ghi chú niên đại** (sửa 10/11/2026): gốm hoa lam Chu Đậu ra đời cuối thế kỷ 14,
   rực rỡ thế kỷ 15–16, nên trong game lò gốm gọi chung là «gốm Đại Việt»; «giặc

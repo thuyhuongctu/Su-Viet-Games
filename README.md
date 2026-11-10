@@ -98,11 +98,11 @@ software: see [License](#license-and-third-party-components).
 
 ### Vân Đồn — The First Trading Port (1149)
 
-In 1149 King Lý Anh Tông issued an edict establishing Vân Đồn, the first
-international trading port of Đại Việt. The player develops the port from a
+In 1149, in the reign of King Lý Anh Tông, the court established Vân Đồn,
+commonly regarded as the first international trading port of Đại Việt. The player develops the port from a
 fishing hamlet: building piers for merchant ships arriving from Song China,
-Japan, Java and Siam; opening pottery kilns, silk workshops and pearl
-rafts; collecting tax revenue; weathering storms; and repelling raids. The game
+Srivijaya, Java and Siam; opening pottery kilns, silk workshops and pearl-diving
+stations; collecting tax revenue; weathering storms; and repelling raids. The game
 includes tiered building upgrades, royal tribute quests, an in-game history
 codex, an achievements board, and a separate challenge mode recreating the
 Battle of Vân Đồn (1288), in which Trần Khánh Dư intercepted the Yuan supply
