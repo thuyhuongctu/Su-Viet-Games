@@ -6,6 +6,14 @@ thay vì chỉ đặt công trình như bản 2D ([`../van-don/`](../van-don/)).
 **Chơi:** mở [`index.html`](index.html). Một tệp HTML, dùng `../lib/three.min.js`
 có sẵn trong kho, không tải gì từ bên ngoài.
 
+## Nhân vật
+
+Nhân vật dựng bằng mã (không dùng tệp mô hình ngoài): tạo hình chibi đầu to, mắt to,
+tóc búi, áo giao lĩnh có viền, tay chân có khớp và bước đi. Người chơi chọn
+**Quan trấn thủ** (mũ cánh chuồn) hoặc **Nữ thương chủ** (nhân vật hư cấu) ở màn mở
+đầu. Mỗi thợ và mỗi thương nhân có trang phục, mũ nón và màu da riêng; khi đang mang
+hàng, nhân vật đeo gùi sau lưng.
+
 ## Cách chơi
 
 - **Đi lại:** phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái.

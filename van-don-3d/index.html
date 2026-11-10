@@ -74,6 +74,10 @@
     justify-content:center;padding:16px;overflow:auto;touch-action:pan-y}
   .card{width:min(94vw,560px);background:var(--panel);border:2px solid var(--dong);border-radius:18px;
     padding:20px 18px;text-align:center;max-height:94vh;overflow:auto}
+  .ov.pick{align-items:flex-end;background:linear-gradient(#160d0400 0%,#160d0400 34%,#160d04f2 52%);padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .ov.pick .card{max-height:none;overflow:visible}
+  .card details{text-align:left;font-size:14px;margin:10px 0}
+  .card summary{cursor:pointer;color:var(--celadon);min-height:44px;display:flex;align-items:center}
   .card h1{font-size:26px;color:var(--dong);line-height:1.2}
   .card h1 small{display:block;font-size:14px;color:var(--celadon);letter-spacing:.12em;margin-top:6px}
   .card p{font-size:14px;line-height:1.55;margin:10px 0;text-align:left}
@@ -85,12 +89,13 @@
 <body>
 <canvas id="game" aria-label="Bến Vân Đồn nhìn từ trên cao, có nhân vật quan trấn thủ đi lại"></canvas>
 
-<div id="hud">
+<div id="hud" style="display:none">
   <span class="chip">📜 Phiên <b id="hRound">1</b>/6</span>
   <span class="chip">🪙 <b id="hMoney">0</b> quan</span>
   <span class="chip">⭐ <b id="hRep">0</b></span>
   <span class="chip">🧺 <b id="hCarry">0</b>/10</span>
   <span class="chip">⚖️ Thuế <b id="hTax">15</b>%</span>
+  <span class="chip" id="hNear">📍 <b id="hNearName">—</b></span>
   <a id="btnHome" href="../index.html" aria-label="Về cổng trò chơi">🏠</a>
   <div id="sun"><div id="sunBar"></div></div>
 </div>
@@ -108,24 +113,31 @@
   <div class="btns" id="dlgBtns"></div>
 </div>
 
-<div class="ov" id="ovStart">
+<div class="ov pick" id="ovStart">
   <div class="card">
     <h1 class="serif">Vân Đồn 3D<small>DẠO BẾN THƯƠNG CẢNG · 1149</small></h1>
-    <p>Khanh là quan trấn thủ trang Vân Đồn. Lần này khanh <b>tự đi lại trên bến</b>: ghé lò xưởng
-    mua hàng, mang ra cầu tàu bán cho thương thuyền bốn phương, và định mức thuế cảng.</p>
-    <ul>
-      <li>Đi lại: phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái. Đến gần người nào thì bấm nút đỏ (hoặc phím E) để gặp.</li>
-      <li>Mỗi thương nhân <b>chuộng hai mặt hàng</b> và trả giá cao cho đúng hàng đó.</li>
-      <li>Khanh chỉ mang được <b>10 kiện</b> mỗi chuyến, và mỗi phiên chợ có hạn giờ.</li>
-      <li>Ở <b>Nhà thuế quan</b>: thuế cao thu nhiều trên mỗi kiện, nhưng phiên sau thuyền mua ít đi.</li>
-      <li>Sau <b>6 phiên</b>, triều đình xét công theo quan tiền và danh vọng.</li>
-    </ul>
-    <p class="note">Bản thử nghiệm. Trò chơi giản lược lịch sử: mức thuế, giá cả và nhịp phiên chợ là số liệu
-    của trò chơi, không phải sử liệu. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
+    <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b>: ghé lò xưởng mua hàng, mang ra cầu tàu bán cho
+    thương thuyền bốn phương, và định mức thuế cảng.</p>
+    <div class="btns" style="justify-content:center" role="group" aria-label="Chọn nhân vật">
+      <button class="btn" type="button" data-char="quan" aria-pressed="false">Quan trấn thủ</button>
+      <button class="btn" type="button" data-char="nu" aria-pressed="false">Nữ thương chủ</button>
+    </div>
+    <details>
+      <summary>Cách chơi</summary>
+      <ul>
+        <li>Đi lại: phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái. Đến gần người nào thì bấm nút đỏ (hoặc phím E) để gặp.</li>
+        <li>Mỗi thương nhân <b>chuộng hai mặt hàng</b> và trả giá cao cho đúng hàng đó.</li>
+        <li>Mỗi chuyến mang được <b>10 kiện</b>, và mỗi phiên chợ có hạn giờ.</li>
+        <li>Ở <b>Nhà thuế quan</b>: thuế cao thu nhiều trên mỗi kiện, nhưng phiên sau thuyền mua ít đi.</li>
+        <li>Sau <b>6 phiên</b>, triều đình xét công theo quan tiền và danh vọng.</li>
+      </ul>
+    </details>
     <div class="btns" style="justify-content:center">
       <button class="btn pri" id="btnStart" type="button">⚓ Ra bến</button>
       <a class="btn" href="../van-don/index.html" style="text-decoration:none;display:inline-flex;align-items:center">Bản 2D dựng bến</a>
     </div>
+    <p class="note">Bản thử nghiệm. Mức thuế, giá cả, nhịp phiên chợ và nhân vật «Nữ thương chủ» là hư cấu của
+    trò chơi, không phải sử liệu. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
     <p class="note" id="bestLine" style="text-align:center"></p>
   </div>
 </div>
@@ -170,10 +182,14 @@ const GOODS = [
   { id:'tram', ic:'🌿', name:'Trầm hương',   price:150 },
 ];
 const NATIONS = [
-  { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0 },
-  { id:'nhat', name:'Nhật Bản', who:'Thương nhân Nhật Bản',   flag:0xf2e8d5, sail:0xb8452f, prefs:['gom','tram'], mult:1.15 },
-  { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1 },
-  { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05 },
+  { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0,
+    look:{ robe:0xe8d9b0, trim:0xc94b3c, hat:'mu', hatColor:0x1c1c1c } },
+  { id:'nhat', name:'Nhật Bản', who:'Thương nhân Nhật Bản',   flag:0xf2e8d5, sail:0xb8452f, prefs:['gom','tram'], mult:1.15,
+    look:{ robe:0x7a2a22, trim:0xf2e8d5, sash:0x1c1c1c } },
+  { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1,
+    look:{ robe:0x3f7a4f, trim:0xd9a441, hat:'khan', hatColor:0xd9a441, skin:0xc8956a } },
+  { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05,
+    look:{ robe:0x9ec5ab, trim:0xd9a441, hat:'chop', hatColor:0xd9a441, skin:0xd2a070 } },
 ];
 const G = id => GOODS.find(g => g.id===id);
 const ROUNDS = 6, CARRY = 10, ROUND_SEC = 80, COST_RATE = 0.55;
@@ -338,42 +354,137 @@ NATIONS.forEach((n,i) => {
 });
 
 // ----- Người -----
-function person(robe, hat, hatType){
-  const g = new THREE.Group();
-  const legL = box(0.55,1.5,0.55,0x3a2412,-0.4,0.75,0,g), legR = box(0.55,1.5,0.55,0x3a2412,0.4,0.75,0,g);
-  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.75,1.15,2.3,10), M(robe)); body.position.y = 2.5; g.add(body);
-  const armL = box(0.4,1.7,0.4,robe,-1.05,2.7,0,g), armR = box(0.4,1.7,0.4,robe,1.05,2.7,0,g);
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.72,12,10), M(0xe8b98a)); head.position.y = 4.25; g.add(head);
-  if(hatType==='non'){ const h = new THREE.Mesh(new THREE.ConeGeometry(1.5,0.9,12), M(hat)); h.position.y = 5.1; g.add(h); }
-  else if(hatType==='quan'){ box(1.3,0.6,1.3,hat,0,5.0,0,g); box(2.6,0.14,0.5,hat,0,5.0,-0.5,g); }
-  else { const h = new THREE.Mesh(new THREE.SphereGeometry(0.78,10,8,0,Math.PI*2,0,Math.PI/2), M(hat)); h.position.y = 4.45; g.add(h); }
-  g.userData = { legL, legR, armL, armR, phase:rand(0,6) };
-  scene.add(g); return g;
+// Nhân vật tạo hình chibi: đầu to, mắt to, tóc búi, áo giao lĩnh, tay chân có khớp
+const _geo = {};
+const geo = (k, f) => _geo[k] || (_geo[k] = f());
+const sph = (r, ws, hs) => geo('s'+r+'_'+(ws||20), () => new THREE.SphereGeometry(r, ws||20, hs||16));
+function mesh(g, c, x, y, z, parent, sx, sy, sz){
+  const m = new THREE.Mesh(g, M(c)); m.position.set(x||0, y||0, z||0);
+  if(sx !== undefined) m.scale.set(sx, sy, sz); parent.add(m); return m;
+}
+function person(o){
+  o = Object.assign({ robe:0x8a2424, trim:0xd9a441, skin:0xf0c9a0, hair:0x1d1512, hat:'none', hatColor:0x1c1c1c }, o);
+  const g = new THREE.Group(), rig = new THREE.Group(); g.add(rig);
+  // Bóng dưới chân
+  const sh = new THREE.Mesh(geo('shadow', () => new THREE.CircleGeometry(1.25, 24)),
+    new THREE.MeshBasicMaterial({ color:0x000000, transparent:true, opacity:0.22, depthWrite:false }));
+  sh.rotation.x = -Math.PI/2; sh.position.y = 0.04; g.add(sh);
+  // Chân: quần và giày vải
+  const leg = side => { const pv = new THREE.Group(); pv.position.set(0.36*side, 1.3, 0); rig.add(pv);
+    mesh(geo('leg', () => new THREE.CapsuleGeometry(0.27, 0.62, 6, 12)), o.female ? o.robe : 0xe9dcc0, 0, -0.6, 0, pv);
+    mesh(sph(0.34), 0x2a1c12, 0, -1.14, 0.14, pv, 1, 0.62, 1.5); return pv; };
+  const legL = leg(-1), legR = leg(1);
+  // Thân áo: tà xòe về gấu
+  const prof = o.female
+    ? [[0,2.98],[0.46,2.94],[0.66,2.6],[0.6,2.15],[0.8,1.6],[1.22,0.62],[1.14,0.5],[0,0.5]]
+    : [[0,2.98],[0.5,2.94],[0.74,2.6],[0.72,2.1],[0.84,1.6],[1.06,0.82],[0.98,0.7],[0,0.7]];
+  const robe = new THREE.Mesh(geo('robe'+(o.female?'F':'M'), () => new THREE.LatheGeometry(prof.map(p => new THREE.Vector2(p[0], p[1])), 24)), M(o.robe));
+  rig.add(robe);
+  // Viền gấu, thắt lưng, cổ giao lĩnh
+  const ring = (r, t, y, c, tilt) => { const m = mesh(geo('t'+r+'_'+t, () => new THREE.TorusGeometry(r, t, 8, 28)), c, 0, y, 0, rig); m.rotation.x = Math.PI/2 + (tilt||0); return m; };
+  ring(o.female ? 1.2 : 1.03, 0.07, o.female ? 0.6 : 0.8, o.trim);
+  ring(o.female ? 0.62 : 0.73, 0.1, 2.12, o.sash || o.trim);
+  const col = ring(0.44, 0.09, 2.86, o.trim, 0.42); col.position.z = 0.1;
+  if(o.female){ mesh(sph(0.5), o.sash || o.trim, 0, 2.5, 0.42, rig, 0.9, 0.9, 0.5); }      // yếm
+  // Tay: ống tay rộng, bàn tay tròn
+  const arm = side => { const pv = new THREE.Group(); pv.position.set(0.72*side, 2.72, 0); pv.rotation.z = 0.24*side; rig.add(pv);
+    mesh(sph(0.34), o.robe, 0, 0, 0, pv);
+    mesh(geo('sleeve', () => new THREE.CylinderGeometry(0.24, 0.42, 1.1, 14)), o.robe, 0, -0.55, 0, pv);
+    mesh(geo('cuff', () => new THREE.TorusGeometry(0.4, 0.05, 6, 16)), o.trim, 0, -1.08, 0, pv).rotation.x = Math.PI/2;
+    mesh(sph(0.2), o.skin, 0, -1.2, 0, pv); return pv; };
+  const armL = arm(-1), armR = arm(1);
+  // Đầu
+  const head = new THREE.Group(); head.position.y = 4.0; rig.add(head);
+  mesh(sph(1.15, 28, 22), o.skin, 0, 0, 0, head, 1, 0.95, 0.95);
+  mesh(sph(0.2), o.skin, -1.1, -0.1, 0, head, 0.5, 1, 0.8); mesh(sph(0.2), o.skin, 1.1, -0.1, 0, head, 0.5, 1, 0.8);
+  for(const sd of [-1, 1]){
+    mesh(sph(0.2), 0x2a1a12, 0.42*sd, -0.06, 1.0, head, 0.82, 1.2, 0.4);            // mắt
+    mesh(sph(0.06, 8, 8), 0xffffff, 0.42*sd + 0.07, 0.06, 1.08, head);              // ánh mắt
+    const br = mesh(geo('brow', () => new THREE.BoxGeometry(0.32, 0.055, 0.05)), o.hair, 0.42*sd, 0.3, 1.0, head); br.rotation.z = -0.12*sd;
+    const bl = new THREE.Mesh(sph(0.2), new THREE.MeshLambertMaterial({ color:0xf08a8a, transparent:true, opacity:0.55 }));
+    bl.position.set(0.7*sd, -0.36, 0.8); bl.scale.set(1, 0.6, 0.25); head.add(bl);   // má hồng
+  }
+  mesh(sph(0.2), 0xb5483f, 0, -0.46, 1.0, head, 0.62, 0.3, 0.25);                    // miệng
+  if(o.beard){ const b = mesh(geo('beard', () => new THREE.ConeGeometry(0.34, 0.8, 12)), o.beard, 0, -1.2, 0.72, head); b.rotation.x = Math.PI + 0.25; }
+  // Tóc
+  const cap = mesh(geo('hair', () => new THREE.SphereGeometry(1.21, 28, 16, 0, Math.PI*2, 0, Math.PI*0.56)), o.hair, 0, 0.02, -0.04, head, 1, 0.97, 0.97);
+  cap.rotation.x = -0.34;
+  for(const x of [-0.62, -0.2, 0.2, 0.62]) mesh(sph(0.34), o.hair, x, 0.78 - Math.abs(x)*0.25, 0.78 - Math.abs(x)*0.2, head, 1, 0.55, 0.6);   // mái
+  if(o.female){
+    mesh(sph(1.0), o.hair, 0, -0.75, -0.62, head, 0.95, 1.5, 0.5);                   // tóc dài sau lưng
+    for(const sd of [-1, 1]){ mesh(geo('lock', () => new THREE.CapsuleGeometry(0.2, 1.1, 6, 10)), o.hair, 1.02*sd, -0.75, 0.2, head);
+      mesh(sph(0.42), o.hair, 0.6*sd, 1.12, -0.15, head); mesh(sph(0.1, 8, 8), o.trim, 0.6*sd, 1.5, 0.05, head); }   // hai búi và trâm
+  }
+  // Mũ
+  const H = o.hatColor;
+  if(o.hat==='quan' || o.hat==='mu'){
+    mesh(geo('hcap', () => new THREE.SphereGeometry(1.27, 24, 12, 0, Math.PI*2, 0, Math.PI*0.42)), H, 0, 0.12, -0.06, head);
+    mesh(geo('hback', () => new THREE.CylinderGeometry(0.55, 0.68, 0.62, 16)), H, 0, 1.3, -0.4, head);
+    mesh(geo('hband', () => new THREE.TorusGeometry(1.2, 0.07, 6, 28)), o.trim, 0, 0.5, -0.06, head).rotation.x = Math.PI/2 - 0.2;
+    if(o.hat==='quan') for(const sd of [-1, 1]) mesh(sph(0.5), H, 1.75*sd, 0.62, -0.6, head, 1.5, 0.12, 0.42);   // hai cánh chuồn
+  } else if(o.hat==='non'){
+    mesh(geo('non', () => new THREE.ConeGeometry(2.05, 1.0, 28)), H, 0, 1.28, 0, head);
+    mesh(geo('nonIn', () => new THREE.CylinderGeometry(2.03, 2.03, 0.05, 28)), 0xb49a62, 0, 0.78, 0, head);
+  } else if(o.hat==='khan'){
+    mesh(geo('khan', () => new THREE.TorusGeometry(0.95, 0.34, 10, 24)), H, 0, 0.78, -0.05, head).rotation.x = Math.PI/2 - 0.2;
+    mesh(sph(0.3), o.trim, 0, 0.92, 0.92, head, 1, 1, 0.6);
+  } else if(o.hat==='chop'){
+    mesh(geo('chop', () => new THREE.ConeGeometry(0.62, 1.25, 16)), H, 0, 1.55, -0.05, head);
+    mesh(geo('chopB', () => new THREE.TorusGeometry(0.62, 0.12, 8, 20)), o.trim, 0, 1.0, -0.05, head).rotation.x = Math.PI/2;
+  } else if(!o.female){
+    mesh(sph(0.36), o.hair, 0, 1.26, -0.2, head);                                    // búi tó
+    mesh(geo('bunR', () => new THREE.TorusGeometry(0.26, 0.06, 6, 14)), o.trim, 0, 1.05, -0.17, head).rotation.x = Math.PI/2 - 0.15;
+  }
+  // Gùi hàng sau lưng (chỉ hiện khi đang mang hàng)
+  const pack = new THREE.Group(); pack.position.set(0, 2.25, -0.95); pack.visible = false; rig.add(pack);
+  mesh(geo('pack', () => new THREE.CylinderGeometry(0.62, 0.48, 1.05, 12)), 0xa9793f, 0, 0, 0, pack);
+  mesh(sph(0.6), 0xe6d5ae, 0, 0.5, 0, pack, 1, 0.45, 1);
+  g.userData = { rig, head, legL, legR, armL, armR, pack, phase:rand(0,6), ground:0 };
+  return g;
 }
 function animate(p, moving, dt){
-  const u = p.userData; u.phase += dt * (moving ? 11 : 2);
-  const a = moving ? Math.sin(u.phase)*0.7 : 0;
-  u.legL.rotation.x = a; u.legR.rotation.x = -a; u.armL.rotation.x = -a*0.8; u.armR.rotation.x = a*0.8;
-  if(!moving) p.position.y = Math.sin(u.phase)*0.04;
+  const u = p.userData; u.phase += dt * (moving ? 12 : 2.2);
+  const a = moving ? Math.sin(u.phase)*0.62 : 0;
+  u.legL.rotation.x = a; u.legR.rotation.x = -a;
+  u.armL.rotation.x = -a*0.9; u.armR.rotation.x = a*0.9;
+  u.rig.position.y = moving ? Math.abs(Math.sin(u.phase))*0.14 : Math.sin(u.phase)*0.035;
+  u.rig.rotation.x = moving ? 0.07 : 0;
+  u.head.rotation.z = moving ? Math.sin(u.phase)*0.04 : Math.sin(u.phase*0.5)*0.03;
 }
 
-const player = person(0x7a1f1f, 0x1c1c1c, 'quan');
-player.position.set(0,0,2);
+// Người chơi: khung chứa cố định, đổi tạo hình bên trong
+const AVATARS = {
+  quan: { name:'Quan trấn thủ', o:{ robe:0x8a2424, trim:0xd9a441, hat:'quan', hatColor:0x1c1c1c } },
+  nu:   { name:'Nữ thương chủ', o:{ robe:0xb23a48, trim:0xd9a441, sash:0x9ec5ab, female:true } },
+};
+const CHAR_KEY = 'van-don-3d-char';
+const player = new THREE.Group(); scene.add(player);
+let avatarId = 'quan';
+function setAvatar(id){
+  if(!AVATARS[id]) id = 'quan'; avatarId = id;
+  while(player.children.length) player.remove(player.children[0]);
+  const a = person(AVATARS[id].o); player.add(a); player.userData = a.userData;
+  try{ localStorage.setItem(CHAR_KEY, id); }catch(e){}
+  document.querySelectorAll('[data-char]').forEach(b => { const on = b.dataset.char===id; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+}
+try{ avatarId = localStorage.getItem(CHAR_KEY) || 'quan'; }catch(e){}
+setAvatar(avatarId);
+player.position.set(-26,0,3);      // chỗ trống trên bãi cát cho màn chọn nhân vật
 
 function addPlace(def){
-  const npc = def.npc ? person(def.npc[0], def.npc[1], def.npc[2]) : null;
-  if(npc){ npc.position.set(def.x,0,def.z); npc.rotation.y = def.face||0; label(def.tag, 7, npc, 0.8); }
+  const npc = def.npc ? person(def.npc) : null;
+  if(npc){ scene.add(npc); npc.position.set(def.x, def.z > SHORE_Z ? 0.4 : 0, def.z); npc.rotation.y = def.face||0; npc.userData.tag = label(def.tag, 7.3, npc, 0.6); }
   places.push(Object.assign({}, def, { npc })); if(npc) solids.push({ x:def.x, z:def.z, r:1.3 });
 }
-addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      npc:[0x8a5a33,0xd8c49a,'non'] });
-addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   npc:[0x9ec5ab,0xd8c49a,'non'] });
-addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Phường trưởng đi trầm', npc:[0x4f6a45,0x3a2412,'khan'] });
-addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bè ngọc trai',  who:'Thợ lặn ngọc trai',  npc:[0x2f6f73,0xd8c49a,'non'] });
-addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', npc:[0x31476b,0x1c1c1c,'quan'] });
+addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      npc:{ robe:0x8a5a33, trim:0x5c3d24, hat:'non', hatColor:0xd8c49a, beard:0xd9d4c8, skin:0xe0b48a } });
+addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   npc:{ robe:0x9ec5ab, trim:0xf2e8d5, sash:0xa5402e, female:true } });
+addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Phường trưởng đi trầm', npc:{ robe:0x4f6a45, trim:0xd9a441, hat:'khan', hatColor:0x5c3d24, beard:0x2a1a12, skin:0xdcae84 } });
+addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bè ngọc trai',  who:'Thợ lặn ngọc trai',  npc:{ robe:0x2f6f73, trim:0xf2e8d5, hat:'non', hatColor:0xd8c49a, skin:0xd9a878 } });
+addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', npc:{ robe:0x31476b, trim:0x9ec5ab, hat:'mu', hatColor:0x1c1c1c } });
 addPlace({ id:'bia-su',   kind:'stele', x:-58, z:-0.5, tag:'Bia sử', who:'Bia đá' });
 label('Bia sử', 9, (()=>{ const g=new THREE.Group(); g.position.set(-58,0,-4); scene.add(g); return g; })(), 0.8);
 NATIONS.forEach((n,i) => addPlace({ id:'tn-'+n.id, kind:'merchant', nat:n, x:piers[i].x, z:SHORE_Z+PIER_LEN-5,
-  tag:n.name, who:n.who, face:Math.PI, npc:[n.sail, n.flag, 'khan'] }));
+  tag:n.name, who:n.who, face:Math.PI, npc:n.look }));
 
 function applyRoundToWorld(){
   for(const n of NATIONS){
@@ -398,7 +509,7 @@ addEventListener('blur', () => { for(const k in keys) keys[k] = false; });
 const IS_TOUCH = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 const stick = { on:false, id:null, x:0, z:0 };
 if(IS_TOUCH){
-  $('stick').style.display = 'block'; $('hint').style.display = 'none';
+  $('hint').style.display = 'none';
   const el = $('stick'), kn = $('knob');
   const move = e => {
     const r = el.getBoundingClientRect(); let dx = e.clientX-(r.left+r.width/2), dy = e.clientY-(r.top+r.height/2);
@@ -434,11 +545,15 @@ function updatePlayer(dt){
     if(!blocked(player.position.x, nz)) player.position.z = nz;
     player.rotation.y = Math.atan2(dx, dz);
   }
+  player.position.y = player.position.z > SHORE_Z - 0.4 ? 0.4 : 0;
+  player.userData.pack.visible = carryN() > 0;
   animate(player, moving, dt);
   // Điểm tương tác gần nhất
   nearest = null; let best = 6.5;
   for(const p of places){ if(p.off) continue;
     const d = Math.hypot(player.position.x-p.x, player.position.z-p.z); if(d < best){ best = d; nearest = p; } }
+  { let nb = null, nd = 1e9; for(const p of places){ if(p.off) continue; const d = Math.hypot(player.position.x-p.x, player.position.z-p.z); if(d < nd){ nd = d; nb = p; } }
+    $('hNearName').textContent = nb ? `${nb.tag} · ${Math.round(nd)} m` : '—'; }
   const a = $('act');
   if(nearest && !dlgOpen){ a.style.display = 'block'; a.textContent = (nearest.kind==='stele' ? 'Đọc ' : 'Gặp ') + nearest.tag; }
   else a.style.display = 'none';
@@ -568,9 +683,12 @@ function finish(){
 function start(){
   Object.assign(S, { running:true, paused:false, round:1, money:150, rep:0, tax:15, nextTax:15, carry:{gom:0,lua:0,ngoc:0,tram:0} });
   player.position.set(0,0,2); player.rotation.y = 0; newRound();
+  $('hud').style.display = 'flex'; if(IS_TOUCH) $('stick').style.display = 'block';
   $('ovStart').style.display = 'none'; $('ovEnd').style.display = 'none'; $('ovRound').style.display = 'none';
   toast('Phiên 1 bắt đầu. Ghé <b>lò xưởng</b> mua hàng rồi mang ra <b>cầu tàu</b>.', 4200);
 }
+document.querySelectorAll('[data-char]').forEach(b => b.addEventListener('click', () => setAvatar(b.dataset.char)));
+setAvatar(avatarId);
 $('btnStart').addEventListener('click', start); $('btnAgain').addEventListener('click', start);
 try{ const b = +localStorage.getItem(BEST_KEY); if(b) $('bestLine').textContent = `Kỷ lục của khanh: ${b} điểm`; }catch(e){}
 
@@ -582,7 +700,7 @@ function fit(){
   camera.aspect = w/h; camera.fov = w < h ? 62 : 48; camera.updateProjectionMatrix();
 }
 addEventListener('resize', fit); fit();
-const camOff = new THREE.Vector3(0, 34, 30);
+const camOff = new THREE.Vector3(0, 23, 23);
 let last = performance.now(), tt = 0;
 function loop(now){
   const dt = Math.min(0.05, (now-last)/1000); last = now; tt += dt;
@@ -591,11 +709,23 @@ function loop(now){
     if(!dlgOpen){ S.t -= dt; if(S.t <= 0){ toast('Trống thu không: hết giờ phiên chợ.'); endRound(); } }
     $('sunBar').style.width = clamp(S.t/ROUND_SEC*100, 0, 100) + '%';
   } else { $('act').style.display = 'none'; animate(player, false, dt); }
-  for(const p of places) if(p.npc && p.npc.visible) animate(p.npc, false, dt);
+  for(const p of places) if(p.npc && p.npc.visible){ animate(p.npc, false, dt);
+    const dx = player.position.x - p.x, dz = player.position.z - p.z;
+    p.npc.userData.tag.visible = Math.hypot(dx,dz) > 7;
+    const want = Math.hypot(dx,dz) < 14 ? Math.atan2(dx,dz) : (p.face||0);
+    let d = want - p.npc.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); p.npc.rotation.y += d * Math.min(1, dt*5);
+  }
   for(const n of NATIONS){ const s = ships[n.id]; s.position.y = Math.sin(tt*1.3 + s.position.x)*0.25; s.rotation.z = Math.sin(tt*0.9 + s.position.x)*0.03; }
   sea.position.y = -0.6 + Math.sin(tt*0.8)*0.08;
-  camera.position.lerp(new THREE.Vector3().copy(player.position).add(camOff), 0.12);
-  camera.lookAt(player.position.x, 2, player.position.z - 2);
+  if(!S.running && $('ovStart').style.display !== 'none'){        // màn chọn nhân vật: máy quay lượn quanh
+    const pr = innerWidth < innerHeight;
+    camera.position.set(player.position.x + Math.sin(tt*0.6)*13, 4.5, player.position.z + Math.cos(tt*0.6)*13);
+    camera.lookAt(player.position.x, pr ? -2.6 : 0.6, player.position.z);
+  } else {
+    camera.position.lerp(new THREE.Vector3().copy(player.position).add(camOff), 0.12);
+    camera.lookAt(player.position.x, 2.5, player.position.z - 5);
+  }
+  if(window.__vdCam){ const c = window.__vdCam; camera.position.set(c[0],c[1],c[2]); camera.lookAt(c[3],c[4],c[5]); }
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
 }
@@ -603,7 +733,7 @@ camera.position.copy(player.position).add(camOff);
 requestAnimationFrame(loop);
 
 // Cửa cho kiểm thử tự động
-window.__vd = { S, GOODS, NATIONS, places, player, buy, sell, giveTribute, endRound, start, score, costOf, sellPrice, blocked, openDlg, closeDlg };
+window.__vd = { S, GOODS, NATIONS, places, player, setAvatar, buy, sell, giveTribute, endRound, start, score, costOf, sellPrice, blocked, openDlg, closeDlg };
 </script>
 </body>
 </html>
