@@ -63,9 +63,19 @@ Chỉ giữ ảnh không có chi tiết lệch niên đại 1149; chữ trên �
 | Tệp | Dùng ở | Ghi chú |
 |---|---|---|
 | `ben-cang-van-don.jpg` | Màn mở đầu | Cắt bỏ biển chữ quốc ngữ (chữ quốc ngữ có từ thế kỷ 17). |
+| `quan-tran-thu.jpg` | Nút chọn nhân vật | Mũ phốc đầu, đi ủng (triều phục định năm 1059); áo không thêu rồng. |
+| `nu-thuong-chu.jpg` | Nút chọn nhân vật | Nhân vật hư cấu; răng đen, hộp trầu, chuỗi tiền đồng lỗ vuông. |
 | `tho-ca-lo-gom.jpg` | Lò gốm | Cắt bỏ nhãn «Bát Tràng / Chu Đậu»; hai lò này hưng thịnh sau thời Lý. |
+| `ba-chu-xuong-lua.jpg` | Xưởng dệt lụa | Con tơ, thoi dệt, khung cửi nhỏ, rổ lá dâu. |
+| `chu-tram-huong.jpg` | Trạm trầm hương | Khay trầm, cân đồng đeo ở thắt lưng. |
+| `tho-lan-ngoc-trai.jpg` | Bến mò ngọc trai | Đóng khố, xăm mình, giỏ trai ngọc, dao, cuộn dây. |
+| `thu-lai-thue-quan.jpg` | Nhà thuế quan | Bút lông, thẻ gỗ, cân đồng; không có chữ trên ảnh. |
+| `thuong-nhan-tong.jpg` | Thuyền Tống | Áo cổ tròn, bát men xanh (không phải gốm hoa lam), cuộn lụa. |
+| `thuong-nhan-xiem-la.jpg` | Thuyền Xiêm La | Dựng theo cư dân Môn–Khmer vùng Chao Phraya thế kỷ 12. |
 | `thuong-nhan-phuong-nam.jpg` | Thuyền Trảo Oa, Tam Phật Tề | Trang phục cách điệu, không phục dựng theo hiện vật. |
-| `khoang-thuyen-buon.jpg` | Thuyền Tống, Xiêm La | Khoang hàng: gốm men xanh, quế, ngọc trai, lụa. |
+
+Các tượng nhân vật tạo theo [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md) và đã soát theo bảng soát
+trong tệp đó.
 
 Những ảnh có các chi tiết sau thì không dùng:
 
@@ -74,8 +84,7 @@ Những ảnh có các chi tiết sau thì không dùng:
 - áo thêu rồng cho quan (rồng là biểu tượng của vua), giáp trụ vàng kiểu phim cổ trang;
 - biển chữ quốc ngữ, địa danh đời sau như «Yên Bái».
 
-Các nhân vật còn lại chưa có ảnh. Prompt để tạo ảnh và bảng soát trước khi đưa vào game
-nằm ở [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md).
+Khi tạo thêm ảnh, dùng prompt và bảng soát trong [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md).
 
 ## Sử liệu và chỗ giản lược
 
@@ -109,4 +118,4 @@ Những chỗ là cách dựng của trò chơi:
 
 - Âm thanh.
 - Lưu ván giữa chừng.
-- Ảnh cho các nhân vật còn lại (xem [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md)).
+- Ảnh riêng cho thương nhân Trảo Oa và Tam Phật Tề (hiện dùng chung một ảnh).

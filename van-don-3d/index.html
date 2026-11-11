@@ -72,6 +72,8 @@
   .btn.pri{background:var(--son);color:#fff}
   .btn.on{background:var(--dong);color:#241708}
   .btn:disabled{opacity:.4;cursor:default}
+  .btn.char{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px}
+  .btn.char img{width:40px;height:56px;object-fit:cover;object-position:top;border-radius:8px;background:#160d04}
   .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 
   /* ---------- Màn phủ ---------- */
@@ -127,8 +129,8 @@
     <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b>: ghé lò xưởng mua hàng, mang ra cầu tàu bán cho
     thương thuyền bốn phương, và định mức thuế cảng.</p>
     <div class="btns" style="justify-content:center" role="group" aria-label="Chọn nhân vật">
-      <button class="btn" type="button" data-char="quan" aria-pressed="false">Quan trấn thủ</button>
-      <button class="btn" type="button" data-char="nu" aria-pressed="false">Nữ thương chủ</button>
+      <button class="btn char" type="button" data-char="quan" aria-pressed="false"><img src="assets/quan-tran-thu.jpg" alt="" width="40" height="56">Quan trấn thủ</button>
+      <button class="btn char" type="button" data-char="nu" aria-pressed="false"><img src="assets/nu-thuong-chu.jpg" alt="" width="40" height="56">Nữ thương chủ</button>
     </div>
     <details>
       <summary>Cách chơi</summary>
@@ -480,11 +482,15 @@ setAvatar(avatarId);
 player.position.set(-26,0,3);      // chỗ trống trên bãi cát cho màn chọn nhân vật
 
 /* Ảnh minh hoạ trong bảng hội thoại (mô hình đất nặn, đã rà theo niên đại 1149; xem README) */
-const PIC_THUYEN = { src:'assets/khoang-thuyen-buon.jpg', pos:'center', alt:'Mô hình bổ dọc khoang thuyền buôn chở gốm, quế, ngọc trai, lụa' };
 const PIC_PHUONG_NAM = { src:'assets/thuong-nhan-phuong-nam.jpg', alt:'Tượng đất nặn một thương nhân phương Nam quấn khăn, mặc xà rông' };
 const PICS = {
-  'lo-gom':  { src:'assets/tho-ca-lo-gom.jpg', alt:'Tượng đất nặn thợ cả lò gốm búi tóc, tay bưng bát' },
-  'tn-tong': PIC_THUYEN, 'tn-xiem': PIC_THUYEN,
+  'lo-gom':    { src:'assets/tho-ca-lo-gom.jpg', alt:'Tượng đất nặn thợ cả lò gốm búi tóc, tay bưng bát' },
+  'xuong-lua': { src:'assets/ba-chu-xuong-lua.jpg', alt:'Tượng đất nặn bà chủ xưởng dệt cầm con tơ và thoi dệt, bên khung cửi' },
+  'tram':      { src:'assets/chu-tram-huong.jpg', alt:'Tượng đất nặn chủ trạm trầm hương bưng khay trầm, đeo cân đồng' },
+  'be-ngoc':   { src:'assets/tho-lan-ngoc-trai.jpg', alt:'Tượng đất nặn thợ lặn đóng khố, xăm mình, ôm giỏ trai ngọc' },
+  'thue-quan': { src:'assets/thu-lai-thue-quan.jpg', alt:'Tượng đất nặn thư lại cầm bút lông và thẻ gỗ, bên cân đồng' },
+  'tn-tong':   { src:'assets/thuong-nhan-tong.jpg', alt:'Tượng đất nặn thương nhân Tống áo cổ tròn, cầm bát men xanh và cuộn lụa' },
+  'tn-xiem':   { src:'assets/thuong-nhan-xiem-la.jpg', alt:'Tượng đất nặn thương nhân Xiêm La đeo hoa tai, quấn sampot, cầm sừng tê' },
   'tn-trao': PIC_PHUONG_NAM, 'tn-nhat': PIC_PHUONG_NAM,
 };
 function addPlace(def){

@@ -1,7 +1,7 @@
 /* ThuyHuong Digital — service worker
    Cache-first cho toàn bộ cổng game: cài một lần, chơi ngoại tuyến. */
 'use strict';
-const VERSION = 'thd-v12';
+const VERSION = 'thd-v13';
 const SHELL = [
   './',
   './index.html',
@@ -24,7 +24,14 @@ const SHELL = [
   './van-don-3d/assets/ben-cang-van-don.jpg',
   './van-don-3d/assets/tho-ca-lo-gom.jpg',
   './van-don-3d/assets/thuong-nhan-phuong-nam.jpg',
-  './van-don-3d/assets/khoang-thuyen-buon.jpg',
+  './van-don-3d/assets/quan-tran-thu.jpg',
+  './van-don-3d/assets/nu-thuong-chu.jpg',
+  './van-don-3d/assets/ba-chu-xuong-lua.jpg',
+  './van-don-3d/assets/chu-tram-huong.jpg',
+  './van-don-3d/assets/tho-lan-ngoc-trai.jpg',
+  './van-don-3d/assets/thu-lai-thue-quan.jpg',
+  './van-don-3d/assets/thuong-nhan-tong.jpg',
+  './van-don-3d/assets/thuong-nhan-xiem-la.jpg',
 ];
 
 self.addEventListener('install', e => {
