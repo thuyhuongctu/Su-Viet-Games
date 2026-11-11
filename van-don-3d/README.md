@@ -14,6 +14,24 @@ tóc búi, áo giao lĩnh có viền, tay chân có khớp và bước đi. Ngư
 đầu. Mỗi thợ và mỗi thương nhân có trang phục, mũ nón và màu da riêng; khi đang mang
 hàng, nhân vật đeo gùi sau lưng.
 
+## Ảnh minh hoạ
+
+Ảnh mô hình đất nặn trong [`assets/`](assets/), dùng ở màn mở đầu và bảng hội thoại.
+Chỉ giữ ảnh không có chi tiết lệch niên đại 1149; chữ ghi trên ảnh gốc đã cắt bỏ.
+
+| Tệp | Dùng ở | Ghi chú |
+|---|---|---|
+| `ben-cang-van-don.jpg` | Màn mở đầu | Cắt bỏ biển chữ quốc ngữ (chữ quốc ngữ có từ thế kỷ 17). |
+| `tho-ca-lo-gom.jpg` | Lò gốm | Cắt bỏ nhãn «Bát Tràng / Chu Đậu», hai lò này hưng thịnh sau thời Lý. |
+| `thuong-nhan-phuong-nam.jpg` | Thuyền Trảo Oa, Tam Phật Tề | Trang phục cách điệu, không phục dựng theo hiện vật. |
+| `khoang-thuyen-buon.jpg` | Thuyền Tống, Xiêm La | Khoang hàng: gốm men xanh, quế, ngọc trai, lụa. |
+
+Không dùng các ảnh có: bình gốm hoa lam (thế kỷ 14 trở đi), ba lô vải có khoá cài,
+mỏ neo kiểu châu Âu, áo thêu rồng cho quan (rồng là biểu tượng của vua), giáp trụ vàng
+kiểu phim cổ trang, biển chữ quốc ngữ, địa danh «Yên Bái».
+
+Prompt cho các nhân vật còn thiếu ảnh: [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md).
+
 ## Cách chơi
 
 - **Đi lại:** phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái.

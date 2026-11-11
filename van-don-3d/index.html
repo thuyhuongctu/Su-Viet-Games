@@ -57,6 +57,11 @@
     width:min(96vw,560px);max-height:72vh;overflow:auto;background:#241708f7;border:2px solid var(--dong);
     border-radius:16px;padding:14px;z-index:9;display:none;touch-action:pan-y}
   #dlg h2{font-size:18px;color:var(--dong);margin-bottom:4px}
+  #dlgPic{float:right;width:84px;height:112px;object-fit:cover;object-position:top;border-radius:10px;
+    border:1px solid var(--dong);margin:0 0 6px 10px;background:#160d04}
+  #dlgPic[hidden]{display:none}
+  .banner{display:block;width:100%;height:auto;aspect-ratio:1100/511;object-fit:cover;border-radius:12px;
+    border:1px solid var(--dong);margin:8px 0 10px;background:#160d04}
   #dlg .who{font-size:12px;color:var(--celadon);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
   #dlg .body{font-size:14px;line-height:1.5;margin-bottom:10px}
   .row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #5c3d2488;font-size:14px}
@@ -106,6 +111,7 @@
 <button id="act" type="button">Nói chuyện</button>
 
 <div id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+  <img id="dlgPic" alt="" hidden width="84" height="112">
   <div class="who" id="dlgWho"></div>
   <h2 class="serif" id="dlgTitle"></h2>
   <div class="body" id="dlgBody"></div>
@@ -116,6 +122,8 @@
 <div class="ov pick" id="ovStart">
   <div class="card">
     <h1 class="serif">Vân Đồn 3D<small>DẠO BẾN THƯƠNG CẢNG · 1149</small></h1>
+    <img class="banner" src="assets/ben-cang-van-don.jpg" width="1100" height="511"
+      alt="Mô hình đất nặn bến Vân Đồn: cầu tàu gỗ, nhà mái tranh, thuyền buồm giữa các đảo đá vôi">
     <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b>: ghé lò xưởng mua hàng, mang ra cầu tàu bán cho
     thương thuyền bốn phương, và định mức thuế cảng.</p>
     <div class="btns" style="justify-content:center" role="group" aria-label="Chọn nhân vật">
@@ -471,6 +479,14 @@ try{ avatarId = localStorage.getItem(CHAR_KEY) || 'quan'; }catch(e){}
 setAvatar(avatarId);
 player.position.set(-26,0,3);      // chỗ trống trên bãi cát cho màn chọn nhân vật
 
+/* Ảnh minh hoạ trong bảng hội thoại (mô hình đất nặn, đã rà theo niên đại 1149; xem README) */
+const PIC_THUYEN = { src:'assets/khoang-thuyen-buon.jpg', pos:'center', alt:'Mô hình bổ dọc khoang thuyền buôn chở gốm, quế, ngọc trai, lụa' };
+const PIC_PHUONG_NAM = { src:'assets/thuong-nhan-phuong-nam.jpg', alt:'Tượng đất nặn một thương nhân phương Nam quấn khăn, mặc xà rông' };
+const PICS = {
+  'lo-gom':  { src:'assets/tho-ca-lo-gom.jpg', alt:'Tượng đất nặn thợ cả lò gốm búi tóc, tay bưng bát' },
+  'tn-tong': PIC_THUYEN, 'tn-xiem': PIC_THUYEN,
+  'tn-trao': PIC_PHUONG_NAM, 'tn-nhat': PIC_PHUONG_NAM,
+};
 function addPlace(def){
   const npc = def.npc ? person(def.npc) : null;
   if(npc){ scene.add(npc); npc.position.set(def.x, def.z > SHORE_Z ? 0.4 : 0, def.z); npc.rotation.y = def.face||0; npc.userData.tag = label(def.tag, 7.3, npc, 0.6); }
@@ -571,6 +587,9 @@ function rowHTML(lbl, small, btns){ return `<div class="row"><div class="lbl">${
 
 function renderDlg(){
   const p = dlgPlace; if(!p) return;
+  const pic = PICS[p.id], im = $('dlgPic');
+  if(pic){ if(im.getAttribute('src') !== pic.src) im.src = pic.src; im.alt = pic.alt; im.style.objectPosition = pic.pos || 'top'; im.hidden = false; }
+  else im.hidden = true;
   $('dlgWho').textContent = p.who; let rows = '', body = '', title = p.tag;
   let btns = '<button class="btn" type="button" data-a="close">Đi tiếp</button>';
   if(p.kind==='shop'){
