@@ -57,6 +57,11 @@
     width:min(96vw,560px);max-height:72vh;overflow:auto;background:#241708f7;border:2px solid var(--dong);
     border-radius:16px;padding:14px;z-index:9;display:none;touch-action:pan-y}
   #dlg h2{font-size:18px;color:var(--dong);margin-bottom:4px}
+  #dlgPic{float:right;width:84px;height:112px;object-fit:cover;object-position:top;border-radius:10px;
+    border:1px solid var(--dong);margin:0 0 6px 10px;background:#160d04}
+  #dlgPic[hidden]{display:none}
+  .banner{display:block;width:100%;height:auto;object-fit:cover;border-radius:12px;
+    border:1px solid var(--dong);margin:8px 0 10px;background:#160d04}
   #dlg .who{font-size:12px;color:var(--celadon);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
   #dlg .body{font-size:14px;line-height:1.5;margin-bottom:10px}
   .row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #5c3d2488;font-size:14px}
@@ -67,6 +72,8 @@
   .btn.pri{background:var(--son);color:#fff}
   .btn.on{background:var(--dong);color:#241708}
   .btn:disabled{opacity:.4;cursor:default}
+  .btn.char{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px}
+  .btn.char img{width:40px;height:56px;object-fit:cover;object-position:top;border-radius:8px;background:#160d04}
   .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 
   /* ---------- Màn phủ ---------- */
@@ -106,6 +113,7 @@
 <button id="act" type="button">Nói chuyện</button>
 
 <div id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+  <img id="dlgPic" alt="" hidden width="84" height="112">
   <div class="who" id="dlgWho"></div>
   <h2 class="serif" id="dlgTitle"></h2>
   <div class="body" id="dlgBody"></div>
@@ -116,11 +124,13 @@
 <div class="ov pick" id="ovStart">
   <div class="card">
     <h1 class="serif">Vân Đồn 3D<small>DẠO BẾN THƯƠNG CẢNG · 1149</small></h1>
+    <img class="banner" src="assets/ben-cang-van-don.jpg" width="1100" height="511"
+      alt="Mô hình đất nặn bến Vân Đồn: cầu tàu gỗ, nhà mái tranh, thuyền buồm giữa các đảo đá vôi">
     <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b>: ghé lò xưởng mua hàng, mang ra cầu tàu bán cho
     thương thuyền bốn phương, và định mức thuế cảng.</p>
     <div class="btns" style="justify-content:center" role="group" aria-label="Chọn nhân vật">
-      <button class="btn" type="button" data-char="quan" aria-pressed="false">Quan trấn thủ</button>
-      <button class="btn" type="button" data-char="nu" aria-pressed="false">Nữ thương chủ</button>
+      <button class="btn char" type="button" data-char="quan" aria-pressed="false"><img src="assets/quan-tran-thu.jpg" alt="" width="40" height="56">Quan trấn thủ</button>
+      <button class="btn char" type="button" data-char="nu" aria-pressed="false"><img src="assets/nu-thuong-chu.jpg" alt="" width="40" height="56">Nữ thương chủ</button>
     </div>
     <details>
       <summary>Cách chơi</summary>
@@ -145,6 +155,7 @@
 <div class="ov" id="ovRound" style="display:none">
   <div class="card">
     <h1 class="serif" id="rdTitle"></h1>
+    <img class="banner" id="rdPic" src="assets/ben-dem.jpg" width="1100" height="613" alt="">
     <div id="rdBody"></div>
     <div class="btns" style="justify-content:center">
       <button class="btn pri" id="btnNext" type="button">Sang phiên kế</button>
@@ -155,6 +166,8 @@
 <div class="ov" id="ovEnd" style="display:none">
   <div class="card">
     <h1 class="serif" id="endTitle"></h1>
+    <img class="banner" src="assets/ben-hoang-hon.jpg" width="1100" height="528" loading="lazy"
+      alt="Mô hình đất nặn bến Vân Đồn lúc hoàng hôn: cầu tàu chất hàng, thuyền buồm, làng chài giữa các đảo đá vôi">
     <div class="big" id="endScore"></div>
     <div id="endBody"></div>
     <div class="btns" style="justify-content:center">
@@ -471,6 +484,18 @@ try{ avatarId = localStorage.getItem(CHAR_KEY) || 'quan'; }catch(e){}
 setAvatar(avatarId);
 player.position.set(-26,0,3);      // chỗ trống trên bãi cát cho màn chọn nhân vật
 
+/* Ảnh minh hoạ trong bảng hội thoại (mô hình đất nặn, đã rà theo niên đại 1149; xem README) */
+const PIC_PHUONG_NAM = { src:'assets/thuong-nhan-phuong-nam.jpg', alt:'Tượng đất nặn một thương nhân phương Nam quấn khăn, mặc xà rông' };
+const PICS = {
+  'lo-gom':    { src:'assets/tho-ca-lo-gom.jpg', alt:'Tượng đất nặn thợ cả lò gốm búi tóc, tay bưng bát' },
+  'xuong-lua': { src:'assets/ba-chu-xuong-lua.jpg', alt:'Tượng đất nặn bà chủ xưởng dệt cầm con tơ và thoi dệt, bên khung cửi' },
+  'tram':      { src:'assets/chu-tram-huong.jpg', alt:'Tượng đất nặn chủ trạm trầm hương bưng khay trầm, đeo cân đồng' },
+  'be-ngoc':   { src:'assets/tho-lan-ngoc-trai.jpg', alt:'Tượng đất nặn thợ lặn đóng khố, xăm mình, ôm giỏ trai ngọc' },
+  'thue-quan': { src:'assets/thu-lai-thue-quan.jpg', alt:'Tượng đất nặn thư lại cầm bút lông và thẻ gỗ, bên cân đồng' },
+  'tn-tong':   { src:'assets/thuong-nhan-tong.jpg', alt:'Tượng đất nặn thương nhân Tống áo cổ tròn, cầm bát men xanh và cuộn lụa' },
+  'tn-xiem':   { src:'assets/thuong-nhan-xiem-la.jpg', alt:'Tượng đất nặn thương nhân Xiêm La đeo hoa tai, quấn sampot, cầm sừng tê' },
+  'tn-trao': PIC_PHUONG_NAM, 'tn-nhat': PIC_PHUONG_NAM,
+};
 function addPlace(def){
   const npc = def.npc ? person(def.npc) : null;
   if(npc){ scene.add(npc); npc.position.set(def.x, def.z > SHORE_Z ? 0.4 : 0, def.z); npc.rotation.y = def.face||0; npc.userData.tag = label(def.tag, 7.3, npc, 0.6); }
@@ -571,6 +596,9 @@ function rowHTML(lbl, small, btns){ return `<div class="row"><div class="lbl">${
 
 function renderDlg(){
   const p = dlgPlace; if(!p) return;
+  const pic = PICS[p.id], im = $('dlgPic');
+  if(pic){ if(im.getAttribute('src') !== pic.src) im.src = pic.src; im.alt = pic.alt; im.style.objectPosition = pic.pos || 'top'; im.hidden = false; }
+  else im.hidden = true;
   $('dlgWho').textContent = p.who; let rows = '', body = '', title = p.tag;
   let btns = '<button class="btn" type="button" data-a="close">Đi tiếp</button>';
   if(p.kind==='shop'){
@@ -654,6 +682,10 @@ let toastT = 0;
 function toast(html, ms){ const t = $('toast'); t.innerHTML = html; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms||2600); }
 const score = () => S.money + S.rep*10;
 
+const RD_PICS = [
+  { src:'assets/ben-dem.jpg', alt:'Mô hình đất nặn bến Vân Đồn về đêm: thuyền buồm thắp đèn, lều chợ trên cầu tàu' },
+  { src:'assets/cho-dem.jpg', alt:'Mô hình đất nặn chợ đêm trên cầu tàu: hàng ăn, cân hàng, đèn nến, thuyền buồm ngoài vịnh' },
+];
 function endRound(){
   S.paused = true; closeDlg();
   const st = S.stat, tx = TAX[S.tax]; S.rep = Math.max(0, S.rep + tx.rep);
@@ -668,6 +700,7 @@ function endRound(){
   if(S.absent) lines += ` Bão ngoài vịnh: thuyền <b>${NATIONS.find(n => n.id===S.absent).name}</b> không vào bến.`;
   if(S.tribute) lines += ` Triều đình xuống chiếu đòi <b>${S.tribute.n} kiện ${G(S.tribute.good).name}</b>, dâng tại Nhà thuế quan.`;
   lines += '</p>';
+  const rp = RD_PICS[(S.round-2) % RD_PICS.length], ri = $('rdPic'); ri.src = rp.src; ri.alt = rp.alt;
   $('rdTitle').textContent = `Hết phiên ${S.round-1}`; $('rdBody').innerHTML = lines; $('ovRound').style.display = 'flex';
 }
 $('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'none'; S.paused = false; });
