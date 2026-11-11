@@ -32,8 +32,8 @@ Khanh bắt đầu với 150 quan tiền và mỗi chuyến mang được **10 k
 **Điểm = quan tiền + danh vọng × 10.** Hết sáu phiên, triều đình xét công và phong bến
 từ «Trang nhỏ ven vịnh» lên «Trang Vân Đồn», «Trấn Vân Đồn», rồi «Đệ Nhất Thương Cảng».
 
-**Biến cố:** ở phiên 2 hoặc 4, bão làm một thuyền không vào bến. Ở phiên 3 và 5 có chiếu
-đòi cống phẩm; dâng đủ trong phiên được thêm 15 danh vọng.
+**Biến cố:** ở phiên 2 và phiên 4 thường có bão, làm một thuyền không vào bến. Ở phiên 3
+và 5 có chiếu đòi cống phẩm (4 kiện gốm hoặc lụa); dâng đủ trong phiên được thêm 15 danh vọng.
 
 ## Địa điểm trên bến
 
