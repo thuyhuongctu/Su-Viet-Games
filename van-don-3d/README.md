@@ -63,6 +63,8 @@ Chỉ giữ ảnh không có chi tiết lệch niên đại 1149; chữ trên �
 | Tệp | Dùng ở | Ghi chú |
 |---|---|---|
 | `ben-cang-van-don.jpg` | Màn mở đầu | Cắt bỏ biển chữ quốc ngữ (chữ quốc ngữ có từ thế kỷ 17). |
+| `ben-dem.jpg`, `cho-dem.jpg` | Bảng hết phiên (luân phiên) | Bến và chợ đêm trên cầu tàu, đèn nến, thuyền buồm. |
+| `ben-hoang-hon.jpg` | Màn kết thúc | Bến lúc hoàng hôn; cắt bỏ mép bàn và kệ phòng chụp. |
 | `quan-tran-thu.jpg` | Nút chọn nhân vật | Mũ phốc đầu, đi ủng (triều phục định năm 1059); áo không thêu rồng. |
 | `nu-thuong-chu.jpg` | Nút chọn nhân vật | Nhân vật hư cấu; răng đen, hộp trầu, chuỗi tiền đồng lỗ vuông. |
 | `tho-ca-lo-gom.jpg` | Lò gốm | Cắt bỏ nhãn «Bát Tràng / Chu Đậu»; hai lò này hưng thịnh sau thời Lý. |
