@@ -196,13 +196,13 @@ const GOODS = [
 ];
 const NATIONS = [
   { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0,
-    look:{ robe:0xe8d9b0, trim:0xc94b3c, hat:'mu', hatColor:0x1c1c1c } },
+    tuong:'thuong-nhan-tong' },
   { id:'nhat', name:'Tam Phật Tề', who:'Thương nhân Tam Phật Tề', flag:0x7a2a22, sail:0xc7772e, prefs:['gom','tram'], mult:1.15,
-    look:{ robe:0x8a4a2a, trim:0xd9a441, hat:'khan', hatColor:0x7a2a22, skin:0xc8956a } },
+    tuong:'thuong-nhan-phuong-nam' },
   { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1,
-    look:{ robe:0x3f7a4f, trim:0xd9a441, hat:'khan', hatColor:0xd9a441, skin:0xc8956a } },
+    tuong:'thuong-nhan-phuong-nam' },
   { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05,
-    look:{ robe:0x9ec5ab, trim:0xd9a441, hat:'chop', hatColor:0xd9a441, skin:0xd2a070 } },
+    tuong:'thuong-nhan-xiem-la' },
 ];
 const G = id => GOODS.find(g => g.id===id);
 const ROUNDS = 6, CARRY = 10, ROUND_SEC = 80, COST_RATE = 0.55;
@@ -367,7 +367,7 @@ NATIONS.forEach((n,i) => {
 });
 
 // ----- Người -----
-// Nhân vật tạo hình chibi: đầu to, mắt to, tóc búi, áo giao lĩnh, tay chân có khớp
+// Hình khối dùng chung
 const _geo = {};
 const geo = (k, f) => _geo[k] || (_geo[k] = f());
 const sph = (r, ws, hs) => geo('s'+r+'_'+(ws||20), () => new THREE.SphereGeometry(r, ws||20, hs||16));
@@ -375,86 +375,44 @@ function mesh(g, c, x, y, z, parent, sx, sy, sz){
   const m = new THREE.Mesh(g, M(c)); m.position.set(x||0, y||0, z||0);
   if(sx !== undefined) m.scale.set(sx, sy, sz); parent.add(m); return m;
 }
-function person(o){
-  o = Object.assign({ robe:0x8a2424, trim:0xd9a441, skin:0xf0c9a0, hair:0x1d1512, hat:'none', hatColor:0x1c1c1c }, o);
+// Tượng đất nặn (ảnh đã tách nền) dựng đứng như tấm bìa, luôn quay mặt về máy quay
+const TUONG = {   // tên tệp: tỉ lệ rộng/cao
+  'quan-tran-thu':0.432, 'nu-thuong-chu':0.398, 'tho-ca-lo-gom':0.449, 'ba-chu-xuong-lua':0.549,
+  'chu-tram-huong':0.381, 'tho-lan-ngoc-trai':0.465, 'thu-lai-thue-quan':0.576,
+  'thuong-nhan-tong':0.436, 'thuong-nhan-xiem-la':0.477, 'thuong-nhan-phuong-nam':0.398,
+};
+const TUONG_H = 5.8, _tuongTex = {};
+function tuong(key){
+  const tex = _tuongTex[key] || (_tuongTex[key] = new THREE.TextureLoader().load('assets/tuong/'+key+'.webp'));
   const g = new THREE.Group(), rig = new THREE.Group(); g.add(rig);
-  // Bóng dưới chân
   const sh = new THREE.Mesh(geo('shadow', () => new THREE.CircleGeometry(1.25, 24)),
     new THREE.MeshBasicMaterial({ color:0x000000, transparent:true, opacity:0.22, depthWrite:false }));
   sh.rotation.x = -Math.PI/2; sh.position.y = 0.04; g.add(sh);
-  // Chân: quần và giày vải
-  const leg = side => { const pv = new THREE.Group(); pv.position.set(0.36*side, 1.3, 0); rig.add(pv);
-    mesh(geo('leg', () => new THREE.CapsuleGeometry(0.27, 0.62, 6, 12)), o.female ? o.robe : 0xe9dcc0, 0, -0.6, 0, pv);
-    mesh(sph(0.34), 0x2a1c12, 0, -1.14, 0.14, pv, 1, 0.62, 1.5); return pv; };
-  const legL = leg(-1), legR = leg(1);
-  // Thân áo: tà xòe về gấu
-  const prof = o.female
-    ? [[0,2.98],[0.46,2.94],[0.66,2.6],[0.6,2.15],[0.8,1.6],[1.22,0.62],[1.14,0.5],[0,0.5]]
-    : [[0,2.98],[0.5,2.94],[0.74,2.6],[0.72,2.1],[0.84,1.6],[1.06,0.82],[0.98,0.7],[0,0.7]];
-  const robe = new THREE.Mesh(geo('robe'+(o.female?'F':'M'), () => new THREE.LatheGeometry(prof.map(p => new THREE.Vector2(p[0], p[1])), 24)), M(o.robe));
-  rig.add(robe);
-  // Viền gấu, thắt lưng, cổ giao lĩnh
-  const ring = (r, t, y, c, tilt) => { const m = mesh(geo('t'+r+'_'+t, () => new THREE.TorusGeometry(r, t, 8, 28)), c, 0, y, 0, rig); m.rotation.x = Math.PI/2 + (tilt||0); return m; };
-  ring(o.female ? 1.2 : 1.03, 0.07, o.female ? 0.6 : 0.8, o.trim);
-  ring(o.female ? 0.62 : 0.73, 0.1, 2.12, o.sash || o.trim);
-  const col = ring(0.44, 0.09, 2.86, o.trim, 0.42); col.position.z = 0.1;
-  if(o.female){ mesh(sph(0.5), o.sash || o.trim, 0, 2.5, 0.42, rig, 0.9, 0.9, 0.5); }      // yếm
-  // Tay: ống tay rộng, bàn tay tròn
-  const arm = side => { const pv = new THREE.Group(); pv.position.set(0.72*side, 2.72, 0); pv.rotation.z = 0.24*side; rig.add(pv);
-    mesh(sph(0.34), o.robe, 0, 0, 0, pv);
-    mesh(geo('sleeve', () => new THREE.CylinderGeometry(0.24, 0.42, 1.1, 14)), o.robe, 0, -0.55, 0, pv);
-    mesh(geo('cuff', () => new THREE.TorusGeometry(0.4, 0.05, 6, 16)), o.trim, 0, -1.08, 0, pv).rotation.x = Math.PI/2;
-    mesh(sph(0.2), o.skin, 0, -1.2, 0, pv); return pv; };
-  const armL = arm(-1), armR = arm(1);
-  // Đầu
-  const head = new THREE.Group(); head.position.y = 4.0; rig.add(head);
-  mesh(sph(1.15, 28, 22), o.skin, 0, 0, 0, head, 1, 0.95, 0.95);
-  mesh(sph(0.2), o.skin, -1.1, -0.1, 0, head, 0.5, 1, 0.8); mesh(sph(0.2), o.skin, 1.1, -0.1, 0, head, 0.5, 1, 0.8);
-  for(const sd of [-1, 1]){
-    mesh(sph(0.2), 0x2a1a12, 0.42*sd, -0.06, 1.0, head, 0.82, 1.2, 0.4);            // mắt
-    mesh(sph(0.06, 8, 8), 0xffffff, 0.42*sd + 0.07, 0.06, 1.08, head);              // ánh mắt
-    const br = mesh(geo('brow', () => new THREE.BoxGeometry(0.32, 0.055, 0.05)), o.hair, 0.42*sd, 0.3, 1.0, head); br.rotation.z = -0.12*sd;
-    const bl = new THREE.Mesh(sph(0.2), new THREE.MeshLambertMaterial({ color:0xf08a8a, transparent:true, opacity:0.55 }));
-    bl.position.set(0.7*sd, -0.36, 0.8); bl.scale.set(1, 0.6, 0.25); head.add(bl);   // má hồng
-  }
-  mesh(sph(0.2), 0xb5483f, 0, -0.46, 1.0, head, 0.62, 0.3, 0.25);                    // miệng
-  if(o.beard){ const b = mesh(geo('beard', () => new THREE.ConeGeometry(0.34, 0.8, 12)), o.beard, 0, -1.2, 0.72, head); b.rotation.x = Math.PI + 0.25; }
-  // Tóc
-  const cap = mesh(geo('hair', () => new THREE.SphereGeometry(1.21, 28, 16, 0, Math.PI*2, 0, Math.PI*0.56)), o.hair, 0, 0.02, -0.04, head, 1, 0.97, 0.97);
-  cap.rotation.x = -0.34;
-  for(const x of [-0.62, -0.2, 0.2, 0.62]) mesh(sph(0.34), o.hair, x, 0.78 - Math.abs(x)*0.25, 0.78 - Math.abs(x)*0.2, head, 1, 0.55, 0.6);   // mái
-  if(o.female){
-    mesh(sph(1.0), o.hair, 0, -0.75, -0.62, head, 0.95, 1.5, 0.5);                   // tóc dài sau lưng
-    for(const sd of [-1, 1]){ mesh(geo('lock', () => new THREE.CapsuleGeometry(0.2, 1.1, 6, 10)), o.hair, 1.02*sd, -0.75, 0.2, head);
-      mesh(sph(0.42), o.hair, 0.6*sd, 1.12, -0.15, head); mesh(sph(0.1, 8, 8), o.trim, 0.6*sd, 1.5, 0.05, head); }   // hai búi và trâm
-  }
-  // Mũ
-  const H = o.hatColor;
-  if(o.hat==='quan' || o.hat==='mu'){
-    mesh(geo('hcap', () => new THREE.SphereGeometry(1.27, 24, 12, 0, Math.PI*2, 0, Math.PI*0.42)), H, 0, 0.12, -0.06, head);
-    mesh(geo('hback', () => new THREE.CylinderGeometry(0.55, 0.68, 0.62, 16)), H, 0, 1.3, -0.4, head);
-    mesh(geo('hband', () => new THREE.TorusGeometry(1.2, 0.07, 6, 28)), o.trim, 0, 0.5, -0.06, head).rotation.x = Math.PI/2 - 0.2;
-    if(o.hat==='quan') for(const sd of [-1, 1]) mesh(sph(0.5), H, 1.75*sd, 0.62, -0.6, head, 1.5, 0.12, 0.42);   // hai cánh chuồn
-  } else if(o.hat==='non'){
-    mesh(geo('non', () => new THREE.ConeGeometry(2.05, 1.0, 28)), H, 0, 1.28, 0, head);
-    mesh(geo('nonIn', () => new THREE.CylinderGeometry(2.03, 2.03, 0.05, 28)), 0xb49a62, 0, 0.78, 0, head);
-  } else if(o.hat==='khan'){
-    mesh(geo('khan', () => new THREE.TorusGeometry(0.95, 0.34, 10, 24)), H, 0, 0.78, -0.05, head).rotation.x = Math.PI/2 - 0.2;
-    mesh(sph(0.3), o.trim, 0, 0.92, 0.92, head, 1, 1, 0.6);
-  } else if(o.hat==='chop'){
-    mesh(geo('chop', () => new THREE.ConeGeometry(0.62, 1.25, 16)), H, 0, 1.55, -0.05, head);
-    mesh(geo('chopB', () => new THREE.TorusGeometry(0.62, 0.12, 8, 20)), o.trim, 0, 1.0, -0.05, head).rotation.x = Math.PI/2;
-  } else if(!o.female){
-    mesh(sph(0.36), o.hair, 0, 1.26, -0.2, head);                                    // búi tó
-    mesh(geo('bunR', () => new THREE.TorusGeometry(0.26, 0.06, 6, 14)), o.trim, 0, 1.05, -0.17, head).rotation.x = Math.PI/2 - 0.15;
-  }
-  // Gùi hàng sau lưng (chỉ hiện khi đang mang hàng)
-  const pack = new THREE.Group(); pack.position.set(0, 2.25, -0.95); pack.visible = false; rig.add(pack);
+  const card = new THREE.Group(); card.rotation.order = 'YXZ'; rig.add(card);   // quay về máy quay
+  const tilt = new THREE.Group(); card.add(tilt);                                 // lắc lư khi bước
+  const w = TUONG_H * TUONG[key];
+  const img = new THREE.Mesh(new THREE.PlaneGeometry(w, TUONG_H),
+    new THREE.MeshBasicMaterial({ map:tex, transparent:true, alphaTest:0.35, side:THREE.DoubleSide }));
+  img.position.y = TUONG_H/2; tilt.add(img);
+  // Gùi hàng bên hông (chỉ hiện khi đang mang hàng)
+  const pack = new THREE.Group(); pack.position.set(w*0.5 + 0.3, 2.0, -0.2); pack.visible = false; tilt.add(pack);
   mesh(geo('pack', () => new THREE.CylinderGeometry(0.62, 0.48, 1.05, 12)), 0xa9793f, 0, 0, 0, pack);
   mesh(sph(0.6), 0xe6d5ae, 0, 0.5, 0, pack, 1, 0.45, 1);
-  g.userData = { rig, head, legL, legR, armL, armR, pack, phase:rand(0,6), ground:0 };
+  const dummy = () => new THREE.Group();
+  g.userData = { rig, head:dummy(), legL:dummy(), legR:dummy(), armL:dummy(), armR:dummy(), pack, card, tilt, phase:rand(0,6), ground:0 };
   return g;
 }
+const _f = new THREE.Vector3();
+let _camYaw = 0, _camPitch = 0;
+function camFacing(){   // mọi tượng cùng song song mặt phẳng nhìn, không bị méo ở mép màn hình
+  camera.getWorldDirection(_f);
+  _camYaw = Math.atan2(-_f.x, -_f.z); _camPitch = Math.asin(clamp(_f.y, -1, 1)) * 0.7;
+}
+function faceCamera(obj){
+  const u = obj.userData; if(!u.card) return;
+  u.card.rotation.y = _camYaw - obj.rotation.y; u.card.rotation.x = _camPitch;
+}
+
 function animate(p, moving, dt){
   const u = p.userData; u.phase += dt * (moving ? 12 : 2.2);
   const a = moving ? Math.sin(u.phase)*0.62 : 0;
@@ -463,12 +421,13 @@ function animate(p, moving, dt){
   u.rig.position.y = moving ? Math.abs(Math.sin(u.phase))*0.14 : Math.sin(u.phase)*0.035;
   u.rig.rotation.x = moving ? 0.07 : 0;
   u.head.rotation.z = moving ? Math.sin(u.phase)*0.04 : Math.sin(u.phase*0.5)*0.03;
+  if(u.tilt){ u.rig.rotation.x = 0; u.tilt.rotation.z = moving ? Math.sin(u.phase)*0.09 : Math.sin(u.phase*0.5)*0.015; }
 }
 
 // Người chơi: khung chứa cố định, đổi tạo hình bên trong
 const AVATARS = {
-  quan: { name:'Quan trấn thủ', o:{ robe:0x8a2424, trim:0xd9a441, hat:'quan', hatColor:0x1c1c1c } },
-  nu:   { name:'Nữ thương chủ', o:{ robe:0xb23a48, trim:0xd9a441, sash:0x9ec5ab, female:true } },
+  quan: { name:'Quan trấn thủ', tuong:'quan-tran-thu' },
+  nu:   { name:'Nữ thương chủ', tuong:'nu-thuong-chu' },
 };
 const CHAR_KEY = 'van-don-3d-char';
 const player = new THREE.Group(); scene.add(player);
@@ -476,7 +435,7 @@ let avatarId = 'quan';
 function setAvatar(id){
   if(!AVATARS[id]) id = 'quan'; avatarId = id;
   while(player.children.length) player.remove(player.children[0]);
-  const a = person(AVATARS[id].o); player.add(a); player.userData = a.userData;
+  const a = tuong(AVATARS[id].tuong); player.add(a); player.userData = a.userData;
   try{ localStorage.setItem(CHAR_KEY, id); }catch(e){}
   document.querySelectorAll('[data-char]').forEach(b => { const on = b.dataset.char===id; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
 }
@@ -497,19 +456,19 @@ const PICS = {
   'tn-trao': PIC_PHUONG_NAM, 'tn-nhat': PIC_PHUONG_NAM,
 };
 function addPlace(def){
-  const npc = def.npc ? person(def.npc) : null;
+  const npc = def.tuong ? tuong(def.tuong) : null;
   if(npc){ scene.add(npc); npc.position.set(def.x, def.z > SHORE_Z ? 0.4 : 0, def.z); npc.rotation.y = def.face||0; npc.userData.tag = label(def.tag, 7.3, npc, 0.6); }
   places.push(Object.assign({}, def, { npc })); if(npc) solids.push({ x:def.x, z:def.z, r:1.3 });
 }
-addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      npc:{ robe:0x8a5a33, trim:0x5c3d24, hat:'non', hatColor:0xd8c49a, beard:0xd9d4c8, skin:0xe0b48a } });
-addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   npc:{ robe:0x9ec5ab, trim:0xf2e8d5, sash:0xa5402e, female:true } });
-addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Chủ trạm trầm hương', npc:{ robe:0x4f6a45, trim:0xd9a441, hat:'khan', hatColor:0x5c3d24, beard:0x2a1a12, skin:0xdcae84 } });
-addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bến mò ngọc trai', who:'Thợ lặn mò ngọc trai',  npc:{ robe:0x2f6f73, trim:0xf2e8d5, hat:'non', hatColor:0xd8c49a, skin:0xd9a878 } });
-addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', npc:{ robe:0x31476b, trim:0x9ec5ab, hat:'mu', hatColor:0x1c1c1c } });
+addPlace({ id:'lo-gom',   kind:'shop', good:'gom',  x:-40, z:-21.5, tag:'Lò gốm',        who:'Thợ cả lò gốm',      tuong:'tho-ca-lo-gom' });
+addPlace({ id:'xuong-lua',kind:'shop', good:'lua',  x:-14, z:-25,   tag:'Xưởng dệt lụa', who:'Bà chủ xưởng dệt',   tuong:'ba-chu-xuong-lua' });
+addPlace({ id:'tram',     kind:'shop', good:'tram', x:14,  z:-25,   tag:'Trạm trầm hương',who:'Chủ trạm trầm hương', tuong:'chu-tram-huong' });
+addPlace({ id:'be-ngoc',  kind:'shop', good:'ngoc', x:58,  z:1,     tag:'Bến mò ngọc trai', who:'Thợ lặn mò ngọc trai',  tuong:'tho-lan-ngoc-trai' });
+addPlace({ id:'thue-quan',kind:'customs', x:5, z:-3.5, tag:'Nhà thuế quan', who:'Thư lại thuế quan', tuong:'thu-lai-thue-quan' });
 addPlace({ id:'bia-su',   kind:'stele', x:-58, z:-0.5, tag:'Bia sử', who:'Bia đá' });
 label('Bia sử', 9, (()=>{ const g=new THREE.Group(); g.position.set(-58,0,-4); scene.add(g); return g; })(), 0.8);
 NATIONS.forEach((n,i) => addPlace({ id:'tn-'+n.id, kind:'merchant', nat:n, x:piers[i].x, z:SHORE_Z+PIER_LEN-5,
-  tag:n.name, who:n.who, face:Math.PI, npc:n.look }));
+  tag:n.name, who:n.who, face:Math.PI, tuong:n.tuong }));
 
 function applyRoundToWorld(){
   for(const n of NATIONS){
@@ -762,6 +721,7 @@ function loop(now){
     camera.lookAt(player.position.x, 2.5, player.position.z - 5);
   }
   if(window.__vdCam){ const c = window.__vdCam; camera.position.set(c[0],c[1],c[2]); camera.lookAt(c[3],c[4],c[5]); }
+  camFacing(); faceCamera(player); for(const p of places) if(p.npc) faceCamera(p.npc);
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
 }

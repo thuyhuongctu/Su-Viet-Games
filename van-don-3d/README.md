@@ -49,11 +49,13 @@ và 5 có chiếu đòi cống phẩm (4 kiện gốm hoặc lụa); dâng đủ
 
 ## Nhân vật
 
-Nhân vật dựng bằng mã, không dùng tệp mô hình ngoài: tạo hình chibi đầu to, tóc búi,
-áo giao lĩnh có viền, tay chân có khớp và bước đi. Khi đang mang hàng, nhân vật đeo gùi.
+Mọi nhân vật trên bến là **tượng đất nặn** trong [`assets/tuong/`](assets/tuong/): ảnh tượng đã
+tách nền (WebP trong suốt, cao 512 px), dựng đứng như tấm bìa và luôn quay mặt về máy quay.
+Khi đi, tượng nhún và lắc lư; khi đang mang hàng, bên hông hiện thêm một chiếc gùi.
 
-Ở màn mở đầu, người chơi chọn **Quan trấn thủ** (mũ quan hai cánh, cách điệu) hoặc
-**Nữ thương chủ** (nhân vật hư cấu). Trò chơi nhớ lựa chọn cho lần sau.
+Ở màn mở đầu, người chơi chọn **Quan trấn thủ** hoặc **Nữ thương chủ** (nhân vật hư cấu).
+Trò chơi nhớ lựa chọn cho lần sau. Thợ, thư lại và thương nhân mỗi người một tượng riêng; thương
+nhân Trảo Oa và Tam Phật Tề hiện dùng chung một tượng.
 
 ## Ảnh minh hoạ
 
