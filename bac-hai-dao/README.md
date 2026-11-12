@@ -72,6 +72,21 @@ Hai điệu tự chuyển: **ra khơi** khoan thai và **giáp chiến** dồn d
 thuyền giặc áp sát. Bật tắt bằng nút 🔊 góc trái hoặc phím **M**,
 lựa chọn được ghi nhớ.
 
+### Bài hát của game
+
+**«Bắc Hải Đảo – Theo cánh buồm quê hương»** (*Nơi những con sóng còn ghi nhớ*),
+5 phút 47 giây, hát tiếng Việt, làm bằng Suno. Các tệp trong
+[`assets/nhac/`](assets/nhac/):
+
+- `bac-hai-dao-theo-canh-buom-que-huong.mp3`: bài hát (128 kbps, 5,8 MB)
+- `bac-hai-dao-theo-canh-buom-que-huong.mp4`: lyric video
+- `bac-hai-dao-bia.jpg`: ảnh bìa
+
+Bài nằm trong bộ sưu tập «Bac Hai Dao – Pirates of the Gulf of Tonkin» của app
+nghe nhạc [Chansonia](https://thuyhuongctu.github.io/Chansonia/app/), có lời
+chạy theo nhạc; app phát thẳng các tệp này từ GitHub Pages. Trò chơi chưa dùng
+các tệp này: nhạc trong ván vẫn sinh bằng WebAudio như trên.
+
 ## Kỹ thuật
 
 - 1 file `index.html` tự chứa: HTML + CSS + JavaScript thuần (canvas 2D, WebAudio).
