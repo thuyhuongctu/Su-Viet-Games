@@ -154,6 +154,18 @@ Những chỗ là cách dựng của trò chơi:
 - Nút 🔊 trên thanh trên để tắt hoặc bật; trò chơi nhớ lựa chọn. Âm thanh chỉ bắt đầu sau khi
   bấm «Ra bến» (trình duyệt chặn tự phát tiếng) và tạm dừng khi chuyển sang thẻ khác.
 
+### Bài hát chủ đề
+
+**«Vân Đồn – Tiếng vọng non sông»** (5 phút 17 giây), tệp
+[`assets/nhac/van-don-tieng-vong-non-song.mp3`](assets/nhac/van-don-tieng-vong-non-song.mp3),
+nén 96 kbps (3,8 MB), làm bằng Suno.
+
+- Màn mở đầu có nút 🎵 «Nghe bài hát» và mục «Lời bài hát». Bài hát dừng khi bấm «Ra bến».
+- Màn kết thúc (khi không bị bãi chức) tự phát bài hát sau tiếng cồng; có nút dừng.
+- Khi bài hát phát, nhạc nền ngũ cung nhỏ lại; tắt âm thanh (🔇) hoặc chuyển thẻ thì bài hát dừng.
+- Bài hát chỉ tải khi người chơi bấm nghe lần đầu, rồi được service worker lưu lại để nghe khi
+  mất mạng; không nằm trong danh sách tải sẵn lúc cài, để lần cài đầu không nặng thêm 3,8 MB.
+
 ## Kỹ thuật
 
 - Một tệp `index.html`, dùng [`../lib/three.min.js`](../lib/three.min.js) có sẵn trong kho.
