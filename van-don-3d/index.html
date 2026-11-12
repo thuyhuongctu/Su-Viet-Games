@@ -27,6 +27,10 @@
   .chip{background:#241708d9;border:1px solid var(--edge);border-radius:999px;
     padding:5px 10px;font-size:13px;font-weight:600;white-space:nowrap}
   .chip b{color:var(--dong)}
+  .chip.goal{max-width:100%;white-space:normal}
+  .chip.goal.ok{border-color:var(--celadon);color:var(--celadon)}
+  .kind{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;border:1px solid currentColor}
+  .kind.su{color:var(--celadon)} .kind.hc{color:var(--dong)}
   #sun{position:absolute;left:8px;right:8px;top:100%;height:5px;border-radius:3px;
     background:#0006;overflow:hidden}
   #sunBar{height:100%;width:100%;background:linear-gradient(90deg,var(--son),var(--dong))}
@@ -99,12 +103,14 @@
 <canvas id="game" aria-label="Bến Vân Đồn nhìn từ trên cao, có nhân vật quan trấn thủ đi lại"></canvas>
 
 <div id="hud" style="display:none">
-  <span class="chip">📜 Phiên <b id="hRound">1</b>/6</span>
+  <span class="chip">📜 Chương <b id="hRound">1</b>/6</span>
   <span class="chip">🪙 <b id="hMoney">0</b> quan</span>
   <span class="chip">⭐ <b id="hRep">0</b></span>
-  <span class="chip">🧺 <b id="hCarry">0</b>/10</span>
+  <span class="chip">🧺 <b id="hCarry">0</b>/<span id="hCap">10</span></span>
   <span class="chip">⚖️ Thuế <b id="hTax">15</b>%</span>
   <span class="chip" id="hNear">📍 <b id="hNearName">—</b></span>
+  <span class="chip goal" id="hGoalChip">🎯 <span id="hGoal">—</span></span>
+  <span class="chip">⛵ <span id="hShips">—</span></span>
   <button id="btnSound" type="button" aria-label="Tắt âm thanh" aria-pressed="true">🔊</button>
   <a id="btnHome" href="../index.html" aria-label="Về cổng trò chơi">🏠</a>
   <div id="sun"><div id="sunBar"></div></div>
@@ -129,8 +135,9 @@
     <h1 class="serif">Vân Đồn 3D<small>DẠO BẾN THƯƠNG CẢNG · 1149</small></h1>
     <img class="banner" src="assets/ben-cang-van-don.jpg" width="1100" height="511"
       alt="Mô hình đất nặn bến Vân Đồn: cầu tàu gỗ, nhà mái tranh, thuyền buồm giữa các đảo đá vôi">
-    <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b>: ghé lò xưởng mua hàng, mang ra cầu tàu bán cho
-    thương thuyền bốn phương, và định mức thuế cảng.</p>
+    <p>Chọn nhân vật rồi <b>tự đi lại trên bến</b> qua sáu chương, từ năm 1149 lập trang đến năm 1348.
+    Thuyền buôn vào bến đặt hàng và chỉ đợi một lúc: chạy đi mua, mang ra cầu tàu giao cho kịp,
+    dựng công trình và làm tròn việc triều đình giao.</p>
     <div class="btns" style="justify-content:center" role="group" aria-label="Chọn nhân vật">
       <button class="btn char" type="button" data-char="quan" aria-pressed="false"><img src="assets/quan-tran-thu.jpg" alt="" width="40" height="56">Quan trấn thủ</button>
       <button class="btn char" type="button" data-char="nu" aria-pressed="false"><img src="assets/nu-thuong-chu.jpg" alt="" width="40" height="56">Nữ thương chủ</button>
@@ -139,18 +146,18 @@
       <summary>Cách chơi</summary>
       <ul>
         <li>Đi lại: phím W A S D hoặc mũi tên; trên điện thoại kéo vòng tròn góc trái. Đến gần người nào thì bấm nút đỏ (hoặc phím E) để gặp.</li>
-        <li>Mỗi thương nhân <b>chuộng hai mặt hàng</b> và trả giá cao cho đúng hàng đó.</li>
-        <li>Mỗi chuyến mang được <b>10 kiện</b>, và mỗi phiên chợ có hạn giờ.</li>
-        <li>Ở <b>Nhà thuế quan</b>: thuế cao thu nhiều trên mỗi kiện, nhưng phiên sau thuyền mua ít đi.</li>
-        <li>Sau <b>6 phiên</b>, triều đình xét công theo quan tiền và danh vọng.</li>
+        <li>Mỗi thuyền vào bến <b>đặt một đơn hàng</b> và chỉ đợi một lúc (xem chip ⛵). Giao trọn đơn được thưởng; để thuyền bỏ đi thì mất danh vọng.</li>
+        <li>Giá mua và giá bán <b>lên xuống theo chương</b> (▲ đắt, ▼ rẻ). Gánh ban đầu chỉ mang được <b>10 kiện</b>.</li>
+        <li>Ở <b>Nhà thuế quan</b>: chọn thuế cảng, dâng cống phẩm, và <b>dựng công trình</b> (xe kéo, xe trâu, mở rộng lò xưởng, vọng lâu thủy binh, đền thần biển).</li>
+        <li>Mỗi chương có <b>một việc triều đình giao</b> (chip 🎯). Danh vọng xuống dưới 0 là <b>bị bãi chức</b>.</li>
       </ul>
     </details>
     <div class="btns" style="justify-content:center">
       <button class="btn pri" id="btnStart" type="button">⚓ Ra bến</button>
       <a class="btn" href="../van-don/index.html" style="text-decoration:none;display:inline-flex;align-items:center">Bản 2D dựng bến</a>
     </div>
-    <p class="note">Bản thử nghiệm. Mức thuế, giá cả, nhịp phiên chợ, chức «quan trấn thủ» và nhân vật «Nữ thương chủ» là hư cấu của
-    trò chơi, không phải sử liệu. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
+    <p class="note">Ba chương 1149, 1184, 1348 theo <i>Đại Việt sử ký toàn thư</i>; ba chương còn lại, mức thuế, giá cả, đơn hàng,
+    công trình, chức «quan trấn thủ» và nhân vật «Nữ thương chủ» là hư cấu của trò chơi. Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).</p>
     <p class="note" id="bestLine" style="text-align:center"></p>
   </div>
 </div>
@@ -208,45 +215,84 @@ const NATIONS = [
     tuong:'thuong-nhan-xiem-la' },
 ];
 const G = id => GOODS.find(g => g.id===id);
-const ROUNDS = 6, CARRY = 10, ROUND_SEC = 80, COST_RATE = 0.55;
-const TAX = { 5:{demand:1.15, rep:2}, 15:{demand:1.0, rep:0}, 30:{demand:0.85, rep:-3} };
+const NAT = id => NATIONS.find(n => n.id===id);
+const ROUNDS = 6, ROUND_SEC = 90, COST_RATE = 0.62;
+const TAX = { 5:{demand:1.2, rep:2}, 15:{demand:1.0, rep:0}, 30:{demand:0.8, rep:-3} };
+
+// Sáu chương, mỗi phiên chợ một mốc. «su:true» là mốc có chép trong sử; còn lại là cách dựng của trò chơi.
+// thuyen: [nước, giây thứ mấy của phiên thì vào bến]; kien: số giây thuyền chịu đợi.
+const CHUONG = [
+  { nam:'1149', ten:'Lập trang', su:true, nguon:'Đại Việt sử ký toàn thư',
+    ke:'Mùa xuân năm Kỷ Tỵ (1149), đời vua Lý Anh Tông, thuyền buôn Trảo Oa, Lộ Lạc, Xiêm La vào Hải Đông xin cư trú buôn bán. Triều đình cho lập trang ở hải đảo, gọi là Vân Đồn.',
+    thuyen:[['trao',0],['xiem',14],['trao',60],['xiem',66]], kien:60,
+    muc:{ loai:'don', n:2, txt:'Giao trọn 2 đơn hàng' } },
+  { nam:'Những năm sau', ten:'Khách buôn phương Bắc', su:false,
+    ke:'Trang mới lập, khách buôn nước Tống cũng tìm đến. Thuyền nào cũng chỉ đợi một lúc rồi nhổ neo, nên phải tính đường đi cho khéo.',
+    thuyen:[['tong',0],['trao',8],['xiem',30],['tong',55],['trao',62]], kien:50,
+    muc:{ loai:'tien', n:800, txt:'Bán được 800 quan tiền hàng' } },
+  { nam:'1184', ten:'Tam Phật Tề đến', su:true, nguon:'Đại Việt sử ký toàn thư',
+    ke:'Năm Giáp Thìn (1184), người buôn các nước Xiêm La và Tam Phật Tề vào Vân Đồn xin buôn bán.',
+    thuyen:[['nhat',0],['xiem',6],['tong',24],['trao',40],['nhat',58]], kien:45,
+    muc:{ loai:'donNuoc', nat:'nhat', txt:'Giao trọn đơn của thuyền Tam Phật Tề' } },
+  { nam:'Mùa gió bấc', ten:'Giặc biển', su:false, giac:45,
+    ke:'Bến giàu lên thì giặc biển nhòm ngó. Có tin thuyền giặc sẽ áp sát cầu tàu giữa phiên chợ. Không có vọng lâu thủy binh thì giặc cướp tiền và thuyền buôn bỏ chạy.',
+    thuyen:[['tong',0],['nhat',5],['xiem',20],['trao',35],['tong',60]], kien:42,
+    muc:{ loai:'giac', txt:'Đẩy lui giặc biển (cần Vọng lâu thủy binh)' } },
+  { nam:'Năm được mùa', ten:'Chiếu đòi cống', su:false, cong:{ ngoc:3, lua:4 },
+    nguon:'Toàn thư chép trang Vân Đồn lập ra «để mua bán hàng hóa quý, dâng tiến sản vật địa phương»',
+    ke:'Sứ thần mang chiếu đến: trong phiên này phải dâng đủ cống phẩm tại Nhà thuế quan. Hàng dâng cống thì không bán được nữa.',
+    thuyen:[['xiem',0],['tong',10],['nhat',25],['trao',40],['xiem',62]], kien:40,
+    muc:{ loai:'cong', txt:'Dâng 3 ngọc trai và 4 lụa' } },
+  { nam:'1348', ten:'Thuyền Đồ Bồ', su:true, nguon:'Đại Việt sử ký toàn thư', doBo:true,
+    ke:'Năm Mậu Tý (1348), thuyền nước Đồ Bồ đến Vân Đồn, ngầm mua ngọc trai. Trong phiên này, người lạ sẽ tìm đến bến mò ngọc trai, trả giá rất cao.',
+    thuyen:[['tong',0],['trao',5],['nhat',18],['xiem',32],['tong',55],['nhat',64]], kien:38,
+    muc:{ loai:'liem', txt:'Không bán lén ngọc trai cho người Đồ Bồ' } },
+];
+// Công trình dựng ở Nhà thuế quan; dùng cho cả ván
+const CONG_TRINH = [
+  { id:'xe',    ic:'🛒', ten:'Xe kéo hàng',        gia:350, mo:'Mang được 16 kiện thay vì 10.' },
+  { id:'xe2',   ic:'🐃', ten:'Xe trâu',            gia:800, can:'xe', mo:'Mang được 24 kiện.' },
+  { id:'lo',    ic:'🔥', ten:'Mở rộng lò xưởng',   gia:600, mo:'Giá mua mọi mặt hàng giảm 15%.' },
+  { id:'volau', ic:'🗼', ten:'Vọng lâu thủy binh', gia:650, mo:'Đẩy lui giặc biển.' },
+  { id:'den',   ic:'🕯️', ten:'Đền thần biển',      gia:550, mo:'Đầu mỗi phiên +3 danh vọng; thuyền đợi thêm 8 giây.' },
+];
 const TITLES = [
-  { min:0,    name:'Trang nhỏ ven vịnh',  text:'Bến còn thưa thuyền. Triều đình ghi nhận công khai phá, mong khanh gắng hơn ở nhiệm kỳ sau.' },
-  { min:4000, name:'Trang Vân Đồn',       text:'Sứ thần đọc chiếu: bến cát nay chính thức mang tên Trang Vân Đồn.' },
-  { min:9000, name:'Trấn Vân Đồn',        text:'Danh tiếng bến cảng vang tới kinh sư. Vua thăng Vân Đồn làm Trấn.' },
-  { min:15000, name:'Đệ Nhất Thương Cảng', text:'Thuyền buôn mười phương nối đuôi vào vịnh. Tên tuổi khanh lưu vào quốc sử.' },
+  { min:0, name:'Trang nhỏ ven vịnh',      text:'Bến còn thưa thuyền. Triều đình ghi nhận công khai phá, mong khanh gắng hơn.' },
+  { min:2, name:'Trang Vân Đồn',           text:'Thuyền buôn các nước đã quen đường vào vịnh. Trang Vân Đồn đứng vững.' },
+  { min:4, name:'Thương cảng phồn thịnh',  text:'Tiền thuế đều đặn về kinh, giặc biển không dám bén mảng. Danh tiếng bến vang xa.' },
+  { min:6, name:'Đệ nhất thương cảng',     text:'Khanh hoàn thành mọi việc triều đình giao qua sáu chương. Tên khanh được ghi vào sổ công.' },
 ];
 const BEST_KEY = 'van-don-3d-best';
-
-const costOf = g => Math.round(g.price * COST_RATE);
-const sellPrice = (nat, g) => Math.round(g.price * nat.mult * (nat.prefs.includes(g.id) ? 1.3 : 0.75));
 
 // =====================================================================
 //  TRẠNG THÁI
 // =====================================================================
 const S = {
-  running:false, paused:true, round:1, money:150, rep:0, tax:15, nextTax:15,
-  carry:{gom:0,lua:0,ngoc:0,tram:0}, t:ROUND_SEC,
-  demand:{}, absent:null, tribute:null,
-  stat:{ sold:0, taxIncome:0, spent:0, income:0 },
+  running:false, paused:true, round:1, money:200, rep:15, tax:15, nextTax:15,
+  carry:{gom:0,lua:0,ngoc:0,tram:0}, t:ROUND_SEC, el:0, built:{}, market:{}, ships:{}, queue:[],
+  stat:{ sold:0, taxIncome:0, spent:0, income:0, done:0, missed:0, doneNat:{} },
+  goals:0, tribute:null, giac:null, doBo:null, lost:false,
 };
 const carryN = () => GOODS.reduce((n,g) => n + S.carry[g.id], 0);
+const capOf = () => S.built.xe2 ? 24 : S.built.xe ? 16 : 10;
+const chuong = () => CHUONG[S.round-1];
+const costOf = g => Math.round(g.price * COST_RATE * (S.market[g.id]||1) * (S.built.lo ? 0.85 : 1));
+const sellPrice = (nat, g) => Math.round(g.price * nat.mult * 1.12 * (S.market[g.id]||1));
+const orderTxt = o => Object.entries(o).filter(([,q]) => q>0).map(([id,q]) => `${q} ${G(id).name}`).join(', ');
+const sumO = o => Object.values(o).reduce((a,b) => a+b, 0);
 
 function newRound(){
-  S.tax = S.nextTax;
-  S.t = ROUND_SEC;
-  S.stat = { sold:0, taxIncome:0, spent:0, income:0 };
-  const f = TAX[S.tax].demand;
-  S.demand = {};
-  for(const n of NATIONS){
-    S.demand[n.id] = {};
-    for(const g of GOODS) S.demand[n.id][g.id] = Math.round((n.prefs.includes(g.id) ? 6 : 2) * f);
-  }
-  // Biến cố: bão ở phiên 2 hoặc 4, chiếu đòi cống phẩm ở phiên 3 và 5
-  S.absent = (S.round===2 || S.round===4) && Math.random()<0.75 ? pick(NATIONS).id : null;
-  S.tribute = (S.round===3 || S.round===5) ? { good:pick(['gom','lua']), n:4, done:false } : null;
-  applyRoundToWorld();
-  renderHUD();
+  const c = chuong();
+  S.tax = S.nextTax; S.t = ROUND_SEC; S.el = 0;
+  S.stat = { sold:0, taxIncome:0, spent:0, income:0, done:0, missed:0, doneNat:{} };
+  for(const g of GOODS) S.market[g.id] = Math.round(rand(80,130))/100;      // giá lên xuống theo phiên
+  S.queue = c.thuyen.map(([id,at]) => ({ id, at, done:false }));
+  for(const n of NATIONS) S.ships[n.id] = { st:'away', t:0, max:1, order:{}, full:{}, z:SHIP_AWAY_Z };
+  S.tribute = c.cong ? { need:Object.assign({}, c.cong), done:false } : null;
+  S.giac = c.giac ? { at:c.giac, done:false, ok:false } : null;
+  S.doBo = c.doBo ? { state:'cho', at:20 } : null;
+  if(S.built.den) S.rep += 3;
+  syncWorld(); renderHUD();
 }
 
 // =====================================================================
@@ -346,11 +392,32 @@ const places = [];   // điểm tương tác
 { const x=-58, z=-4;
   box(4,0.8,2.4,0x8f8f86,x,0.4,z); box(2.6,6,0.7,0xa9a99e,x,3.8,z);
   solids.push({x,z,r:2.6}); }
+// Công trình dựng thêm (ẩn cho đến khi xây)
+const BUILD_MESH = {};
+{ // Vọng lâu thủy binh: bốn cột, sàn, mái
+  const g = new THREE.Group(); g.position.set(-63, 0, 5); scene.add(g);
+  for(const [a,b] of [[-1.6,-1.6],[1.6,-1.6],[-1.6,1.6],[1.6,1.6]]) box(0.5,11,0.5,0x5c3d24,a,5.5,b,g);
+  box(4.6,0.5,4.6,0x7a5a36,0,8,0,g); box(4.6,1.2,0.3,0x7a5a36,0,8.8,2.2,g);
+  const r = new THREE.Mesh(new THREE.ConeGeometry(3.8,2.6,4), M(0xa5402e)); r.rotation.y = Math.PI/4; r.position.y = 11.6; g.add(r);
+  box(0.12,2.4,0.12,0x3a2412,1.4,13.6,1.4,g); box(1.6,1,0.1,0xa5402e,2.2,14.3,1.4,g);
+  label('Vọng lâu', 16.5, g, 0.55); BUILD_MESH.volau = g; g.visible = false;
+}
+{ // Đền thần biển
+  const g = house(34, -16, 7, 6, 4, 0xe9d7b0, 0x8a2424); g.visible = false;
+  box(1.2,1,1.2,0x8f8f86,0,0.5,4.2,g); label('Đền thần biển', 8.5, g, 0.55); BUILD_MESH.den = g;
+}
+{ // Lò xưởng mở rộng: thêm một lò nhỏ cạnh lò gốm
+  const g = new THREE.Group(); g.position.set(-50, 0, -24); scene.add(g);
+  const d = new THREE.Mesh(new THREE.SphereGeometry(3,10,6,0,Math.PI*2,0,Math.PI/2), M(0xa5623c)); g.add(d);
+  box(1,4.5,1,0x7a4426,1.8,2.2,-1,g); BUILD_MESH.lo = g; g.visible = false;
+}
+
 
 // ----- Cầu tàu và thuyền buôn -----
 const SHORE_Z = 11, PIER_LEN = 20, PIER_W = 5.5;
 const piers = [];
 const ships = {};
+const SHIP_DOCK_Z = SHORE_Z+PIER_LEN-5, SHIP_AWAY_Z = SHIP_DOCK_Z + 75;
 NATIONS.forEach((n,i) => {
   const x = -39 + i*26;
   box(PIER_W,0.6,PIER_LEN,0x7a5a36,x,0.1,SHORE_Z+PIER_LEN/2-0.5);
@@ -499,13 +566,78 @@ label('Bia sử', 9, (()=>{ const g=new THREE.Group(); g.position.set(-58,0,-4);
 NATIONS.forEach((n,i) => addPlace({ id:'tn-'+n.id, kind:'merchant', nat:n, x:piers[i].x, z:SHORE_Z+PIER_LEN-5,
   tag:n.name, who:n.who, face:Math.PI, tuong:n.tuong }));
 
-function applyRoundToWorld(){
+// =====================================================================
+//  THUYỀN VÀO BẾN, ĐỢI, NHỔ NEO
+// =====================================================================
+function syncWorld(){
   for(const n of NATIONS){
-    const here = S.absent !== n.id;
-    ships[n.id].visible = here;
-    const p = places.find(p => p.id==='tn-'+n.id); p.npc.visible = here; p.off = !here;
+    const sh = S.ships[n.id] || { st:'away' }, p = places.find(p => p.id==='tn-'+n.id);
+    const docked = sh.st === 'docked';
+    p.npc.visible = docked; p.off = !docked; ships[n.id].visible = sh.st !== 'away';
+  }
+  for(const id in BUILD_MESH) BUILD_MESH[id].visible = !!S.built[id];
+}
+function arrive(id){
+  const n = NAT(id), sh = S.ships[id], f = TAX[S.tax].demand, early = S.round <= 2;
+  sh.order = {};
+  for(const g of n.prefs){
+    const hi = (g==='tram' || g==='ngoc') && early ? 3 : 5;               // chương đầu ít hàng đắt
+    sh.order[g] = Math.max(1, Math.round(rand(2, hi) * f));
+  }
+  sh.full = Object.assign({}, sh.order); sh.st = 'in'; sh.z = SHIP_AWAY_Z;
+  sh.t = sh.max = chuong().kien + (S.built.den ? 8 : 0);
+  sfx('tuva');
+  toast(`⛵ Thuyền <b>${n.name}</b> vào bến, đặt mua <b>${orderTxt(sh.order)}</b>. Đợi ${Math.round(sh.t)} giây.`, 3400);
+  syncWorld();
+}
+function depart(id, ok){
+  const sh = S.ships[id], n = NAT(id);
+  if(sh.st !== 'docked' && sh.st !== 'in') return;
+  sh.st = 'out';
+  if(!ok){
+    const left = sumO(sh.order);
+    if(left > 0){ S.rep -= 2; S.stat.missed++; sfx('bad');
+      toast(`Thuyền <b>${n.name}</b> nhổ neo khi đơn còn thiếu ${left} kiện: danh vọng −2.`, 3000); }
+  }
+  if(dlgPlace && dlgPlace.nat === n) closeDlg();
+  syncWorld();
+}
+function updateShips(dt){                  // chỉ chạy khi không mở hội thoại
+  S.el += dt;
+  for(const q of S.queue){
+    if(q.done || S.el < q.at) continue;
+    if(S.ships[q.id].st === 'away'){ q.done = true; arrive(q.id); }
+  }
+  for(const n of NATIONS){ const sh = S.ships[n.id];
+    if(sh.st === 'docked'){ sh.t -= dt; if(sh.t <= 0) depart(n.id, false); } }
+  if(S.giac && !S.giac.done && S.el >= S.giac.at) giacDen();
+  if(S.doBo && S.doBo.state==='cho' && !S.doBo.bao && S.el >= S.doBo.at){
+    S.doBo.bao = true; sfx('mo');
+    toast('Có người lạ từ thuyền <b>Đồ Bồ</b> lảng vảng ở <b>bến mò ngọc trai</b>, hỏi mua ngọc trai.', 3800);
   }
 }
+function moveShips(dt){                    // chạy mọi khung hình
+  for(const n of NATIONS){ const sh = S.ships[n.id]; if(!sh) continue; const g = ships[n.id];
+    if(sh.st === 'in'){ sh.z = Math.max(SHIP_DOCK_Z, sh.z - 28*dt); if(sh.z === SHIP_DOCK_Z){ sh.st = 'docked'; syncWorld(); } }
+    else if(sh.st === 'out'){ sh.z = Math.min(SHIP_AWAY_Z, sh.z + 22*dt); if(sh.z === SHIP_AWAY_Z){ sh.st = 'away'; syncWorld(); } }
+    else if(sh.st === 'docked') sh.z = SHIP_DOCK_Z;
+    if(sh.st !== 'away') g.position.z = sh.z;
+  }
+}
+function giacDen(){
+  S.giac.done = true;
+  if(S.built.volau){
+    S.giac.ok = true; S.rep += 6; sfx('trong');
+    toast('🗼 Giặc biển áp sát cầu tàu. Thủy binh trên vọng lâu bắn tên đẩy lui: danh vọng +6.', 4200);
+  } else {
+    const mat = Math.min(S.money, Math.max(60, Math.round(S.money*0.35)));
+    S.money -= mat; S.rep -= 4; sfx('bad'); setTimeout(() => sfx('bao'), 300);
+    for(const n of NATIONS) if(S.ships[n.id].st === 'docked' || S.ships[n.id].st === 'in'){ S.ships[n.id].order = {}; depart(n.id, true); }
+    toast(`🏴 Giặc biển cướp bến: mất <b>${mat}</b> quan, thuyền buôn bỏ chạy, danh vọng −4. Cần dựng Vọng lâu thủy binh.`, 5200);
+  }
+}
+
+syncWorld();
 
 // =====================================================================
 //  ĐI LẠI
@@ -583,6 +715,7 @@ function closeDlg(){ dlgOpen = false; dlgPlace = null; $('dlg').style.display = 
 function interact(){ if(nearest && !dlgOpen) openDlg(nearest); }
 function rowHTML(lbl, small, btns){ return `<div class="row"><div class="lbl">${lbl}<small>${small}</small></div>${btns}</div>`; }
 
+function trend(g){ const m = S.market[g.id]||1; return m >= 1.12 ? ' <span style="color:#e58a6a">▲ đắt</span>' : m <= 0.9 ? ' <span style="color:#9ec5ab">▼ rẻ</span>' : ''; }
 function renderDlg(){
   const p = dlgPlace; if(!p) return;
   const pic = PICS[p.id], im = $('dlgPic');
@@ -591,30 +724,43 @@ function renderDlg(){
   $('dlgWho').textContent = p.who; let rows = '', body = '', title = p.tag;
   let btns = '<button class="btn" type="button" data-a="close">Đi tiếp</button>';
   if(p.kind==='shop'){
-    const g = G(p.good), c = costOf(g), room = CARRY - carryN(), max = Math.min(room, Math.floor(S.money/c));
-    body = `Hàng tại xưởng: <b>${g.ic} ${g.name}</b>, giá <b>${c} quan</b> một kiện. Khanh còn chỗ cho <b>${room}</b> kiện.`;
+    const g = G(p.good), c = costOf(g), room = capOf() - carryN(), max = Math.min(room, Math.floor(S.money/c));
+    body = `Hàng tại xưởng: <b>${g.ic} ${g.name}</b>, giá phiên này <b>${c} quan</b> một kiện${trend(g)}. Khanh còn chỗ cho <b>${room}</b> kiện.`;
+    const want = NATIONS.filter(n => ['in','docked'].includes(S.ships[n.id].st) && (S.ships[n.id].order[g.id]||0) > 0)
+      .map(n => `${n.name} cần ${S.ships[n.id].order[g.id]}`);
     const fans = NATIONS.filter(n => n.prefs.includes(g.id)).map(n => n.name).join(', ');
-    rows = rowHTML(`${g.ic} ${g.name}`, `Được chuộng ở thuyền: ${fans}`,
+    rows = rowHTML(`${g.ic} ${g.name}`, want.length ? `Đang đặt: ${want.join(' · ')}` : `Thuyền hay mua: ${fans}`,
       `<button class="btn" type="button" data-a="buy" data-n="1" ${max<1?'disabled':''}>Mua 1</button>
        <button class="btn pri" type="button" data-a="buy" data-n="${max}" ${max<1?'disabled':''}>Mua ${Math.max(max,0)}</button>`);
     if(max<1) body += room<1 ? ' <b>Gánh đã đầy.</b>' : ' <b>Không đủ quan tiền.</b>';
+    if(p.good==='ngoc' && S.doBo && S.doBo.state==='cho' && S.doBo.bao){
+      const k = S.carry.ngoc, gia = sellPrice(NAT('trao'), g) * 3;
+      rows += rowHTML('🕶️ Người lạ thuyền Đồ Bồ', `Hỏi mua lén ngọc trai, trả ${gia} quan một kiện (gấp ba). Bán thì mất danh vọng nặng và hỏng việc triều đình giao.`,
+        `<button class="btn" type="button" data-a="doboBan" ${k<1?'disabled':''}>Bán lén ${k}</button>
+         <button class="btn pri" type="button" data-a="doboTu">Từ chối, báo quan</button>`);
+    }
   } else if(p.kind==='merchant'){
-    const n = p.nat;
-    body = `Thuyền <b>${n.name}</b> chuộng <b>${n.prefs.map(id => G(id).name).join('</b> và <b>')}</b>. Thuế cảng phiên này: <b>${S.tax}%</b>, thu thêm trên mỗi kiện bán ra.`;
-    for(const g of GOODS){
-      const have = S.carry[g.id], want = S.demand[n.id][g.id], pr = sellPrice(n,g), k = Math.min(have, want);
-      const pref = n.prefs.includes(g.id);
-      rows += rowHTML(`${g.ic} ${g.name}${pref?' ⭐':''}`, `Trả ${pr} quan/kiện · còn mua ${want} · khanh có ${have}`,
-        `<button class="btn ${pref?'pri':''}" type="button" data-a="sell" data-g="${g.id}" ${k<1?'disabled':''}>Bán ${k}</button>`);
+    const n = p.nat, sh = S.ships[n.id];
+    body = `Thuyền <b>${n.name}</b> còn đợi <b>${Math.max(0, Math.ceil(sh.t))} giây</b>. Giao trọn đơn được thưởng thêm 15% và +3 danh vọng. Thuế cảng phiên này: <b>${S.tax}%</b>.`;
+    for(const [gid, q] of Object.entries(sh.order)){
+      const g = G(gid), have = S.carry[gid], k = Math.min(have, q);
+      rows += rowHTML(`${g.ic} ${g.name}`, `Trả ${sellPrice(n,g)} quan/kiện${trend(g)} · còn cần ${q} · khanh có ${have}`,
+        `<button class="btn ${k>0?'pri':''}" type="button" data-a="sell" data-g="${gid}" ${k<1?'disabled':''}>Giao ${k}</button>`);
     }
   } else if(p.kind==='customs'){
-    body = `Thuế cảng đang áp dụng: <b>${S.tax}%</b>. Mức khanh chọn dưới đây có hiệu lực <b>từ phiên sau</b>.`;
-    rows = rowHTML('⚖️ Mức thuế phiên sau', 'Thuế thấp: thuyền mua nhiều hơn, thêm danh vọng. Thuế cao: thu nhiều mỗi kiện, thuyền mua ít đi, mất danh vọng.',
+    body = `Thuế cảng đang áp dụng: <b>${S.tax}%</b>. Mức chọn dưới đây có hiệu lực <b>từ chương sau</b>.`;
+    rows = rowHTML('⚖️ Thuế chương sau', 'Thấp: thuyền đặt nhiều, +danh vọng. Cao: thu nhiều, thuyền đặt ít, −danh vọng.',
       [5,15,30].map(t => `<button class="btn ${S.nextTax===t?'on':''}" type="button" data-a="tax" data-t="${t}" aria-pressed="${S.nextTax===t}">${t}%</button>`).join(''));
     if(S.tribute && !S.tribute.done){
-      const g = G(S.tribute.good), ok = S.carry[g.id] >= S.tribute.n;
-      rows += rowHTML(`📜 Chiếu đòi cống phẩm: ${S.tribute.n} kiện ${g.name}`, `Dâng trong phiên này: +15 danh vọng. Khanh đang có ${S.carry[g.id]}.`,
+      const need = S.tribute.need, ok = Object.entries(need).every(([id,q]) => S.carry[id] >= q);
+      rows += rowHTML(`📜 Chiếu đòi cống: ${orderTxt(need)}`, `Dâng trong phiên này. Khanh đang có ${Object.keys(need).map(id => `${S.carry[id]} ${G(id).name}`).join(', ')}.`,
         `<button class="btn pri" type="button" data-a="tribute" ${ok?'':'disabled'}>Dâng</button>`);
+    }
+    for(const c of CONG_TRINH){
+      if(S.built[c.id]) { rows += rowHTML(`${c.ic} ${c.ten}`, `Đã dựng. ${c.mo}`, ''); continue; }
+      const thieu = c.can && !S.built[c.can];
+      rows += rowHTML(`${c.ic} ${c.ten}`, thieu ? `Cần dựng ${CONG_TRINH.find(x => x.id===c.can).ten} trước. ${c.mo}` : c.mo,
+        `<button class="btn" type="button" data-a="build" data-b="${c.id}" ${(thieu || S.money < c.gia)?'disabled':''}>${c.gia} quan</button>`);
     }
     btns = `<button class="btn pri" type="button" data-a="end">🥁 Đánh trống kết phiên</button>` + btns;
   } else {
@@ -623,7 +769,8 @@ function renderDlg(){
       Triều đình bèn cho lập trang ở nơi hải đảo, gọi là <b>Vân Đồn</b>, để mua bán hàng hóa quý, dâng tiến sản vật địa phương (theo <i>Đại Việt sử ký toàn thư</i>).<br><br>
       Năm 1184, người buôn Xiêm La và <b>Tam Phật Tề</b> vào Vân Đồn xin buôn bán. Năm 1348, thuyền Đồ Bồ đến đây ngầm mua ngọc trai.
       Đầu năm <b>1288</b>, Trần Khánh Dư đánh tan đoàn thuyền lương của Trương Văn Hổ ở vùng biển này. Năm <b>1349</b>, nhà Trần đặt quan trấn, quan lộ, sát hải sứ và quân Bình Hải ở trấn Vân Đồn.<br><br>
-      <b>Chỗ trò chơi giản lược:</b> năm 1149 Vân Đồn mới là trang, nên «quan trấn thủ», Nhà thuế quan và thư lại là cách dựng của trò chơi; mức thuế 5–15–30%, giá hàng và nhịp sáu phiên chợ là số liệu của trò chơi.
+      <b>Chỗ trò chơi giản lược:</b> sáu chương gói hai trăm năm vào một ván. Chương 1149, 1184 và 1348 theo sử; các chương «Khách buôn phương Bắc», «Giặc biển», «Chiếu đòi cống» là cách dựng của trò chơi.
+      Năm 1149 Vân Đồn mới là trang, nên «quan trấn thủ», Nhà thuế quan, thư lại, vọng lâu và đền thần biển là hư cấu; mức thuế, giá hàng, đơn hàng và thời gian đợi là số liệu của trò chơi.
       Trang phục nhân vật được cách điệu, không phục dựng theo hiện vật. Tên Xiêm La chép theo <i>Toàn thư</i>, dù vương quốc của người Thái đến thế kỷ 13 mới lập.
       Trầm hương là hàng trung chuyển, không phải sản vật của đảo; ngọc trai là ngọc mò ngoài biển. Gốm trong game gọi chung là «gốm Đại Việt».`;
   }
@@ -634,30 +781,56 @@ $('dlg').addEventListener('click', e => {
   const a = b.dataset.a, p = dlgPlace;
   if(a==='close') return closeDlg();
   if(a==='buy'){ if(buy(p.good, +b.dataset.n)) sfx('coin'); }
-  if(a==='sell'){ if(sell(p.nat, b.dataset.g)) sfx('sell'); }
-  if(a==='tax'){ sfx('mo'); S.nextTax = +b.dataset.t; toast(`Từ phiên sau, thuế cảng là <b>${S.nextTax}%</b>.`); }
+  if(a==='sell'){ const k = sell(p.nat, b.dataset.g); if(k) sfx('sell'); if(!dlgOpen){ renderHUD(); return; } }
+  if(a==='tax'){ sfx('mo'); S.nextTax = +b.dataset.t; toast(`Từ chương sau, thuế cảng là <b>${S.nextTax}%</b>.`); }
   if(a==='tribute'){ if(giveTribute()) sfx('gong'); }
+  if(a==='build'){ if(build(b.dataset.b)) sfx('gong'); }
+  if(a==='doboBan' || a==='doboTu'){ doBo(a==='doboBan'); }
   if(a==='end'){ closeDlg(); return endRound(); }
   renderHUD(); renderDlg();
 });
 
 function buy(goodId, n){
-  const g = G(goodId), c = costOf(g); n = Math.min(n, CARRY-carryN(), Math.floor(S.money/c)); if(n<1) return 0;
+  const g = G(goodId), c = costOf(g); n = Math.min(n, capOf()-carryN(), Math.floor(S.money/c)); if(n<1) return 0;
   S.money -= c*n; S.carry[goodId] += n; S.stat.spent += c*n; return n;
 }
 function sell(nat, goodId){
-  const g = G(goodId), k = Math.min(S.carry[goodId], S.demand[nat.id][goodId]); if(k<1) return 0;
+  const sh = S.ships[nat.id], g = G(goodId);
+  if(sh.st !== 'docked') return 0;
+  const k = Math.min(S.carry[goodId], sh.order[goodId]||0); if(k<1) return 0;
   const pr = sellPrice(nat,g), tax = Math.round(pr*k*S.tax/100);
-  S.carry[goodId] -= k; S.demand[nat.id][goodId] -= k;
+  S.carry[goodId] -= k; sh.order[goodId] -= k;
   S.money += pr*k + tax; S.stat.income += pr*k; S.stat.taxIncome += tax; S.stat.sold += k;
-  if(nat.prefs.includes(goodId)) S.rep += k;
-  toast(`Bán <b>${k} ${g.name}</b> cho thuyền ${nat.name}: <b>+${pr*k}</b> quan, thuế cảng <b>+${tax}</b>.`);
+  if(sumO(sh.order) <= 0){
+    const bonus = Math.round(Object.entries(sh.full).reduce((a,[id,q]) => a + q*sellPrice(nat, G(id)), 0) * 0.15);
+    S.money += bonus; S.rep += 3; S.stat.done++; S.stat.doneNat[nat.id] = true;
+    toast(`✅ Giao trọn đơn cho thuyền <b>${nat.name}</b>: thưởng <b>+${bonus}</b> quan, danh vọng +3.`, 3200);
+    setTimeout(() => sfx('gong'), 250);
+    depart(nat.id, true);
+  } else toast(`Giao <b>${k} ${g.name}</b> cho thuyền ${nat.name}: <b>+${pr*k}</b> quan, thuế cảng <b>+${tax}</b>.`);
   return k;
 }
 function giveTribute(){
-  const t = S.tribute; if(!t || t.done || S.carry[t.good] < t.n) return false;
-  S.carry[t.good] -= t.n; t.done = true; S.rep += 15;
-  toast('Sứ thần nhận cống phẩm: <b>+15 danh vọng</b>.'); return true;
+  const t = S.tribute; if(!t || t.done) return false;
+  if(!Object.entries(t.need).every(([id,q]) => S.carry[id] >= q)) return false;
+  for(const [id,q] of Object.entries(t.need)) S.carry[id] -= q;
+  t.done = true; S.rep += 5;
+  toast('Sứ thần nhận cống phẩm: <b>+5 danh vọng</b>.'); return true;
+}
+const BUILD_SOLID = { volau:{x:-63,z:5,r:3}, den:{x:34,z:-16,r:5}, lo:{x:-50,z:-24,r:3.5} };
+function build(id){
+  const c = CONG_TRINH.find(x => x.id===id); if(!c || S.built[id] || S.money < c.gia || (c.can && !S.built[c.can])) return false;
+  S.money -= c.gia; S.built[id] = true; if(BUILD_SOLID[id]) solids.push(BUILD_SOLID[id]);
+  syncWorld(); toast(`${c.ic} Đã dựng <b>${c.ten}</b>. ${c.mo}`, 3200); return true;
+}
+function doBo(ban){
+  const d = S.doBo; if(!d || d.state!=='cho') return;
+  if(ban){
+    const k = S.carry.ngoc; if(k<1) return;
+    const gia = sellPrice(NAT('trao'), G('ngoc')) * 3;
+    S.carry.ngoc = 0; S.money += gia*k; S.rep -= 15; d.state = 'ban'; sfx('bad');
+    toast(`Khanh bán lén ${k} ngọc trai: <b>+${gia*k}</b> quan, nhưng danh vọng −15. Tin đồn đã đến tai triều đình.`, 4200);
+  } else { d.state = 'tuchoi'; S.rep += 6; sfx('trong'); toast('Khanh từ chối và báo quan: người Đồ Bồ bị đuổi khỏi bến. Danh vọng +6.', 3800); }
 }
 
 // =====================================================================
@@ -724,6 +897,8 @@ function sfx(kind){
     else if(kind==='gong'){ tone('sine', 196, 0, 0.2, 1.8); tone('sine', 392, 0, 0.07, 1.3); tone('sine', 523, 0, 0.03, 0.9); }
     else if(kind==='trong'){ for(let i=0;i<3;i++){ noise(0.3, 160, 0.9, t + i*0.42); tone('sine', 90, 55, 0.3, 0.35, t + i*0.42); } }
     else if(kind==='bao'){ noise(2.2, 120, 0.7); noise(1.4, 320, 0.25, t+0.3); }        // sấm xa
+    else if(kind==='tuva'){ tone('sawtooth', 196, 0, 0.05, 0.9); tone('sine', 196, 0, 0.12, 1.0); }      // tù và báo thuyền vào
+    else if(kind==='bad'){ tone('sawtooth', 150, 70, 0.08, 0.5); }
     else if(kind==='buoc'){ noise(0.06, 700, 0.18, t, 'bandpass'); }
   }catch(e){}
 }
@@ -756,9 +931,25 @@ function musicTick(){
 // =====================================================================
 //  PHIÊN CHỢ
 // =====================================================================
+function goalState(){
+  const m = chuong().muc, st = S.stat;
+  switch(m.loai){
+    case 'don':     return { ok: st.done >= m.n, p: `${Math.min(st.done, m.n)}/${m.n} đơn` };
+    case 'tien':    return { ok: st.income >= m.n, p: `${Math.min(st.income, m.n)}/${m.n} quan` };
+    case 'donNuoc': return { ok: !!st.doneNat[m.nat], p: st.doneNat[m.nat] ? 'xong' : 'chưa' };
+    case 'giac':    return { ok: !!(S.giac && S.giac.ok), p: S.giac && S.giac.done ? (S.giac.ok ? 'đã đẩy lui' : 'thất thủ') : (S.built.volau ? 'đã có vọng lâu' : 'chưa có vọng lâu') };
+    case 'cong':    return { ok: !!(S.tribute && S.tribute.done), p: S.tribute && S.tribute.done ? 'đã dâng' : 'chưa dâng' };
+    case 'liem':    return { ok: !(S.doBo && S.doBo.state==='ban'), p: S.doBo && S.doBo.state==='tuchoi' ? 'đã báo quan' : S.doBo && S.doBo.state==='ban' ? 'đã bán lén' : 'giữ mình' };
+  }
+  return { ok:false, p:'' };
+}
 function renderHUD(){
   $('hRound').textContent = S.round; $('hMoney').textContent = S.money; $('hRep').textContent = S.rep;
-  $('hCarry').textContent = carryN(); $('hTax').textContent = S.tax;
+  $('hCarry').textContent = carryN(); $('hCap').textContent = capOf(); $('hTax').textContent = S.tax;
+  if(S.running){ const gs = goalState(); $('hGoal').textContent = `${chuong().muc.txt} · ${gs.p}`; $('hGoalChip').classList.toggle('ok', gs.ok); }
+  const w = NATIONS.filter(n => S.ships[n.id] && S.ships[n.id].st==='docked')
+    .map(n => `${n.name} ${Math.max(0, Math.ceil(S.ships[n.id].t))}s`);
+  $('hShips').textContent = w.length ? w.join(' · ') : (S.ships.tong ? 'chưa có thuyền đợi' : '—');
 }
 let toastT = 0;
 function toast(html, ms){ const t = $('toast'); t.innerHTML = html; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms||2600); }
@@ -768,44 +959,63 @@ const RD_PICS = [
   { src:'assets/ben-dem.jpg', alt:'Mô hình đất nặn bến Vân Đồn về đêm: thuyền buồm thắp đèn, lều chợ trên cầu tàu' },
   { src:'assets/cho-dem.jpg', alt:'Mô hình đất nặn chợ đêm trên cầu tàu: hàng ăn, cân hàng, đèn nến, thuyền buồm ngoài vịnh' },
 ];
-function endRound(){
-  S.paused = true; closeDlg(); sfx('trong');
-  const st = S.stat, tx = TAX[S.tax]; S.rep = Math.max(0, S.rep + tx.rep);
-  let lines = `<p>Bán được <b>${st.sold}</b> kiện, thu <b>${st.income}</b> quan tiền hàng và <b>${st.taxIncome}</b> quan thuế cảng (thuế ${S.tax}%). Tiền mua hàng: <b>${st.spent}</b> quan.</p>`;
-  if(tx.rep) lines += `<p>Thuế ${S.tax}%: danh vọng <b>${tx.rep>0?'+':''}${tx.rep}</b>.</p>`;
-  if(S.tribute) lines += S.tribute.done ? '' : `<p>Khanh <b>lỡ hạn cống phẩm</b>: danh vọng −8.</p>`;
-  if(S.tribute && !S.tribute.done) S.rep = Math.max(0, S.rep-8);
-  const left = carryN(); if(left) lines += `<p>Còn <b>${left}</b> kiện trong gánh, mang sang phiên sau.</p>`;
-  if(S.round >= ROUNDS){ renderHUD(); return finish(); }
-  S.round++; newRound();
-  lines += `<p><b>Phiên ${S.round}</b>: thuế cảng <b>${S.tax}%</b>.`;
-  if(S.absent){ setTimeout(() => sfx('bao'), 1400); }
-  if(S.absent) lines += ` Bão ngoài vịnh: thuyền <b>${NATIONS.find(n => n.id===S.absent).name}</b> không vào bến.`;
-  if(S.tribute) lines += ` Triều đình xuống chiếu đòi <b>${S.tribute.n} kiện ${G(S.tribute.good).name}</b>, dâng tại Nhà thuế quan.`;
-  lines += '</p>';
-  const rp = RD_PICS[(S.round-2) % RD_PICS.length], ri = $('rdPic'); ri.src = rp.src; ri.alt = rp.alt;
-  $('rdTitle').textContent = `Hết phiên ${S.round-1}`; $('rdBody').innerHTML = lines; $('ovRound').style.display = 'flex';
+function chuongHTML(i){
+  const c = CHUONG[i];
+  let h = `<p><span class="kind ${c.su?'su':'hc'}">${c.su ? '📜 Theo sử' : '🎭 Trò chơi dựng'}</span> <b>${c.nam}</b></p><p>${c.ke}</p>`;
+  if(c.nguon) h += `<p class="note">Nguồn: <i>${c.nguon}</i>.</p>`;
+  h += `<p>🎯 <b>Việc triều đình giao:</b> ${c.muc.txt}. Làm được: +10 danh vọng và 120 quan thưởng; không làm được: −6 danh vọng.</p>`;
+  if(c.giac && !S.built.volau) h += `<p>⚠️ Chưa có <b>Vọng lâu thủy binh</b>. Dựng ở Nhà thuế quan (${CONG_TRINH.find(x => x.id==='volau').gia} quan) trước giây thứ ${c.giac} của phiên.</p>`;
+  return h;
 }
-$('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'none'; S.paused = false; });
+function showChuong(i, lead){
+  const rp = RD_PICS[i % RD_PICS.length], ri = $('rdPic'); ri.src = rp.src; ri.alt = rp.alt;
+  $('rdTitle').textContent = `Chương ${i+1} · ${CHUONG[i].ten}`;
+  $('rdBody').innerHTML = (lead || '') + chuongHTML(i);
+  $('btnNext').textContent = '⚓ Vào phiên';
+  $('ovRound').style.display = 'flex';
+}
+function endRound(){
+  if(!S.running) return;
+  S.paused = true; closeDlg(); sfx('trong');
+  const st = S.stat, tx = TAX[S.tax], gs = goalState(), c = chuong();
+  S.rep += tx.rep;
+  if(gs.ok){ S.rep += 10; S.money += 120; S.goals++; } else S.rep -= 6;
+  if(S.tribute && !S.tribute.done) S.rep -= 4;
+  let lines = `<h3 class="serif" style="color:var(--dong);margin:4px 0">Hết chương ${S.round} · ${c.ten}</h3>`;
+  lines += `<p>${gs.ok ? '✅' : '❌'} <b>${c.muc.txt}</b>: ${gs.ok ? 'làm được, +10 danh vọng và 120 quan thưởng.' : 'chưa làm được, −6 danh vọng.'}</p>`;
+  lines += `<p>Giao trọn <b>${st.done}</b> đơn, để lỡ <b>${st.missed}</b> thuyền. Bán ${st.sold} kiện được <b>${st.income}</b> quan, thuế cảng <b>${st.taxIncome}</b> quan, tiền mua hàng ${st.spent} quan.</p>`;
+  if(tx.rep) lines += `<p>Thuế ${S.tax}%: danh vọng ${tx.rep>0?'+':''}${tx.rep}.</p>`;
+  const left = carryN(); if(left) lines += `<p>Còn <b>${left}</b> kiện trong gánh, mang sang chương sau (giá có thể đã khác).</p>`;
+  for(const n of NATIONS) S.ships[n.id].st = 'away';
+  syncWorld(); renderHUD();
+  if(S.rep < 0){ S.lost = true; return finish(lines); }
+  if(S.round >= ROUNDS) return finish(lines);
+  S.round++; newRound();
+  if(S.built.den) lines += `<p>🕯️ Đền thần biển: danh vọng +3 đầu chương.</p>`;
+  showChuong(S.round-1, lines + '<hr style="border:0;border-top:1px solid #5c3d24;margin:10px 0">');
+}
+$('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'none'; sndInit(); S.paused = false; });
 
-function finish(){
-  S.running = false; const sc = score(); setTimeout(() => sfx('gong'), 1300);
-  let title = TITLES[0]; for(const t of TITLES) if(sc >= t.min) title = t;
-  let best = 0; try{ best = +localStorage.getItem(BEST_KEY) || 0; if(sc > best) localStorage.setItem(BEST_KEY, String(sc)); }catch(e){}
-  $('endTitle').textContent = title.name; $('endScore').textContent = sc + ' điểm';
-  $('endBody').innerHTML = `<p>${title.text}</p>
-    <p><b>${S.money}</b> quan tiền + <b>${S.rep}</b> danh vọng × 10.${sc>best && best ? ' Kỷ lục mới của khanh.' : (best ? ` Kỷ lục cũ: ${best} điểm.` : '')}</p>
-    <p><b>Ngẫm lại:</b> khanh đã chọn mang hàng nào cho thuyền nào, và vì sao? Mức thuế nào cho khanh nhiều nhất khi gánh hàng có hạn?
-    Thuế cao thu nhiều trên mỗi kiện nhưng làm thuyền mua ít đi: đó là đánh đổi mà mọi thương cảng đều phải cân nhắc.</p>`;
+function finish(lead){
+  S.running = false; const sc = score(); setTimeout(() => sfx(S.lost ? 'bad' : 'gong'), 1300);
+  let title = TITLES[0]; for(const t of TITLES) if(S.goals >= t.min) title = t;
+  if(S.lost) title = { name:'Bị bãi chức', text:'Danh vọng xuống dưới 0: triều đình triệu khanh về kinh. Bến Vân Đồn giao cho người khác coi giữ.' };
+  let best = 0; try{ best = +localStorage.getItem(BEST_KEY) || 0; if(!S.lost && sc > best) localStorage.setItem(BEST_KEY, String(sc)); }catch(e){}
+  $('endTitle').textContent = title.name; $('endScore').textContent = S.lost ? `Chương ${S.round}/6` : sc + ' điểm';
+  $('endBody').innerHTML = (lead || '') + `<p>${title.text}</p>
+    <p>Làm được <b>${S.goals}/6</b> việc triều đình giao. ${S.lost ? '' : `Điểm: <b>${S.money}</b> quan tiền + <b>${S.rep}</b> danh vọng × 10.`}${!S.lost && sc>best && best ? ' Kỷ lục mới của khanh.' : (best ? ` Kỷ lục: ${Math.max(best, S.lost?0:sc)} điểm.` : '')}</p>
+    <p><b>Ngẫm lại:</b> thuyền nào đáng chạy trước khi gánh hàng có hạn? Nên tiêu tiền vào công trình sớm hay giữ vốn mua hàng? Thuế cao thu nhiều trên mỗi kiện nhưng thuyền đặt ít đi: đó là đánh đổi mà mọi thương cảng đều phải cân nhắc.</p>`;
   $('ovEnd').style.display = 'flex';
 }
 function start(){
+  Object.assign(S, { running:true, paused:true, round:1, money:200, rep:15, tax:15, nextTax:15, goals:0, lost:false,
+    built:{}, carry:{gom:0,lua:0,ngoc:0,tram:0} });
+  for(const id in BUILD_SOLID){ const i = solids.indexOf(BUILD_SOLID[id]); if(i >= 0) solids.splice(i, 1); }
   sndInit();
-  Object.assign(S, { running:true, paused:false, round:1, money:150, rep:0, tax:15, nextTax:15, carry:{gom:0,lua:0,ngoc:0,tram:0} });
   player.position.set(0,0,2); player.rotation.y = 0; newRound();
   $('hud').style.display = 'flex'; if(IS_TOUCH) $('stick').style.display = 'block';
-  $('ovStart').style.display = 'none'; $('ovEnd').style.display = 'none'; $('ovRound').style.display = 'none';
-  toast('Phiên 1 bắt đầu. Ghé <b>lò xưởng</b> mua hàng rồi mang ra <b>cầu tàu</b>.', 4200);
+  $('ovStart').style.display = 'none'; $('ovEnd').style.display = 'none';
+  showChuong(0);
 }
 document.querySelectorAll('[data-char]').forEach(b => b.addEventListener('click', () => setAvatar(b.dataset.char)));
 setAvatar(avatarId);
@@ -826,8 +1036,9 @@ function loop(now){
   const dt = Math.min(0.05, (now-last)/1000); last = now; tt += dt;
   if(S.running && !S.paused){
     updatePlayer(dt);
-    if(!dlgOpen){ S.t -= dt; if(S.t <= 0){ toast('Trống thu không: hết giờ phiên chợ.'); endRound(); } }
+    if(!dlgOpen){ S.t -= dt; updateShips(dt); if(S.t <= 0){ toast('Trống thu không: hết giờ phiên chợ.'); endRound(); } }
     $('sunBar').style.width = clamp(S.t/ROUND_SEC*100, 0, 100) + '%';
+    renderHUD();
   } else { $('act').style.display = 'none'; animate(player, false, dt); }
   for(const p of places) if(p.npc && p.npc.visible){ animate(p.npc, false, dt);
     const dx = player.position.x - p.x, dz = player.position.z - p.z;
@@ -835,6 +1046,7 @@ function loop(now){
     const want = Math.hypot(dx,dz) < 14 ? Math.atan2(dx,dz) : (p.face||0);
     let d = want - p.npc.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); p.npc.rotation.y += d * Math.min(1, dt*5);
   }
+  moveShips(dt);
   for(const n of NATIONS){ const s = ships[n.id]; s.position.y = Math.sin(tt*1.3 + s.position.x)*0.25; s.rotation.z = Math.sin(tt*0.9 + s.position.x)*0.03; }
   sea.position.y = -0.6 + Math.sin(tt*0.8)*0.08;
   if(!S.running && $('ovStart').style.display !== 'none'){        // màn chọn nhân vật: máy quay lượn quanh
@@ -854,7 +1066,7 @@ camera.position.copy(player.position).add(camOff);
 requestAnimationFrame(loop);
 
 // Cửa cho kiểm thử tự động
-window.__vd = { S, GOODS, NATIONS, places, player, setAvatar, buy, sell, giveTribute, endRound, start, score, costOf, sellPrice, blocked, openDlg, closeDlg };
+window.__vd = { S, GOODS, NATIONS, CHUONG, places, player, setAvatar, buy, sell, giveTribute, build, doBo, arrive, depart, endRound, start, score, costOf, sellPrice, blocked, openDlg, closeDlg };
 </script>
 </body>
 </html>
