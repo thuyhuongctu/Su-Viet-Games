@@ -1,7 +1,7 @@
 /* ThuyHuong Digital — service worker
    Cache-first cho toàn bộ cổng game: cài một lần, chơi ngoại tuyến. */
 'use strict';
-const VERSION = 'thd-v15';
+const VERSION = 'thd-v16';
 const SHELL = [
   './',
   './index.html',
@@ -35,8 +35,12 @@ const SHELL = [
   './van-don-3d/assets/ben-dem.jpg',
   './van-don-3d/assets/cho-dem.jpg',
   './van-don-3d/assets/ben-hoang-hon.jpg',
-  './van-don-3d/assets/tuong/quan-tran-thu.webp',
-  './van-don-3d/assets/tuong/nu-thuong-chu.webp',
+  './van-don-3d/assets/tuong/quan-tran-thu.than.webp',
+  './van-don-3d/assets/tuong/quan-tran-thu.chanT.webp',
+  './van-don-3d/assets/tuong/quan-tran-thu.chanP.webp',
+  './van-don-3d/assets/tuong/nu-thuong-chu.than.webp',
+  './van-don-3d/assets/tuong/nu-thuong-chu.chanT.webp',
+  './van-don-3d/assets/tuong/nu-thuong-chu.chanP.webp',
   './van-don-3d/assets/tuong/tho-ca-lo-gom.webp',
   './van-don-3d/assets/tuong/ba-chu-xuong-lua.webp',
   './van-don-3d/assets/tuong/chu-tram-huong.webp',
