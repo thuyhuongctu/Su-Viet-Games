@@ -53,8 +53,8 @@ Mọi nhân vật trên bến là **tượng đất nặn** trong [`assets/tuong
 tách nền (WebP trong suốt, cao 512 px), dựng đứng như tấm bìa và luôn quay mặt về máy quay.
 Tượng của người chơi đã bỏ đế đất nặn và tách làm ba phần (thân, hai bàn chân:
 `*.than.webp`, `*.chanT.webp`, `*.chanP.webp`). Khi đi, hai bàn chân nhấc lần lượt và thân nhún
-nhẹ theo bước. Thợ và thương nhân đứng yên tại chỗ nên giữ nguyên đế. Khi đang mang hàng,
-bên hông người chơi hiện thêm một chiếc gùi.
+nhẹ theo bước. Thợ, thư lại và thương nhân cũng đã bỏ đế, đứng thẳng trên nền đất như người
+chơi. Khi đang mang hàng, bên hông người chơi hiện thêm một chiếc gùi.
 
 Ở màn mở đầu, người chơi chọn **Quan trấn thủ** hoặc **Nữ thương chủ** (nhân vật hư cấu).
 Trò chơi nhớ lựa chọn cho lần sau. Thợ, thư lại và thương nhân mỗi người một tượng riêng; thương
