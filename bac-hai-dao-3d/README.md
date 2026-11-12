@@ -7,6 +7,13 @@ nhưng nhìn qua camera 3D đuổi sau thuyền.
 
 **Chơi ngay:** mở [`index.html`](index.html) bằng trình duyệt.
 
+## Bài hát
+
+Dùng chung bài hát **«Bắc Hải Đảo – Theo cánh buồm quê hương»** với bản 2D
+(tệp [`../bac-hai-dao/assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3`](../bac-hai-dao/assets/nhac/)):
+nút 🎵 và lời bài hát ở màn mở đầu, tự phát khi thắng ván. Xem
+[README bản 2D](../bac-hai-dao/README.md#bài-hát-của-game).
+
 ## Kỹ thuật
 
 - Dựng bằng **three.js** (bản r147 nhúng sẵn tại `../lib/three.min.js` —

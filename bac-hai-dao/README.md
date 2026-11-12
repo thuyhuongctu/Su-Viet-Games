@@ -84,8 +84,16 @@ lựa chọn được ghi nhớ.
 
 Bài nằm trong bộ sưu tập «Bac Hai Dao – Pirates of the Gulf of Tonkin» của app
 nghe nhạc [Chansonia](https://thuyhuongctu.github.io/Chansonia/app/), có lời
-chạy theo nhạc; app phát thẳng các tệp này từ GitHub Pages. Trò chơi chưa dùng
-các tệp này: nhạc trong ván vẫn sinh bằng WebAudio như trên.
+chạy theo nhạc; app phát thẳng các tệp này từ GitHub Pages, nên **không đổi tên
+hay di chuyển các tệp**.
+
+Trong game (cả bản 2D và bản 3D, dùng chung tệp mp3 này):
+
+- Màn mở đầu có nút 🎵 «Nghe bài hát» và mục «Lời bài hát». Bài hát dừng khi vào ván.
+- Màn kết thúc khi thắng (Vua Bắc Hải Đảo) tự phát bài hát; có nút dừng.
+- Khi bài hát phát, nhạc nền WebAudio nhỏ lại; tắt nhạc (🔇) hoặc chuyển thẻ thì bài hát dừng.
+- Bài hát chỉ tải khi người chơi bấm nghe lần đầu, sau đó service worker lưu lại để
+  nghe khi mất mạng; không nằm trong danh sách tải sẵn lúc cài.
 
 ## Kỹ thuật
 
