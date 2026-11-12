@@ -19,21 +19,45 @@ Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).
 | Gặp người, đọc bia | Phím E (hoặc Enter, Space) | Nút đỏ ở góc phải |
 | Đóng bảng hội thoại | Esc | Nút «Đi tiếp» |
 
-Mỗi ván có **sáu phiên chợ**, mỗi phiên 80 giây; đồng hồ dừng khi đang nói chuyện.
-Khanh bắt đầu với 150 quan tiền và mỗi chuyến mang được **10 kiện**.
+Mỗi ván có **sáu chương**, mỗi chương là một phiên chợ 90 giây; đồng hồ dừng khi đang nói
+chuyện. Khanh bắt đầu với 200 quan tiền, 15 danh vọng, và gánh chỉ mang được **10 kiện**.
 
-1. **Mua hàng** ở bốn lò xưởng.
-2. **Bán hàng** cho bốn thương thuyền ở cầu tàu. Mỗi thuyền chuộng hai mặt hàng và trả
-   giá cao cho đúng hàng đó (đánh dấu ⭐).
-3. **Định thuế** ở Nhà thuế quan: 5%, 15% hoặc 30%, có hiệu lực từ phiên sau. Thuế
-   cao thu nhiều hơn trên mỗi kiện, nhưng thuyền mua ít đi và khanh mất danh vọng.
-4. **Kết phiên** bằng cách đánh trống ở Nhà thuế quan, hoặc chờ hết giờ.
+1. **Thuyền vào bến và đặt hàng.** Mỗi thuyền đặt một đơn gồm hai mặt hàng nó chuộng, rồi chỉ
+   đợi một lúc (chip ⛵ đếm ngược). Thuyền đến lần lượt trong phiên, nhiều khi hai ba thuyền
+   cùng đợi, nên phải chọn chạy cho thuyền nào trước.
+2. **Mua hàng** ở bốn lò xưởng. Giá **lên xuống theo chương** (▲ đắt, ▼ rẻ).
+3. **Giao hàng** ở cầu tàu. Giao trọn đơn: thưởng thêm 15% và +3 danh vọng. Để thuyền nhổ
+   neo khi đơn còn thiếu: −2 danh vọng.
+4. **Nhà thuế quan:** chọn thuế cảng 5%, 15% hoặc 30% cho chương sau (thuế cao thu nhiều
+   trên mỗi kiện nhưng thuyền đặt ít đi và mất danh vọng), dâng cống phẩm, dựng công trình,
+   và đánh trống kết phiên.
+5. **Việc triều đình giao** (chip 🎯): mỗi chương một việc. Làm được: +10 danh vọng và 120 quan
+   thưởng; không làm được: −6 danh vọng. **Danh vọng xuống dưới 0 là bị bãi chức**, thua ván.
 
-**Điểm = quan tiền + danh vọng × 10.** Hết sáu phiên, triều đình xét công và phong bến
-từ «Trang nhỏ ven vịnh» lên «Trang Vân Đồn», «Trấn Vân Đồn», rồi «Đệ Nhất Thương Cảng».
+| Chương | Năm | Việc triều đình giao | Theo sử hay trò chơi dựng |
+|---|---|---|---|
+| 1. Lập trang | 1149 | Giao trọn 2 đơn hàng (chỉ có thuyền Trảo Oa, Xiêm La) | Theo sử |
+| 2. Khách buôn phương Bắc | những năm sau | Bán được 800 quan tiền hàng | Trò chơi dựng |
+| 3. Tam Phật Tề đến | 1184 | Giao trọn đơn của thuyền Tam Phật Tề | Theo sử |
+| 4. Giặc biển | mùa gió bấc | Đẩy lui giặc biển giữa phiên (cần Vọng lâu thủy binh) | Trò chơi dựng |
+| 5. Chiếu đòi cống | năm được mùa | Dâng 3 ngọc trai và 4 lụa | Trò chơi dựng |
+| 6. Thuyền Đồ Bồ | 1348 | Không bán lén ngọc trai cho người Đồ Bồ | Theo sử |
 
-**Biến cố:** ở phiên 2 và phiên 4 thường có bão, làm một thuyền không vào bến. Ở phiên 3
-và 5 có chiếu đòi cống phẩm (4 kiện gốm hoặc lụa); dâng đủ trong phiên được thêm 15 danh vọng.
+**Công trình** (dựng ở Nhà thuế quan, giữ cho cả ván):
+
+| Công trình | Giá | Tác dụng |
+|---|---|---|
+| 🛒 Xe kéo hàng | 350 quan | Mang được 16 kiện |
+| 🐃 Xe trâu | 800 quan | Mang được 24 kiện (cần xe kéo trước) |
+| 🔥 Mở rộng lò xưởng | 600 quan | Giá mua mọi mặt hàng giảm 15% |
+| 🗼 Vọng lâu thủy binh | 650 quan | Đẩy lui giặc biển; không có thì giặc cướp 35% tiền và thuyền bỏ chạy |
+| 🕯️ Đền thần biển | 550 quan | Đầu mỗi chương +3 danh vọng; thuyền đợi thêm 8 giây |
+
+**Điểm = quan tiền + danh vọng × 10.** Danh hiệu cuối ván tính theo số việc làm được:
+0–1 «Trang nhỏ ven vịnh», 2–3 «Trang Vân Đồn», 4–5 «Thương cảng phồn thịnh», 6 «Đệ nhất thương cảng».
+
+Đã chạy thử bằng bot đi bộ với tốc độ của người chơi bình thường: đa số ván làm được 5 hoặc
+6 việc, có ván chỉ được 4 việc, nên không còn thắng chắc như trước.
 
 ## Địa điểm trên bến
 
@@ -43,8 +67,8 @@ và 5 có chiếu đòi cống phẩm (4 kiện gốm hoặc lụa); dâng đủ
 | Xưởng dệt lụa | Bà chủ xưởng dệt | Mua lụa tơ tằm |
 | Trạm trầm hương | Chủ trạm trầm hương | Mua trầm hương |
 | Bến mò ngọc trai | Thợ lặn mò ngọc trai | Mua ngọc trai |
-| Nhà thuế quan | Thư lại thuế quan | Định thuế, dâng cống phẩm, kết phiên |
-| Bốn cầu tàu | Thương nhân Tống, Tam Phật Tề, Trảo Oa, Xiêm La | Bán hàng |
+| Nhà thuế quan | Thư lại thuế quan | Định thuế, dâng cống phẩm, dựng công trình, kết phiên |
+| Bốn cầu tàu | Thương nhân Tống, Tam Phật Tề, Trảo Oa, Xiêm La (khi thuyền đang đợi) | Giao hàng theo đơn |
 | Bia sử | Bia đá | Đọc sử liệu về Vân Đồn |
 
 ## Nhân vật
@@ -108,8 +132,13 @@ Bốn thuyền buôn trong game lấy theo các nước sử chép có đến V�
 
 Những chỗ là cách dựng của trò chơi:
 
-- Năm 1149 Vân Đồn mới là trang, nên «quan trấn thủ», Nhà thuế quan và thư lại là hư cấu.
-- Mức thuế, giá hàng, sức mang 10 kiện và nhịp sáu phiên chợ là số liệu trò chơi.
+- Sáu chương gói hai trăm năm (1149–1348) vào một ván. Ba chương «Khách buôn phương Bắc»,
+  «Giặc biển», «Chiếu đòi cống» là cách dựng của trò chơi, không gắn với năm cụ thể nào.
+- Năm 1149 Vân Đồn mới là trang, nên «quan trấn thủ», Nhà thuế quan, thư lại, vọng lâu thủy
+  binh và đền thần biển là hư cấu.
+- Mức thuế, giá hàng, đơn hàng, thời gian thuyền đợi, sức mang và giá công trình là số liệu trò chơi.
+- Chương 1348: *Toàn thư* chép thuyền Đồ Bồ đến Vân Đồn ngầm mua ngọc trai; việc người lạ
+  hỏi mua và lựa chọn bán lén hay báo quan là tình huống trò chơi dựng thêm.
 - Tên Xiêm La chép theo *Toàn thư*, dù vương quốc của người Thái đến thế kỷ 13 mới lập.
 - Trầm hương là hàng trung chuyển, không phải sản vật của đảo; ngọc trai là ngọc mò ngoài biển.
 - Trang phục nhân vật được cách điệu, không phục dựng theo hiện vật.
@@ -119,8 +148,9 @@ Những chỗ là cách dựng của trò chơi:
 Âm thanh sinh bằng Web Audio ngay trong trang, không có tệp âm thanh nào:
 
 - Nhạc nền gảy dây trên thang **ngũ cung** (như bản 2D), cùng tiếng sóng biển vỗ đều.
-- Tiếng bước chân khi đi, tiếng mõ khi gặp người hoặc chọn thuế, tiếng tiền đồng khi mua và
-  bán, cồng khi dâng cống phẩm và khi hết ván, ba tiếng trống khi kết phiên, sấm xa khi có bão.
+- Tiếng tù và khi thuyền vào bến, bước chân khi đi, mõ khi gặp người hoặc chọn thuế, tiền đồng
+  khi mua và giao hàng, cồng khi giao trọn đơn, dâng cống, dựng công trình và hết ván, ba tiếng
+  trống khi kết phiên hoặc thủy binh đẩy lui giặc, tiếng trầm khi thuyền bỏ đi hoặc bị giặc cướp.
 - Nút 🔊 trên thanh trên để tắt hoặc bật; trò chơi nhớ lựa chọn. Âm thanh chỉ bắt đầu sau khi
   bấm «Ra bến» (trình duyệt chặn tự phát tiếng) và tạm dừng khi chuyển sang thẻ khác.
 
