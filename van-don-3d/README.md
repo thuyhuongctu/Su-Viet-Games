@@ -154,6 +154,15 @@ Những chỗ là cách dựng của trò chơi:
 - Nút 🔊 trên thanh trên để tắt hoặc bật; trò chơi nhớ lựa chọn. Âm thanh chỉ bắt đầu sau khi
   bấm «Ra bến» (trình duyệt chặn tự phát tiếng) và tạm dừng khi chuyển sang thẻ khác.
 
+### Bài hát của game
+
+[`assets/nhac/van-don-tieng-vong-non-song.mp3`](assets/nhac/van-don-tieng-vong-non-song.mp3)
+— **«Vân Đồn – Tiếng vọng non sông»** (*Nơi những con sóng còn ghi nhớ*), 5:17,
+tiếng Việt. Bài nằm trong bộ sưu tập «Vân Đồn 3D» của app nghe nhạc
+[Chansonia](https://thuyhuongctu.github.io/Chansonia/app/), có lời chạy theo nhạc;
+app phát thẳng tệp này từ GitHub Pages. Trò chơi chưa dùng tệp này: âm thanh trong
+ván vẫn sinh bằng Web Audio như trên.
+
 ## Kỹ thuật
 
 - Một tệp `index.html`, dùng [`../lib/three.min.js`](../lib/three.min.js) có sẵn trong kho.
