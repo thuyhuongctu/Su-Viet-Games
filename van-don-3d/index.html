@@ -243,9 +243,9 @@ const NATIONS = [
   { id:'tong', name:'Tống',     who:'Thương nhân nước Tống',  flag:0xc94b3c, sail:0xe8d9b0, prefs:['gom','lua'],  mult:1.0,
     tuong:'thuong-nhan-tong' },
   { id:'nhat', name:'Tam Phật Tề', who:'Thương nhân Tam Phật Tề', flag:0x7a2a22, sail:0xc7772e, prefs:['gom','tram'], mult:1.15,
-    tuong:'thuong-nhan-phuong-nam' },
+    tuong:'thuong-nhan-tam-phat-te' },
   { id:'trao', name:'Trảo Oa',  who:'Thương nhân Trảo Oa',    flag:0x3f7a4f, sail:0xd9a441, prefs:['lua','ngoc'], mult:1.1,
-    tuong:'thuong-nhan-phuong-nam' },
+    tuong:'thuong-nhan-trao-oa' },
   { id:'xiem', name:'Xiêm La',  who:'Thương nhân Xiêm La',    flag:0xd9a441, sail:0x9ec5ab, prefs:['gom','ngoc'], mult:1.05,
     tuong:'thuong-nhan-xiem-la' },
 ];
@@ -484,7 +484,7 @@ function mesh(g, c, x, y, z, parent, sx, sy, sz){
 const TUONG = {   // tên tệp: tỉ lệ rộng/cao
   'quan-tran-thu':0.432, 'nu-thuong-chu':0.398, 'tho-ca-lo-gom':0.449, 'ba-chu-xuong-lua':0.564,
   'chu-tram-huong':0.408, 'tho-lan-ngoc-trai':0.398, 'thu-lai-thue-quan':0.611,
-  'thuong-nhan-tong':0.463, 'thuong-nhan-xiem-la':0.525, 'thuong-nhan-phuong-nam':0.428,
+  'thuong-nhan-tong':0.463, 'thuong-nhan-xiem-la':0.525, 'thuong-nhan-trao-oa':0.455, 'thuong-nhan-tam-phat-te':0.441,
 };
 // Tượng người chơi tách làm thân và hai bàn chân (đã bỏ đế) để bước đi được.
 // Toạ độ theo điểm ảnh của tượng cao 512: [x trái, y trên, rộng, cao]
@@ -575,7 +575,6 @@ setAvatar(avatarId);
 player.position.set(-26,0,3);      // chỗ trống trên bãi cát cho màn chọn nhân vật
 
 /* Ảnh minh hoạ trong bảng hội thoại (mô hình đất nặn, đã rà theo niên đại 1149; xem README) */
-const PIC_PHUONG_NAM = { src:'assets/thuong-nhan-phuong-nam.jpg', alt:'Tượng đất nặn một thương nhân phương Nam quấn khăn, mặc xà rông' };
 const PICS = {
   'lo-gom':    { src:'assets/tho-ca-lo-gom.jpg', alt:'Tượng đất nặn thợ cả lò gốm búi tóc, tay bưng bát' },
   'xuong-lua': { src:'assets/ba-chu-xuong-lua.jpg', alt:'Tượng đất nặn bà chủ xưởng dệt cầm con tơ và thoi dệt, bên khung cửi' },
@@ -584,7 +583,8 @@ const PICS = {
   'thue-quan': { src:'assets/thu-lai-thue-quan.jpg', alt:'Tượng đất nặn thư lại cầm bút lông và thẻ gỗ, bên cân đồng' },
   'tn-tong':   { src:'assets/thuong-nhan-tong.jpg', alt:'Tượng đất nặn thương nhân Tống áo cổ tròn, cầm bát men xanh và cuộn lụa' },
   'tn-xiem':   { src:'assets/thuong-nhan-xiem-la.jpg', alt:'Tượng đất nặn thương nhân Xiêm La đeo hoa tai, quấn sampot, cầm sừng tê' },
-  'tn-trao': PIC_PHUONG_NAM, 'tn-nhat': PIC_PHUONG_NAM,
+  'tn-trao':   { src:'assets/thuong-nhan-trao-oa.jpg', alt:'Tượng đất nặn thương nhân Trảo Oa búi tóc quấn dải chàm, quấn vải chàm, xách giỏ đinh hương, ôm khúc đàn hương' },
+  'tn-nhat':   { src:'assets/thuong-nhan-tam-phat-te.jpg', alt:'Tượng đất nặn thương nhân Tam Phật Tề tóc ngang vai, quấn vải đỏ, cầm ngà voi và ống tre đựng long não, đeo tấm đồi mồi' },
 };
 function addPlace(def){
   const npc = def.tuong ? tuong(def.tuong) : null;
