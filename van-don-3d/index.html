@@ -381,25 +381,41 @@ const TUONG = {   // tên tệp: tỉ lệ rộng/cao
   'chu-tram-huong':0.381, 'tho-lan-ngoc-trai':0.465, 'thu-lai-thue-quan':0.576,
   'thuong-nhan-tong':0.436, 'thuong-nhan-xiem-la':0.477, 'thuong-nhan-phuong-nam':0.398,
 };
+// Tượng người chơi tách làm thân và hai bàn chân (đã bỏ đế) để bước đi được.
+// Toạ độ theo điểm ảnh của tượng cao 512: [x trái, y trên, rộng, cao]
+const TUONG_DI = {
+  'quan-tran-thu': { W:244.3, than:[2.2,0,232,462], chanT:[53.9,460.3,57,52], chanP:[137.1,460.3,50,52] },
+  'nu-thuong-chu': { W:222.5, than:[0,0,216,474],   chanT:[52,461,55,52],     chanP:[134.4,466.3,54,46] },
+};
 const TUONG_H = 5.8, _tuongTex = {};
+const texOf = f => _tuongTex[f] || (_tuongTex[f] = new THREE.TextureLoader().load('assets/tuong/'+f+'.webp'));
+const tuongMat = f => new THREE.MeshBasicMaterial({ map:texOf(f), transparent:true, alphaTest:0.35, side:THREE.DoubleSide });
 function tuong(key){
-  const tex = _tuongTex[key] || (_tuongTex[key] = new THREE.TextureLoader().load('assets/tuong/'+key+'.webp'));
   const g = new THREE.Group(), rig = new THREE.Group(); g.add(rig);
   const sh = new THREE.Mesh(geo('shadow', () => new THREE.CircleGeometry(1.25, 24)),
     new THREE.MeshBasicMaterial({ color:0x000000, transparent:true, opacity:0.22, depthWrite:false }));
   sh.rotation.x = -Math.PI/2; sh.position.y = 0.04; g.add(sh);
   const card = new THREE.Group(); card.rotation.order = 'YXZ'; rig.add(card);   // quay về máy quay
   const tilt = new THREE.Group(); card.add(tilt);                                 // lắc lư khi bước
-  const w = TUONG_H * TUONG[key];
-  const img = new THREE.Mesh(new THREE.PlaneGeometry(w, TUONG_H),
-    new THREE.MeshBasicMaterial({ map:tex, transparent:true, alphaTest:0.35, side:THREE.DoubleSide }));
-  img.position.y = TUONG_H/2; tilt.add(img);
+  const w = TUONG_H * TUONG[key], di = TUONG_DI[key];
+  let body = tilt, feet = null;
+  if(di){                                   // thân + hai bàn chân, bàn chân nhấc lên khi bước
+    const k = TUONG_H/512;
+    const part = (f, b, z, parent) => { const grp = new THREE.Group(); parent.add(grp);
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(b[2]*k, b[3]*k), tuongMat(key+'.'+f));
+      m.position.set((b[0] + b[2]/2 - di.W/2)*k, (512 - b[1] - b[3]/2)*k, z); grp.add(m); return grp; };
+    body = part('than', di.than, 0, tilt);
+    feet = [part('chanT', di.chanT, -0.03, tilt), part('chanP', di.chanP, -0.03, tilt)];
+  } else {
+    const img = new THREE.Mesh(new THREE.PlaneGeometry(w, TUONG_H), tuongMat(key));
+    img.position.y = TUONG_H/2; tilt.add(img);
+  }
   // Gùi hàng bên hông (chỉ hiện khi đang mang hàng)
-  const pack = new THREE.Group(); pack.position.set(w*0.5 + 0.3, 2.0, -0.2); pack.visible = false; tilt.add(pack);
+  const pack = new THREE.Group(); pack.position.set(w*0.5 + 0.3, 2.0, -0.2); pack.visible = false; body.add(pack);
   mesh(geo('pack', () => new THREE.CylinderGeometry(0.62, 0.48, 1.05, 12)), 0xa9793f, 0, 0, 0, pack);
   mesh(sph(0.6), 0xe6d5ae, 0, 0.5, 0, pack, 1, 0.45, 1);
   const dummy = () => new THREE.Group();
-  g.userData = { rig, head:dummy(), legL:dummy(), legR:dummy(), armL:dummy(), armR:dummy(), pack, card, tilt, phase:rand(0,6), ground:0 };
+  g.userData = { rig, head:dummy(), legL:dummy(), legR:dummy(), armL:dummy(), armR:dummy(), pack, card, tilt, body, feet, phase:rand(0,6), ground:0 };
   return g;
 }
 const _f = new THREE.Vector3();
@@ -421,7 +437,17 @@ function animate(p, moving, dt){
   u.rig.position.y = moving ? Math.abs(Math.sin(u.phase))*0.14 : Math.sin(u.phase)*0.035;
   u.rig.rotation.x = moving ? 0.07 : 0;
   u.head.rotation.z = moving ? Math.sin(u.phase)*0.04 : Math.sin(u.phase*0.5)*0.03;
-  if(u.tilt){ u.rig.rotation.x = 0; u.tilt.rotation.z = moving ? Math.sin(u.phase)*0.09 : Math.sin(u.phase*0.5)*0.015; }
+  if(u.tilt){
+    u.rig.rotation.x = 0;
+    if(u.feet){                 // bước đi: nhấc lần lượt từng bàn chân, thân nhún nhẹ
+      const sn = Math.sin(u.phase);
+      u.feet[0].position.y = moving ? Math.max(0, sn)*0.42 : 0;
+      u.feet[1].position.y = moving ? Math.max(0, -sn)*0.42 : 0;
+      u.rig.position.y = 0;
+      u.body.position.y = moving ? 0.05 + Math.abs(sn)*0.1 : Math.sin(u.phase)*0.02;
+      u.tilt.rotation.z = moving ? sn*0.03 : 0;
+    } else u.tilt.rotation.z = moving ? Math.sin(u.phase)*0.09 : Math.sin(u.phase*0.5)*0.015;
+  }
 }
 
 // Người chơi: khung chứa cố định, đổi tạo hình bên trong
