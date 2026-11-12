@@ -153,8 +153,8 @@ Limestone karst islands in the background, turquoise water. No text, no plaques.
 
 ## 10. Thương nhân Trảo Oa (Java)
 
-Hiện game dùng chung một ảnh «thương nhân phương Nam» cho Trảo Oa và Tam Phật Tề.
-Hai prompt dưới đây để mỗi nước có tượng riêng. Cỡ ảnh: dọc 3:4, **đứng thẳng trên nền
+Hai prompt dưới đây đã dùng để tạo tượng riêng cho Trảo Oa và Tam Phật Tề (đã đưa vào game
+ngày 12/11/2026). Cỡ ảnh: dọc 3:4, **đứng thẳng trên nền
 trơn, không có đế** (game tự tách nền; đế đất nặn sẽ phải cắt bỏ thủ công).
 
 ```

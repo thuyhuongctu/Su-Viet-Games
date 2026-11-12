@@ -81,8 +81,7 @@ nhẹ theo bước. Thợ, thư lại và thương nhân cũng đã bỏ đế, 
 chơi. Khi đang mang hàng, bên hông người chơi hiện thêm một chiếc gùi.
 
 Ở màn mở đầu, người chơi chọn **Quan trấn thủ** hoặc **Nữ thương chủ** (nhân vật hư cấu).
-Trò chơi nhớ lựa chọn cho lần sau. Thợ, thư lại và thương nhân mỗi người một tượng riêng; thương
-nhân Trảo Oa và Tam Phật Tề hiện dùng chung một tượng.
+Trò chơi nhớ lựa chọn cho lần sau. Thợ, thư lại và bốn thương nhân mỗi người một tượng riêng.
 
 ## Ảnh minh hoạ
 
@@ -103,7 +102,8 @@ Chỉ giữ ảnh không có chi tiết lệch niên đại 1149; chữ trên �
 | `thu-lai-thue-quan.jpg` | Nhà thuế quan | Bút lông, thẻ gỗ, cân đồng; không có chữ trên ảnh. |
 | `thuong-nhan-tong.jpg` | Thuyền Tống | Áo cổ tròn, bát men xanh (không phải gốm hoa lam), cuộn lụa. |
 | `thuong-nhan-xiem-la.jpg` | Thuyền Xiêm La | Dựng theo cư dân Môn–Khmer vùng Chao Phraya thế kỷ 12. |
-| `thuong-nhan-phuong-nam.jpg` | Thuyền Trảo Oa, Tam Phật Tề | Trang phục cách điệu, không phục dựng theo hiện vật. |
+| `thuong-nhan-trao-oa.jpg` | Thuyền Trảo Oa | Búi tóc quấn dải chàm, vải chàm ngang gối, giỏ đinh hương, khúc đàn hương (prompt mục 10). |
+| `thuong-nhan-tam-phat-te.jpg` | Thuyền Tam Phật Tề | Tóc ngang vai, vải đỏ, ngà voi, ống tre long não, tấm đồi mồi (prompt mục 11). |
 
 Các tượng nhân vật tạo theo [`PROMPT-NHAN-VAT.md`](PROMPT-NHAN-VAT.md) và đã soát theo bảng soát
 trong tệp đó.
@@ -176,4 +176,3 @@ nén 96 kbps (3,8 MB), làm bằng Suno.
 ## Chưa có
 
 - Lưu ván giữa chừng.
-- Ảnh riêng cho thương nhân Trảo Oa và Tam Phật Tề (hiện dùng chung một ảnh; prompt ở mục 10 và 11 của `PROMPT-NHAN-VAT.md`).
