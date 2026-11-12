@@ -42,6 +42,13 @@
     line-height:1.6;z-index:5;pointer-events:none;color:#9fb8c9}
   #controls b{color:var(--ink)}
   /* ---------- Panels ---------- */
+  .song{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+  .songName{font-size:13px;color:#8fb0c4}
+  .lyricsBox{text-align:left;margin:8px 0 0;font-size:14px}
+  .lyricsBox summary{cursor:pointer;color:var(--gold);min-height:40px;display:flex;align-items:center;justify-content:center}
+  .lyrics{max-height:36vh;overflow:auto;padding-right:6px}
+  .lyrics p{margin:0 0 10px;line-height:1.55}
+  .lyrics .tag{margin:12px 0 4px;color:#8fb0c4;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
   .overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
     background:rgba(4,12,20,.65);z-index:10}
   .panel{background:var(--panel);border:2px solid var(--edge);border-radius:16px;
@@ -170,6 +177,36 @@
       <button class="gold" id="btnNew" style="font-size:17px;padding:12px 30px">⚓ Ra khơi</button>
       <button id="btnContinue" style="font-size:15px;display:none">📜 Chơi tiếp</button>
     </p>
+    <div class="song">
+      <button class="btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button>
+      <span class="songName">«Bắc Hải Đảo – Theo cánh buồm quê hương»</span>
+    </div>
+    <details class="lyricsBox">
+      <summary>Lời bài hát</summary>
+      <div class="lyrics">
+      <p class="tag">Khổ 1</p>
+      <p>Trời vừa sáng, con thuyền rời bến<br>Gió đưa buồm qua cửa biển xa<br>Trong tay nải có lời mẹ dặn<br>Trong tim người có bóng quê nhà</p>
+      <p>Qua sóng bạc, nhìn nhau vững dạ<br>Chung tay chèo qua những đêm dài<br>Dẫu phía trước còn bao điều lạ<br>Vẫn bên nhau đón ánh ban mai</p>
+      <p class="tag">Tiền điệp khúc</p>
+      <p>Từng cơn gió căng đầy cánh vải<br>Từng vì sao soi sáng đường xa<br>Giữa biển rộng, nghe lòng nhắc mãi<br>Sau lưng mình là cả quê nhà</p>
+      <p class="tag">Điệp khúc</p>
+      <p>Bắc Hải Đảo, căng buồm đón gió<br>Mang quê hương theo mỗi cánh buồm<br>Qua giông bão, chung lòng gìn giữ<br>Đảo xa này nối với làng thôn</p>
+      <p>Bắc Hải Đảo, khắc ghi lời hẹn<br>Dẫu xa xôi, lòng chẳng xa nhà<br>Xin tiếp bước những người đi trước<br>Giữ biển trời, gìn giữ quê ta</p>
+      <p class="tag">Khổ 2</p>
+      <p>Có người đã qua bao mùa gió<br>Áo phai màu theo nắng ngoài khơi<br>Có tên tuổi lưu trong trang sách<br>Có công lao lặng giữa dòng đời</p>
+      <p>Nay ta mở từng trang chuyện cũ<br>Nghe người xưa như ở bên mình<br>Mỗi dấu tích, một lời nhắn nhủ<br>Bao nhọc nhằn mới có bình yên</p>
+      <p class="tag">Tiền điệp khúc (nhắc lại)</p>
+      <p class="tag">Điệp khúc (nhắc lại)</p>
+      <p class="tag">Đoạn chuyển</p>
+      <p>Giữ biển đảo từ điều bình dị<br>Một bàn tay nâng đỡ bạn mình<br>Một lời hứa mang theo từ bến<br>Một tấm lòng gìn giữ niềm tin</p>
+      <p>Mai trở lại bên thềm nhà nhỏ<br>Kể người nghe chuyện những chuyến đi<br>Để con trẻ thêm yêu biển đảo<br>Hiểu công người gìn giữ từng khi</p>
+      <p>Nghe trong gió lời xưa vọng lại<br>Cùng bên nhau, vững lái ra khơi</p>
+      <p class="tag">Điệp khúc (lần cuối)</p>
+      <p class="tag">Kết</p>
+      <p>Chiều êm xuống, con thuyền về bến<br>Khói lam bay trên mái nhà quen<br>Lời ru cũ theo người ra biển<br>Lại theo người về giữa bình yên</p>
+      <p>Bắc Hải Đảo…<br>Mang quê hương theo mỗi cánh buồm…</p>
+      </div>
+    </details>
     <p style="font-size:12px;color:#8fb0c4;margin-top:10px">
       Điều khiển: <span class="kbd">↑</span><span class="kbd">↓</span> buồm ·
       <span class="kbd">←</span><span class="kbd">→</span> lái ·
@@ -215,7 +252,8 @@
     <img id="endImg" alt="">
     <h1 id="endTitle"></h1>
     <p id="endText" style="text-align:left"></p>
-    <p><button class="gold" id="btnEnd">⚓ Tiếp tục</button></p>
+    <p><button class="gold" id="btnEnd">⚓ Tiếp tục</button>
+      <button class="btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button></p>
   </div>
 </div>
 
@@ -353,12 +391,39 @@ function musicStart(){
 function musicBtnUI(){ $('btnMusic').textContent = music.on ? '🔊' : '🔇'; }
 function toggleMusic(){
   music.on = !music.on;
+  if(!music.on && typeof songStop === 'function') songStop();
   try{ localStorage.setItem('bac-hai-dao-music', music.on?'on':'off'); }catch(e){}
   musicStart();
   toast(music.on ? '🔊 Nhạc nền: bật (phím M)' : '🔇 Nhạc nền: tắt', 1400);
 }
 $('btnMusic').onclick = toggleMusic;
 musicBtnUI();
+
+// Bài hát «Bắc Hải Đảo – Theo cánh buồm quê hương»: phát khi bấm ở màn mở đầu, tự phát khi thắng ván.
+// Tải trọn tệp một lần (service worker lưu lại để nghe khi mất mạng); nhạc nền nhỏ lại khi bài hát phát.
+const SONG_URL = 'assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3';
+const song = { el:new Audio(), ready:false, loading:null };
+song.el.volume = 0.85;
+function songUI(msg){
+  const on = !song.el.paused;
+  document.querySelectorAll('.btnSong').forEach(b => { b.textContent = msg || (on ? '⏸ Dừng bài hát' : '🎵 Nghe bài hát'); b.setAttribute('aria-pressed', on); });
+}
+function songDuck(on){ if(AC && music.gain) music.gain.gain.setTargetAtTime(on ? 0 : 0.9, AC.currentTime, 0.4); }
+function songLoad(){
+  if(song.ready) return Promise.resolve();
+  return song.loading || (song.loading = fetch(SONG_URL).then(r => { if(!r.ok) throw new Error(r.status); return r.blob(); })
+    .then(b => { song.el.src = URL.createObjectURL(b); song.ready = true; })
+    .finally(() => { song.loading = null; }));
+}
+function songPlay(){
+  songUI('⏳ Đang tải bài hát…');
+  songLoad().then(() => { song.el.currentTime = 0; songDuck(true); return song.el.play(); })
+    .then(() => songUI()).catch(() => { songDuck(false); songUI('Chưa tải được bài hát'); });
+}
+function songStop(){ if(!song.el.paused) song.el.pause(); songDuck(false); songUI(); }
+song.el.addEventListener('ended', () => { songDuck(false); songUI(); });
+document.querySelectorAll('.btnSong').forEach(b => b.addEventListener('click', () => { if(song.el.paused) songPlay(); else songStop(); }));
+document.addEventListener('visibilitychange', () => { if(document.hidden) songStop(); });
 
 // ---------------- Dữ liệu hàng hóa & thương cảng ----------------
 const GOODS = [
@@ -970,6 +1035,7 @@ function update(dt){
 // ---------------- Kết thúc ----------------
 function showEnd(win){
   state = 'end';
+  if(win) setTimeout(() => { if($('endOverlay').style.display === 'flex' && song.el.paused) songPlay(); }, 1500);
   $('endOverlay').style.display = 'flex';
   const cap = game.captain;
   const capName = cap ? `<b>${cap.name}</b> «${cap.alias}»` : 'bạn';
@@ -999,6 +1065,7 @@ function showEnd(win){
   }
 }
 $('btnEnd').onclick = () => {
+  songStop();
   $('endOverlay').style.display = 'none';
   if(ship.hp <= 0){
     game.gold = Math.floor(game.gold/2);
@@ -1037,6 +1104,7 @@ window.chooseChar = function(id){
 };
 
 function startGame(fresh){
+  songStop();
   if(fresh){
     localStorage.removeItem(SAVE_KEY);
   } else {
