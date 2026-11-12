@@ -30,7 +30,9 @@
   #sun{position:absolute;left:8px;right:8px;top:100%;height:5px;border-radius:3px;
     background:#0006;overflow:hidden}
   #sunBar{height:100%;width:100%;background:linear-gradient(90deg,var(--son),var(--dong))}
-  #btnHome{pointer-events:auto;margin-left:auto;background:#241708d9;color:var(--nga);
+  #btnSound{margin-left:auto}
+  #btnHome{margin-left:6px}
+  #btnSound,#btnHome{pointer-events:auto;background:#241708d9;color:var(--nga);
     border:1px solid var(--edge);border-radius:999px;min-width:44px;min-height:44px;
     font-size:18px;text-decoration:none;display:flex;align-items:center;justify-content:center}
 
@@ -103,6 +105,7 @@
   <span class="chip">🧺 <b id="hCarry">0</b>/10</span>
   <span class="chip">⚖️ Thuế <b id="hTax">15</b>%</span>
   <span class="chip" id="hNear">📍 <b id="hNearName">—</b></span>
+  <button id="btnSound" type="button" aria-label="Tắt âm thanh" aria-pressed="true">🔊</button>
   <a id="btnHome" href="../index.html" aria-label="Về cổng trò chơi">🏠</a>
   <div id="sun"><div id="sunBar"></div></div>
 </div>
@@ -558,6 +561,7 @@ function updatePlayer(dt){
   player.position.y = player.position.z > SHORE_Z - 0.4 ? 0.4 : 0;
   player.userData.pack.visible = carryN() > 0;
   animate(player, moving, dt);
+  if(moving){ const st = Math.floor(player.userData.phase / Math.PI); if(st !== snd.step){ snd.step = st; sfx('buoc'); } }
   // Điểm tương tác gần nhất
   nearest = null; let best = 6.5;
   for(const p of places){ if(p.off) continue;
@@ -574,7 +578,7 @@ $('act').addEventListener('click', () => interact());
 //  HỘI THOẠI: MUA, BÁN, THUẾ, BIA SỬ
 // =====================================================================
 let dlgOpen = false, dlgPlace = null;
-function openDlg(p){ dlgOpen = true; dlgPlace = p; $('dlg').style.display = 'block'; $('hint').style.display = 'none'; renderDlg(); }
+function openDlg(p){ sfx('mo'); dlgOpen = true; dlgPlace = p; $('dlg').style.display = 'block'; $('hint').style.display = 'none'; renderDlg(); }
 function closeDlg(){ dlgOpen = false; dlgPlace = null; $('dlg').style.display = 'none'; }
 function interact(){ if(nearest && !dlgOpen) openDlg(nearest); }
 function rowHTML(lbl, small, btns){ return `<div class="row"><div class="lbl">${lbl}<small>${small}</small></div>${btns}</div>`; }
@@ -629,10 +633,10 @@ $('dlg').addEventListener('click', e => {
   const b = e.target.closest('button[data-a]'); if(!b || b.disabled) return;
   const a = b.dataset.a, p = dlgPlace;
   if(a==='close') return closeDlg();
-  if(a==='buy'){ buy(p.good, +b.dataset.n); }
-  if(a==='sell'){ sell(p.nat, b.dataset.g); }
-  if(a==='tax'){ S.nextTax = +b.dataset.t; toast(`Từ phiên sau, thuế cảng là <b>${S.nextTax}%</b>.`); }
-  if(a==='tribute'){ giveTribute(); }
+  if(a==='buy'){ if(buy(p.good, +b.dataset.n)) sfx('coin'); }
+  if(a==='sell'){ if(sell(p.nat, b.dataset.g)) sfx('sell'); }
+  if(a==='tax'){ sfx('mo'); S.nextTax = +b.dataset.t; toast(`Từ phiên sau, thuế cảng là <b>${S.nextTax}%</b>.`); }
+  if(a==='tribute'){ if(giveTribute()) sfx('gong'); }
   if(a==='end'){ closeDlg(); return endRound(); }
   renderHUD(); renderDlg();
 });
@@ -657,6 +661,99 @@ function giveTribute(){
 }
 
 // =====================================================================
+//  ÂM THANH: sinh bằng WebAudio, không dùng tệp ngoài
+//  Nhạc gảy dây trên thang ngũ cung (như bản 2D), tiếng sóng, bước chân,
+//  tiền đồng khi mua bán, mõ khi gặp người, trống khi kết phiên, cồng khi dâng cống.
+// =====================================================================
+const SND_KEY = 'van-don-3d-sound';
+const snd = { on:true, ac:null, master:null, music:null, timer:null, next:0, mel:3, bar:0, step:0 };
+try{ snd.on = localStorage.getItem(SND_KEY) !== 'off'; }catch(e){}
+function sndInit(){
+  if(!snd.on) return;
+  try{
+    if(!snd.ac){
+      const ac = snd.ac = new (window.AudioContext||window.webkitAudioContext)();
+      snd.master = ac.createGain(); snd.master.gain.value = 0.8; snd.master.connect(ac.destination);
+      snd.music = ac.createGain(); snd.music.gain.value = 0.5; snd.music.connect(snd.master);
+      // Sóng biển: tiếng ồn lọc trầm, to nhỏ theo nhịp sóng vỗ
+      const len = ac.sampleRate*3|0, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      let last = 0; for(let i=0;i<len;i++){ last = (last + 0.02*(Math.random()*2-1)) / 1.02; d[i] = last*3.5; }
+      const src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
+      const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 520;
+      const sea = ac.createGain(); sea.gain.value = 0.16;
+      const lfo = ac.createOscillator(), lfoG = ac.createGain(); lfo.frequency.value = 0.13; lfoG.gain.value = 0.1;
+      lfo.connect(lfoG); lfoG.connect(sea.gain);
+      src.connect(lp); lp.connect(sea); sea.connect(snd.master); src.start(); lfo.start();
+    }
+    if(snd.ac.state === 'suspended') snd.ac.resume();
+    if(!snd.timer) snd.timer = setInterval(musicTick, 120);
+  }catch(e){}
+}
+function sndUI(){ const b = $('btnSound'); b.textContent = snd.on ? '🔊' : '🔇';
+  b.setAttribute('aria-pressed', snd.on); b.setAttribute('aria-label', snd.on ? 'Tắt âm thanh' : 'Bật âm thanh'); }
+$('btnSound').addEventListener('click', () => {
+  snd.on = !snd.on; try{ localStorage.setItem(SND_KEY, snd.on ? 'on' : 'off'); }catch(e){}
+  if(snd.on) sndInit();
+  if(snd.ac) snd.master.gain.setTargetAtTime(snd.on ? 0.8 : 0, snd.ac.currentTime, 0.05);
+  sndUI(); toast(snd.on ? '🔊 Âm thanh: bật' : '🔇 Âm thanh: tắt', 1400);
+});
+sndUI();
+document.addEventListener('visibilitychange', () => { if(!snd.ac) return;
+  if(document.hidden) snd.ac.suspend(); else if(snd.on) snd.ac.resume(); });
+const sndOK = () => snd.on && snd.ac && snd.ac.state === 'running';
+function tone(type, f0, f1, vol, dur, when, dest){
+  const ac = snd.ac, t = when || ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(f0, t); if(f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur*0.8);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(dest || snd.master); o.start(t); o.stop(t + dur + 0.05);
+}
+function noise(dur, freq, vol, when, type){
+  const ac = snd.ac, t = when || ac.currentTime, n = ac.sampleRate*dur|0, buf = ac.createBuffer(1, n, ac.sampleRate), d = buf.getChannelData(0);
+  for(let i=0;i<n;i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/n, 3);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const f = ac.createBiquadFilter(); f.type = type || 'lowpass'; f.frequency.value = freq;
+  const g = ac.createGain(); g.gain.value = vol; src.connect(f); f.connect(g); g.connect(snd.master); src.start(t);
+}
+function sfx(kind){
+  if(!sndOK()) return;
+  try{
+    const t = snd.ac.currentTime;
+    if(kind==='coin'){ tone('sine', 1180, 0, 0.12, 0.25); tone('sine', 1770, 0, 0.05, 0.18, t+0.02); }
+    else if(kind==='sell'){ for(let i=0;i<3;i++) tone('sine', 1050 + i*260, 0, 0.1, 0.22, t + i*0.07); }
+    else if(kind==='mo'){ tone('sine', 820, 560, 0.16, 0.12); }                          // tiếng mõ gỗ
+    else if(kind==='gong'){ tone('sine', 196, 0, 0.2, 1.8); tone('sine', 392, 0, 0.07, 1.3); tone('sine', 523, 0, 0.03, 0.9); }
+    else if(kind==='trong'){ for(let i=0;i<3;i++){ noise(0.3, 160, 0.9, t + i*0.42); tone('sine', 90, 55, 0.3, 0.35, t + i*0.42); } }
+    else if(kind==='bao'){ noise(2.2, 120, 0.7); noise(1.4, 320, 0.25, t+0.3); }        // sấm xa
+    else if(kind==='buoc'){ noise(0.06, 700, 0.18, t, 'bandpass'); }
+  }catch(e){}
+}
+// Nhạc nền: gảy dây ngũ cung D, bè trầm và trống mõ thưa
+function pluck(freq, when, vol, dur, bend){
+  const ac = snd.ac, o = ac.createOscillator(), o2 = ac.createOscillator(), g = ac.createGain(), g2 = ac.createGain();
+  o.type = 'triangle'; o2.type = 'sine';
+  o.frequency.setValueAtTime(bend ? freq*1.025 : freq, when); o.frequency.exponentialRampToValueAtTime(freq, when + 0.09);
+  o2.frequency.setValueAtTime(freq*2.004, when);
+  g.gain.setValueAtTime(0.0001, when); g.gain.exponentialRampToValueAtTime(vol, when + 0.018); g.gain.exponentialRampToValueAtTime(0.0001, when + dur);
+  g2.gain.value = 0.22; o.connect(g); o2.connect(g2); g2.connect(g); g.connect(snd.music);
+  o.start(when); o2.start(when); o.stop(when + dur + 0.1); o2.stop(when + dur + 0.1);
+}
+const NGU_CUNG = [0,2,5,7,9];
+function musicTick(){
+  if(!sndOK()) return;
+  const ac = snd.ac, beat = 0.6, base = 146.83;
+  if(snd.next < ac.currentTime) snd.next = ac.currentTime + 0.05;
+  while(snd.next < ac.currentTime + 0.45){
+    const t = snd.next;
+    snd.mel = clamp(snd.mel + pick([-2,-1,-1,0,1,1,2]), 0, 9);
+    const semi = NGU_CUNG[snd.mel%5] + 12*Math.floor(snd.mel/5) + 12;
+    if(Math.random() < 0.6) pluck(base*Math.pow(2, semi/12), t, 0.09, 1.5, true);
+    snd.bar++;
+    if(snd.bar%4===1) pluck(base, t, 0.08, beat*4.4, false);
+    snd.next = t + beat * pick([1,1,1,2]);
+  }
+}
+
+// =====================================================================
 //  PHIÊN CHỢ
 // =====================================================================
 function renderHUD(){
@@ -672,7 +769,7 @@ const RD_PICS = [
   { src:'assets/cho-dem.jpg', alt:'Mô hình đất nặn chợ đêm trên cầu tàu: hàng ăn, cân hàng, đèn nến, thuyền buồm ngoài vịnh' },
 ];
 function endRound(){
-  S.paused = true; closeDlg();
+  S.paused = true; closeDlg(); sfx('trong');
   const st = S.stat, tx = TAX[S.tax]; S.rep = Math.max(0, S.rep + tx.rep);
   let lines = `<p>Bán được <b>${st.sold}</b> kiện, thu <b>${st.income}</b> quan tiền hàng và <b>${st.taxIncome}</b> quan thuế cảng (thuế ${S.tax}%). Tiền mua hàng: <b>${st.spent}</b> quan.</p>`;
   if(tx.rep) lines += `<p>Thuế ${S.tax}%: danh vọng <b>${tx.rep>0?'+':''}${tx.rep}</b>.</p>`;
@@ -682,6 +779,7 @@ function endRound(){
   if(S.round >= ROUNDS){ renderHUD(); return finish(); }
   S.round++; newRound();
   lines += `<p><b>Phiên ${S.round}</b>: thuế cảng <b>${S.tax}%</b>.`;
+  if(S.absent){ setTimeout(() => sfx('bao'), 1400); }
   if(S.absent) lines += ` Bão ngoài vịnh: thuyền <b>${NATIONS.find(n => n.id===S.absent).name}</b> không vào bến.`;
   if(S.tribute) lines += ` Triều đình xuống chiếu đòi <b>${S.tribute.n} kiện ${G(S.tribute.good).name}</b>, dâng tại Nhà thuế quan.`;
   lines += '</p>';
@@ -691,7 +789,7 @@ function endRound(){
 $('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'none'; S.paused = false; });
 
 function finish(){
-  S.running = false; const sc = score();
+  S.running = false; const sc = score(); setTimeout(() => sfx('gong'), 1300);
   let title = TITLES[0]; for(const t of TITLES) if(sc >= t.min) title = t;
   let best = 0; try{ best = +localStorage.getItem(BEST_KEY) || 0; if(sc > best) localStorage.setItem(BEST_KEY, String(sc)); }catch(e){}
   $('endTitle').textContent = title.name; $('endScore').textContent = sc + ' điểm';
@@ -702,6 +800,7 @@ function finish(){
   $('ovEnd').style.display = 'flex';
 }
 function start(){
+  sndInit();
   Object.assign(S, { running:true, paused:false, round:1, money:150, rep:0, tax:15, nextTax:15, carry:{gom:0,lua:0,ngoc:0,tram:0} });
   player.position.set(0,0,2); player.rotation.y = 0; newRound();
   $('hud').style.display = 'flex'; if(IS_TOUCH) $('stick').style.display = 'block';
