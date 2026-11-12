@@ -90,6 +90,11 @@
   .ov.pick{align-items:flex-end;background:linear-gradient(#160d0400 0%,#160d0400 34%,#160d04f2 52%);padding-bottom:calc(12px + env(safe-area-inset-bottom))}
   .ov.pick .card{max-height:none;overflow:visible}
   .card details{text-align:left;font-size:14px;margin:10px 0}
+  .song{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0 0}
+  .songName{font-size:13px;color:var(--celadon)}
+  .lyrics{max-height:40vh;overflow:auto;padding-right:6px}
+  .lyrics p{margin:0 0 10px;line-height:1.55}
+  .lyrics .tag{margin:12px 0 4px;color:var(--celadon);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
   .card summary{cursor:pointer;color:var(--celadon);min-height:44px;display:flex;align-items:center}
   .card h1{font-size:26px;color:var(--dong);line-height:1.2}
   .card h1 small{display:block;font-size:14px;color:var(--celadon);letter-spacing:.12em;margin-top:6px}
@@ -152,6 +157,35 @@
         <li>Mỗi chương có <b>một việc triều đình giao</b> (chip 🎯). Danh vọng xuống dưới 0 là <b>bị bãi chức</b>.</li>
       </ul>
     </details>
+    <div class="song">
+      <button class="btn btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button>
+      <span class="songName">«Vân Đồn – Tiếng vọng non sông»</span>
+    </div>
+    <details>
+      <summary>Lời bài hát «Vân Đồn – Tiếng vọng non sông»</summary>
+      <div class="lyrics">
+        <p class="tag">Khổ 1</p>
+        <p>Bình minh lên trên muôn trùng sóng<br>Cánh buồm căng giữa nước trời xa<br>Có người đi từ miền làng nhỏ<br>Mang trong tim hình bóng quê nhà</p>
+        <p>Một bờ tre, một lời ru mẹ<br>Một dòng sông thương nhớ khôn nguôi<br>Nghe non nước gọi, người đứng dậy<br>Gác tình riêng, đi giữ quê hương</p>
+        <p class="tag">Tiền điệp khúc</p>
+        <p>Nghe tiếng trống vang qua cửa biển<br>Nghe lời thề hòa giữa trùng khơi<br>Dẫu năm tháng phủ mờ dấu cũ<br>Chí khí cha ông sáng muôn đời</p>
+        <p class="tag">Điệp khúc</p>
+        <p>Vân Đồn ơi, vang lời sông núi<br>Lớp lớp người gìn giữ biển trời<br>Bao người đã qua thời lửa khói<br>Cho quê hương rạng ánh ban mai</p>
+        <p>Xin khắc ghi công người đi trước<br>Giữ trong tim từng tấc đất này<br>Từ trang sử, ta nghe lời nhắc<br>Giữ non sông bằng cả đôi tay</p>
+        <p class="tag">Khổ 2</p>
+        <p>Có tên người lưu trong trang sách<br>Có bao người chẳng rõ tuổi tên<br>Gửi thanh xuân vào lòng biển biếc<br>Cho quê nhà yên giấc đêm đêm</p>
+        <p>Nay ta bước qua miền dấu tích<br>Nghe chuyện xưa gần lại bên mình<br>Lật trang sử, càng thêm thấu hiểu<br>Bao hy sinh mới có thanh bình</p>
+        <p class="tag">Tiền điệp khúc (nhắc lại)</p>
+        <p class="tag">Điệp khúc (nhắc lại)</p>
+        <p class="tag">Đoạn chuyển</p>
+        <p>Xin tri ân người nơi chiến trận<br>Cả những người ở lại quê nhà<br>Càng hiểu những hy sinh thầm lặng<br>Càng nâng niu cuộc sống quanh ta</p>
+        <p>Từng con sóng mang lời nhắn gửi<br>Người hôm nay tiếp bước người xưa</p>
+        <p class="tag">Điệp khúc (lần cuối)</p>
+        <p class="tag">Kết</p>
+        <p>Vân Đồn ơi, ngàn năm sóng hát<br>Chuyện cha ông truyền tới hôm nay<br>Ta tiếp bước bằng lòng son sắt<br>Giữ quê hương, dựng xây từng ngày</p>
+        <p>Vân Đồn ơi…<br>Vọng tiếng non sông…</p>
+      </div>
+    </details>
     <div class="btns" style="justify-content:center">
       <button class="btn pri" id="btnStart" type="button">⚓ Ra bến</button>
       <a class="btn" href="../van-don/index.html" style="text-decoration:none;display:inline-flex;align-items:center">Bản 2D dựng bến</a>
@@ -182,6 +216,7 @@
     <div id="endBody"></div>
     <div class="btns" style="justify-content:center">
       <button class="btn pri" id="btnAgain" type="button">Chơi lại</button>
+      <button class="btn btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button>
       <a class="btn" href="../index.html" style="text-decoration:none;display:inline-flex;align-items:center">Về cổng trò chơi</a>
     </div>
   </div>
@@ -866,13 +901,46 @@ function sndUI(){ const b = $('btnSound'); b.textContent = snd.on ? '🔊' : '�
   b.setAttribute('aria-pressed', snd.on); b.setAttribute('aria-label', snd.on ? 'Tắt âm thanh' : 'Bật âm thanh'); }
 $('btnSound').addEventListener('click', () => {
   snd.on = !snd.on; try{ localStorage.setItem(SND_KEY, snd.on ? 'on' : 'off'); }catch(e){}
-  if(snd.on) sndInit();
+  if(snd.on) sndInit(); else songStop();
   if(snd.ac) snd.master.gain.setTargetAtTime(snd.on ? 0.8 : 0, snd.ac.currentTime, 0.05);
   sndUI(); toast(snd.on ? '🔊 Âm thanh: bật' : '🔇 Âm thanh: tắt', 1400);
 });
 sndUI();
-document.addEventListener('visibilitychange', () => { if(!snd.ac) return;
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) songStop();
+  if(!snd.ac) return;
   if(document.hidden) snd.ac.suspend(); else if(snd.on) snd.ac.resume(); });
+
+// Bài hát chủ đề: tải trọn tệp (để service worker lưu lại, nghe được khi mất mạng),
+// phát ở màn mở đầu khi người chơi bấm, và tự phát ở màn kết thúc. Nhạc nền nhỏ lại khi bài hát đang phát.
+const SONG_URL = 'assets/nhac/van-don-tieng-vong-non-song.mp3';
+const song = { el:new Audio(), ready:false, loading:null };
+song.el.volume = 0.85;
+function songUI(msg){
+  const on = !song.el.paused;
+  document.querySelectorAll('.btnSong').forEach(b => { b.textContent = msg || (on ? '⏸ Dừng bài hát' : '🎵 Nghe bài hát'); b.setAttribute('aria-pressed', on); });
+}
+function duck(on){ if(snd.ac && snd.music) snd.music.gain.setTargetAtTime(on ? 0 : 0.5, snd.ac.currentTime, 0.4); }
+function songLoad(){
+  if(song.ready) return Promise.resolve();
+  return song.loading || (song.loading = fetch(SONG_URL).then(r => { if(!r.ok) throw new Error(r.status); return r.blob(); })
+    .then(b => { song.el.src = URL.createObjectURL(b); song.ready = true; })
+    .finally(() => { song.loading = null; }));
+}
+function songPlay(){
+  if(!snd.on) return;
+  songUI('⏳ Đang tải bài hát…');
+  songLoad().then(() => { if(!snd.on) return; song.el.currentTime = 0; duck(true); return song.el.play(); })
+    .then(() => songUI()).catch(() => { duck(false); songUI('Chưa tải được bài hát'); });
+}
+function songStop(){ if(!song.el.paused) song.el.pause(); duck(false); songUI(); }
+song.el.addEventListener('ended', () => { duck(false); songUI(); });
+document.querySelectorAll('.btnSong').forEach(b => b.addEventListener('click', () => {
+  if(song.el.paused){
+    if(!snd.on){ snd.on = true; try{ localStorage.setItem(SND_KEY, 'on'); }catch(e){} sndUI(); if(snd.ac) snd.master.gain.setTargetAtTime(0.8, snd.ac.currentTime, 0.05); }
+    songPlay();
+  } else songStop();
+}));
 const sndOK = () => snd.on && snd.ac && snd.ac.state === 'running';
 function tone(type, f0, f1, vol, dur, when, dest){
   const ac = snd.ac, t = when || ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
@@ -998,6 +1066,7 @@ $('btnNext').addEventListener('click', () => { $('ovRound').style.display = 'non
 
 function finish(lead){
   S.running = false; const sc = score(); setTimeout(() => sfx(S.lost ? 'bad' : 'gong'), 1300);
+  if(!S.lost) setTimeout(() => { if($('ovEnd').style.display === 'flex') songPlay(); }, 3200);
   let title = TITLES[0]; for(const t of TITLES) if(S.goals >= t.min) title = t;
   if(S.lost) title = { name:'Bị bãi chức', text:'Danh vọng xuống dưới 0: triều đình triệu khanh về kinh. Bến Vân Đồn giao cho người khác coi giữ.' };
   let best = 0; try{ best = +localStorage.getItem(BEST_KEY) || 0; if(!S.lost && sc > best) localStorage.setItem(BEST_KEY, String(sc)); }catch(e){}
@@ -1008,6 +1077,7 @@ function finish(lead){
   $('ovEnd').style.display = 'flex';
 }
 function start(){
+  songStop();
   Object.assign(S, { running:true, paused:true, round:1, money:200, rep:15, tax:15, nextTax:15, goals:0, lost:false,
     built:{}, carry:{gom:0,lua:0,ngoc:0,tram:0} });
   for(const id in BUILD_SOLID){ const i = solids.indexOf(BUILD_SOLID[id]); if(i >= 0) solids.splice(i, 1); }
