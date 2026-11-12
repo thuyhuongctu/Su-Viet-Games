@@ -43,6 +43,18 @@ Web Activity)**: app trên CH Play thực chất mở trang web của bạn toà
 hình, không thanh địa chỉ. Game chỉ cần bảo trì **một nơi duy nhất** (repo
 này) — app tự cập nhật theo web.
 
+### Trạng thái thực tế (cập nhật 12/11/2026) {#trang-thai-play}
+
+Các bước 2.1 đến 2.4 bên dưới là hướng dẫn chung. Thực tế đã làm khác ở mấy điểm sau:
+
+- Gói Android dựng bằng **Bubblewrap** (TWA), không dùng PWABuilder; trang mở là `https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/index.html`.
+- Tên gói: `io.github.thuyhuongctu.suvietgames` (không phải `vn.thuyhuongdigital.suvietgames`). Tên trên Play: `Su Viet Games: Vietnam History`. Bản đầu: 1.2 (versionCode 1), minSdk 24, targetSdk 36.
+- Khóa tải lên do tác giả giữ ngoài kho mã; Play App Signing giữ khóa ký phát hành.
+- `assetlinks.json` đặt ở kho `thuyhuongctu.github.io` (tệp `.well-known/assetlinks.json` ở gốc tên miền), không đặt trong kho này; vân tay khóa ký của Play sẽ bổ sung sau khi tải lên.
+- Trang chính sách khai với Play: `privacy.html` của kho này. Đối tượng khai trên Play: 18 tuổi trở lên.
+- Kênh thử nghiệm khép kín (Alpha) đã gửi Google xét duyệt ngày 11/11/2026; cần 12 người thử liên tục 14 ngày rồi mới xin phát hành công khai.
+- Nội dung game sửa trên `main` thì app tự cập nhật theo web, không phải nộp lại.
+
 ### Bước 2.1 — Đăng ký tài khoản nhà phát triển {#play-console}
 
 1. Vào https://play.google.com/console/signup
