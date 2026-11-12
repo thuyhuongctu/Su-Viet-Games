@@ -7,6 +7,22 @@ thương thuyền, và định mức thuế cảng.
 
 Bản 2D dựng bến nằm ở [`../van-don/`](../van-don/).
 
+## Bài hát chủ đề
+
+Màn chọn nhân vật có mục **«♪ Bài hát chủ đề»**: bản thu
+*Vân Đồn — Tiếng vọng non sông (Nơi những con sóng còn ghi nhớ)*, 5 phút 17 giây,
+kèm trọn lời. Lời do tác giả viết, phần nhạc dựng bằng Suno — thẻ ID3 của tệp
+ghi rõ điều ấy.
+
+Bài hát **chỉ nghe được ở màn chọn nhân vật**. Bấm «⚓ Ra bến» thì nó dừng, nhường
+chỗ cho nhạc nền ngũ cung sinh bằng WebAudio: một bản hợp xướng có lời chồng lên
+tiếng mõ, tiếng sóng và lời thoại thì không nghe ra gì cả.
+
+Tệp nặng 7,5 MB (7 502 311 byte) nên **không khai trong `SHELL` của `sw.js`**: khai vào thì ai cài
+trò chơi cũng phải tải, kể cả người không mở tới. Service worker vẫn lưu lại khi
+người chơi bấm nghe lần đầu, nên từ lần sau nghe được cả khi mất mạng. Thẻ `audio`
+đặt `preload="none"` vì lẽ ấy.
+
 **Chơi:** mở [`index.html`](index.html) bằng trình duyệt. Không cần cài đặt, không
 tải gì từ bên ngoài, chơi được cả khi mất mạng sau lần mở đầu tiên.
 Trò chơi không dành cho trẻ em (người chơi từ 16 tuổi).

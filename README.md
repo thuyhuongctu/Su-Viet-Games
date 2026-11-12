@@ -157,7 +157,9 @@ playability and should not be treated as a scholarly source.
   web manifest and icon set
 - **Generative audio**: background music synthesised in real time with the
   Web Audio API on the Vietnamese pentatonic scale, emulating *đàn tranh*
-  plucked strings and *đàn bầu* pitch bends; no audio files are shipped
+  plucked strings and *đàn bầu* pitch bends. The only audio file in the
+  project is the Vân Đồn 3D theme song, which plays on that game's opening
+  screen and is fetched only when the player presses play
 - **Desktop and mobile input**: keyboard control on desktop, touch control on
   phones and tablets
 - **Local progress storage**: saved games and high scores are held in browser
@@ -230,7 +232,7 @@ given in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese).
 | 2D games (Vân Đồn, Bắc Hải Đảo) | HTML5 canvas and vanilla JavaScript, one self-contained file per game |
 | 3D game (Bắc Hải Đảo 3D) | [three.js](https://threejs.org/) r147, vendored locally |
 | 2D game engine (Chợ Nổi) | [Phaser 3](https://phaser.io/) v3.90.0, vendored locally |
-| Audio | Web Audio API, generative pentatonic music, no audio assets |
+| Audio | Web Audio API, generative pentatonic music; one MP3, the Vân Đồn 3D theme song |
 | Application platform | Progressive Web App: manifest, service worker, shortcuts |
 | Persistence | Browser `localStorage`, device-local only |
 | Distribution | GitHub Pages; Trusted Web Activity wrapper for Google Play; home-screen installation on iOS |
@@ -318,6 +320,11 @@ as training data for commercial AI systems require the author's prior written
 permission.
 
 Licensing enquiries: [thuyhuongctu@gmail.com](mailto:thuyhuongctu@gmail.com)
+
+The Vân Đồn 3D theme song, *Vân Đồn — Tiếng vọng non sông*
+(`van-don-3d/assets/tieng-vong-non-song.mp3`), has lyrics written by the author;
+the recording was produced with [Suno](https://suno.com/), which the file's own
+ID3 comment states. It is covered by the reservation above.
 
 Vendored third-party libraries are excluded from the reservation above and
 retain their own licences:
