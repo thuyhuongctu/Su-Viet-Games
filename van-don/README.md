@@ -31,9 +31,6 @@ Bạn là quan trấn thủ được vua giao dựng bến. Vòng chơi:
 5. **Cống phẩm triều đình** (từ cấp Trang Vân Đồn): chiếu chỉ định kỳ đòi
    dâng tiến sản vật trong hạn định — dâng kịp được ban thưởng lớn và
    +10 danh vọng, trễ hạn sứ thần phật ý trừ danh vọng.
-6. **Khách quý**: từ cấp Trấn, thuyền **Phượng Hỏa** của Đô đốc T'Hương
-   (game *Bắc Hải Đảo* cùng bộ sưu tập) thỉnh thoảng ghé bến — mua nhiều
-   mặt hàng, trả giá cao nhất và tặng thêm danh vọng khi rời bến.
 
 Nút **📖** trên thanh trên mở **Sổ sử ký** — tóm lược sử liệu thật về
 Vân Đồn: việc lập trang năm 1149, gốm Đại Việt xuất khẩu, trận Vân Đồn 1288
@@ -69,8 +66,9 @@ thuyền lương của **Trương Văn Hổ**.
 - Gốm Đại Việt, lụa, ngọc trai, trầm hương — các mặt hàng xuất khẩu nổi tiếng
 - **Ghi chú niên đại** (sửa 10/11/2026): gốm hoa lam Chu Đậu ra đời cuối thế kỷ 14,
   rực rỡ thế kỷ 15–16, nên trong game lò gốm gọi chung là «gốm Đại Việt»; «giặc
-  Tàu Ô» là tên gọi cướp biển thế kỷ 18–19, nên bến Vân Đồn gọi là «giặc biển»;
-  thuyền Phượng Hỏa và Đô đốc T'Hương là nhân vật hư cấu. Sổ sử ký trong game có
+  Tàu Ô» là tên gọi cướp biển thế kỷ 18–19, nên bến Vân Đồn gọi là «giặc biển».
+  Từ 12/11/2026 bến không còn thuyền Phượng Hỏa của Đô đốc T'Hương (nhân vật hư cấu
+  của *Bắc Hải Đảo*, 1780), để game theo sử liệu không lẫn nhân vật hư cấu. Sổ sử ký trong game có
   mục «Chỗ trò chơi giản lược» nói rõ các điểm này.
 - Kiến trúc mái ngói cong đầu đao, hoa văn sóng nước thời Lý trên giao diện
 - Bảng màu lấy từ gốm men ngọc (celadon), nâu đất, đỏ son, vàng đồng

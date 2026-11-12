@@ -210,9 +210,7 @@
       <div class="suItem"><h3>📌 Chỗ trò chơi giản lược</h3>
         <p>Ván chơi gói nhiều thế kỷ vào một bến: từ trang thời Lý (1149) đến
         trấn thời Trần (1349) và thời thịnh của gốm hoa lam thời Lê sơ. Giá hàng,
-        thuế bến và danh vọng là số của trò chơi, không phải số liệu lịch sử.
-        Thuyền <b>Phượng Hỏa</b> và Đô đốc T'Hương là nhân vật hư cấu của bộ game
-        (<i>Bắc Hải Đảo</i>, 1780), ghé bến như một vị khách vượt thời gian.</p>
+        thuế bến và danh vọng là số của trò chơi, không phải số liệu lịch sử.</p>
         <p>Năm 1149 Vân Đồn mới là <b>trang</b>; chức quan trấn chỉ được đặt năm 1349,
         nên «quan trấn thủ» ở đầu ván là cách gọi giản lược. Tên <b>Xiêm La</b> chép
         theo <i>Toàn thư</i>; nhiều nhà nghiên cứu cho rằng tên này chưa hợp với năm
@@ -413,26 +411,6 @@ const NATIONS = [
   { id:'xiem', name:'Xiêm La', flag:'#d9a441', sail:'#9ec5ab', prefs:['gom','ngoc'], mult:1.05 },
 ];
 
-// ---------- Thuyền Phượng Hỏa — Đô đốc T'Hương từ Bắc Hải Đảo ghé thăm ----------
-const PHOENIX = { id:'phuonghoa', name:'Phượng Hỏa', flag:'#2e8b8b', sail:'#2e8b8b', mult:1.6 };
-function spawnPhoenix(){
-  const ds=docks(); if(!ds.length) return;
-  const busy=game.ships.map(s=>s.dockC);
-  const free=ds.filter(d=>!busy.includes(d.c));
-  if(!free.length){ game.phoenixCd=25; return; }
-  const dock=pick(free);
-  const wants={};
-  for(const g of unlockedGoods()) wants[g.id]=Math.floor(rand(4,9));
-  game.ships.push({
-    nat:PHOENIX, special:true, wants, dockC:dock.c,
-    x:dock.x+rand(-40,40), y:cv.height+50, tx:dock.x, ty:dock.y+34,
-    state:'in', tradeT:0, waitT:26, bob:rand(0,TAU),
-  });
-  game.phoenixN++;
-  toast("🔥 Thuyền <b>Phượng Hỏa</b> của Đô đốc T'Hương từ Bắc Hải Đảo ghé bến — mua nhiều, trả giá hậu hĩnh!",4600);
-  sfx('gong');
-}
-
 // ---------- Cấp bến ----------
 const LEVELS = [
   { rep:0,   name:'Trang nhỏ',        title:'TRANG NHỎ VEN VỊNH' },
@@ -477,8 +455,8 @@ const game = {
   eventT:rand(45,70),
   storm:0, t:0, served:0,
   started:false,
-  tribute:null, tributeCd:70, phoenixCd:150,
-  earned:0, prodN:0, tribOk:0, guardN:0, phoenixN:0, playT:0,
+  tribute:null, tributeCd:70,
+  earned:0, prodN:0, tribOk:0, guardN:0, playT:0,
 };
 GOODS.forEach(g=>game.storage[g.id]=0);
 for(let r=0;r<ROWS;r++){ game.grid.push(Array(COLS).fill(null)); }
@@ -518,7 +496,7 @@ function saveGame(){
     gold:game.gold, rep:game.rep, level:game.level, storage:game.storage,
     cap:game.cap, grid:game.grid, glvl:game.glvl, served:game.served,
     earned:game.earned, prodN:game.prodN, tribOk:game.tribOk,
-    guardN:game.guardN, phoenixN:game.phoenixN, playT:game.playT,
+    guardN:game.guardN, playT:game.playT,
   }));
 }
 function loadGame(){
@@ -527,7 +505,7 @@ function loadGame(){
     Object.assign(game,{gold:d.gold,rep:d.rep,level:d.level,cap:d.cap,served:d.served||0});
     game.storage=d.storage; game.grid=d.grid; game.glvl=d.glvl||[];
     game.earned=d.earned||0; game.prodN=d.prodN||0; game.tribOk=d.tribOk||0;
-    game.guardN=d.guardN||0; game.phoenixN=d.phoenixN||0; game.playT=d.playT||0;
+    game.guardN=d.guardN||0; game.playT=d.playT||0;
     return true;
   }catch(e){ return false; }
 }
@@ -571,10 +549,6 @@ function updateShips(dt){
   if(game.storm>0) dt*=0.25;                       // bão: mọi việc chậm lại
   game.nextShip-=dt;
   if(game.nextShip<=0){ spawnShip(); game.nextShip=rand(9,15)/Math.max(1,docks().length*0.6); }
-  if(game.level>=2){
-    game.phoenixCd-=dt;
-    if(game.phoenixCd<=0){ game.phoenixCd=rand(130,200); spawnPhoenix(); }
-  }
   for(const s of game.ships){
     s.bob+=dt;
     if(s.state==='in'){
@@ -600,7 +574,6 @@ function updateShips(dt){
         s.state='out'; s.ty=cv.height+80; s.tx=s.x+rand(-60,60);
         const tax=8*lvlAt(ROWS-1, s.dockC); game.gold+=tax; game.earned+=tax;
         let dr = done?2:1;
-        if(s.special){ dr+=5; toast('🔥 Phượng Hỏa nhổ neo — Đô đốc gửi lời khen, <b>+5 danh vọng</b>!',3200); }
         dr += sumLvl('den')*2;
         game.rep+=dr; game.served++;
         fly(s.x, s.y-18, `+${dr} 🏮`, '#9ec5ab');
@@ -722,7 +695,6 @@ function renderStats(){
     ['🏺 Món hàng sản xuất', game.prodN],
     ['📜 Cống phẩm dâng đúng hạn', game.tribOk],
     ['🗼 Lần đẩy lui giặc biển', game.guardN],
-    ['🔥 Lần Phượng Hỏa ghé bến', game.phoenixN],
     ['🏗️ Công trình (tổng cấp)', builds+' ('+lvls+')'],
     ['⏳ Thời gian trấn thủ', fmtPlayT(game.playT)],
   ];
@@ -730,7 +702,6 @@ function renderStats(){
     ['👑 Đệ Nhất Thương Cảng', game.level>=3],
     ['⚖️ Thần buôn — tiếp 50 thuyền', game.served>=50],
     ['🛡️ Hộ quốc — đẩy giặc 3 lần', game.guardN>=3],
-    ['🤝 Bằng hữu Đô đốc — Phượng Hỏa ghé 3 lần', game.phoenixN>=3],
     ['🏗️ Đại kiến trúc sư — tổng cấp ≥ 15', lvls>=15],
     ['📜 Trung thần — dâng 5 cống phẩm', game.tribOk>=5],
   ];
