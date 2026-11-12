@@ -114,6 +114,16 @@ Những chỗ là cách dựng của trò chơi:
 - Trầm hương là hàng trung chuyển, không phải sản vật của đảo; ngọc trai là ngọc mò ngoài biển.
 - Trang phục nhân vật được cách điệu, không phục dựng theo hiện vật.
 
+## Âm thanh
+
+Âm thanh sinh bằng Web Audio ngay trong trang, không có tệp âm thanh nào:
+
+- Nhạc nền gảy dây trên thang **ngũ cung** (như bản 2D), cùng tiếng sóng biển vỗ đều.
+- Tiếng bước chân khi đi, tiếng mõ khi gặp người hoặc chọn thuế, tiếng tiền đồng khi mua và
+  bán, cồng khi dâng cống phẩm và khi hết ván, ba tiếng trống khi kết phiên, sấm xa khi có bão.
+- Nút 🔊 trên thanh trên để tắt hoặc bật; trò chơi nhớ lựa chọn. Âm thanh chỉ bắt đầu sau khi
+  bấm «Ra bến» (trình duyệt chặn tự phát tiếng) và tạm dừng khi chuyển sang thẻ khác.
+
 ## Kỹ thuật
 
 - Một tệp `index.html`, dùng [`../lib/three.min.js`](../lib/three.min.js) có sẵn trong kho.
@@ -123,6 +133,5 @@ Những chỗ là cách dựng của trò chơi:
 
 ## Chưa có
 
-- Âm thanh.
 - Lưu ván giữa chừng.
-- Ảnh riêng cho thương nhân Trảo Oa và Tam Phật Tề (hiện dùng chung một ảnh).
+- Ảnh riêng cho thương nhân Trảo Oa và Tam Phật Tề (hiện dùng chung một ảnh; prompt ở mục 10 và 11 của `PROMPT-NHAN-VAT.md`).

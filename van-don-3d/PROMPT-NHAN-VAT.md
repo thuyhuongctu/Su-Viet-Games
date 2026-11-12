@@ -151,6 +151,54 @@ Limestone karst islands in the background, turquoise water. No text, no plaques.
 
 *Ghi chú:* neo thuyền thời này làm bằng gỗ buộc đá, không phải mỏ neo sắt hai càng kiểu châu Âu.
 
+## 10. Thương nhân Trảo Oa (Java)
+
+Hiện game dùng chung một ảnh «thương nhân phương Nam» cho Trảo Oa và Tam Phật Tề.
+Hai prompt dưới đây để mỗi nước có tượng riêng. Cỡ ảnh: dọc 3:4, **đứng thẳng trên nền
+trơn, không có đế** (game tự tách nền; đế đất nặn sẽ phải cắt bỏ thủ công).
+
+```
+A Javanese sea merchant from the Kediri kingdom (East Java), 12th century, middle-aged man.
+Long black hair tied in a high topknot wrapped with a narrow dark indigo headband,
+round wooden ear plugs, bare chest, a simple bronze armband on each upper arm.
+Dark indigo cotton hip-cloth (kain) wrapped from waist to knee, tucked in front,
+with a plain red cloth sash. Barefoot.
+Carries a small woven rattan basket of dried cloves in one hand and a short log of
+pale sandalwood under the other arm.
+Standing straight on a plain flat background, no base, no pedestal.
+```
+
+*Căn cứ:* *Toàn thư* chép thuyền Trảo Oa đến Hải Đông năm 1149. *Chư phiên chí* của Triệu
+Nhữ Quát (1225) kể sản vật của Java (Đồ Bà) có đinh hương, đàn hương, hồ tiêu. Trang phục
+dựng theo phù điêu và tượng Đông Java: để trần, quấn vải ngang hông, búi tóc. Đây là cách
+điệu, không phục dựng theo hiện vật cụ thể.
+
+## 11. Thương nhân Tam Phật Tề (Srivijaya, Sumatra)
+
+```
+A Malay sea merchant from Srivijaya (Palembang, Sumatra), 12th century, young man.
+Shoulder-length black hair tied loosely at the nape, small gold ear studs,
+bare chest with a thin cord necklace, a dark red cotton hip-cloth wrapped to mid-calf
+with an ochre-yellow sash. Barefoot.
+Carries a short elephant tusk in one arm and a sealed bamboo tube of camphor crystals
+in the other hand; a polished tortoiseshell plate hangs from his sash.
+Standing straight on a plain flat background, no base, no pedestal.
+```
+
+*Căn cứ:* *Toàn thư* chép người buôn Tam Phật Tề đến Vân Đồn năm 1184. *Chư phiên chí* kể sản
+vật của Tam Phật Tề có long não, đồi mồi, trầm, ngà voi. Trang phục cách điệu theo người Mã Lai
+ven biển, cố ý khác tượng Trảo Oa (tóc xõa ngang vai, vải đỏ dài hơn) để người chơi phân biệt.
+
+**Thêm vào khối cấm cho hai prompt này:**
+
+```
+turban, Islamic cap, songkok, peci, batik pattern, songket gold brocade, kris dagger,
+shirt, jacket, trousers, base, pedestal, clay disc
+```
+
+*Lý do:* khăn xếp và mũ songkok gắn với thời kỳ Hồi giáo hoá (từ thế kỷ 13–15 trở đi);
+kỹ thuật batik và gấm songket chưa chắc có ở thế kỷ 12; dao kris mang dáng hiện nay muộn hơn.
+
 ---
 
 ## Bảng soát trước khi đưa ảnh vào game
@@ -161,3 +209,4 @@ Limestone karst islands in the background, turquoise water. No text, no plaques.
 - [ ] Người Việt: búi tóc, răng đen (nếu thấy răng), áo giao lĩnh; không áo dài, không khăn rằn.
 - [ ] Không có địa danh đời sau (Bát Tràng, Chu Đậu, Yên Bái…).
 - [ ] Thuyền không có mỏ neo sắt kiểu châu Âu.
+- [ ] Tượng đứng trên nền trơn, không có đế (để game tách nền và cho bước đi).
