@@ -18,7 +18,7 @@ lại game bằng engine nào khác** (GDevelop, Unity, C++…) — chỉ cần 
 
 Trang web đã phát hành tại:
 
-**https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/**
+**https://thuyhuongctu.github.io/Vietnamese-History-Games/**
 
 Nếu link trên chưa hoạt động, bật GitHub Pages như sau:
 
@@ -55,6 +55,22 @@ Các bước 2.1 đến 2.4 bên dưới là hướng dẫn chung. Thực tế �
 - Kênh thử nghiệm khép kín (Alpha) đã gửi Google xét duyệt ngày 11/11/2026; cần 12 người thử liên tục 14 ngày rồi mới xin phát hành công khai.
 - Nội dung game sửa trên `main` thì app tự cập nhật theo web, không phải nộp lại.
 
+> ⚠️ **Đổi tên kho (13/11/2026):** kho đổi tên từ `ThuyHuong_Digital-2026-Games`
+> thành `Vietnamese-History-Games`, nên địa chỉ web mới là
+> `https://thuyhuongctu.github.io/Vietnamese-History-Games/`. GitHub Pages
+> **không tự chuyển hướng** địa chỉ cũ. Bản 1.2 (versionCode 1) trên Play vẫn mở
+> địa chỉ cũ, nên cần:
+>
+> 1. Dựng lại gói bằng Bubblewrap với địa chỉ mới (sửa `host`/`startUrl` trong
+>    `twa-manifest.json`), tăng versionCode lên 2, ký bằng khóa tải lên cũ, rồi nộp
+>    vào kênh thử nghiệm khép kín. Tên gói `io.github.thuyhuongctu.suvietgames` giữ nguyên.
+> 2. `assetlinks.json` ở gốc tên miền `thuyhuongctu.github.io` **không phải sửa**, vì
+>    tên miền không đổi.
+> 3. Cập nhật đường dẫn trang chính sách trong Play Console thành
+>    `https://thuyhuongctu.github.io/Vietnamese-History-Games/privacy.html`.
+>
+> Người đã cài web app từ địa chỉ cũ cần mở địa chỉ mới và cài lại.
+
 ### Bước 2.1 — Đăng ký tài khoản nhà phát triển {#play-console}
 
 1. Vào https://play.google.com/console/signup
@@ -72,7 +88,7 @@ Các bước 2.1 đến 2.4 bên dưới là hướng dẫn chung. Thực tế �
 
 1. Vào **https://www.pwabuilder.com**
 2. Dán địa chỉ web app:
-   `https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/`
+   `https://thuyhuongctu.github.io/Vietnamese-History-Games/`
 3. Bấm **Start** → chờ chấm điểm PWA → bấm **Package for stores**
 4. Chọn **Android** → điền:
    - **Package ID**: `vn.thuyhuongdigital.suvietgames` (tên miền đảo ngược,
@@ -104,7 +120,7 @@ SHA-256 thật trong file tải về):
 ```
 
 Đẩy lên `main` để file có tại:
-`https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/.well-known/assetlinks.json`
+`https://thuyhuongctu.github.io/Vietnamese-History-Games/.well-known/assetlinks.json`
 
 ### Bước 2.4 — Tạo ứng dụng trên Play Console và nộp {#play-submit}
 
@@ -163,7 +179,7 @@ tác giả.
 1. Vào **https://zenodo.org** → **Log in** → chọn **Log in with GitHub**
    → cho phép truy cập
 2. Bấm ảnh đại diện (góc phải) → **GitHub** → tìm
-   `thuyhuongctu/ThuyHuong_Digital-2026-Games` → gạt công tắc sang **ON**
+   `thuyhuongctu/Vietnamese-History-Games` → gạt công tắc sang **ON**
 3. Tạo một **release mới** trên GitHub (ví dụ `v.1.3`) — ⚠️ các release
    tạo *trước khi* bật công tắc (v.1.1, v.1.2) sẽ **không** được cấp DOI;
    chỉ release mới sau khi bật mới được lưu trữ
