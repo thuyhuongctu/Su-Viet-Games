@@ -7,14 +7,14 @@
 A collection of browser-based educational games set in documented periods of
 Vietnamese history, published as an installable, offline-capable web application.
 
-[![Release](https://img.shields.io/github/v/release/thuyhuongctu/ThuyHuong_Digital-2026-Games?label=release&color=b8860b)](https://github.com/thuyhuongctu/ThuyHuong_Digital-2026-Games/releases)
+[![Release](https://img.shields.io/github/v/release/thuyhuongctu/Vietnamese-History-Games?label=release&color=b8860b)](https://github.com/thuyhuongctu/Vietnamese-History-Games/releases)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21850564.svg)](https://doi.org/10.5281/zenodo.21850564)
-[![PWA](https://img.shields.io/badge/PWA-installable%20%C2%B7%20offline-5a3&logo=pwa)](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/)
+[![PWA](https://img.shields.io/badge/PWA-installable%20%C2%B7%20offline-5a3&logo=pwa)](https://thuyhuongctu.github.io/Vietnamese-History-Games/)
 [![License](https://img.shields.io/badge/license-proprietary%20·%20all%20rights%20reserved-lightgrey)](LICENSE)
 [![three.js](https://img.shields.io/badge/3D-three.js-049EF4?logo=threedotjs&logoColor=white)](bac-hai-dao-3d/)
 [![Phaser](https://img.shields.io/badge/2D-Phaser%203-2ea3f2)](cho-noi/)
 
-**[▶ Play now: thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/)**
+**[▶ Play now: thuyhuongctu.github.io/Vietnamese-History-Games](https://thuyhuongctu.github.io/Vietnamese-History-Games/)**
 
 *No installation, no account, no advertising, no data collection.*
 
@@ -91,10 +91,10 @@ software: see [License](#license-and-third-party-components).
 
 | | Game | Period | Genre | Play |
 |---|---|---|---|---|
-| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | City building, port management | [Play](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/van-don/) · [Guide](van-don/README.md) |
-| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/bac-hai-dao/) · [Guide](bac-hai-dao/README.md) |
-| 🌊 | **Bắc Hải Đảo 3D** | 1780 | The same world rendered in 3D | [Play](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
-| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/cho-noi/) · [Guide](cho-noi/README.md) |
+| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [Guide](van-don/README.md) |
+| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [Guide](bac-hai-dao/README.md) |
+| 🌊 | **Bắc Hải Đảo 3D** | 1780 | The same world rendered in 3D | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
+| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [Guide](cho-noi/README.md) |
 
 ### Vân Đồn — The First Trading Port (1149)
 
@@ -169,7 +169,7 @@ playability and should not be treated as a scholarly source.
 
 ### Play online
 
-Open the [portal](https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/)
+Open the [portal](https://thuyhuongctu.github.io/Vietnamese-History-Games/)
 in any modern browser. On a mobile device, select **Install to Home Screen** to
 obtain the full-screen offline application. On iOS, use Safari and choose
 **Share → Add to Home Screen**.
@@ -184,8 +184,8 @@ require it.
 ### Run locally
 
 ```bash
-git clone https://github.com/thuyhuongctu/ThuyHuong_Digital-2026-Games.git
-cd ThuyHuong_Digital-2026-Games
+git clone https://github.com/thuyhuongctu/Vietnamese-History-Games.git
+cd Vietnamese-History-Games
 python3 -m http.server 8000     # then open http://localhost:8000
 ```
 
@@ -334,7 +334,7 @@ retain their own licences:
 Correspondence: [thuyhuongctu@gmail.com](mailto:thuyhuongctu@gmail.com)
 
 Issues and suggestions are welcome through the repository
-[issue tracker](https://github.com/thuyhuongctu/ThuyHuong_Digital-2026-Games/issues).
+[issue tracker](https://github.com/thuyhuongctu/Vietnamese-History-Games/issues).
 
 ---
 

@@ -18,7 +18,7 @@ lại game bằng engine nào khác** (GDevelop, Unity, C++…) — chỉ cần 
 
 Trang web đã phát hành tại:
 
-**https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/**
+**https://thuyhuongctu.github.io/Vietnamese-History-Games/**
 
 Nếu link trên chưa hoạt động, bật GitHub Pages như sau:
 
@@ -47,13 +47,35 @@ này) — app tự cập nhật theo web.
 
 Các bước 2.1 đến 2.4 bên dưới là hướng dẫn chung. Thực tế đã làm khác ở mấy điểm sau:
 
-- Gói Android dựng bằng **Bubblewrap** (TWA), không dùng PWABuilder; trang mở là `https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/index.html`.
+- Gói Android dựng bằng **Bubblewrap** (TWA), không dùng PWABuilder; trang mở là `https://thuyhuongctu.github.io/Vietnamese-History-Games/index.html`.
 - Tên gói: `io.github.thuyhuongctu.suvietgames` (không phải `vn.thuyhuongdigital.suvietgames`). Tên trên Play: `Su Viet Games: Vietnam History`. Bản đầu: 1.2 (versionCode 1), minSdk 24, targetSdk 36.
 - Khóa tải lên do tác giả giữ ngoài kho mã; Play App Signing giữ khóa ký phát hành.
 - `assetlinks.json` đặt ở kho `thuyhuongctu.github.io` (tệp `.well-known/assetlinks.json` ở gốc tên miền), không đặt trong kho này; vân tay khóa ký của Play sẽ bổ sung sau khi tải lên.
 - Trang chính sách khai với Play: `privacy.html` của kho này. Đối tượng khai trên Play: 18 tuổi trở lên.
 - Kênh thử nghiệm khép kín (Alpha) đã gửi Google xét duyệt ngày 11/11/2026; cần 12 người thử liên tục 14 ngày rồi mới xin phát hành công khai.
 - Nội dung game sửa trên `main` thì app tự cập nhật theo web, không phải nộp lại.
+
+### Đổi tên kho ngày 13/11/2026 {#doi-ten-kho}
+
+Kho đổi tên từ `ThuyHuong_Digital-2026-Games` thành `Vietnamese-History-Games`. GitHub Pages
+**không chuyển hướng** địa chỉ cũ: `https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/`
+giờ trả về 404. Trang mới là `https://thuyhuongctu.github.io/Vietnamese-History-Games/`.
+
+Việc cần làm ngoài kho này:
+
+1. **Gói Android (Bubblewrap):** app bản 1.2 vẫn mở địa chỉ cũ nên đang hỏng. Trong
+   `twa-manifest.json`, đổi `startUrl` thành `/Vietnamese-History-Games/index.html`, đổi
+   `webManifestUrl`, `iconUrl`, `maskableIconUrl`, `fullScopeUrl` sang đường dẫn mới, tăng
+   `appVersionCode` lên 2 (và `appVersion`), rồi chạy `bubblewrap update` và `bubblewrap build`,
+   tải gói `.aab` mới lên kênh thử nghiệm khép kín. Tên miền vẫn là `thuyhuongctu.github.io`,
+   nên `assetlinks.json` ở kho `thuyhuongctu.github.io` không phải sửa.
+2. **Play Console:** sửa *Privacy policy URL* thành
+   `https://thuyhuongctu.github.io/Vietnamese-History-Games/privacy.html` (App content → Privacy
+   policy), và sửa địa chỉ trang web trong Store listing nếu có.
+3. **App Chansonia:** sửa đường dẫn bài hát Bắc Hải Đảo sang
+   `https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/assets/nhac/…`.
+4. **Zenodo:** bản lưu trữ đã phát hành giữ đường dẫn cũ; bản phát hành sau sẽ lấy
+   `.zenodo.json` và `CITATION.cff` mới.
 
 ### Bước 2.1 — Đăng ký tài khoản nhà phát triển {#play-console}
 
@@ -72,7 +94,7 @@ Các bước 2.1 đến 2.4 bên dưới là hướng dẫn chung. Thực tế �
 
 1. Vào **https://www.pwabuilder.com**
 2. Dán địa chỉ web app:
-   `https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/`
+   `https://thuyhuongctu.github.io/Vietnamese-History-Games/`
 3. Bấm **Start** → chờ chấm điểm PWA → bấm **Package for stores**
 4. Chọn **Android** → điền:
    - **Package ID**: `vn.thuyhuongdigital.suvietgames` (tên miền đảo ngược,
@@ -104,7 +126,7 @@ SHA-256 thật trong file tải về):
 ```
 
 Đẩy lên `main` để file có tại:
-`https://thuyhuongctu.github.io/ThuyHuong_Digital-2026-Games/.well-known/assetlinks.json`
+`https://thuyhuongctu.github.io/Vietnamese-History-Games/.well-known/assetlinks.json`
 
 ### Bước 2.4 — Tạo ứng dụng trên Play Console và nộp {#play-submit}
 
@@ -163,7 +185,7 @@ tác giả.
 1. Vào **https://zenodo.org** → **Log in** → chọn **Log in with GitHub**
    → cho phép truy cập
 2. Bấm ảnh đại diện (góc phải) → **GitHub** → tìm
-   `thuyhuongctu/ThuyHuong_Digital-2026-Games` → gạt công tắc sang **ON**
+   `thuyhuongctu/Vietnamese-History-Games` → gạt công tắc sang **ON**
 3. Tạo một **release mới** trên GitHub (ví dụ `v.1.3`) — ⚠️ các release
    tạo *trước khi* bật công tắc (v.1.1, v.1.2) sẽ **không** được cấp DOI;
    chỉ release mới sau khi bật mới được lưu trữ
