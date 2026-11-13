@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1f1509">
+<script>(function(){try{var r=document.documentElement,l=localStorage.getItem('thd-lang'),m=localStorage.getItem('thd-theme');if(l==='vi'||l==='en')r.lang=l;if(m==='light'||m==='dark')r.setAttribute('data-theme',m);}catch(e){}})();</script>
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/icon-192.png">
-<title>Chợ Nổi — Phiên Chợ Trên Sông · ThuyHuong Digital</title>
-<meta name="description" content="Chợ Nổi: trò chơi nhanh tay lấy bối cảnh chợ nổi miền Tây thời khẩn hoang Đất Phương Nam (thế kỷ 19). Chèo xuồng ba lá hứng nông sản từ ghe bầu trong phiên chợ 90 giây. Chơi miễn phí trên trình duyệt.">
-<meta property="og:title" content="Chợ Nổi — Phiên Chợ Trên Sông">
-<meta property="og:description" content="Chèo xuồng ba lá hứng dừa, xoài, khóm, lúa trong phiên chợ nổi 90 giây. Chơi miễn phí trên trình duyệt.">
+<title data-vi-text="Chợ Nổi — Phiên Chợ Trên Sông · ThuyHuong Digital">Chợ Nổi — Floating Market · ThuyHuong Digital</title>
+<meta name="description" content="Chợ Nổi: a quick-reflex game set in the floating markets of the Mekong Delta as settlers opened the south in the 19th century. Paddle a sampan to catch produce from a merchant barge in a 90-second market. Free in your browser."
+  data-vi-content="Chợ Nổi: trò chơi nhanh tay lấy bối cảnh chợ nổi miền Tây thời khẩn hoang Đất Phương Nam (thế kỷ 19). Chèo xuồng ba lá hứng nông sản từ ghe bầu trong phiên chợ 90 giây. Chơi miễn phí trên trình duyệt.">
+<meta property="og:title" content="Chợ Nổi — Floating Market">
+<meta property="og:description" content="Paddle a sampan to catch coconuts, mangoes, pineapples and rice in a 90-second floating market. Free in your browser.">
 <meta property="og:image" content="../assets/portal/cho-noi.webp">
+<link rel="stylesheet" href="../assets/portal/site.css">
 <link rel="stylesheet" href="../assets/portal/gioi-thieu.css">
 </head>
 <body>
-<a class="skip" href="#noi-dung">Bỏ qua, đến nội dung</a>
+<a class="skip" href="#noi-dung"><span lang="en">Skip to content</span><span lang="vi">Bỏ qua, đến nội dung</span></a>
 
 <header class="top">
-  <nav class="wrap" aria-label="Đường dẫn">
-    <ol class="crumbs">
-      <li><a href="../index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cổng trò chơi</a></li>
-      <li><a href="../index.html#eraTK19">Thế kỷ 19 · Đất Phương Nam</a></li>
-      <li><span aria-current="page">Chợ Nổi</span></li>
-    </ol>
-  </nav>
+  <div class="wrap topIn">
+    <nav aria-label="Breadcrumb" data-vi-aria-label="Đường dẫn">
+      <ol class="crumbs">
+        <li><a href="../index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span lang="en">All games</span><span lang="vi">Cổng trò chơi</span></a></li>
+        <li><a href="../index.html#eraTK19"><span lang="en">1800s · The southern frontier</span><span lang="vi">Thế kỷ 19 · Đất Phương Nam</span></a></li>
+        <li><span aria-current="page">Chợ Nổi</span></li>
+      </ol>
+    </nav>
+    <div class="prefs">
+      <button id="prefLang" class="pref" type="button" hidden>Tiếng Việt</button>
+      <button id="prefTheme" class="pref" type="button" hidden aria-label="Switch to dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
 </header>
 
 <main id="noi-dung" class="wrap">
@@ -32,96 +44,106 @@
     <figure class="gallery">
       <div class="main">
         <img src="../assets/portal/cho-noi.webp" width="800" height="500"
-          alt="Màn mở đầu Chợ Nổi: chiếc xuồng ba lá trên sông phù sa và hướng dẫn tính điểm">
+          alt="Chợ Nổi title screen: a sampan on the silty river and the scoring guide"
+          data-vi-alt="Màn mở đầu Chợ Nổi: chiếc xuồng ba lá trên sông phù sa và hướng dẫn tính điểm">
       </div>
-      <figcaption>Màn mở đầu — phiên chợ sắp nhóm</figcaption>
+      <figcaption><span lang="en">Title screen — the market is about to open</span><span lang="vi">Màn mở đầu — phiên chợ sắp nhóm</span></figcaption>
     </figure>
 
     <div class="aside">
-      <span class="tag line">Trò chơi nhanh tay · 90 giây</span>
+      <span class="tag line"><span lang="en">Quick reflexes · 90 seconds</span><span lang="vi">Trò chơi nhanh tay · 90 giây</span></span>
       <h1>Chợ Nổi</h1>
-      <span class="alias">Phiên Chợ Trên Sông</span>
-      <p>Thời khẩn hoang Đất Phương Nam, ghe xuồng tụ giữa sông thành chợ nổi. Ghe bầu chạy ngang
+      <span class="alias"><span lang="en">Floating Market</span><span lang="vi">Phiên Chợ Trên Sông</span></span>
+      <p lang="en">As settlers opened the southern frontier, boats gathered mid-river into floating markets. A merchant barge
+        passes, dropping produce; you paddle a sampan (xuồng ba lá) to fill your hold and dodge driftwood before the market closes.</p>
+      <p lang="vi">Thời khẩn hoang Đất Phương Nam, ghe xuồng tụ giữa sông thành chợ nổi. Ghe bầu chạy ngang
         thả nông sản; bạn chèo xuồng ba lá hứng cho đầy khoang, né gỗ trôi, trước khi tan chợ.</p>
-      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi ngay</a>
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span lang="en">Play now</span><span lang="vi">Chơi ngay</span></a>
+      <p class="langNote" lang="en"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg>The game’s few words are in Vietnamese, but it plays without reading.</p>
       <dl class="facts">
-        <div><dt>Thể loại</dt><dd>Nhanh tay, phản xạ</dd></div>
-        <div><dt>Bối cảnh</dt><dd>Đồng bằng sông Cửu Long, thế kỷ 19</dd></div>
-        <div><dt>Thiết bị</dt><dd>Điện thoại, máy tính</dd></div>
-        <div><dt>Một ván</dt><dd>90 giây, lưu kỷ lục</dd></div>
+        <div><dt><span lang="en">Genre</span><span lang="vi">Thể loại</span></dt><dd><span lang="en">Arcade, reflexes</span><span lang="vi">Nhanh tay, phản xạ</span></dd></div>
+        <div><dt><span lang="en">Setting</span><span lang="vi">Bối cảnh</span></dt><dd><span lang="en">Mekong Delta, 19th century</span><span lang="vi">Đồng bằng sông Cửu Long, thế kỷ 19</span></dd></div>
+        <div><dt><span lang="en">Devices</span><span lang="vi">Thiết bị</span></dt><dd><span lang="en">Phone, computer</span><span lang="vi">Điện thoại, máy tính</span></dd></div>
+        <div><dt><span lang="en">One game</span><span lang="vi">Một ván</span></dt><dd><span lang="en">90 seconds, best score kept</span><span lang="vi">90 giây, lưu kỷ lục</span></dd></div>
       </dl>
     </div>
   </div>
 
   <section class="blk" aria-labelledby="h-boi-canh">
-    <span class="eyebrow">Bối cảnh</span>
-    <h2 id="h-boi-canh">Ghe xuồng là chân đi</h2>
+    <span class="eyebrow"><span lang="en">Setting</span><span lang="vi">Bối cảnh</span></span>
+    <h2 id="h-boi-canh"><span lang="en">Where boats were the only road</span><span lang="vi">Ghe xuồng là chân đi</span></h2>
     <div class="box">
-      <p>Thế kỷ 19, lưu dân người Việt theo kênh rạch tiến vào khẩn hoang đồng bằng sông Cửu Long.
+      <p lang="en">In the 19th century, Vietnamese settlers followed the canals into the Mekong Delta to clear new land.
+        There were no roads yet and boats were how people moved, so buyers and sellers met in the middle of the river —
+        the <strong>floating market</strong>.</p>
+      <p lang="vi">Thế kỷ 19, lưu dân người Việt theo kênh rạch tiến vào khẩn hoang đồng bằng sông Cửu Long.
         Đường bộ chưa mở, ghe xuồng là chân đi — người mua kẻ bán tụ lại giữa sông thành
         <strong>chợ nổi</strong>.</p>
-      <p>Mỗi ghe treo một <strong>cây bẹo</strong> trước mũi để người mua nhìn từ xa đã biết ghe bán gì:
+      <p lang="en">Each boat hangs its goods from a tall pole at the bow, the <strong>cây bẹo</strong>, so buyers can see from afar
+        what it sells: “what hangs is what’s for sale.”</p>
+      <p lang="vi">Mỗi ghe treo một <strong>cây bẹo</strong> trước mũi để người mua nhìn từ xa đã biết ghe bán gì:
         «treo hàng gì, bán hàng nấy».</p>
     </div>
   </section>
 
-  <section class="blk twoCol" aria-label="Tính điểm và cách chơi">
+  <section class="blk twoCol" aria-label="Scoring and controls" data-vi-aria-label="Tính điểm và cách chơi">
     <div>
-      <span class="eyebrow">Tính điểm</span>
-      <h2 id="h-diem">Hứng gì, được bao nhiêu</h2>
+      <span class="eyebrow"><span lang="en">Scoring</span><span lang="vi">Tính điểm</span></span>
+      <h2 id="h-diem"><span lang="en">What each catch is worth</span><span lang="vi">Hứng gì, được bao nhiêu</span></h2>
       <div class="tblBox" tabindex="0" role="region" aria-labelledby="h-diem">
         <table class="narrow">
-          <thead><tr><th scope="col">Hàng rơi</th><th scope="col">Điểm</th></tr></thead>
+          <thead><tr><th scope="col"><span lang="en">Falling item</span><span lang="vi">Hàng rơi</span></th><th scope="col"><span lang="en">Points</span><span lang="vi">Điểm</span></th></tr></thead>
           <tbody>
-            <tr><th scope="row">Dừa, chuối</th><td class="su">+1</td></tr>
-            <tr><th scope="row">Dưa hấu, xoài</th><td class="su">+2</td></tr>
-            <tr><th scope="row">Khóm, lúa</th><td class="su">+3</td></tr>
-            <tr><th scope="row">Gỗ trôi — phải né</th><td class="dung">−5, rung màn hình</td></tr>
+            <tr><th scope="row"><span lang="en">Coconut, banana</span><span lang="vi">Dừa, chuối</span></th><td class="su">+1</td></tr>
+            <tr><th scope="row"><span lang="en">Watermelon, mango</span><span lang="vi">Dưa hấu, xoài</span></th><td class="su">+2</td></tr>
+            <tr><th scope="row"><span lang="en">Pineapple, rice</span><span lang="vi">Khóm, lúa</span></th><td class="su">+3</td></tr>
+            <tr><th scope="row"><span lang="en">Driftwood — dodge it</span><span lang="vi">Gỗ trôi — phải né</span></th><td class="dung"><span lang="en">−5, the screen shakes</span><span lang="vi">−5, rung màn hình</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">Chợ càng về trưa, ghe thả càng dặt dìu, hàng rơi càng nhanh.</p>
+      <p class="note"><span lang="en">As the morning wears on, the barge drops faster and the produce falls quicker.</span><span lang="vi">Chợ càng về trưa, ghe thả càng dặt dìu, hàng rơi càng nhanh.</span></p>
     </div>
     <div>
-      <span class="eyebrow">Điều khiển</span>
-      <h2>Cách chơi</h2>
-      <span class="h3">Máy tính</span>
+      <span class="eyebrow"><span lang="en">Controls</span><span lang="vi">Điều khiển</span></span>
+      <h2><span lang="en">How to play</span><span lang="vi">Cách chơi</span></h2>
+      <span class="h3"><span lang="en">Computer</span><span lang="vi">Máy tính</span></span>
       <dl class="keys">
-        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Chèo xuồng sang trái, sang phải</dd></div>
+        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd><span lang="en">Paddle left and right</span><span lang="vi">Chèo xuồng sang trái, sang phải</span></dd></div>
       </dl>
-      <span class="h3">Điện thoại, máy tính bảng</span>
-      <p class="note">Rê hoặc chạm màn hình để chèo xuồng theo tay.</p>
-      <span class="h3">Kỷ lục</span>
-      <p class="note">Điểm cao nhất được lưu ngay trong trình duyệt, không gửi đi đâu.</p>
+      <span class="h3"><span lang="en">Phone and tablet</span><span lang="vi">Điện thoại, máy tính bảng</span></span>
+      <p class="note"><span lang="en">Drag or tap the screen and the sampan follows your finger.</span><span lang="vi">Rê hoặc chạm màn hình để chèo xuồng theo tay.</span></p>
+      <span class="h3"><span lang="en">Best score</span><span lang="vi">Kỷ lục</span></span>
+      <p class="note"><span lang="en">Your best score stays in your browser and is never sent anywhere.</span><span lang="vi">Điểm cao nhất được lưu ngay trong trình duyệt, không gửi đi đâu.</span></p>
     </div>
   </section>
 
-  <section class="blk" aria-labelledby="h-ky-thuat">
-    <span class="eyebrow">Cho thầy cô</span>
-    <h2 id="h-ky-thuat">Ngắn gọn, hợp đầu giờ học</h2>
+  <section class="blk" aria-labelledby="h-thay-co">
+    <span class="eyebrow"><span lang="en">For teachers</span><span lang="vi">Cho thầy cô</span></span>
+    <h2 id="h-thay-co"><span lang="en">Short enough for the start of a lesson</span><span lang="vi">Ngắn gọn, hợp đầu giờ học</span></h2>
     <ul class="loop">
-      <li><b>Một ván 90 giây</b><span>Vừa đủ làm hoạt động khởi động trước bài về khẩn hoang Nam Bộ hay văn hóa sông nước.</span></li>
-      <li><b>Chạy trên máy yếu</b><span>Đồ họa nhẹ, không cần tải ảnh; chơi được ngoại tuyến sau lần mở đầu.</span></li>
-      <li><b>Âm nhạc ngũ cung</b><span>Âm thanh theo thang ngũ cung, cùng chất nhạc với Vân Đồn và Bắc Hải Đảo.</span></li>
+      <li><b><span lang="en">A 90-second round</span><span lang="vi">Một ván 90 giây</span></b><span lang="en">Just right as a warm-up before a lesson on the settlement of the south or river culture.</span><span lang="vi">Vừa đủ làm hoạt động khởi động trước bài về khẩn hoang Nam Bộ hay văn hóa sông nước.</span></li>
+      <li><b><span lang="en">Runs on modest devices</span><span lang="vi">Chạy trên máy yếu</span></b><span lang="en">Light graphics, no images to download; plays offline after the first visit.</span><span lang="vi">Đồ họa nhẹ, không cần tải ảnh; chơi được ngoại tuyến sau lần mở đầu.</span></li>
+      <li><b><span lang="en">Pentatonic music</span><span lang="vi">Âm nhạc ngũ cung</span></b><span lang="en">Sound on the Vietnamese pentatonic scale, matching Vân Đồn and Bắc Hải Đảo.</span><span lang="vi">Âm thanh theo thang ngũ cung, cùng chất nhạc với Vân Đồn và Bắc Hải Đảo.</span></li>
     </ul>
   </section>
 
   <div class="cta">
-    <h2>Sẵn sàng nhóm chợ?</h2>
+    <h2><span lang="en">Ready for market day?</span><span lang="vi">Sẵn sàng nhóm chợ?</span></h2>
     <div class="row">
-      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi ngay</a>
-      <a class="btn btnLine" href="../index.html">Xem trò chơi khác</a>
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span lang="en">Play now</span><span lang="vi">Chơi ngay</span></a>
+      <a class="btn btnLine" href="../index.html"><span lang="en">See other games</span><span lang="vi">Xem trò chơi khác</span></a>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="wrap footIn">
-    <span>© 2026 ThuyHuong Digital · Trò chơi HTML5 thuần</span>
-    <span><a href="../index.html">Về cổng trò chơi</a> · <a href="../privacy.html">Quyền riêng tư</a></span>
+    <span>© 2026 ThuyHuong Digital · <span lang="en">Pure HTML5 games</span><span lang="vi">Trò chơi HTML5 thuần</span></span>
+    <span><a href="../index.html"><span lang="en">All games</span><span lang="vi">Về cổng trò chơi</span></a> · <a href="../privacy.html"><span lang="en">Privacy</span><span lang="vi">Quyền riêng tư</span></a></span>
   </div>
 </footer>
 
+<script src="../assets/portal/site.js"></script>
 <script>
 'use strict';
 if('serviceWorker' in navigator){
