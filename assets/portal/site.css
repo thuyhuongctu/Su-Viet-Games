@@ -60,8 +60,9 @@ img{display:block;max-width:100%;height:auto}
 [hidden]{display:none !important}
 
 /* ===== Ngôn ngữ: mỗi đoạn có hai bản, chỉ hiện bản đang chọn ===== */
-html[lang="en"] body [lang="vi"]:not(.pref),
-html[lang="vi"] body [lang="en"]:not(.pref){display:none !important}
+/* .pref (nút chuyển) và .keep (ví dụ lời bài hát tiếng Việt) luôn hiện */
+html[lang="en"] body [lang="vi"]:not(.pref):not(.keep),
+html[lang="vi"] body [lang="en"]:not(.pref):not(.keep){display:none !important}
 
 /* ===== Bản đồ Việt Nam chìm (gồm Hoàng Sa, Trường Sa) =====
    Đường biên: Natural Earth (phạm vi công cộng) qua gói world-atlas, rút gọn;

@@ -21,6 +21,7 @@ const SHELL = [
   './assets/portal/site.css',
   './assets/portal/site.js',
   './assets/portal/gallery.js',
+  './assets/nhac/nguoi-trao-ta-chan-troi.webp',
   './assets/portal/van-don-cho-dem.webp',
   './van-don-3d/index.html',
   './bac-hai-dao/index.html',
