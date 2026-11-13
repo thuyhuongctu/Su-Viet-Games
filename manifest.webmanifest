@@ -17,9 +17,9 @@
     { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Vân Đồn — The First Trading Port", "url": "./van-don/index.html",
+    { "name": "Vân Đồn: The First Trading Port", "url": "./van-don/index.html",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Bắc Hải Đảo — Pirates of the Gulf of Tonkin", "url": "./bac-hai-dao/index.html",
+    { "name": "Bắc Hải Đảo: Pirates of the Gulf of Tonkin", "url": "./bac-hai-dao/index.html",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "Bắc Hải Đảo 3D", "url": "./bac-hai-dao-3d/index.html",
       "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
