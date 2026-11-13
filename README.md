@@ -138,6 +138,9 @@ Hắc Giao to become King of the Northern Sea. Four playable captains provide di
 starting conditions and abilities. The characters and story are fiction; the theme
 song is *Bắc Hải Đảo – Theo cánh buồm quê hương*.
 
+The two games also share a song, *Người trao ta chân trời* (Those Who Gave Us the Horizon,
+`assets/nhac/nguoi-trao-ta-chan-troi.mp3`): a thanksgiving to those, named and unnamed, who kept this sea.
+
 ### Bắc Hải Đảo 3D (1780)
 
 The same world rebuilt in three dimensions with three.js: a chase camera behind the
