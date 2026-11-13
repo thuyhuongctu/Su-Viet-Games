@@ -29,7 +29,7 @@
     line-height:1.5;-webkit-font-smoothing:antialiased}
   a{color:var(--dong-link)} a:hover{color:var(--dong-hi)}
   :focus-visible{outline:2px solid var(--dong-hi);outline-offset:3px;border-radius:6px}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
   .serif{font-family:var(--serif)}
   .wrap{max-width:var(--wrap);margin:0 auto;padding-left:24px;padding-right:24px}
   .eyebrow{font-size:13px;letter-spacing:.22em;font-weight:600;color:var(--muted);text-transform:uppercase}
@@ -113,6 +113,9 @@
     font-weight:600;text-decoration:none}
   /* cả thẻ bấm được, chữ "Chơi ngay" là liên kết thật */
   .play::after{content:'';position:absolute;inset:0;border-radius:14px}
+  .links{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
+  .links .play{margin-top:0}
+  .more{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;color:var(--nga-2);font-weight:500}
   .card.soon{background:none;border-style:dashed;border-color:#5c4a30;justify-content:center;
     padding:28px;gap:10px;min-height:260px}
   .card.soon:hover{transform:none;box-shadow:none;border-color:#5c4a30}
@@ -274,7 +277,10 @@
             <span class="genre">Phiêu lưu · hải chiến · buôn bán</span>
             <p>Lái thuyền buồm cánh dơi qua sáu thương cảng cổ, buôn nước mắm, lụa, trầm hương,
               đánh chìm giặc Tàu Ô, gặp Rồng thiêng và hạ trùm Hắc Giao để xưng Vua Bắc Hải Đảo.</p>
-            <a class="play" href="bac-hai-dao/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <div class="links">
+              <a class="play" href="bac-hai-dao/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="more" href="bac-hai-dao/gioi-thieu.html">Giới thiệu</a>
+            </div>
           </div>
         </article>
         <article class="card">

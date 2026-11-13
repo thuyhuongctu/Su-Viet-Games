@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1f1509">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/icon-192.png">
+<title>Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ · ThuyHuong Digital</title>
+<meta name="description" content="Bắc Hải Đảo: phiêu lưu hải tặc trên vịnh Bắc Bộ năm 1780. Chọn thuyền trưởng, buôn bán qua sáu thương cảng cổ, đánh giặc Tàu Ô và hạ trùm Hắc Giao. Chơi miễn phí trên trình duyệt, bản 2D và 3D.">
+<meta property="og:title" content="Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ">
+<meta property="og:description" content="Phiêu lưu, hải chiến, buôn bán giữa đảo đá vôi Hạ Long năm 1780. Chơi miễn phí trên trình duyệt.">
+<meta property="og:image" content="../assets/portal/bac-hai-dao.webp">
+<style>
+  /* ===== Bảng màu gốm Lý–Trần dùng chung toàn hệ sinh thái ===== */
+  :root{
+    --ground:#1f1509; --panel:#2a1c0c; --line:#4a3420; --rule:#3d2a15;
+    --wood:#5c3d24; --son:#a5402e; --dong:#d9a441; --dong-link:#e6b95a; --dong-hi:#f2d48a;
+    --nga:#f2e8d5; --nga-2:#e0d3b6; --muted:#c9b896; --label:#b5a37f;
+    --celadon:#9ec5ab; --sea:#2f5a4e; --sea-deep:#1d3a33;
+    --serif:Georgia,"Noto Serif","Times New Roman",serif;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ground);color:var(--nga);font-family:var(--sans);line-height:1.5;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--dong-link)} a:hover{color:var(--dong-hi)}
+  :focus-visible{outline:2px solid var(--dong-hi);outline-offset:3px;border-radius:6px}
+  img{display:block;max-width:100%;height:auto}
+  .wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+  .eyebrow{font-size:13px;letter-spacing:.22em;font-weight:600;color:var(--muted);text-transform:uppercase}
+  .ic{width:16px;height:16px;flex:0 0 auto}
+  h1,h2{font-family:var(--serif);font-weight:700}
+  h2{font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.15}
+  section.blk{padding-top:80px;display:flex;flex-direction:column;gap:22px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--dong);color:var(--ground);
+    padding:10px 16px;border-radius:8px;z-index:10;font-weight:700}
+  .skip:focus{left:8px}
+
+  /* ===== Thanh trên + đường dẫn ===== */
+  .top{border-bottom:1px solid var(--rule)}
+  .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding-top:12px;padding-bottom:12px;
+    list-style:none;font-size:15px}
+  .crumbs a{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--nga-2);text-decoration:none}
+  .crumbs a:hover{color:var(--dong-hi)}
+  .crumbs li+li::before{content:'/';color:#6b5638;margin-right:12px}
+  .crumbs [aria-current]{color:var(--muted)}
+
+  /* ===== Phần đầu ===== */
+  .hero{display:flex;flex-wrap:wrap;gap:40px 48px;align-items:flex-start;padding-top:44px}
+  .gallery{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:12px}
+  .gallery .main{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#11251f}
+  .gallery .main img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none}
+  .thumbs button{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;background:none;cursor:pointer}
+  .thumbs button[aria-pressed="true"]{border:2px solid var(--dong)}
+  .thumbs img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .gallery figcaption{font-size:13px;color:var(--muted)}
+  .aside{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:16px}
+  .tag{align-self:flex-start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;
+    background:var(--son);color:#fbf1e2}
+  h1{font-size:clamp(2.3rem,4.4vw,3.2rem);line-height:1.06}
+  .alias{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--muted)}
+  .aside p{font-size:16px;line-height:1.65;color:var(--nga-2)}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;
+    border-radius:999px;font:700 17px var(--sans);text-decoration:none}
+  .btnFill{background:var(--dong);color:var(--ground)}
+  .btnFill:hover{background:var(--dong-hi);color:var(--ground)}
+  .btnLine{min-height:48px;border:1px solid var(--dong);color:var(--dong-hi);font-weight:600;font-size:15px}
+  .btnLine:hover{background:rgba(217,164,65,.12)}
+  .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px;margin-top:6px;
+    padding-top:18px;border-top:1px solid var(--rule)}
+  .facts dt{font-size:12px;letter-spacing:.08em;color:var(--label);text-transform:uppercase}
+  .facts dd{font-size:15px;margin-top:2px}
+
+  /* ===== Bối cảnh: bảng đối chiếu ===== */
+  .lead{font-size:17px;line-height:1.6;color:#d6c8a8;max-width:44rem}
+  .tblBox{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+  table{width:100%;border-collapse:collapse;min-width:520px;font-size:15px}
+  th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+  thead th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;background:var(--panel)}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+  tbody th{font-weight:500;color:var(--muted);width:40%}
+  td strong{color:var(--nga)}
+
+  /* ===== Thuyền trưởng ===== */
+  .caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;list-style:none}
+  .cap{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .cap img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;background:#11251f}
+  .capBody{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
+  .capRole{font-size:12px;letter-spacing:.1em;color:var(--dong);font-weight:600;text-transform:uppercase}
+  .cap h3{font-family:var(--serif);font-size:21px;line-height:1.2}
+  .capNick{font-family:var(--serif);font-style:italic;color:var(--muted)}
+  .cap p{font-size:15px;line-height:1.55;color:var(--nga-2);margin-top:4px}
+
+  /* ===== Cảng + cách chơi ===== */
+  .twoCol{display:flex;flex-wrap:wrap;gap:40px}
+  .twoCol > div{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px}
+  .ports{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;counter-reset:p}
+  .ports li{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:15px;
+    display:flex;gap:10px;align-items:baseline;counter-increment:p}
+  .ports li::before{content:counter(p);font-family:var(--serif);color:var(--dong);font-weight:700}
+  .goods{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+  .goods li{font-size:14px;padding:6px 12px;border-radius:999px;border:1px solid #8a7656;color:var(--nga-2)}
+  .h3{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;margin-top:6px}
+  .keys{display:flex;flex-direction:column;gap:10px}
+  .keys div{display:flex;gap:14px;align-items:center}
+  .keys dt{flex:0 0 96px}
+  .keys dd{font-size:15px;color:var(--nga-2)}
+  kbd{font:600 13px var(--sans);padding:4px 8px;border:1px solid #8a7656;border-bottom-width:2px;border-radius:6px;white-space:nowrap}
+  .note{font-size:14px;line-height:1.6;color:var(--muted)}
+
+  /* ===== Vòng chơi ===== */
+  .loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;list-style:none;counter-reset:s}
+  .loop li{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+    display:flex;flex-direction:column;gap:6px;counter-increment:s}
+  .loop li::before{content:counter(s,decimal-leading-zero);font-family:var(--serif);font-size:24px;
+    font-weight:700;color:var(--dong);line-height:1}
+  .loop b{font-size:17px}
+  .loop span{font-size:15px;line-height:1.6;color:var(--nga-2)}
+
+  /* ===== Bài hát ===== */
+  .band{margin-top:80px;background:var(--sea);border-radius:20px;padding:28px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+  .band img{width:130px;height:180px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+  .bandTxt{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .bandTxt .eyebrow{color:#cfe3d6}
+  .bandTxt p{font-size:15px;line-height:1.6;color:#e3f0e7;max-width:38rem}
+  .bandTxt audio{width:100%;max-width:440px;margin-top:6px}
+  .bandTxt a{color:var(--nga);align-self:flex-start;display:inline-flex;align-items:center;min-height:44px}
+
+  .cta{margin-top:80px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .cta .row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  .cta .btn{min-width:200px}
+  footer{margin-top:80px;border-top:1px solid var(--rule)}
+  .footIn{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;padding-top:28px;padding-bottom:40px;
+    font-size:14px;color:var(--muted)}
+  .footIn a{display:inline-flex;align-items:center;min-height:44px}
+
+  @media (max-width:640px){
+    .wrap{padding-left:16px;padding-right:16px}
+    .hero{padding-top:24px}
+    section.blk{padding-top:56px}
+    .band{padding:20px;gap:18px}
+    .band img{width:90px;height:125px}
+    .cta .btn{flex:1 1 100%}
+  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<a class="skip" href="#noi-dung">Bỏ qua, đến nội dung</a>
+
+<header class="top">
+  <nav class="wrap" aria-label="Đường dẫn">
+    <ol class="crumbs">
+      <li><a href="../index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cổng trò chơi</a></li>
+      <li><a href="../index.html#era1780">1780 · Vịnh Bắc Bộ</a></li>
+      <li><span aria-current="page">Bắc Hải Đảo</span></li>
+    </ol>
+  </nav>
+</header>
+
+<main id="noi-dung" class="wrap">
+  <div class="hero">
+    <figure class="gallery">
+      <div class="main">
+        <img id="shot" src="../assets/portal/bac-hai-dao.webp" width="800" height="500"
+          alt="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng">
+      </div>
+      <ul class="thumbs" aria-label="Chọn ảnh">
+        <li><button type="button" aria-pressed="true" data-src="../assets/portal/bac-hai-dao.webp"
+          data-alt="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng" data-cap="Bản 2D — bản đồ vịnh nhìn từ trên cao">
+          <img src="../assets/portal/bac-hai-dao.webp" width="800" height="500" alt="Ảnh 1: bản 2D"></button></li>
+        <li><button type="button" aria-pressed="false" data-src="../assets/portal/bac-hai-dao-captains.webp"
+          data-alt="Màn chọn thuyền trưởng với bốn nhân vật" data-cap="Màn chọn thuyền trưởng">
+          <img src="../assets/portal/bac-hai-dao-captains.webp" width="800" height="500" alt="Ảnh 2: chọn thuyền trưởng"></button></li>
+        <li><button type="button" aria-pressed="false" data-src="../assets/portal/bac-hai-dao-3d.webp"
+          data-alt="Bắc Hải Đảo 3D: camera đuổi sau thuyền giữa đảo đá vôi" data-cap="Bản 3D — camera đuổi sau thuyền">
+          <img src="../assets/portal/bac-hai-dao-3d.webp" width="800" height="500" alt="Ảnh 3: bản 3D"></button></li>
+      </ul>
+      <figcaption id="shotCap" aria-live="polite">Bản 2D — bản đồ vịnh nhìn từ trên cao</figcaption>
+    </figure>
+
+    <div class="aside">
+      <span class="tag">Truyện hư cấu · bối cảnh có thật</span>
+      <h1>Bắc Hải Đảo</h1>
+      <span class="alias">Hải Tặc Vịnh Bắc Bộ</span>
+      <p>Lái thuyền buồm cánh dơi giữa đảo đá vôi Hạ Long, buôn nước mắm, lụa, trầm hương qua
+        sáu thương cảng cổ, đánh chìm giặc Tàu Ô, gặp Rồng thiêng và hạ trùm Hắc Giao để xưng
+        Vua Bắc Hải Đảo.</p>
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi bản 2D</a>
+      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html">Chơi bản 3D</a>
+      <dl class="facts">
+        <div><dt>Thể loại</dt><dd>Phiêu lưu, hải chiến, buôn bán</dd></div>
+        <div><dt>Bối cảnh</dt><dd>Vịnh Bắc Bộ, năm 1780</dd></div>
+        <div><dt>Thiết bị</dt><dd>Máy tính, điện thoại, máy tính bảng</dd></div>
+        <div><dt>Lưu game</dt><dd>Tự lưu mỗi lần cập bến</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <section class="blk" aria-labelledby="h-boi-canh">
+    <span class="eyebrow">Bối cảnh</span>
+    <h2 id="h-boi-canh">Thể loại hải tặc, chất liệu Việt Nam</h2>
+    <p class="lead">Cốt truyện là hư cấu, nhưng cảnh vật, thuyền bè, thương cảng và hàng hóa đều
+      lấy từ vùng biển Đông Bắc Việt Nam.</p>
+    <div class="tblBox" tabindex="0" role="region" aria-labelledby="h-boi-canh">
+      <table>
+        <thead><tr><th scope="col">Trong game hải tặc quen thuộc</th><th scope="col">Trong Bắc Hải Đảo</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Vùng biển xa lạ</th><td>Vịnh Bắc Bộ với <strong>đảo đá vôi Hạ Long</strong></td></tr>
+          <tr><th scope="row">Tàu galleon</th><td>Thuyền buồm <strong>cánh dơi</strong> (ghe mành)</td></tr>
+          <tr><th scope="row">Port Royal, Tortuga</th><td><strong>Vân Đồn</strong>, Hòn Gai, Cát Bà, Quan Lạn, Cô Tô, Bạch Long Vĩ</td></tr>
+          <tr><th scope="row">Rượu rum, thuốc lá, vàng</th><td>Muối, <strong>nước mắm Cát Hải</strong>, chè Thái Nguyên, gốm Chu Đậu, lụa, quế, ngọc trai Cô Tô, trầm hương</td></tr>
+          <tr><th scope="row">Hải tặc Râu Đen</th><td>Giặc <strong>Tàu Ô</strong> và trùm <strong>Hắc Giao</strong></td></tr>
+          <tr><th scope="row">Kraken, nàng tiên cá</th><td><strong>Rồng thiêng Hạ Long</strong> hiện lên ban phước</td></tr>
+          <tr><th scope="row">Đồng doubloon</th><td><strong>Lượng</strong> bạc</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="blk" aria-labelledby="h-thuyen-truong">
+    <span class="eyebrow">Phân vai</span>
+    <h2 id="h-thuyen-truong">Bốn thuyền trưởng, bốn lối chơi</h2>
+    <ul class="caps">
+      <li class="cap">
+        <img src="assets/do-doc-phuong-hoa.jpg" width="700" height="928" loading="lazy" alt="Chân dung Đô đốc T’Hương">
+        <div class="capBody">
+          <span class="capRole">Thiện chiến nhất</span>
+          <h3>Đô đốc T’Hương</h3>
+          <span class="capNick">«Phượng Hỏa Bắc Hải»</span>
+          <p>+1 nòng pháo mỗi mạn, nạp đạn nhanh hơn 30%. Buồm ngọc lam và màn kết thắng trận riêng.</p>
+        </div>
+      </li>
+      <li class="cap">
+        <img src="assets/lai-buon-tran-van-don.jpg" width="896" height="1200" loading="lazy" alt="Chân dung Lái buôn Trần Vân Đồn">
+        <div class="capBody">
+          <span class="capRole">Giàu nhanh nhất</span>
+          <h3>Lái buôn Trần Vân Đồn</h3>
+          <span class="capNick">«Thần Toán Bến Cổ»</span>
+          <p>Mua rẻ 10%, bán đắt 10%, thêm 20 khoang hàng.</p>
+        </div>
+      </li>
+      <li class="cap">
+        <img src="assets/kiem-khach-hai-au.jpg" width="805" height="1200" loading="lazy" alt="Chân dung Kiếm khách Hải Âu">
+        <div class="capBody">
+          <span class="capRole">Cơ động nhất</span>
+          <h3>Kiếm khách Hải Âu</h3>
+          <span class="capNick">«Cánh Én Ngược Gió»</span>
+          <p>Tốc độ +15%, bẻ lái nhanh hơn 25%.</p>
+        </div>
+      </li>
+      <li class="cap">
+        <img src="assets/ba-tu-cat-hai.jpg" width="896" height="896" loading="lazy" alt="Chân dung Bà Tư Cát Hải">
+        <div class="capBody">
+          <span class="capRole">Bền bỉ nhất</span>
+          <h3>Bà Tư Cát Hải</h3>
+          <span class="capNick">«Mẹ Biển Cả»</span>
+          <p>+50 máu, +4 thủy thủ.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="blk" aria-labelledby="h-vong-choi">
+    <span class="eyebrow">Vòng chơi</span>
+    <h2 id="h-vong-choi">Từ lái buôn đến Vua Bắc Hải Đảo</h2>
+    <ol class="loop">
+      <li><b>Buôn hàng</b><span>Mỗi cảng có đặc sản giá rẻ và mặt hàng khan hiếm giá cao. Mua chỗ rẻ, chở sang bán chỗ đắt; giá dao động theo thời gian.</span></li>
+      <li><b>Chiến đấu</b><span>Giặc Tàu Ô tuần tra khắp vịnh. Đánh chìm chúng để lấy chiến lợi phẩm và uy danh. Xuôi gió chạy nhanh, ngược gió ì ạch.</span></li>
+      <li><b>Nâng cấp</b><span>Ở xưởng tàu: thân gỗ lim, buồm lớn, thêm nòng thần công, mở rộng khoang hàng. Mộ thủy thủ ở quán rượu.</span></li>
+      <li><b>Bão biển</b><span>Khi bão nổi phải hạ buồm — căng buồm to trong bão sẽ vỡ tàu.</span></li>
+      <li><b>Rồng thiêng Hạ Long</b><span>Thỉnh thoảng hiện lên giữa các đảo đá. Chèo đến gần để được hồi máu, thuận buồm và cộng uy danh.</span></li>
+      <li><b>Trận cuối</b><span>Đạt 10 uy danh, trùm Hắc Giao xuất trận gần Bạch Long Vĩ. Đánh chìm soái hạm của hắn để xưng Vua Bắc Hải Đảo.</span></li>
+    </ol>
+    <p class="note">Thua trận không mất hết: dân chài Vân Đồn vớt bạn về bến, chỉ mất nửa số bạc.</p>
+  </section>
+
+  <section class="blk twoCol" aria-label="Thương cảng và cách điều khiển">
+    <div>
+      <span class="eyebrow">Hải trình</span>
+      <h2>Sáu thương cảng</h2>
+      <ol class="ports">
+        <li>Vân Đồn</li><li>Hòn Gai</li><li>Cát Bà</li><li>Quan Lạn</li><li>Cô Tô</li><li>Bạch Long Vĩ</li>
+      </ol>
+      <span class="h3">Hàng hóa</span>
+      <ul class="goods">
+        <li>Muối</li><li>Nước mắm Cát Hải</li><li>Chè Thái Nguyên</li><li>Gốm Chu Đậu</li>
+        <li>Lụa</li><li>Quế</li><li>Ngọc trai Cô Tô</li><li>Trầm hương</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow">Điều khiển</span>
+      <h2>Cách chơi</h2>
+      <span class="h3">Máy tính</span>
+      <dl class="keys">
+        <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Căng / hạ buồm (3 cấp)</dd></div>
+        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Bẻ lái</dd></div>
+        <div><dt><kbd>Space</kbd></dt><dd>Khai hỏa thần công hai mạn</dd></div>
+        <div><dt><kbd>E</kbd></dt><dd>Cập bến khi đến gần cảng</dd></div>
+        <div><dt><kbd>P</kbd></dt><dd>Tạm dừng</dd></div>
+        <div><dt><kbd>M</kbd></dt><dd>Bật / tắt nhạc</dd></div>
+      </dl>
+      <span class="h3">Điện thoại, máy tính bảng</span>
+      <p class="note">Nút cảm ứng tự hiện: góc trái để bẻ lái và căng/hạ buồm, góc phải giữ để khai hỏa liên tục.
+        Chạm dòng «Nhấn E để cập bến» để vào cảng. Nên xoay ngang màn hình.</p>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="h-bai-hat">
+    <img src="assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy" alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
+    <div class="bandTxt">
+      <span class="eyebrow">Bài hát chủ đề</span>
+      <h2 id="h-bai-hat">«Theo cánh buồm quê hương»</h2>
+      <p>Bài hát dài 5 phút 47 giây, vang lên ở màn mở đầu và khi xưng Vua, trong cả bản 2D và 3D.
+        Lúc ra khơi, nhạc nền ngũ cung đàn tranh, đàn bầu được tạo trực tiếp trong game.</p>
+      <audio controls preload="none" src="assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3">
+        Trình duyệt của bạn chưa phát được âm thanh.
+      </audio>
+      <a href="assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp4">Xem lyric video</a>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Sẵn sàng ra khơi?</h2>
+    <div class="row">
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi bản 2D</a>
+      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html">Chơi bản 3D</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footIn">
+    <span>© 2026 ThuyHuong Digital · Trò chơi HTML5 thuần</span>
+    <span><a href="../index.html">Về cổng trò chơi</a> · <a href="../privacy.html">Quyền riêng tư</a></span>
+  </div>
+</footer>
+
+<script>
+'use strict';
+// Thư viện ảnh: bấm ảnh nhỏ để đổi ảnh lớn
+const shot=document.getElementById('shot'), cap=document.getElementById('shotCap');
+const btns=document.querySelectorAll('.thumbs button');
+btns.forEach(b => b.addEventListener('click', () => {
+  btns.forEach(x => x.setAttribute('aria-pressed', x===b ? 'true' : 'false'));
+  shot.src=b.dataset.src; shot.alt=b.dataset.alt; cap.textContent=b.dataset.cap;
+}));
+if('serviceWorker' in navigator){
+  addEventListener('load', () => { navigator.serviceWorker.register('../sw.js').catch(()=>{}); });
+}
+</script>
+</body>
+</html>
