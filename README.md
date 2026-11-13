@@ -99,11 +99,11 @@ web. It is free to play and to teach with, but it is not open-source software: s
 
 | | Game | Setting | Basis | Genre | Play |
 |---|---|---|---|---|---|
-| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [Guide](van-don/README.md) |
-| 🚶 | **Vân Đồn 3D** — Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don-3d/) · [Guide](van-don-3d/README.md) |
-| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [Guide](bac-hai-dao/README.md) |
+| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
+| 🚶 | **Vân Đồn 3D** — Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don-3d/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
+| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
 | 🌊 | **Bắc Hải Đảo 3D** | 1780 | Fiction | The same world rendered in 3D | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
-| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [Guide](cho-noi/README.md) |
+| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
 
 ### Vân Đồn — The First Trading Port (1149)
 
@@ -245,17 +245,18 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 ```
 .
 ├── index.html               Portal homepage (chronological timeline)
-├── van-don/                 Vân Đồn: port building, 2D canvas (1149)
+├── van-don/                 Vân Đồn: port building, 2D canvas (1149); gioi-thieu.html About page
 ├── van-don-3d/              Vân Đồn 3D: walking the quay, three.js (1149–1348)
 │   ├── assets/              Clay-figure cut-outs, portraits, scene photos, theme song
 │   └── PROMPT-NHAN-VAT.md   Image prompts and period checklist for the figures
-├── bac-hai-dao/             Bắc Hải Đảo: pirate adventure, 2D canvas (1780)
+├── bac-hai-dao/             Bắc Hải Đảo: pirate adventure, 2D canvas (1780); gioi-thieu.html About page
 │   ├── assets/              Captain artwork and theme song
 │   └── PROMPT-VUA.md        Image prompts for the victory («King») artwork
 ├── bac-hai-dao-3d/          Bắc Hải Đảo 3D: three.js edition
-├── cho-noi/                 Chợ Nổi: floating market, Phaser 3 (19th century)
+├── cho-noi/                 Chợ Nổi: floating market, Phaser 3 (19th century); gioi-thieu.html About page
 ├── lib/three.min.js         Vendored three.js r147
 ├── assets/vendor/           Vendored Phaser 3.90.0 and its licence
+├── assets/portal/           Portal thumbnails and the shared CSS of the About pages
 ├── icons/                   Application icon set (192, 512, maskable)
 ├── docs/                    Screenshots and the Zenodo description
 ├── store-assets/            Store listings, data-safety answers, promotional graphics

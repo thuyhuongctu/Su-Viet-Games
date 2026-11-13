@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#241708">
+<meta name="theme-color" content="#1f1509">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -11,225 +11,386 @@
 <meta name="description" content="Cổng trò chơi sử Việt của ThuyHuong Digital: dựng thương cảng Vân Đồn thời Lý, làm hải tặc Vịnh Bắc Bộ thời Lê, chèo xuồng chợ nổi miền Tây. Game HTML5 miễn phí, chơi ngay trên trình duyệt điện thoại và máy tính.">
 <meta property="og:title" content="ThuyHuong Digital — Cổng Trò Chơi Sử Việt">
 <meta property="og:description" content="Mỗi trò chơi là một trang sử Đại Việt. Chơi miễn phí ngay trên trình duyệt.">
+<meta property="og:image" content="assets/portal/bac-hai-dao-3d.webp">
 <style>
   /* ===== Bảng màu gốm Lý–Trần dùng chung toàn hệ sinh thái ===== */
   :root{
-    --panel:#241708; --panel2:#31200d; --wood:#5c3d24;
-    --son:#a5402e; --dong:#d9a441; --nga:#f2e8d5; --celadon:#9ec5ab;
-    --sea:#2f5a4e;
+    --ground:#1f1509; --panel:#2a1c0c; --panel-hi:#3a2810; --line:#4a3420; --rule:#3d2a15;
+    --wood:#5c3d24; --son:#a5402e; --dong:#d9a441; --dong-link:#e6b95a; --dong-hi:#f2d48a;
+    --nga:#f2e8d5; --nga-2:#e0d3b6; --muted:#c9b896;
+    --celadon:#9ec5ab; --sea:#2f5a4e; --sea-deep:#1d3a33;
+    --serif:Georgia,"Noto Serif","Times New Roman",serif;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;
+    --wrap:1200px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--panel);color:var(--nga);
-    font-family:"Segoe UI",system-ui,sans-serif;min-height:100vh;
-    display:flex;flex-direction:column;align-items:center}
-  .serif{font-family:Georgia,"Times New Roman","Noto Serif",serif}
+  html{scroll-behavior:smooth}
+  body{background:var(--ground);color:var(--nga);font-family:var(--sans);
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--dong-link)} a:hover{color:var(--dong-hi)}
+  :focus-visible{outline:2px solid var(--dong-hi);outline-offset:3px;border-radius:6px}
+  img{display:block;max-width:100%;height:auto}
+  .serif{font-family:var(--serif)}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding-left:24px;padding-right:24px}
+  .eyebrow{font-size:13px;letter-spacing:.22em;font-weight:600;color:var(--muted);text-transform:uppercase}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--dong);color:var(--ground);
+    padding:10px 16px;border-radius:8px;z-index:10;font-weight:700}
+  .skip:focus{left:8px}
+  .ic{width:16px;height:16px;flex:0 0 auto}
 
-  /* Hoa văn sóng nước thời Lý — chữ ký thị giác */
-  .songly{height:9px;width:100%;background:
-    radial-gradient(circle at 6px -3px, transparent 5.5px, var(--dong) 6px, var(--dong) 7.5px, transparent 8px)
-    repeat-x;background-size:12px 9px;opacity:.85}
+  /* ===== Thanh trên ===== */
+  .top{border-bottom:1px solid var(--rule)}
+  .topIn{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;
+    padding-top:14px;padding-bottom:14px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--nga)}
+  .brand b{display:block;font-family:var(--serif);font-size:19px;line-height:1.15}
+  .brand small{display:block;font-size:11px;letter-spacing:.18em;color:var(--muted)}
+  nav ul{display:flex;flex-wrap:wrap;align-items:center;gap:2px;list-style:none}
+  nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+    color:#e8dcc2;text-decoration:none;font-size:15px;border-radius:8px}
+  nav a:hover{color:var(--dong-hi);background:var(--panel)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;
+    padding:0 22px;border-radius:999px;font:600 16px var(--sans);text-decoration:none;cursor:pointer}
+  .btnFill{background:var(--dong);color:var(--ground);border:0;font-weight:700}
+  .btnFill:hover{background:var(--dong-hi);color:var(--ground)}
+  .btnLine{background:transparent;border:1px solid var(--celadon);color:#e3f0e7}
+  .btnLine:hover{background:rgba(158,197,171,.12);color:#fff}
+  .btnGold{min-height:44px;padding:0 18px;font-size:14px;border:1px solid var(--dong);
+    background:transparent;color:var(--dong-hi)}
+  .btnGold:hover{background:rgba(217,164,65,.14)}
+  #btnInstall[hidden]{display:none}
 
   /* ===== Hero: biển men ngọc chuyển động ===== */
-  header{position:relative;width:100%;overflow:hidden;text-align:center;
-    padding:52px 20px 40px}
-  #sea{position:absolute;inset:0;z-index:0}
-  .heroIn{position:relative;z-index:1}
-  .eyebrow{font-size:11px;letter-spacing:5px;color:var(--celadon);margin-bottom:10px}
-  h1{font-size:clamp(30px,7vw,52px);color:var(--dong);letter-spacing:2px;
-    line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,.55)}
-  .sub{margin-top:12px;font-style:italic;color:#d9cdb4;font-size:clamp(13px,3.4vw,16px);
-    max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
-  .seal{display:inline-block;margin-top:18px;border:1.5px solid var(--son);
-    color:var(--son);border-radius:6px;padding:5px 14px;font-size:12px;
-    letter-spacing:2px;background:rgba(165,64,46,.14)}
+  .hero{position:relative;overflow:hidden;background:var(--sea-deep)}
+  #sea{position:absolute;inset:0;width:100%;height:100%}
+  .heroIn{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:48px;
+    padding-top:80px;padding-bottom:88px}
+  .heroTxt{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px}
+  .heroTxt .eyebrow{color:var(--celadon)}
+  h1{font-family:var(--serif);font-size:clamp(2.4rem,5.2vw,4.2rem);line-height:1.06;font-weight:700}
+  h1 em{color:var(--dong)}
+  .lead{font-size:clamp(16px,1.6vw,18px);line-height:1.65;color:#dfe9e2;max-width:34rem}
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+  .stats{display:flex;flex-wrap:wrap;gap:28px;margin-top:10px;padding-top:20px;
+    border-top:1px solid #3f6358;list-style:none}
+  .stats b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1}
+  .stats span{font-size:13px;color:#c3d6ca}
+  .heroFig{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:10px}
+  .heroFig a{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--dong);background:#11251f}
+  .heroFig img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .4s}
+  .heroFig a:hover img{transform:scale(1.03)}
+  .heroFig figcaption{font-size:13px;color:#c3d6ca}
 
-  /* ===== Dòng sử liệu ===== */
-  main{width:100%;max-width:680px;padding:34px 18px 10px;position:relative}
-  .lineWrap{position:relative;padding-left:34px}
-  .lineWrap::before{content:'';position:absolute;left:11px;top:6px;bottom:6px;
-    width:2px;background:linear-gradient(180deg,var(--dong),var(--wood))}
-  .era{position:relative;margin-bottom:30px}
-  .era::before{content:'';position:absolute;left:-30px;top:14px;width:12px;height:12px;
-    border-radius:50%;background:var(--son);border:2.5px solid var(--dong)}
-  .kind{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;font-size:11px;letter-spacing:.5px;vertical-align:1px;border:1px solid currentColor}
-  .kind.su{color:var(--celadon)}
-  .kind.hc{color:var(--dong)}
-  .year{font-size:12px;letter-spacing:3px;color:var(--celadon);margin-bottom:6px}
-  a.card{display:block;text-decoration:none;color:inherit;background:var(--panel2);
-    border:1.5px solid var(--wood);border-radius:14px;overflow:hidden;
-    transition:transform .18s,border-color .18s,box-shadow .18s}
-  a.card:hover,a.card:focus-visible{transform:translateY(-3px);border-color:var(--dong);
-    box-shadow:0 12px 34px rgba(0,0,0,.45);outline:none}
-  .cardTop{display:flex;gap:14px;align-items:center;padding:16px 18px 12px}
-  .cardIc{font-size:38px;flex:0 0 auto}
-  .card h2{color:var(--dong);font-size:19px;letter-spacing:.5px;line-height:1.3}
-  .card .alias{font-size:12px;color:var(--celadon);font-style:italic;margin-top:2px}
-  .card p{padding:0 18px 14px;font-size:13.5px;line-height:1.7;color:#e0d4bb}
-  .cardFoot{display:flex;justify-content:space-between;align-items:center;
-    padding:10px 18px;border-top:1px solid var(--wood);font-size:12px;color:var(--celadon)}
-  .play{color:#fff8e0;background:linear-gradient(180deg,#b8912e,#8a6a1c);
-    border:1px solid var(--dong);border-radius:7px;padding:7px 16px;font-weight:600;
-    font-size:13px}
-  .tags span{margin-right:8px}
-  .soon{opacity:.55}
-  .soon .play{background:var(--panel);border-color:var(--wood);color:var(--celadon)}
+  /* ===== Dòng thời gian ===== */
+  .secHead{display:flex;flex-direction:column;gap:12px;padding-top:88px}
+  h2{font-family:var(--serif);font-size:clamp(1.9rem,3.4vw,2.8rem);line-height:1.15;font-weight:700}
+  .secHead p{font-size:17px;line-height:1.6;color:#d6c8a8;max-width:42rem}
+  .secHead strong{color:var(--nga)}
+  .rail{display:flex;align-items:center;margin-top:24px}
+  .rail i{width:14px;height:14px;border-radius:50%;background:var(--dong);flex:0 0 auto}
+  .rail i.next{background:none;border:2px dashed #8a7656}
+  .rail s{flex:1 1 0;height:2px;background:var(--wood)}
+  .eras{display:flex;flex-direction:column;gap:56px;padding-top:32px}
+  .era{display:flex;flex-wrap:wrap;gap:24px 32px}
+  .eraHead{flex:1 1 220px;max-width:260px;display:flex;flex-direction:column;gap:6px}
+  .eraHead .yr{font-family:var(--serif);font-size:56px;font-weight:700;line-height:1;color:var(--dong)}
+  .eraHead b{font-size:16px}
+  .eraHead span{font-size:14px;line-height:1.55;color:var(--muted)}
+  .cards{flex:999 1 560px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  .card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,border-color .18s,box-shadow .18s}
+  .card:hover,.card:focus-within{transform:translateY(-3px);border-color:var(--dong);box-shadow:0 12px 34px rgba(0,0,0,.45)}
+  .card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#11251f}
+  .cardBody{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1 1 auto}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid #8a7656;color:var(--nga-2)}
+  .tag.su{background:var(--sea);border-color:var(--sea);color:#e3f0e7}
+  .tag.hc{background:var(--son);border-color:var(--son);color:#fbf1e2}
+  .card h3{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:700}
+  .card .genre{font-size:14px;color:var(--muted)}
+  .card p{font-size:15px;line-height:1.6;color:var(--nga-2)}
+  .play{margin-top:auto;display:inline-flex;align-items:center;gap:8px;min-height:44px;
+    font-weight:600;text-decoration:none}
+  /* cả thẻ bấm được, chữ "Chơi ngay" là liên kết thật */
+  .play::after{content:'';position:absolute;inset:0;border-radius:14px}
+  .links{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
+  .links .play{margin-top:0}
+  .more{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;color:var(--nga-2);font-weight:500}
+  .card.soon{background:none;border-style:dashed;border-color:#5c4a30;justify-content:center;
+    padding:28px;gap:10px;min-height:260px}
+  .card.soon:hover{transform:none;box-shadow:none;border-color:#5c4a30}
+  .card.soon h3{font-size:22px;color:var(--nga-2)}
+  .card.soon p{color:var(--muted)}
 
-  .card3d{margin-top:14px}
-  footer{width:100%;text-align:center;padding:26px 16px 34px;color:#8d7d5e;
-    font-size:12px;line-height:1.8}
-  footer b{color:var(--celadon)}
-  footer a{color:var(--dong);display:inline-block;padding:12px 4px;text-underline-offset:3px}
-  @media (prefers-reduced-motion: reduce){ #sea{display:none} }
+  /* ===== Bài hát ===== */
+  .band{margin-top:96px;background:var(--sea);border-radius:20px;padding:32px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:32px}
+  .band img{width:150px;height:208px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+  .bandTxt{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:10px}
+  .bandTxt .eyebrow{color:#cfe3d6}
+  .bandTxt h2{font-size:clamp(1.7rem,3vw,2.2rem)}
+  .bandTxt p{font-size:16px;line-height:1.6;color:#e3f0e7;max-width:36rem}
+  .bandTxt audio{width:100%;max-width:440px;margin-top:6px}
+  .bandTxt .btnLine{align-self:flex-start;border-color:#cfe3d6;color:var(--nga)}
+
+  /* ===== Cho thầy cô ===== */
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
+    margin-top:28px;list-style:none}
+  .feat li{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;
+    display:flex;flex-direction:column;gap:10px}
+  .feat svg{width:28px;height:28px;color:var(--dong)}
+  .feat h3{font-size:18px;font-weight:600}
+  .feat p{font-size:15px;line-height:1.6;color:#d6c8a8}
+
+  footer{margin-top:96px;border-top:1px solid var(--rule)}
+  .footIn{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;
+    padding-top:36px;padding-bottom:48px;font-size:14px;line-height:1.7;color:var(--muted)}
+  .footIn > div{display:flex;flex-direction:column;gap:4px;max-width:34rem}
+  .footIn b{font-family:var(--serif);font-size:18px;color:var(--nga)}
+  .footIn ul{list-style:none;display:flex;flex-direction:column}
+  .footIn ul a{display:inline-flex;align-items:center;min-height:36px}
+
+  @media (max-width:640px){
+    .wrap{padding-left:16px;padding-right:16px}
+    nav{width:100%}
+    nav ul{gap:0}
+    nav a{padding:0 10px;font-size:14px}
+    .heroIn{padding-top:36px;padding-bottom:44px;gap:28px}
+    .ctas .btn{flex:1 1 100%}
+    .eraHead{max-width:none}
+    .eraHead .yr{font-size:40px}
+    .eras{gap:40px}
+    .band{padding:20px;gap:20px}
+    .band img{width:96px;height:133px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .card,.heroFig img{transition:none}
+    .card:hover,.card:focus-within{transform:none}
+  }
 </style>
 </head>
 <body>
+<a class="skip" href="#games">Bỏ qua, đến danh sách trò chơi</a>
 
-<header>
-  <canvas id="sea"></canvas>
-  <div class="heroIn">
-    <div class="eyebrow">THUYHUONG DIGITAL · 2026</div>
-    <h1 class="serif">CỔNG TRÒ CHƠI<br>SỬ VIỆT</h1>
-    <p class="sub">Mỗi trò chơi là một trang sử Đại Việt — từ thương cảng Vân Đồn
-    thời Lý, sóng nước Vịnh Bắc Bộ thời Lê đến chợ nổi Đất Phương Nam. Chơi ngay trên trình duyệt,
-    không cần cài đặt.</p>
-    <span class="seal">HTML5 · MIỄN PHÍ · ĐIỆN THOẠI & MÁY TÍNH</span>
-    <div><button id="btnInstall" style="display:none;margin-top:16px;
-      background:linear-gradient(180deg,#b8912e,#8a6a1c);color:#fff8e0;
-      border:1px solid var(--dong);border-radius:8px;padding:11px 22px;
-      font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">
-      📲 Cài lên màn hình chính</button></div>
+<header class="top">
+  <div class="wrap topIn">
+    <a class="brand" href="./" aria-label="ThuyHuong Digital — trang chủ">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#d9a441" stroke-width="1.6" aria-hidden="true"><circle cx="17" cy="17" r="15"/><path d="M6 21c3-2 5-2 8 0s5 2 8 0 5-2 6 0"/><path d="M17 6v11M17 8l6 7h-6"/></svg>
+      <span><b>ThuyHuong Digital</b><small>CỔNG TRÒ CHƠI SỬ VIỆT</small></span>
+    </a>
+    <nav aria-label="Chính">
+      <ul>
+        <li><a href="#games">Trò chơi</a></li>
+        <li><a href="#music">Âm nhạc</a></li>
+        <li><a href="#teachers">Cho thầy cô</a></li>
+        <li><button id="btnInstall" class="btn btnGold" type="button" hidden>
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Cài ứng dụng</button></li>
+      </ul>
+    </nav>
   </div>
 </header>
-<div class="songly"></div>
 
 <main>
-  <div class="lineWrap">
-
-    <div class="era">
-      <div class="year">NĂM 1149 · TRIỀU LÝ <span class="kind su">📜 Theo sử liệu</span></div>
-      <a class="card" href="van-don/index.html">
-        <div class="cardTop">
-          <div class="cardIc">🏮</div>
-          <div>
-            <h2 class="serif">Vân Đồn — Đệ Nhất Thương Cảng</h2>
-            <div class="alias">Xây dựng & quản lý thương cảng</div>
-          </div>
-        </div>
-        <p>Năm 1149, đời vua Lý Anh Tông, dựng trang Vân Đồn từ bãi cát ven vịnh:
-        đặt cầu tàu đón thuyền Tống – Tam Phật Tề – Trảo Oa – Xiêm La, mở lò gốm,
-        xưởng lụa, bến mò ngọc trai. Thu thuế, tích danh vọng, đưa Vân Đồn lên ngôi
-        thương cảng đệ nhất Đại Việt.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>🏗️ Xây dựng</span><span>💰 Giao thương</span><span>📜 Sử liệu</span></div>
-          <span class="play">⚓ Chơi ngay</span>
-        </div>
-      </a>
-      <a class="card card3d" href="van-don-3d/index.html">
-        <div class="cardTop">
-          <div class="cardIc">🚶</div>
-          <div>
-            <h2 class="serif">Vân Đồn 3D — Dạo Bến</h2>
-            <div class="alias">Bản thử nghiệm · nhân vật đi lại trên bến</div>
-          </div>
-        </div>
-        <p>Vào vai quan trấn thủ, tự đi lại trên bến Vân Đồn: ghé lò xưởng mua hàng,
-        mang ra cầu tàu bán cho thương thuyền bốn phương, và định mức thuế cảng
-        qua sáu phiên chợ.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>🚶 Đi lại 3D</span><span>⚖️ Thuế cảng</span><span>💰 Giao thương</span></div>
-          <span class="play">⚓ Chơi thử</span>
-        </div>
-      </a>
+<section class="hero" aria-labelledby="heroTitle">
+  <canvas id="sea" aria-hidden="true"></canvas>
+  <div class="wrap heroIn">
+    <div class="heroTxt">
+      <span class="eyebrow">ThuyHuong Digital · 2026</span>
+      <h1 id="heroTitle">Mỗi trò chơi là <em>một trang sử</em> Đại Việt</h1>
+      <p class="lead">Từ thương cảng Vân Đồn thời Lý, sóng nước Vịnh Bắc Bộ đến chợ nổi Đất Phương Nam.
+        Chơi ngay trên trình duyệt — không cài đặt, không tài khoản, không quảng cáo.</p>
+      <div class="ctas">
+        <a class="btn btnFill" href="#games"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi ngay</a>
+        <a class="btn btnLine" href="#timeline">Xem dòng thời gian</a>
+      </div>
+      <ul class="stats">
+        <li><b>5</b><span>trò chơi</span></li>
+        <li><b>3</b><span>thời kỳ lịch sử</span></li>
+        <li><b>0 đ</b><span>miễn phí, chơi được ngoại tuyến</span></li>
+      </ul>
     </div>
-
-    <div class="era">
-      <div class="year">NĂM 1780 · VỊNH BẮC BỘ <span class="kind hc">🎭 Truyện hư cấu</span></div>
-      <a class="card" href="bac-hai-dao/index.html">
-        <div class="cardTop">
-          <div class="cardIc">🏴‍☠️</div>
-          <div>
-            <h2 class="serif">Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ</h2>
-            <div class="alias">Phiêu lưu · hải chiến · buôn bán</div>
-          </div>
-        </div>
-        <p>Lái thuyền buồm cánh dơi giữa đảo đá vôi Hạ Long, buôn nước mắm, lụa,
-        trầm hương qua sáu thương cảng cổ, đánh chìm giặc Tàu Ô, gặp Rồng thiêng
-        và hạ trùm Hắc Giao để xưng Vua Bắc Hải Đảo.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>⚔️ Hải chiến</span><span>⛵ Phiêu lưu</span><span>🐉 Huyền tích</span></div>
-          <span class="play">⚓ Chơi ngay</span>
-        </div>
+    <figure class="heroFig">
+      <a href="bac-hai-dao-3d/index.html" aria-label="Chơi Bắc Hải Đảo 3D">
+        <img src="assets/portal/bac-hai-dao-3d.webp" width="800" height="500"
+          alt="Bắc Hải Đảo 3D: thuyền buồm cánh dơi giữa đảo đá vôi vịnh Bắc Bộ">
       </a>
-    </div>
-
-    <div class="era">
-      <div class="year">NĂM 1780 · BẢN ĐỒ HỌA 3D <span class="kind hc">🎭 Truyện hư cấu</span></div>
-      <a class="card" href="bac-hai-dao-3d/index.html">
-        <div class="cardTop">
-          <div class="cardIc">🌊</div>
-          <div>
-            <h2 class="serif">Bắc Hải Đảo 3D</h2>
-            <div class="alias">Cùng thế giới — góc nhìn 3 chiều</div>
-          </div>
-        </div>
-        <p>Toàn bộ vịnh Bắc Bộ dựng lại bằng đồ họa 3D: camera đuổi sau thuyền
-        buồm cánh dơi, sóng biển nhấp nhô, đảo đá vôi sừng sững. Đầy đủ phân vai,
-        giao thương, hải chiến, bão giông và Rồng thiêng như bản gốc.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>🎮 3D</span><span>⚔️ Hải chiến</span><span>⛵ Phiêu lưu</span></div>
-          <span class="play">⚓ Chơi ngay</span>
-        </div>
-      </a>
-    </div>
-
-    <div class="era">
-      <div class="year">THẾ KỶ 19 · ĐẤT PHƯƠNG NAM</div>
-      <a class="card" href="cho-noi/index.html">
-        <div class="cardTop">
-          <div class="cardIc">🛶</div>
-          <div>
-            <h2 class="serif">Chợ Nổi — Phiên Chợ Trên Sông</h2>
-            <div class="alias">Nhanh tay · hứng nông sản miệt vườn</div>
-          </div>
-        </div>
-        <p>Thời khẩn hoang Đất Phương Nam, ghe xuồng tụ giữa sông thành chợ nổi.
-        Chèo xuồng ba lá hứng dừa, xoài, khóm, lúa từ ghe bầu thả xuống, né gỗ trôi,
-        gom cho đầy khoang trước khi tan chợ — phiên chợ dài 90 giây.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>🍍 Nhanh tay</span><span>⏱️ 90 giây</span><span>🌾 Miệt vườn</span></div>
-          <span class="play">⚓ Chơi ngay</span>
-        </div>
-      </a>
-    </div>
-
-    <div class="era soon">
-      <div class="year">SẮP RA KHƠI…</div>
-      <a class="card" href="#" onclick="return false">
-        <div class="cardTop">
-          <div class="cardIc">📜</div>
-          <div>
-            <h2 class="serif">Trang sử kế tiếp</h2>
-            <div class="alias">Đang được chép…</div>
-          </div>
-        </div>
-        <p>Hệ sinh thái ThuyHuong Digital sẽ tiếp tục bổ sung những trò chơi mới
-        mang màu sắc sử Việt trong năm 2026.</p>
-        <div class="cardFoot">
-          <div class="tags"><span>🕰️ Chờ ngày ra mắt</span></div>
-          <span class="play">Sắp có</span>
-        </div>
-      </a>
-    </div>
-
+      <figcaption>Mới cập nhật · Bắc Hải Đảo 3D — vịnh Bắc Bộ năm 1780, nay có bài hát chủ đề</figcaption>
+    </figure>
   </div>
+</section>
+
+<div class="wrap">
+  <div class="secHead" id="timeline">
+    <span class="eyebrow">Dòng thời gian</span>
+    <h2 id="games" tabindex="-1">Chọn một thời kỳ để ra khơi</h2>
+    <p>Các trò chơi xếp theo năm diễn ra. Nhãn <strong>Theo sử liệu</strong> và
+      <strong>Truyện hư cấu</strong> cho biết mức độ bám sát chính sử.</p>
+    <div class="rail" aria-hidden="true"><i></i><s></s><i></i><s></s><i></i><s></s><i class="next"></i></div>
+  </div>
+
+  <div class="eras">
+    <section class="era" aria-labelledby="era1149">
+      <div class="eraHead">
+        <span class="yr" id="era1149">1149</span>
+        <b>Triều Lý</b>
+        <span>Vua Lý Anh Tông lập trang Vân Đồn — thương cảng quốc tế đầu tiên của Đại Việt.</span>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img src="assets/portal/van-don.webp" width="800" height="500" loading="lazy" alt="Màn chơi Vân Đồn: bến cảng nhìn từ trên cao">
+          <div class="cardBody">
+            <div class="tags"><span class="tag su">Theo sử liệu</span></div>
+            <h3>Vân Đồn — Đệ Nhất Thương Cảng</h3>
+            <span class="genre">Xây dựng · quản lý thương cảng</span>
+            <p>Dựng bến từ bãi cát ven vịnh, đón thuyền Tống, Tam Phật Tề, Trảo Oa, Xiêm La;
+              mở lò gốm, xưởng lụa, bến mò ngọc trai. Thu thuế, tích danh vọng, đưa Vân Đồn lên ngôi đệ nhất.</p>
+            <div class="links">
+              <a class="play" href="van-don/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="more" href="van-don/gioi-thieu.html">Giới thiệu</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/portal/van-don-3d.webp" width="800" height="500" loading="lazy" alt="Vân Đồn 3D: bến cảng với thuyền buôn">
+          <div class="cardBody">
+            <div class="tags"><span class="tag su">Theo sử liệu</span><span class="tag">Bản thử nghiệm</span></div>
+            <h3>Vân Đồn 3D — Dạo Bến</h3>
+            <span class="genre">Đi lại 3D · thuế cảng · giao thương</span>
+            <p>Vào vai quan trấn thủ, ghé lò xưởng mua hàng, mang ra cầu tàu bán cho thương thuyền
+              bốn phương và định mức thuế cảng qua sáu phiên chợ.</p>
+            <div class="links">
+              <a class="play" href="van-don-3d/index.html">Chơi thử <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="more" href="van-don/gioi-thieu.html">Giới thiệu</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="era" aria-labelledby="era1780">
+      <div class="eraHead">
+        <span class="yr" id="era1780">1780</span>
+        <b>Vịnh Bắc Bộ</b>
+        <span>Buôn bán và hải tặc giữa muôn đảo đá vôi Hạ Long.</span>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img src="assets/portal/bac-hai-dao.webp" width="800" height="500" loading="lazy" alt="Bắc Hải Đảo: thuyền buồm giữa vịnh">
+          <div class="cardBody">
+            <div class="tags"><span class="tag hc">Truyện hư cấu</span></div>
+            <h3>Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ</h3>
+            <span class="genre">Phiêu lưu · hải chiến · buôn bán</span>
+            <p>Lái thuyền buồm cánh dơi qua sáu thương cảng cổ, buôn nước mắm, lụa, trầm hương,
+              đánh chìm giặc Tàu Ô, gặp Rồng thiêng và hạ trùm Hắc Giao để xưng Vua Bắc Hải Đảo.</p>
+            <div class="links">
+              <a class="play" href="bac-hai-dao/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="more" href="bac-hai-dao/gioi-thieu.html">Giới thiệu</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/portal/bac-hai-dao-3d.webp" width="800" height="500" loading="lazy" alt="Bắc Hải Đảo 3D: camera đuổi sau thuyền">
+          <div class="cardBody">
+            <div class="tags"><span class="tag hc">Truyện hư cấu</span><span class="tag">Đồ họa 3D</span></div>
+            <h3>Bắc Hải Đảo 3D</h3>
+            <span class="genre">Cùng thế giới — góc nhìn 3 chiều</span>
+            <p>Toàn bộ vịnh dựng lại bằng 3D: sóng nhấp nhô, đảo đá vôi sừng sững. Đầy đủ phân vai,
+              giao thương, hải chiến, bão giông và Rồng thiêng như bản gốc.</p>
+            <a class="play" href="bac-hai-dao-3d/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="era" aria-labelledby="eraTK19">
+      <div class="eraHead">
+        <span class="yr" id="eraTK19">TK 19</span>
+        <b>Đất Phương Nam</b>
+        <span>Thời khẩn hoang, ghe xuồng tụ giữa sông thành chợ nổi.</span>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img src="assets/portal/cho-noi.webp" width="800" height="500" loading="lazy" alt="Chợ Nổi: xuồng ba lá hứng nông sản trên sông">
+          <div class="cardBody">
+            <div class="tags"><span class="tag">Nhanh tay · 90 giây</span></div>
+            <h3>Chợ Nổi — Phiên Chợ Trên Sông</h3>
+            <span class="genre">Nhanh tay · hứng nông sản miệt vườn</span>
+            <p>Chèo xuồng ba lá hứng dừa, xoài, khóm, lúa từ ghe bầu thả xuống, né gỗ trôi,
+              gom cho đầy khoang trước khi tan chợ.</p>
+            <div class="links">
+              <a class="play" href="cho-noi/index.html">Chơi ngay <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="more" href="cho-noi/gioi-thieu.html">Giới thiệu</a>
+            </div>
+          </div>
+        </article>
+        <article class="card soon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9b896" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h8M8 13h6"/></svg>
+          <h3>Trang sử kế tiếp</h3>
+          <p>Đang được chép… Trò chơi mới mang màu sắc sử Việt sẽ tiếp tục ra mắt trong năm 2026.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <section class="band" id="music" aria-labelledby="songTitle">
+    <img src="bac-hai-dao/assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy"
+      alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
+    <div class="bandTxt">
+      <span class="eyebrow">Nhạc trong game</span>
+      <h2 id="songTitle">«Theo cánh buồm quê hương»</h2>
+      <p>Bài hát chủ đề của Bắc Hải Đảo, nay vang lên trong cả bản 2D và 3D.</p>
+      <audio controls preload="none" src="bac-hai-dao/assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3">
+        Trình duyệt của bạn chưa phát được âm thanh.
+      </audio>
+    </div>
+  </section>
+
+  <section id="teachers" aria-labelledby="teachTitle">
+    <div class="secHead">
+      <span class="eyebrow">Cho thầy cô &amp; bảo tàng</span>
+      <h2 id="teachTitle">Mang vào lớp học, không cần phòng máy</h2>
+    </div>
+    <ul class="feat">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>
+        <h3>Chạy trên mọi thiết bị</h3>
+        <p>Điện thoại, máy tính bảng, máy tính — chỉ cần trình duyệt.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 9a15 15 0 0 1 20 0M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg>
+        <h3>Chơi ngoại tuyến</h3>
+        <p>Cài lên màn hình chính một lần, vẫn chơi được khi mất mạng.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Không thu thập dữ liệu</h3>
+        <p>Không tài khoản, không quảng cáo — an toàn cho học sinh.
+          <a href="privacy.html">Chính sách quyền riêng tư</a>.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg>
+        <h3>Có trích dẫn học thuật</h3>
+        <p>Lưu trữ trên Zenodo, DOI <a href="https://doi.org/10.5281/zenodo.21850564">10.5281/zenodo.21850564</a>.</p>
+      </li>
+    </ul>
+  </section>
+</div>
 </main>
 
-<div class="songly"></div>
 <footer>
-  © 2026 <b>ThuyHuong Digital</b> · Trò chơi HTML5 thuần, mã nguồn trên GitHub<br>
-  Cảm hứng từ chính sử Đại Việt: thương cảng Vân Đồn (1149) · vịnh Bắc Bộ (1780) · chợ nổi Đất Phương Nam (thế kỷ 19)<br>
-  Cấp phép cho trường học, bảo tàng, đơn vị du lịch và đối tác thương mại:
-  <a href="mailto:thuyhuongctu@gmail.com?subject=C%E1%BA%A5p%20ph%C3%A9p%20game%20s%E1%BB%AD%20Vi%E1%BB%87t">thuyhuongctu@gmail.com</a>
+  <div class="wrap footIn">
+    <div>
+      <b>ThuyHuong Digital · 2026</b>
+      <span>Cảm hứng từ chính sử Đại Việt: thương cảng Vân Đồn (1149) · vịnh Bắc Bộ (1780) · chợ nổi Đất Phương Nam (thế kỷ 19).</span>
+      <span>© 2026 ThuyHuong Digital · Trò chơi HTML5 thuần.</span>
+    </div>
+    <ul>
+      <li><a href="https://github.com/thuyhuongctu/Vietnamese-History-Games">Mã nguồn trên GitHub</a></li>
+      <li><a href="privacy.html">Chính sách quyền riêng tư</a></li>
+      <li><a href="mailto:thuyhuongctu@gmail.com?subject=C%E1%BA%A5p%20ph%C3%A9p%20game%20s%E1%BB%AD%20Vi%E1%BB%87t">Cấp phép cho trường học, bảo tàng &amp; đối tác</a></li>
+    </ul>
+  </div>
 </footer>
 
 <script>
@@ -238,14 +399,12 @@
 const cv=document.getElementById('sea'), cx=cv.getContext('2d');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function fit(){ const h=cv.parentElement;
-  cv.width=h.offsetWidth; cv.height=h.offsetHeight; }
-addEventListener('resize', fit); fit();
+  cv.width=h.offsetWidth; cv.height=h.offsetHeight; if(reduced) draw(); }
 let t=0,last=performance.now();
-function loop(now){
-  const dt=Math.min(0.05,(now-last)/1000); last=now; t+=dt;
+function draw(){
   const W=cv.width,H=cv.height;
   const g=cx.createLinearGradient(0,0,0,H);
-  g.addColorStop(0,'#1d3a33'); g.addColorStop(1,'#241708');
+  g.addColorStop(0,'#1d3a33'); g.addColorStop(1,'#1a2f29');
   cx.fillStyle=g; cx.fillRect(0,0,W,H);
   cx.strokeStyle='rgba(158,197,171,0.14)'; cx.lineWidth=1.4;
   for(let y=H*0.3;y<H;y+=26){
@@ -256,9 +415,13 @@ function loop(now){
     }
     cx.stroke();
   }
-  if(!reduced) requestAnimationFrame(loop);
 }
-requestAnimationFrame(loop);
+function loop(now){
+  const dt=Math.min(0.05,(now-last)/1000); last=now; t+=dt;
+  draw(); requestAnimationFrame(loop);
+}
+addEventListener('resize', fit); fit();
+if(reduced) draw(); else requestAnimationFrame(loop);
 
 // ---- PWA: đăng ký service worker (chỉ chạy trên https/GitHub Pages) ----
 if('serviceWorker' in navigator){
@@ -266,19 +429,19 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
-// nút "Cài lên màn hình chính" hiện khi trình duyệt cho phép cài
+// nút "Cài ứng dụng" hiện khi trình duyệt cho phép cài
 let deferredPrompt=null;
 const btnI=document.getElementById('btnInstall');
 addEventListener('beforeinstallprompt', e => {
-  e.preventDefault(); deferredPrompt=e; btnI.style.display='inline-block';
+  e.preventDefault(); deferredPrompt=e; btnI.hidden=false;
 });
 btnI.addEventListener('click', async () => {
   if(!deferredPrompt) return;
   deferredPrompt.prompt();
   await deferredPrompt.userChoice;
-  deferredPrompt=null; btnI.style.display='none';
+  deferredPrompt=null; btnI.hidden=true;
 });
-addEventListener('appinstalled', () => { btnI.style.display='none'; });
+addEventListener('appinstalled', () => { btnI.hidden=true; });
 </script>
 </body>
 </html>

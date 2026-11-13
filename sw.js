@@ -1,7 +1,7 @@
 /* ThuyHuong Digital — service worker
    Cache-first cho toàn bộ cổng game: cài một lần, chơi ngoại tuyến. */
 'use strict';
-const VERSION = 'thd-v23';
+const VERSION = 'thd-v27';
 const SHELL = [
   './',
   './index.html',
@@ -9,11 +9,23 @@ const SHELL = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
+  './assets/portal/van-don.webp',
+  './assets/portal/van-don-3d.webp',
+  './assets/portal/bac-hai-dao.webp',
+  './assets/portal/bac-hai-dao-3d.webp',
+  './assets/portal/cho-noi.webp',
+  './bac-hai-dao/assets/nhac/bac-hai-dao-bia.jpg',
   './van-don/index.html',
+  './van-don/gioi-thieu.html',
+  './assets/portal/gioi-thieu.css',
+  './assets/portal/van-don-cho-dem.webp',
   './van-don-3d/index.html',
   './bac-hai-dao/index.html',
+  './bac-hai-dao/gioi-thieu.html',
+  './assets/portal/bac-hai-dao-captains.webp',
   './bac-hai-dao-3d/index.html',
   './cho-noi/index.html',
+  './cho-noi/gioi-thieu.html',
   './assets/vendor/phaser.min.js',
   './lib/three.min.js',
   './bac-hai-dao/assets/do-doc-phuong-hoa.jpg',
