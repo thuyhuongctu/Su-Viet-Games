@@ -111,13 +111,27 @@
 
   /* ===== Bài hát ===== */
   .band{margin-top:96px;background:var(--sea);color:var(--on-sea);border-radius:20px;padding:32px;
-    display:flex;flex-wrap:wrap;align-items:center;gap:32px}
-  .band img{width:150px;height:208px;object-fit:cover;border-radius:10px;flex:0 0 auto}
-  .bandTxt{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:10px}
-  .bandTxt .eyebrow{color:var(--on-sea-2)}
-  .bandTxt h2{font-size:clamp(1.7rem,3vw,2.2rem)}
-  .bandTxt p{font-size:16px;line-height:1.6;max-width:36rem}
-  .bandTxt audio{width:100%;max-width:440px;margin-top:6px}
+    display:flex;flex-direction:column;gap:24px}
+  .band .eyebrow{color:var(--on-sea-2)}
+  .musicHead{display:flex;flex-direction:column;gap:8px}
+  .musicHead h2{font-size:clamp(1.7rem,3vw,2.2rem)}
+  .songs{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .song{display:flex;flex-wrap:wrap;gap:18px 22px;align-items:flex-start;padding:18px;border-radius:14px;
+    background:rgba(0,0,0,.14)}
+  .song img{width:104px;height:104px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+  .song.feature img{width:150px;height:150px}
+  .songTxt{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .songMeta{font-size:13px;color:var(--on-sea-2);letter-spacing:.02em}
+  .song h3{font-family:var(--serif);font-size:22px;line-height:1.2}
+  .song.feature h3{font-size:clamp(1.5rem,2.6vw,1.9rem)}
+  .songTxt p{font-size:15px;line-height:1.6;max-width:40rem}
+  .songTxt audio{width:100%;max-width:440px}
+  .songLink{color:var(--on-sea);align-self:flex-start;display:inline-flex;align-items:center;min-height:44px}
+  .songLink:hover{color:#fff}
+  .lyrics summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--on-sea)}
+  .lyrics .keep{columns:3 240px;column-gap:32px;padding:6px 0 4px;font-size:15px;line-height:1.65;color:var(--on-sea)}
+  .lyrics .keep p{break-inside:avoid;margin-bottom:14px}
+  .lyrics .chorus{font-style:italic;color:var(--on-sea-2)}
 
   /* ===== Cho thầy cô ===== */
   .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
@@ -146,8 +160,9 @@
     .eraHead{max-width:none}
     .eraHead .yr{font-size:40px}
     .eras{gap:40px}
-    .band{padding:20px;gap:20px}
-    .band img{width:96px;height:133px}
+    .band{padding:20px;gap:18px}
+    .song{padding:14px}
+    .song img,.song.feature img{width:84px;height:84px}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
@@ -351,18 +366,73 @@
     </section>
   </div>
 
-  <section class="band" id="music" aria-labelledby="songTitle">
-    <img src="bac-hai-dao/assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy"
-      alt="Cover art for the song Theo cánh buồm quê hương" data-vi-alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
-    <div class="bandTxt">
+  <section class="band music" id="music" aria-labelledby="songTitle">
+    <div class="musicHead">
       <span class="eyebrow"><span lang="en">Music from the games</span><span lang="vi">Nhạc trong game</span></span>
-      <h2 id="songTitle">«Theo cánh buồm quê hương»</h2>
-      <p lang="en">The theme song of Bắc Hải Đảo — “Following the Sails of Home” — now plays in both the 2D and 3D editions. Sung in Vietnamese.</p>
-      <p lang="vi">Bài hát chủ đề của Bắc Hải Đảo, nay vang lên trong cả bản 2D và 3D.</p>
-      <audio controls preload="none" src="bac-hai-dao/assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3">
-        <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
-      </audio>
+      <h2 id="songTitle"><span lang="en">Three songs, sung in Vietnamese</span><span lang="vi">Ba bài hát của các trò chơi</span></h2>
     </div>
+    <ul class="songs">
+      <li class="song feature">
+        <img src="assets/nhac/nguoi-trao-ta-chan-troi.webp" width="360" height="360" loading="lazy"
+          alt="Cover art for the song Người trao ta chân trời" data-vi-alt="Ảnh bìa bài hát Người trao ta chân trời">
+        <div class="songTxt">
+          <span class="songMeta"><span lang="en">New · shared by Vân Đồn and Bắc Hải Đảo · 5:30</span><span lang="vi">Mới · bài chung của Vân Đồn và Bắc Hải Đảo · 5:30</span></span>
+          <h3>«Người trao ta chân trời»</h3>
+          <p lang="en">“They Gave Us a Horizon” — a thank-you to those who came before, sung for both history games:
+            <em>«Người trao ta một chân trời / Ta giữ cho người đến sau»</em> — they gave us a horizon; we keep it for those who come after.</p>
+          <p lang="vi">Bài hát chung của hai trò chơi lịch sử, lời biết ơn người đi trước:
+            <em>«Người trao ta một chân trời / Ta giữ cho người đến sau.»</em></p>
+          <audio controls preload="none" src="assets/nhac/nguoi-trao-ta-chan-troi.mp3">
+            <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
+          </audio>
+          <details class="lyrics">
+            <summary><span lang="en">Lyrics (in Vietnamese)</span><span lang="vi">Lời bài hát</span></summary>
+            <div class="keep" lang="vi">
+            <p>Gió mở lối, cánh buồm lên<br>Bờ xa lùi sau màn sương sớm<br>Một bàn tay ghì tay lái<br>Một bàn tay níu lấy bàn tay</p>
+            <p>Chưa biết hết đường phía trước<br>Chỉ biết không để bạn một mình<br>Qua một đêm trời nổi sóng<br>Càng thương hơn hai tiếng yên bình</p>
+            <p>Có những người ta chưa từng gặp<br>Mà công lao ở khắp quanh mình<br>Trong bến nước, trong từng mái ngói<br>Trong ngày mai ta sống thanh bình</p>
+            <p class="chorus">Người trao ta một chân trời<br>Đã đi qua bao mùa giông bão<br>Để hôm nay ta đứng nơi này<br>Nghe sóng vỗ mà lòng không sợ hãi<br>Người trao ta một quê nhà<br>Bằng tuổi xanh, bằng đời ở lại<br>Ta mang ơn không chỉ bằng lời<br>Cùng giữ lấy chân trời cho ngày mai</p>
+            <p>Ta đọc chậm từng dòng chữ<br>Tên người xưa, năm tháng xa rồi<br>Bỗng nghe tiếng buồm trong gió<br>Như người còn đứng giữa trùng khơi</p>
+            <p>Không phải ai về tới bến<br>Không phải tên nào cũng được ghi<br>Nhưng biển vẫn còn kể mãi<br>Chuyện bao người đã sống, đã đi</p>
+            <p>Vân Đồn còn vang tiếng sóng<br>Bắc Hải Đảo gọi buồm ra khơi<br>Hai câu chuyện cùng nhắc nhớ<br>Một quê hương, bao thế hệ người</p>
+            <p class="chorus">Người trao ta một chân trời<br>Đã đi qua bao mùa giông bão<br>Để hôm nay ta đứng nơi này<br>Nghe sóng vỗ mà lòng không sợ hãi<br>Người trao ta một quê nhà<br>Bằng tuổi xanh, bằng đời ở lại<br>Ta mang ơn không chỉ bằng lời<br>Cùng giữ lấy chân trời cho ngày mai</p>
+            <p>Có một thời ta chưa từng sống<br>Có những người ta chẳng biết tên<br>Mà mỗi sáng nhìn ra phía biển<br>Lại thấy mình mang một niềm ơn</p>
+            <p>Không để chuyện xưa thành quên lãng<br>Không để tình người hóa xa xôi<br>Từ nơi bàn tay người buông xuống<br>Bàn tay ta tiếp lấy cuộc đời</p>
+            <p class="chorus">Người trao ta một chân trời<br>Đã đi qua bao mùa giông bão<br>Để hôm nay ta đứng nơi này<br>Nghe sóng vỗ mà lòng không sợ hãi<br>Người trao ta một quê nhà<br>Bằng tuổi xanh, bằng đời ở lại<br>Ta mang ơn không chỉ bằng lời<br>Cùng giữ lấy chân trời cho ngày mai</p>
+            <p>Mai có người nhìn ra biển rộng<br>Thấy cánh buồm đi giữa trời xanh<br>Xin còn nhớ người trao chân trời ấy<br>Để hôm nay ta được lớn lên</p>
+            <p>Người trao ta một chân trời…<br>Ta giữ cho người đến sau…</p>
+            </div>
+          </details>
+        </div>
+      </li>
+      <li class="song">
+        <img src="bac-hai-dao/assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy"
+          alt="Cover art for the song Theo cánh buồm quê hương" data-vi-alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
+        <div class="songTxt">
+          <span class="songMeta"><span lang="en">Bắc Hải Đảo, 2D and 3D · 5:47</span><span lang="vi">Bắc Hải Đảo, bản 2D và 3D · 5:47</span></span>
+          <h3>«Theo cánh buồm quê hương»</h3>
+          <p lang="en">“Following the Sails of Home”, the theme song of the pirate adventure.</p>
+          <p lang="vi">Bài hát chủ đề của Bắc Hải Đảo, vang lên trong cả bản 2D và 3D.</p>
+          <audio controls preload="none" src="bac-hai-dao/assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3">
+            <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
+          </audio>
+        </div>
+      </li>
+      <li class="song">
+        <img src="van-don-3d/assets/ben-cang-van-don.jpg" width="1100" height="511" loading="lazy"
+          alt="The clay-model port of Vân Đồn" data-vi-alt="Bến cảng Vân Đồn bằng đất nặn">
+        <div class="songTxt">
+          <span class="songMeta"><span lang="en">Vân Đồn 3D · 5:17</span><span lang="vi">Vân Đồn 3D · 5:17</span></span>
+          <h3>«Vân Đồn – Tiếng vọng non sông»</h3>
+          <p lang="en">“Echoes of the Homeland”, the theme song of the 3D port game.</p>
+          <p lang="vi">Bài hát chủ đề của Vân Đồn 3D.</p>
+          <audio controls preload="none" src="van-don-3d/assets/nhac/van-don-tieng-vong-non-song.mp3">
+            <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
+          </audio>
+          <a class="songLink" href="https://youtu.be/RaACW3fvrQM" target="_blank" rel="noopener"><span lang="en">Lyric video on YouTube</span><span lang="vi">Lyric video trên YouTube</span></a>
+        </div>
+      </li>
+    </ul>
   </section>
 
   <section id="teachers" aria-labelledby="teachTitle">

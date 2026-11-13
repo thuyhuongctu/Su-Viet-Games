@@ -1,7 +1,7 @@
 /* ThuyHuong Digital — service worker
    Cache-first cho toàn bộ cổng game: cài một lần, chơi ngoại tuyến. */
 'use strict';
-const VERSION = 'thd-v29';
+const VERSION = 'thd-v30';
 const SHELL = [
   './',
   './index.html',
@@ -21,6 +21,7 @@ const SHELL = [
   './assets/portal/site.css',
   './assets/portal/site.js',
   './assets/portal/gallery.js',
+  './assets/nhac/nguoi-trao-ta-chan-troi.webp',
   './assets/portal/van-don-cho-dem.webp',
   './van-don-3d/index.html',
   './bac-hai-dao/index.html',
