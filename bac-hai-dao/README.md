@@ -79,7 +79,6 @@ lựa chọn được ghi nhớ.
 [`assets/nhac/`](assets/nhac/):
 
 - `bac-hai-dao-theo-canh-buom-que-huong.mp3`: bài hát (128 kbps, 5,8 MB)
-- `bac-hai-dao-theo-canh-buom-que-huong.mp4`: lyric video
 - `bac-hai-dao-bia.jpg`: ảnh bìa
 
 Bài nằm trong bộ sưu tập «Bac Hai Dao – Pirates of the Gulf of Tonkin» của app
