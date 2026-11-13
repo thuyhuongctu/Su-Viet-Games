@@ -134,6 +134,7 @@
   .lyrics .keep{columns:3 240px;column-gap:32px;padding:6px 0 4px;font-size:15px;line-height:1.65;color:var(--on-sea)}
   .lyrics .keep p{break-inside:avoid;margin-bottom:14px}
   .lyrics .chorus{font-style:italic;color:var(--on-sea-2)}
+  .lyrics .fr{font-style:italic;color:#f2d48a}
 
   /* ===== Cho thầy cô ===== */
   .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
@@ -371,14 +372,54 @@
   <section class="band music" id="music" aria-labelledby="songTitle">
     <div class="musicHead">
       <span class="eyebrow"><span lang="en">Music from the games</span><span lang="vi">Nhạc trong game</span></span>
-      <h2 id="songTitle"><span lang="en">Three songs, sung in Vietnamese</span><span lang="vi">Ba bài hát của các trò chơi</span></h2>
+      <h2 id="songTitle"><span lang="en">Four songs, sung in Vietnamese</span><span lang="vi">Bốn bài hát của cổng game</span></h2>
     </div>
     <ul class="songs">
       <li class="song feature">
+        <img src="assets/nhac/trong-toi-co-mot-nuoc-nam.webp" width="360" height="360" loading="lazy"
+          alt="Cover art for the song Trong tôi có một nước Nam: a gold map of Vietnam with the Hoàng Sa and Trường Sa islands" data-vi-alt="Ảnh bìa bài hát Trong tôi có một nước Nam: bản đồ Việt Nam màu vàng đồng, có quần đảo Hoàng Sa và Trường Sa">
+        <div class="songTxt">
+          <span class="songMeta"><span lang="en">New · the portal’s song · 6:32</span><span lang="vi">Mới · bài hát của cổng game · 6:32</span></span>
+          <h3>«Trong tôi có một nước Nam»</h3>
+          <p lang="en">“A Vietnam Within Me” — born in peacetime, the author sings her thanks to those who never came home,
+            and why she builds these games: <em>«Từng trò chơi, tôi gửi một chút lòng»</em> — into every game, I put a little of my heart.</p>
+          <p lang="vi">Sinh ra khi tiếng bom đã lặng, người làm game gửi lời biết ơn những người không trở lại, và lý do của từng trò chơi:
+            <em>«Từng trò chơi, tôi gửi một chút lòng.»</em></p>
+          <audio controls preload="none" src="assets/nhac/trong-toi-co-mot-nuoc-nam.mp3">
+            <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
+          </audio>
+          <details class="lyrics">
+            <summary><span lang="en">Lyrics (in Vietnamese, with a few lines in French)</span><span lang="vi">Lời bài hát</span></summary>
+            <div class="keep" lang="vi">
+            <p>Tôi sinh ra khi tiếng bom đã lặng<br>Lớn lên cùng tiếng trống buổi trường tan<br>Chuyện năm cũ nghe qua lời kể lại<br>Có đôi lần câu chuyện bỗng dở dang</p>
+            <p>Sau mới hiểu những người không trở lại<br>Cũng từng mong một mái ấm riêng mình<br>Cũng có những lời yêu chưa kịp nói<br>Đã lên đường cho đất nước bình yên</p>
+            <p>Tôi chưa sống những tháng ngày khói lửa<br>Nào dám rằng hiểu hết nỗi đau xưa<br>Chỉ biết quý những bình minh đang có<br>Và mang ơn bao người chẳng về nữa</p>
+            <p class="chorus">Trong tôi có một nước Nam<br>Từ lời ru đã âm thầm lớn dậy<br>Dẫu đi xa, dẫu bao mùa đổi thay<br>Vẫn trong lòng một tiếng gọi quê hương</p>
+            <p class="chorus">Tôi cũng ước một mái nhà đầm ấm<br>Một bàn tay cùng đi hết con đường<br>Nhưng khi phải gác tình riêng ở lại<br>Tôi chọn quê hương, dẫu lòng còn thương</p>
+            <p>Tôi ngồi dựng từng mái nhà, bến cũ<br>Cho cánh buồm căng gió giữa trời xanh<br>Mong người trẻ qua một lần gặp gỡ<br>Thấy người xưa gần lại với đời mình</p>
+            <p>Rồi mở những chuyến hàng xuôi ngược sóng<br>Cho ước mơ được thử bước ban đầu<br>Qua được mất, vẫn bền lòng đứng dậy<br>Biết quê nhà là nơi để bắt đầu</p>
+            <p>Có những tối sửa từng dòng, từng nét<br>Ngẩng đầu lên, trời đã sáng bên thềm<br>Chỉ mong những điều âm thầm bé nhỏ<br>Giúp một người yêu đất nước nhiều thêm</p>
+            <p class="chorus">Trong tôi có một nước Nam<br>Từ lời ru đã âm thầm lớn dậy<br>Dẫu đi xa, dẫu bao mùa đổi thay<br>Vẫn trong lòng một tiếng gọi quê hương</p>
+            <p class="chorus">Tôi cũng ước một mái nhà đầm ấm<br>Một bàn tay cùng đi hết con đường<br>Nhưng khi phải gác tình riêng ở lại<br>Tôi chọn quê hương, dẫu lòng còn thương</p>
+            <p>Có lời hẹn chưa thành ngày gặp lại<br>Có tình yêu nằm giữa một dòng thư<br>Bao người đã gửi đời mình ở đó<br>Cho hôm nay còn tiếng mẹ ầu ơ</p>
+            <p>Tôi không nhận những đau thương chưa trải<br>Như chính mình từng đi giữa đạn bom<br>Chỉ tự hỏi trước bình yên đang có<br>Đã làm gì ngoài hai tiếng biết ơn</p>
+            <p class="fr" lang="fr">Je suis née dans la paix<br>Votre espoir demeure en moi</p>
+            <p>Không chỉ nhớ bằng một lần rơi lệ<br>Không chỉ thương qua hai tiếng nghẹn ngào<br>Xin đem những tháng năm mình đang có<br>Góp sức mình cùng đất nước vươn cao</p>
+            <p class="chorus">Trong tôi có một nước Nam<br>Từ lời ru đến những điều tôi viết<br>Qua bàn tay, qua bao điều tâm huyết<br>Tình quê hương thành công việc mỗi ngày</p>
+            <p class="chorus">Tôi vẫn ước một mái nhà đầm ấm<br>Vẫn nâng niu từng hạnh phúc đời thường<br>Nhưng mái ấm đâu nằm ngoài đất nước<br>Giữ quê nhà, cũng giữ những yêu thương</p>
+            <p class="chorus">Mang ơn xưa, xin bền lòng tiếp bước<br>Góp hôm nay cho tươi sáng ngày sau<br>Từ việc nhỏ, giữ trong mình nguyện ước<br>Một nước Nam vững bước ngẩng cao đầu</p>
+            <p>Từng trò chơi, tôi gửi một chút lòng<br>Mong ai đó thêm thương dòng sông cũ<br>Thêm tin vào con đường mình đã chọn<br>Thì những đêm dài cũng hóa bình yên</p>
+            <p class="fr" lang="fr">Je m’appelle Hương<br>Je crée pour ne pas oublier<br>Et pour demain</p>
+            <p>Trong tôi…<br>Có một nước Nam…</p>
+            </div>
+          </details>
+        </div>
+      </li>
+      <li class="song">
         <img src="assets/nhac/nguoi-trao-ta-chan-troi.webp" width="360" height="360" loading="lazy"
           alt="Cover art for the song Người trao ta chân trời" data-vi-alt="Ảnh bìa bài hát Người trao ta chân trời">
         <div class="songTxt">
-          <span class="songMeta"><span lang="en">New · shared by Vân Đồn and Bắc Hải Đảo · 5:30</span><span lang="vi">Mới · bài chung của Vân Đồn và Bắc Hải Đảo · 5:30</span></span>
+          <span class="songMeta"><span lang="en">Shared by Vân Đồn and Bắc Hải Đảo · 5:30</span><span lang="vi">Bài chung của Vân Đồn và Bắc Hải Đảo · 5:30</span></span>
           <h3>«Người trao ta chân trời»</h3>
           <p lang="en">“They Gave Us a Horizon” — a thank-you to those who came before, sung for both history games:
             <em>«Người trao ta một chân trời / Ta giữ cho người đến sau»</em> — they gave us a horizon; we keep it for those who come after.</p>
