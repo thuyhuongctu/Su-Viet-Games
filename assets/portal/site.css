@@ -1,58 +1,59 @@
-/* ThuyHuong Digital — nền chung cho cổng game và các trang giới thiệu:
+/* ThuyHuong Digital: nền chung cho cổng game và các trang giới thiệu:
    bảng màu gốm Lý–Trần ở chế độ sáng và tối, ẩn hiện theo ngôn ngữ
    (tiếng Anh mặc định, tiếng Việt), nút chuyển, bản đồ Việt Nam chìm.
    Chế độ mặc định theo máy; người dùng chọn thì lưu trong localStorage. */
 
-/* ===== Chế độ sáng (nền ngà) ===== */
+/* ===== Chế độ sáng (hiện đại tối giản: nền trung tính, một màu nhấn đỏ son) ===== */
 :root{
   color-scheme:light;
-  --ground:#f6efe2; --panel:#fffaf1; --panel-hi:#f6e9cf; --line:#e0d0b0; --rule:#e6d9c0;
-  --wood:#c4a374; --chip:#b59c74; --sep:#a8916b;
-  --son:#a5402e; --on-son:#fff7ec;
-  --dong:#8c5d0b; --dong-link:#87580a; --dong-hi:#5f3d05;
-  --fill:#d9a441; --fill-hi:#e8bd66; --on-fill:#1f1509;
-  --nga:#22170a; --nga-2:#44361f; --muted:#5f4f36; --label:#6e5c3c; --soft:#4d3f2a;
-  --celadon:#2c6b55; --sea:#2f5a4e; --on-sea:#eef6f1; --on-sea-2:#d6e9dd; --img-bg:#dfe9e3;
-  --hero-bg:#dcebe2; --hero-ink:#142b25; --hero-ink-2:#2c4740; --hero-eyebrow:#2c6b55;
-  --hero-rule:#b7d0c2; --hero-line:#2f5a4e; --hero-wave:rgba(47,90,78,.22);
-  --map-ink:#2f5a4e; --map-opacity:.11; --shadow:0 12px 30px rgba(60,40,10,.14);
-  --serif:Georgia,"Noto Serif","Times New Roman",serif;
-  --sans:"Segoe UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;
+  --ground:#fbfaf7; --panel:#ffffff; --panel-hi:#f3f1ec; --line:#e6e3dc; --rule:#ece9e3;
+  --wood:#d9d5cc; --chip:#d6d2c9; --sep:#b5b1a8;
+  --son:#b3402e; --on-son:#ffffff;
+  --dong:#b3402e; --dong-link:#a23a29; --dong-hi:#7a2a1d;
+  --fill:#141414; --fill-hi:#333333; --on-fill:#ffffff;
+  --nga:#141414; --nga-2:#3a3936; --muted:#65635e; --label:#6f6d67; --soft:#4a4844;
+  --celadon:#2c6b55; --sea:#2f5a4e; --on-sea:#ffffff; --on-sea-2:#d9ece3; --img-bg:#eceae4;
+  --hero-bg:#fbfaf7; --hero-ink:#141414; --hero-ink-2:#4a4844; --hero-eyebrow:#b3402e;
+  --hero-rule:#e6e3dc; --hero-line:#141414; --hero-wave:rgba(20,20,20,.06);
+  --map-ink:#141414; --map-opacity:.045; --shadow:0 1px 2px rgba(0,0,0,.04),0 16px 40px -12px rgba(0,0,0,.14);
+  /* --serif giữ tên cũ nhưng nay là chữ không chân đậm cho tiêu đề */
+  --serif:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
 }
-/* ===== Chế độ tối (sơn mài) ===== */
+/* ===== Chế độ tối ===== */
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --ground:#1f1509; --panel:#2a1c0c; --panel-hi:#3a2810; --line:#4a3420; --rule:#3d2a15;
-    --wood:#5c3d24; --chip:#8a7656; --sep:#6b5638;
-    --son:#a5402e; --on-son:#fbf1e2;
-    --dong:#d9a441; --dong-link:#e6b95a; --dong-hi:#f2d48a;
-    --fill:#d9a441; --fill-hi:#f2d48a; --on-fill:#1f1509;
-    --nga:#f2e8d5; --nga-2:#e0d3b6; --muted:#c9b896; --label:#b5a37f; --soft:#d6c8a8;
-    --celadon:#9ec5ab; --sea:#2f5a4e; --on-sea:#e3f0e7; --on-sea-2:#cfe3d6; --img-bg:#11251f;
-    --hero-bg:#1d3a33; --hero-ink:#f2e8d5; --hero-ink-2:#dfe9e2; --hero-eyebrow:#9ec5ab;
-    --hero-rule:#3f6358; --hero-line:#9ec5ab; --hero-wave:rgba(158,197,171,.14);
-    --map-ink:#9ec5ab; --map-opacity:.085; --shadow:0 12px 34px rgba(0,0,0,.45);
+    --ground:#0f0f0e; --panel:#181817; --panel-hi:#20201e; --line:#2b2b28; --rule:#242422;
+    --wood:#3a3a37; --chip:#3e3e3a; --sep:#55554f;
+    --son:#d4604b; --on-son:#ffffff;
+    --dong:#ef8a73; --dong-link:#f29a86; --dong-hi:#ffc4b5;
+    --fill:#f4f3ef; --fill-hi:#ffffff; --on-fill:#0f0f0e;
+    --nga:#f4f3ef; --nga-2:#d8d6d0; --muted:#a3a19b; --label:#9d9b95; --soft:#c9c7c1;
+    --celadon:#8fc7ad; --sea:#2f5a4e; --on-sea:#ffffff; --on-sea-2:#d9ece3; --img-bg:#1d1d1b;
+    --hero-bg:#0f0f0e; --hero-ink:#f4f3ef; --hero-ink-2:#c9c7c1; --hero-eyebrow:#ef8a73;
+    --hero-rule:#2b2b28; --hero-line:#f4f3ef; --hero-wave:rgba(255,255,255,.06);
+    --map-ink:#ffffff; --map-opacity:.035; --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -12px rgba(0,0,0,.6);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --ground:#1f1509; --panel:#2a1c0c; --panel-hi:#3a2810; --line:#4a3420; --rule:#3d2a15;
-  --wood:#5c3d24; --chip:#8a7656; --sep:#6b5638;
-  --son:#a5402e; --on-son:#fbf1e2;
-  --dong:#d9a441; --dong-link:#e6b95a; --dong-hi:#f2d48a;
-  --fill:#d9a441; --fill-hi:#f2d48a; --on-fill:#1f1509;
-  --nga:#f2e8d5; --nga-2:#e0d3b6; --muted:#c9b896; --label:#b5a37f; --soft:#d6c8a8;
-  --celadon:#9ec5ab; --sea:#2f5a4e; --on-sea:#e3f0e7; --on-sea-2:#cfe3d6; --img-bg:#11251f;
-  --hero-bg:#1d3a33; --hero-ink:#f2e8d5; --hero-ink-2:#dfe9e2; --hero-eyebrow:#9ec5ab;
-  --hero-rule:#3f6358; --hero-line:#9ec5ab; --hero-wave:rgba(158,197,171,.14);
-  --map-ink:#9ec5ab; --map-opacity:.085; --shadow:0 12px 34px rgba(0,0,0,.45);
+  --ground:#0f0f0e; --panel:#181817; --panel-hi:#20201e; --line:#2b2b28; --rule:#242422;
+  --wood:#3a3a37; --chip:#3e3e3a; --sep:#55554f;
+  --son:#d4604b; --on-son:#ffffff;
+  --dong:#ef8a73; --dong-link:#f29a86; --dong-hi:#ffc4b5;
+  --fill:#f4f3ef; --fill-hi:#ffffff; --on-fill:#0f0f0e;
+  --nga:#f4f3ef; --nga-2:#d8d6d0; --muted:#a3a19b; --label:#9d9b95; --soft:#c9c7c1;
+  --celadon:#8fc7ad; --sea:#2f5a4e; --on-sea:#ffffff; --on-sea-2:#d9ece3; --img-bg:#1d1d1b;
+  --hero-bg:#0f0f0e; --hero-ink:#f4f3ef; --hero-ink-2:#c9c7c1; --hero-eyebrow:#ef8a73;
+  --hero-rule:#2b2b28; --hero-line:#f4f3ef; --hero-wave:rgba(255,255,255,.06);
+  --map-ink:#ffffff; --map-opacity:.035; --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -12px rgba(0,0,0,.6);
 }
 
 /* ===== Nền tảng ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--ground)}
-body{color:var(--nga);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;
+body{color:var(--nga);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;
   background:transparent;min-height:100vh}
 a{color:var(--dong-link)} a:hover{color:var(--dong-hi)}
 :focus-visible{outline:2px solid var(--dong-hi);outline-offset:3px;border-radius:6px}
@@ -94,3 +95,7 @@ html[data-mode="dark"] .pref .i-moon{display:none}
 /* ===== Ghi chú: trò chơi bằng tiếng Việt ===== */
 .langNote{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.55;color:var(--muted)}
 .langNote svg{flex:0 0 auto;width:18px;height:18px;margin-top:1px;color:var(--dong)}
+
+/* ===== Tiêu đề hiện đại: đậm, khít chữ ===== */
+h1,h2,h3{letter-spacing:-.02em}
+h1{letter-spacing:-.035em}
