@@ -9,12 +9,12 @@ installable, offline-capable web application.
 
 [![Release](https://img.shields.io/github/v/release/thuyhuongctu/Vietnamese-History-Games?label=release&color=b8860b)](https://github.com/thuyhuongctu/Vietnamese-History-Games/releases)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21850564.svg)](https://doi.org/10.5281/zenodo.21850564)
-[![PWA](https://img.shields.io/badge/PWA-installable%20%C2%B7%20offline-5a3&logo=pwa)](https://thuyhuongctu.github.io/Vietnamese-History-Games/)
+[![PWA](https://img.shields.io/badge/PWA-installable%20%C2%B7%20offline-5a3&logo=pwa)](https://game.jemappellehuong.com/)
 [![License](https://img.shields.io/badge/license-proprietary%20·%20all%20rights%20reserved-lightgrey)](LICENSE)
 [![three.js](https://img.shields.io/badge/3D-three.js-049EF4?logo=threedotjs&logoColor=white)](van-don-3d/)
 [![Phaser](https://img.shields.io/badge/2D-Phaser%203-2ea3f2)](cho-noi/)
 
-**[▶ Play now: thuyhuongctu.github.io/Vietnamese-History-Games](https://thuyhuongctu.github.io/Vietnamese-History-Games/)**
+**[▶ Play now: game.jemappellehuong.com](https://game.jemappellehuong.com/)**
 
 *No installation, no account, no advertising, no data collection.*
 
@@ -99,11 +99,11 @@ web. It is free to play and to teach with, but it is not open-source software: s
 
 | | Game | Setting | Basis | Genre | Play |
 |---|---|---|---|---|---|
-| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
-| 🚶 | **Vân Đồn 3D** — Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don-3d/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
-| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
-| 🌊 | **Bắc Hải Đảo 3D** | 1780 | Fiction | The same world rendered in 3D | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
-| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
+| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://game.jemappellehuong.com/van-don/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
+| 🚶 | **Vân Đồn 3D** — Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://game.jemappellehuong.com/van-don-3d/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
+| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://game.jemappellehuong.com/bac-hai-dao/) · [About](https://game.jemappellehuong.com/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
+| 🌊 | **Bắc Hải Đảo 3D** | 1780 | Fiction | The same world rendered in 3D | [Play](https://game.jemappellehuong.com/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
+| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://game.jemappellehuong.com/cho-noi/) · [About](https://game.jemappellehuong.com/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
 
 ### Vân Đồn — The First Trading Port (1149)
 
@@ -209,7 +209,7 @@ invest in buildings, how tax rates affect demand) that can open a class discussi
 
 ### Play online
 
-Open the [portal](https://thuyhuongctu.github.io/Vietnamese-History-Games/) in any
+Open the [portal](https://game.jemappellehuong.com/) in any
 modern browser. On Android, choose **Install** (or **Add to Home Screen**) to get
 the full-screen offline application. On iOS, use Safari and choose
 **Share → Add to Home Screen**. A Google Play build (a Trusted Web Activity wrapping

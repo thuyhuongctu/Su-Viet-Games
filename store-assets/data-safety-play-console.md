@@ -51,7 +51,7 @@ Bỏ qua toàn bộ. Không tick bất kỳ loại dữ liệu nào.
 
 | Trường | Giá trị |
 |---|---|
-| Privacy policy URL | `https://thuyhuongctu.github.io/Vietnamese-History-Games/privacy.html` |
+| Privacy policy URL | `https://game.jemappellehuong.com/privacy.html` |
 
 Đây là trang chính sách song ngữ Việt–Anh đã có sẵn trong repo
 ([`privacy.html`](../privacy.html)). Kiểm tra link mở được trước khi nộp.
