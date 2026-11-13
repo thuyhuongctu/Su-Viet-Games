@@ -381,6 +381,11 @@ Correspondence: [thuyhuongctu@gmail.com](mailto:thuyhuongctu@gmail.com)
 Issues and suggestions are welcome through the repository
 [issue tracker](https://github.com/thuyhuongctu/Vietnamese-History-Games/issues).
 
+Related project by the same author: [BizOn](https://bizonland.com/), a set of simulation
+games for learning international business. BizOn lists *Vân Đồn* among its extended games,
+and the portal footer, the Vân Đồn introduction page and the Vân Đồn achievements panel link
+back to it. BizOn is a separate site with its own privacy policy.
+
 ---
 
 <div align="center">
