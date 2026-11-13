@@ -8,7 +8,7 @@ h1,h2{font-family:var(--serif);font-weight:700}
 h2{font-size:clamp(1.8rem,3vw,2.3rem);line-height:1.15}
 section.blk{padding-top:80px;display:flex;flex-direction:column;gap:22px}
 .skip{position:absolute;left:-999px;top:8px;background:var(--fill);color:var(--on-fill);
-  padding:10px 16px;border-radius:8px;z-index:10;font-weight:700}
+  padding:10px 16px;border-radius:999px;z-index:10;font-weight:700}
 .skip:focus{left:8px}
 
 /* ===== Thanh trên + đường dẫn ===== */
@@ -42,8 +42,8 @@ h1{font-size:clamp(2.3rem,4.4vw,3.2rem);line-height:1.06}
   border-radius:999px;font:700 17px var(--sans);text-decoration:none}
 .btnFill{background:var(--fill);color:var(--on-fill)}
 .btnFill:hover{background:var(--fill-hi);color:var(--on-fill)}
-.btnLine{min-height:48px;border:1px solid var(--dong);color:var(--dong-link);font-weight:600;font-size:15px}
-.btnLine:hover{background:rgba(217,164,65,.12)}
+.btnLine{min-height:48px;border:1px solid var(--line);color:var(--nga);font-weight:600;font-size:15px}
+.btnLine:hover{border-color:var(--nga);color:var(--nga)}
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px;margin-top:6px;
   padding-top:18px;border-top:1px solid var(--rule)}
 .facts dt{font-size:12px;letter-spacing:.08em;color:var(--label);text-transform:uppercase}
