@@ -197,7 +197,9 @@ invest in buildings, how tax rates affect demand) that can open a class discussi
   strings and *đàn bầu* pitch bends
 - **Theme songs**: two sung theme songs in Vietnamese (Vân Đồn and Bắc Hải Đảo),
   played from the title screen and the victory screen, with lyrics; each song is
-  downloaded only when the player first listens, then cached for offline use
+  downloaded only when the player first listens, then cached for offline use. A
+  third song shared by both games, *Người trao ta chân trời*, plays from the
+  portal homepage, with its lyrics
 - **Desktop and mobile input**: keyboard on desktop, touch joystick and buttons on
   phones and tablets
 - **Local progress storage**: saved games and high scores stay in browser storage on
@@ -256,6 +258,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 ├── cho-noi/                 Chợ Nổi: floating market, Phaser 3 (19th century); gioi-thieu.html About page
 ├── lib/three.min.js         Vendored three.js r147
 ├── assets/vendor/           Vendored Phaser 3.90.0 and its licence
+├── assets/nhac/             Người trao ta chân trời, the song shared by both games
 ├── assets/portal/           Portal thumbnails and the shared CSS of the About pages
 ├── icons/                   Application icon set (192, 512, maskable)
 ├── docs/                    Screenshots and the Zenodo description
@@ -276,7 +279,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 | 3D games (Vân Đồn 3D, Bắc Hải Đảo 3D) | [three.js](https://threejs.org/) r147, vendored locally |
 | Characters in Vân Đồn 3D | Photographed clay figures, background removed, shown as camera-facing cut-outs (WebP with alpha); the player figure is split into body and two feet for walking |
 | 2D game engine (Chợ Nổi) | [Phaser 3](https://phaser.io/) v3.90.0, vendored locally |
-| Audio | Web Audio API for generated music and sound effects; two MP3 theme songs fetched on demand |
+| Audio | Web Audio API for generated music and sound effects; three MP3 songs fetched on demand |
 | Application platform | Progressive Web App: manifest, service worker, shortcuts |
 | Persistence | Browser `localStorage`, device-local only |
 | Distribution | GitHub Pages; Trusted Web Activity build for Google Play; home-screen installation on iOS |
@@ -285,7 +288,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 The project uses no build tooling and no content delivery networks. The two external
 libraries are vendored so that the application works fully offline and each archived
 release is complete and independently executable. The service worker pre-caches the
-pages, libraries and images at installation; the theme songs (about 4–6 MB each) are
+pages, libraries and images at installation; the songs (about 4–6 MB each) are
 left out of the pre-cache and cached on first play, to keep the first installation
 light.
 
