@@ -67,6 +67,7 @@ h1{font-size:clamp(2.3rem,4.4vw,3.2rem);line-height:1.06}
 .lead{font-size:17px;line-height:1.6;color:#d6c8a8;max-width:44rem}
 .tblBox{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
 table{width:100%;border-collapse:collapse;min-width:520px;font-size:15px}
+table.narrow{min-width:0}
 th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
 thead th{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;background:var(--panel)}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
@@ -84,8 +85,8 @@ td strong{color:var(--nga)}
 .cap p{font-size:15px;line-height:1.55;color:var(--nga-2);margin-top:4px}
 
 /* ===== Cảng + cách chơi ===== */
-.twoCol{display:flex;flex-wrap:wrap;gap:40px}
-.twoCol > div{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.twoCol, section.blk.twoCol{display:flex;flex-direction:row;flex-wrap:wrap;gap:40px}
+.twoCol > div{flex:1 1 340px;min-width:0;max-width:100%;display:flex;flex-direction:column;gap:14px}
 .ports{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;counter-reset:p}
 .ports li{padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:15px;
   display:flex;gap:10px;align-items:baseline;counter-increment:p}

@@ -40,7 +40,7 @@ Vietnamese history, published as an installable, offline-capable web application
 
 ## Overview
 
-**ThuyHuong Digital 2026 — Games** is a portal of four history-themed HTML5
+**ThuyHuong Digital 2026 — Games** is a portal of five history-themed HTML5
 games covering three periods of Vietnamese history: the maritime trading port
 of Vân Đồn under the Lý dynasty (1149), piracy and coastal trade in the Gulf
 of Tonkin (1780), and the floating markets of the Mekong Delta during the
@@ -91,10 +91,11 @@ software: see [License](#license-and-third-party-components).
 
 | | Game | Period | Genre | Play |
 |---|---|---|---|---|
-| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [Guide](van-don/README.md) |
-| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [Guide](bac-hai-dao/README.md) |
+| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | City building, port management | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
+| 🚶 | **Vân Đồn 3D** — Walking the Port *(preview)* | 1149–1348 | Trading, port tax, walking in 3D | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don-3d/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
+| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Adventure, trading, naval combat | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
 | 🌊 | **Bắc Hải Đảo 3D** | 1780 | The same world rendered in 3D | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
-| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [Guide](cho-noi/README.md) |
+| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Arcade, reaction and timing | [Play](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/) · [About](https://thuyhuongctu.github.io/Vietnamese-History-Games/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
 
 ### Vân Đồn — The First Trading Port (1149)
 
@@ -107,6 +108,16 @@ includes tiered building upgrades, royal tribute quests, an in-game history
 codex, an achievements board, and a separate challenge mode recreating the
 Battle of Vân Đồn (1288), in which Trần Khánh Dư intercepted the Yuan supply
 fleet.
+
+### Vân Đồn 3D — Walking the Port (preview)
+
+A three.js edition in which the player walks the quayside among clay-figure
+characters: buying goods at the kilns and workshops, delivering orders to
+Song, Srivijayan, Javanese and Siamese ships, and setting the port tax. A game
+runs over six chapters spanning 1149 to 1348, each a ninety-second market
+session with one task from the court; three chapters follow events recorded in
+the *Đại Việt sử ký toàn thư* and three are dramatised. Intended for players
+aged 16 and over.
 
 ### Bắc Hải Đảo — Pirates of the Gulf of Tonkin (1780)
 
@@ -207,11 +218,13 @@ given in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese).
 .
 ├── index.html               Portal homepage (chronological timeline)
 ├── van-don/                 Vân Đồn: port building (1149)
+├── van-don-3d/              Vân Đồn 3D: walking the port, three.js (preview)
 ├── bac-hai-dao/             Bắc Hải Đảo: pirate adventure, 2D (1780)
 ├── bac-hai-dao-3d/          Bắc Hải Đảo 3D: three.js edition
 ├── cho-noi/                 Chợ Nổi: floating market, Phaser 3 (19th century)
 ├── lib/three.min.js         Vendored three.js r147
 ├── assets/vendor/           Vendored Phaser 3.90.0 and its licence
+├── assets/portal/           Portal thumbnails and the shared CSS of the game About pages
 ├── icons/                   Application icon set (192, 512, maskable)
 ├── docs/screenshots/        Screenshots used in this document
 ├── store-assets/            Store listings and promotional graphics
