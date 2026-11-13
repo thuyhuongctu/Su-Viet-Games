@@ -91,7 +91,8 @@
   .ov.pick .card{max-height:none;overflow:visible}
   .card details{text-align:left;font-size:14px;margin:10px 0}
   .song{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0 0}
-  .songName{font-size:13px;color:var(--celadon)}
+  .songName{font-size:13px;color:var(--celadon);flex-basis:100%}
+  .song a.btn{text-decoration:none;display:inline-flex;align-items:center}
   .lyrics{max-height:40vh;overflow:auto;padding-right:6px}
   .lyrics p{margin:0 0 10px;line-height:1.55}
   .lyrics .tag{margin:12px 0 4px;color:var(--celadon);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
@@ -158,8 +159,9 @@
       </ul>
     </details>
     <div class="song">
-      <button class="btn btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button>
       <span class="songName">«Vân Đồn – Tiếng vọng non sông»</span>
+      <button class="btn btnSong" type="button" aria-pressed="false">🎵 Nghe bài hát</button>
+      <a class="btn" href="https://youtu.be/RaACW3fvrQM" target="_blank" rel="noopener">📺 Xem lyric video ↗</a>
     </div>
     <details>
       <summary>Lời bài hát «Vân Đồn – Tiếng vọng non sông»</summary>

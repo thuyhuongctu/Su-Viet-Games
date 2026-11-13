@@ -165,6 +165,11 @@ nén 96 kbps (3,8 MB), làm bằng Suno.
 - Khi bài hát phát, nhạc nền ngũ cung nhỏ lại; tắt âm thanh (🔇) hoặc chuyển thẻ thì bài hát dừng.
 - Bài hát chỉ tải khi người chơi bấm nghe lần đầu, rồi được service worker lưu lại để nghe khi
   mất mạng; không nằm trong danh sách tải sẵn lúc cài, để lần cài đầu không nặng thêm 3,8 MB.
+- Màn mở đầu có thêm nút 📺 «Xem lyric video» mở [https://youtu.be/RaACW3fvrQM](https://youtu.be/RaACW3fvrQM) ở thẻ mới.
+  Là **liên kết**, không phải khung nhúng: nhúng iframe của YouTube là gọi ra ngoài ngay lúc mở
+  trang, phá lời hứa «no third-party requests at runtime» ở README gốc và mục «không công cụ
+  theo dõi/phân tích của bên thứ ba» trong `privacy.html`. Vì lẽ ấy cũng không lấy ảnh nền video
+  từ `i.ytimg.com`. Liên kết thì không gọi gì cho tới khi người chơi bấm và rời trang.
 
 ## Kỹ thuật
 
