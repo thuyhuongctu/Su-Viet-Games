@@ -199,6 +199,29 @@ shirt, jacket, trousers, base, pedestal, clay disc
 *Lý do:* khăn xếp và mũ songkok gắn với thời kỳ Hồi giáo hoá (từ thế kỷ 13–15 trở đi);
 kỹ thuật batik và gấm songket chưa chắc có ở thế kỷ 12; dao kris mang dáng hiện nay muộn hơn.
 
+## 12. Sứ thần triều đình mang chiếu
+
+Đại diện cho triều đình trong game: hiện ở thẻ mở đầu mỗi chương (giao việc), ở chương 5
+«Chiếu đòi cống», và ở màn kết thúc (đọc lời xét công). **Không tạo hình vua:** năm 1149 vua
+Lý Anh Tông mới 13 tuổi, và không có sử chép vua đến Vân Đồn; việc của triều đình đến bến
+qua chiếu và sứ thần.
+
+```
+A senior Dai Viet court envoy of the Ly dynasty, 12th century, dignified middle-aged man with
+a thin moustache and short beard, black lacquered teeth.
+Black futou-style official cap (phoc dau) with two short stiff flat wings at the back,
+long dark purple-red cross-collar court robe (giao linh) with wide sleeves, plain black trim,
+a jade ring hanging from a plain cloth belt, black cloth boots.
+Holds with both hands, raised to chest height, a closed rolled edict scroll on two wooden rods,
+wrapped in plain yellow silk and tied with a red cord. No writing visible.
+Serious, respectful expression. Standing straight on a plain flat background, no base, no pedestal.
+```
+
+*Ghi chú:* mũ phốc đầu và đi ủng theo lệ triều phục định năm 1059 (*Toàn thư*). Màu áo theo
+phẩm hàm thời Lý chưa rõ, nên chọn màu đỏ tía trầm, không thêu rồng. Cuộn chiếu không có chữ
+để tránh chữ Hán bịa. Thêm vào khối cấm: `dragon embroidery, golden dragon robe, crown,
+visible characters on the scroll, base, pedestal`.
+
 ---
 
 ## Bảng soát trước khi đưa ảnh vào game
