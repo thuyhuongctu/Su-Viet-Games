@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1f1509">
+<script>(function(){try{var r=document.documentElement,l=localStorage.getItem('thd-lang'),m=localStorage.getItem('thd-theme');if(l==='vi'||l==='en')r.lang=l;if(m==='light'||m==='dark')r.setAttribute('data-theme',m);}catch(e){}})();</script>
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="../icons/icon-192.png">
 <link rel="apple-touch-icon" href="../icons/icon-192.png">
-<title>Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ · ThuyHuong Digital</title>
-<meta name="description" content="Bắc Hải Đảo: phiêu lưu hải tặc trên vịnh Bắc Bộ năm 1780. Chọn thuyền trưởng, buôn bán qua sáu thương cảng cổ, đánh giặc Tàu Ô và hạ trùm Hắc Giao. Chơi miễn phí trên trình duyệt, bản 2D và 3D.">
-<meta property="og:title" content="Bắc Hải Đảo — Hải Tặc Vịnh Bắc Bộ">
-<meta property="og:description" content="Phiêu lưu, hải chiến, buôn bán giữa đảo đá vôi Hạ Long năm 1780. Chơi miễn phí trên trình duyệt.">
+<title data-vi-text="Bắc Hải Đảo: Hải Tặc Vịnh Bắc Bộ · ThuyHuong Digital">Bắc Hải Đảo: Pirates of the Gulf of Tonkin · ThuyHuong Digital</title>
+<meta name="description" content="Bắc Hải Đảo: a pirate adventure in the Gulf of Tonkin, 1780. Choose a captain, trade between six old ports, fight Tàu Ô raiders and defeat the pirate lord Hắc Giao. Free in your browser, in 2D and 3D."
+  data-vi-content="Bắc Hải Đảo: phiêu lưu hải tặc trên vịnh Bắc Bộ năm 1780. Chọn thuyền trưởng, buôn bán qua sáu thương cảng cổ, đánh giặc Tàu Ô và hạ trùm Hắc Giao. Chơi miễn phí trên trình duyệt, bản 2D và 3D.">
+<meta property="og:title" content="Bắc Hải Đảo: Pirates of the Gulf of Tonkin">
+<meta property="og:description" content="Adventure, sea battles and trade among the limestone islands of Hạ Long, 1780. Free in your browser.">
 <meta property="og:image" content="../assets/portal/bac-hai-dao.webp">
+<link rel="stylesheet" href="../assets/portal/site.css">
 <link rel="stylesheet" href="../assets/portal/gioi-thieu.css">
 </head>
 <body>
-<a class="skip" href="#noi-dung">Bỏ qua, đến nội dung</a>
+<a class="skip" href="#noi-dung"><span lang="en">Skip to content</span><span lang="vi">Bỏ qua, đến nội dung</span></a>
 
 <header class="top">
-  <nav class="wrap" aria-label="Đường dẫn">
-    <ol class="crumbs">
-      <li><a href="../index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Cổng trò chơi</a></li>
-      <li><a href="../index.html#era1780">1780 · Vịnh Bắc Bộ</a></li>
-      <li><span aria-current="page">Bắc Hải Đảo</span></li>
-    </ol>
-  </nav>
+  <div class="wrap topIn">
+    <nav aria-label="Breadcrumb" data-vi-aria-label="Đường dẫn">
+      <ol class="crumbs">
+        <li><a href="../index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span lang="en">All games</span><span lang="vi">Cổng trò chơi</span></a></li>
+        <li><a href="../index.html#era1780"><span lang="en">1780 · Gulf of Tonkin</span><span lang="vi">1780 · Vịnh Bắc Bộ</span></a></li>
+        <li><span aria-current="page">Bắc Hải Đảo</span></li>
+      </ol>
+    </nav>
+    <div class="prefs">
+      <button id="prefLang" class="pref" type="button" hidden>Tiếng Việt</button>
+      <button id="prefTheme" class="pref" type="button" hidden aria-label="Switch to dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
 </header>
 
 <main id="noi-dung" class="wrap">
@@ -32,187 +44,203 @@
     <figure class="gallery">
       <div class="main">
         <img id="shot" src="../assets/portal/bac-hai-dao.webp" width="800" height="500"
-          alt="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng">
+          alt="Bắc Hải Đảo: a bat-wing junk on the gulf beside an island port"
+          data-vi-alt="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng">
       </div>
-      <ul class="thumbs" aria-label="Chọn ảnh">
+      <ul class="thumbs" aria-label="Choose a picture" data-vi-aria-label="Chọn ảnh">
         <li><button type="button" aria-pressed="true" data-src="../assets/portal/bac-hai-dao.webp"
-          data-alt="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng" data-cap="Bản 2D — bản đồ vịnh nhìn từ trên cao">
-          <img src="../assets/portal/bac-hai-dao.webp" width="800" height="500" alt="Ảnh 1: bản 2D"></button></li>
+          data-alt-en="Bắc Hải Đảo: a bat-wing junk on the gulf beside an island port" data-alt-vi="Bắc Hải Đảo: thuyền buồm cánh dơi trên vịnh, cạnh đảo có bến cảng"
+          data-cap-en="2D edition: the gulf seen from above" data-cap-vi="Bản 2D: bản đồ vịnh nhìn từ trên cao">
+          <img src="../assets/portal/bac-hai-dao.webp" width="800" height="500" alt="Picture 1: 2D edition" data-vi-alt="Ảnh 1: bản 2D"></button></li>
         <li><button type="button" aria-pressed="false" data-src="../assets/portal/bac-hai-dao-captains.webp"
-          data-alt="Màn chọn thuyền trưởng với bốn nhân vật" data-cap="Màn chọn thuyền trưởng">
-          <img src="../assets/portal/bac-hai-dao-captains.webp" width="800" height="500" alt="Ảnh 2: chọn thuyền trưởng"></button></li>
+          data-alt-en="The captain selection screen with four characters" data-alt-vi="Màn chọn thuyền trưởng với bốn nhân vật"
+          data-cap-en="Choosing a captain" data-cap-vi="Màn chọn thuyền trưởng">
+          <img src="../assets/portal/bac-hai-dao-captains.webp" width="800" height="500" alt="Picture 2: choosing a captain" data-vi-alt="Ảnh 2: chọn thuyền trưởng"></button></li>
         <li><button type="button" aria-pressed="false" data-src="../assets/portal/bac-hai-dao-3d.webp"
-          data-alt="Bắc Hải Đảo 3D: camera đuổi sau thuyền giữa đảo đá vôi" data-cap="Bản 3D — camera đuổi sau thuyền">
-          <img src="../assets/portal/bac-hai-dao-3d.webp" width="800" height="500" alt="Ảnh 3: bản 3D"></button></li>
+          data-alt-en="Bắc Hải Đảo 3D: chase camera behind the junk among limestone islands" data-alt-vi="Bắc Hải Đảo 3D: camera đuổi sau thuyền giữa đảo đá vôi"
+          data-cap-en="3D edition: chase camera behind the junk" data-cap-vi="Bản 3D: camera đuổi sau thuyền">
+          <img src="../assets/portal/bac-hai-dao-3d.webp" width="800" height="500" alt="Picture 3: 3D edition" data-vi-alt="Ảnh 3: bản 3D"></button></li>
       </ul>
-      <figcaption id="shotCap" aria-live="polite">Bản 2D — bản đồ vịnh nhìn từ trên cao</figcaption>
+      <figcaption id="shotCap" aria-live="polite">2D edition: the gulf seen from above</figcaption>
     </figure>
 
     <div class="aside">
-      <span class="tag">Truyện hư cấu · bối cảnh có thật</span>
+      <span class="tag"><span lang="en">Fiction · real setting</span><span lang="vi">Truyện hư cấu · bối cảnh có thật</span></span>
       <h1>Bắc Hải Đảo</h1>
-      <span class="alias">Hải Tặc Vịnh Bắc Bộ</span>
-      <p>Lái thuyền buồm cánh dơi giữa đảo đá vôi Hạ Long, buôn nước mắm, lụa, trầm hương qua
+      <span class="alias"><span lang="en">Pirates of the Gulf of Tonkin</span><span lang="vi">Hải Tặc Vịnh Bắc Bộ</span></span>
+      <p lang="en">Sail a bat-wing junk among the limestone islands of Hạ Long, trade fish sauce, silk and agarwood between
+        six old ports, sink Tàu Ô raiders, meet the sacred Dragon and defeat the pirate lord Hắc Giao to become
+        King of the Northern Sea.</p>
+      <p lang="vi">Lái thuyền buồm cánh dơi giữa đảo đá vôi Hạ Long, buôn nước mắm, lụa, trầm hương qua
         sáu thương cảng cổ, đánh chìm giặc Tàu Ô, gặp Rồng thiêng và hạ trùm Hắc Giao để xưng
         Vua Bắc Hải Đảo.</p>
-      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi bản 2D</a>
-      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html">Chơi bản 3D</a>
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span lang="en">Play the 2D edition</span><span lang="vi">Chơi bản 2D</span></a>
+      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html"><span lang="en">Play the 3D edition</span><span lang="vi">Chơi bản 3D</span></a>
+      <p class="langNote" lang="en"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16.5v.01"/></svg>The game itself is in Vietnamese for now.</p>
       <dl class="facts">
-        <div><dt>Thể loại</dt><dd>Phiêu lưu, hải chiến, buôn bán</dd></div>
-        <div><dt>Bối cảnh</dt><dd>Vịnh Bắc Bộ, năm 1780</dd></div>
-        <div><dt>Thiết bị</dt><dd>Máy tính, điện thoại, máy tính bảng</dd></div>
-        <div><dt>Lưu game</dt><dd>Tự lưu mỗi lần cập bến</dd></div>
+        <div><dt><span lang="en">Genre</span><span lang="vi">Thể loại</span></dt><dd><span lang="en">Adventure, sea battles, trade</span><span lang="vi">Phiêu lưu, hải chiến, buôn bán</span></dd></div>
+        <div><dt><span lang="en">Setting</span><span lang="vi">Bối cảnh</span></dt><dd><span lang="en">Gulf of Tonkin, 1780</span><span lang="vi">Vịnh Bắc Bộ, năm 1780</span></dd></div>
+        <div><dt><span lang="en">Devices</span><span lang="vi">Thiết bị</span></dt><dd><span lang="en">Computer, phone, tablet</span><span lang="vi">Máy tính, điện thoại, máy tính bảng</span></dd></div>
+        <div><dt><span lang="en">Saving</span><span lang="vi">Lưu game</span></dt><dd><span lang="en">Saves each time you dock</span><span lang="vi">Tự lưu mỗi lần cập bến</span></dd></div>
       </dl>
     </div>
   </div>
 
   <section class="blk" aria-labelledby="h-boi-canh">
-    <span class="eyebrow">Bối cảnh</span>
-    <h2 id="h-boi-canh">Thể loại hải tặc, chất liệu Việt Nam</h2>
-    <p class="lead">Cốt truyện là hư cấu, nhưng cảnh vật, thuyền bè, thương cảng và hàng hóa đều
+    <span class="eyebrow"><span lang="en">Setting</span><span lang="vi">Bối cảnh</span></span>
+    <h2 id="h-boi-canh"><span lang="en">A pirate game, told in Vietnamese</span><span lang="vi">Thể loại hải tặc, chất liệu Việt Nam</span></h2>
+    <p class="lead" lang="en">The story is invented, but the scenery, the boats, the ports and the cargo all come from
+      the north-eastern coast of Vietnam.</p>
+    <p class="lead" lang="vi">Cốt truyện là hư cấu, nhưng cảnh vật, thuyền bè, thương cảng và hàng hóa đều
       lấy từ vùng biển Đông Bắc Việt Nam.</p>
     <div class="tblBox" tabindex="0" role="region" aria-labelledby="h-boi-canh">
       <table>
-        <thead><tr><th scope="col">Trong game hải tặc quen thuộc</th><th scope="col">Trong Bắc Hải Đảo</th></tr></thead>
+        <thead><tr><th scope="col"><span lang="en">In a familiar pirate game</span><span lang="vi">Trong game hải tặc quen thuộc</span></th><th scope="col"><span lang="en">In Bắc Hải Đảo</span><span lang="vi">Trong Bắc Hải Đảo</span></th></tr></thead>
         <tbody>
-          <tr><th scope="row">Vùng biển xa lạ</th><td>Vịnh Bắc Bộ với <strong>đảo đá vôi Hạ Long</strong></td></tr>
-          <tr><th scope="row">Tàu galleon</th><td>Thuyền buồm <strong>cánh dơi</strong> (ghe mành)</td></tr>
+          <tr><th scope="row"><span lang="en">A far-off pirate sea</span><span lang="vi">Vùng biển xa lạ</span></th><td><span lang="en">The Gulf of Tonkin and the <strong>limestone islands of Hạ Long</strong></span><span lang="vi">Vịnh Bắc Bộ với <strong>đảo đá vôi Hạ Long</strong></span></td></tr>
+          <tr><th scope="row"><span lang="en">Galleons</span><span lang="vi">Tàu galleon</span></th><td><span lang="en"><strong>Bat-wing</strong> junks (ghe mành)</span><span lang="vi">Thuyền buồm <strong>cánh dơi</strong> (ghe mành)</span></td></tr>
           <tr><th scope="row">Port Royal, Tortuga</th><td><strong>Vân Đồn</strong>, Hòn Gai, Cát Bà, Quan Lạn, Cô Tô, Bạch Long Vĩ</td></tr>
-          <tr><th scope="row">Rượu rum, thuốc lá, vàng</th><td>Muối, <strong>nước mắm Cát Hải</strong>, chè Thái Nguyên, gốm Chu Đậu, lụa, quế, ngọc trai Cô Tô, trầm hương</td></tr>
-          <tr><th scope="row">Hải tặc Râu Đen</th><td>Giặc <strong>Tàu Ô</strong> và trùm <strong>Hắc Giao</strong></td></tr>
-          <tr><th scope="row">Kraken, nàng tiên cá</th><td><strong>Rồng thiêng Hạ Long</strong> hiện lên ban phước</td></tr>
-          <tr><th scope="row">Đồng doubloon</th><td><strong>Lượng</strong> bạc</td></tr>
+          <tr><th scope="row"><span lang="en">Rum, tobacco, gold</span><span lang="vi">Rượu rum, thuốc lá, vàng</span></th><td><span lang="en">Salt, <strong>Cát Hải fish sauce</strong>, Thái Nguyên tea, Chu Đậu ceramics, silk, cinnamon, Cô Tô pearls, agarwood</span><span lang="vi">Muối, <strong>nước mắm Cát Hải</strong>, chè Thái Nguyên, gốm Chu Đậu, lụa, quế, ngọc trai Cô Tô, trầm hương</span></td></tr>
+          <tr><th scope="row"><span lang="en">Blackbeard</span><span lang="vi">Hải tặc Râu Đen</span></th><td><span lang="en"><strong>Tàu Ô</strong> raiders and their lord <strong>Hắc Giao</strong></span><span lang="vi">Giặc <strong>Tàu Ô</strong> và trùm <strong>Hắc Giao</strong></span></td></tr>
+          <tr><th scope="row"><span lang="en">The kraken, mermaids</span><span lang="vi">Kraken, nàng tiên cá</span></th><td><span lang="en">The <strong>sacred Dragon of Hạ Long</strong>, who rises to bless sailors</span><span lang="vi"><strong>Rồng thiêng Hạ Long</strong> hiện lên ban phước</span></td></tr>
+          <tr><th scope="row"><span lang="en">Doubloons</span><span lang="vi">Đồng doubloon</span></th><td><span lang="en">Silver <strong>lượng</strong> (taels)</span><span lang="vi"><strong>Lượng</strong> bạc</span></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section class="blk" aria-labelledby="h-thuyen-truong">
-    <span class="eyebrow">Phân vai</span>
-    <h2 id="h-thuyen-truong">Bốn thuyền trưởng, bốn lối chơi</h2>
+    <span class="eyebrow"><span lang="en">Captains</span><span lang="vi">Phân vai</span></span>
+    <h2 id="h-thuyen-truong"><span lang="en">Four captains, four ways to play</span><span lang="vi">Bốn thuyền trưởng, bốn lối chơi</span></h2>
     <ul class="caps">
       <li class="cap">
-        <img src="assets/do-doc-phuong-hoa.jpg" width="700" height="928" loading="lazy" alt="Chân dung Đô đốc T’Hương">
+        <img src="assets/do-doc-phuong-hoa.jpg" width="700" height="928" loading="lazy" alt="Portrait of Admiral T’Hương" data-vi-alt="Chân dung Đô đốc T’Hương">
         <div class="capBody">
-          <span class="capRole">Thiện chiến nhất</span>
-          <h3>Đô đốc T’Hương</h3>
-          <span class="capNick">«Phượng Hỏa Bắc Hải»</span>
-          <p>+1 nòng pháo mỗi mạn, nạp đạn nhanh hơn 30%. Buồm ngọc lam và màn kết thắng trận riêng.</p>
+          <span class="capRole"><span lang="en">The best fighter</span><span lang="vi">Thiện chiến nhất</span></span>
+          <h3><span lang="en">Admiral T’Hương</span><span lang="vi">Đô đốc T’Hương</span></h3>
+          <span class="capNick">«Phượng Hỏa Bắc Hải»<span lang="en">, Fire Phoenix of the North Sea</span></span>
+          <p lang="en">One extra cannon on each side and 30% faster reloading. Turquoise sails and her own victory scene.</p>
+          <p lang="vi">+1 nòng pháo mỗi mạn, nạp đạn nhanh hơn 30%. Buồm ngọc lam và màn kết thắng trận riêng.</p>
         </div>
       </li>
       <li class="cap">
-        <img src="assets/lai-buon-tran-van-don.jpg" width="896" height="1200" loading="lazy" alt="Chân dung Lái buôn Trần Vân Đồn">
+        <img src="assets/lai-buon-tran-van-don.jpg" width="896" height="1200" loading="lazy" alt="Portrait of Trần Vân Đồn the merchant" data-vi-alt="Chân dung Lái buôn Trần Vân Đồn">
         <div class="capBody">
-          <span class="capRole">Giàu nhanh nhất</span>
-          <h3>Lái buôn Trần Vân Đồn</h3>
-          <span class="capNick">«Thần Toán Bến Cổ»</span>
-          <p>Mua rẻ 10%, bán đắt 10%, thêm 20 khoang hàng.</p>
+          <span class="capRole"><span lang="en">The fastest to riches</span><span lang="vi">Giàu nhanh nhất</span></span>
+          <h3><span lang="en">Trần Vân Đồn, merchant</span><span lang="vi">Lái buôn Trần Vân Đồn</span></h3>
+          <span class="capNick">«Thần Toán Bến Cổ»<span lang="en">, Reckoner of the Old Wharf</span></span>
+          <p lang="en">Buys 10% cheaper, sells 10% dearer, and carries 20 more units of cargo.</p>
+          <p lang="vi">Mua rẻ 10%, bán đắt 10%, thêm 20 khoang hàng.</p>
         </div>
       </li>
       <li class="cap">
-        <img src="assets/kiem-khach-hai-au.jpg" width="805" height="1200" loading="lazy" alt="Chân dung Kiếm khách Hải Âu">
+        <img src="assets/kiem-khach-hai-au.jpg" width="805" height="1200" loading="lazy" alt="Portrait of Hải Âu the swordswoman" data-vi-alt="Chân dung Kiếm khách Hải Âu">
         <div class="capBody">
-          <span class="capRole">Cơ động nhất</span>
-          <h3>Kiếm khách Hải Âu</h3>
-          <span class="capNick">«Cánh Én Ngược Gió»</span>
-          <p>Tốc độ +15%, bẻ lái nhanh hơn 25%.</p>
+          <span class="capRole"><span lang="en">The most agile</span><span lang="vi">Cơ động nhất</span></span>
+          <h3><span lang="en">Hải Âu, swordswoman</span><span lang="vi">Kiếm khách Hải Âu</span></h3>
+          <span class="capNick">«Cánh Én Ngược Gió»<span lang="en">, Swallow Against the Wind</span></span>
+          <p lang="en">15% faster under sail and turns 25% quicker.</p>
+          <p lang="vi">Tốc độ +15%, bẻ lái nhanh hơn 25%.</p>
         </div>
       </li>
       <li class="cap">
-        <img src="assets/ba-tu-cat-hai.jpg" width="896" height="896" loading="lazy" alt="Chân dung Bà Tư Cát Hải">
+        <img src="assets/ba-tu-cat-hai.jpg" width="896" height="896" loading="lazy" alt="Portrait of Bà Tư Cát Hải" data-vi-alt="Chân dung Bà Tư Cát Hải">
         <div class="capBody">
-          <span class="capRole">Bền bỉ nhất</span>
+          <span class="capRole"><span lang="en">The toughest</span><span lang="vi">Bền bỉ nhất</span></span>
           <h3>Bà Tư Cát Hải</h3>
-          <span class="capNick">«Mẹ Biển Cả»</span>
-          <p>+50 máu, +4 thủy thủ.</p>
+          <span class="capNick">«Mẹ Biển Cả»<span lang="en">, Mother of the Sea</span></span>
+          <p lang="en">50 more hull points and four more crew.</p>
+          <p lang="vi">+50 máu, +4 thủy thủ.</p>
         </div>
       </li>
     </ul>
   </section>
 
   <section class="blk" aria-labelledby="h-vong-choi">
-    <span class="eyebrow">Vòng chơi</span>
-    <h2 id="h-vong-choi">Từ lái buôn đến Vua Bắc Hải Đảo</h2>
+    <span class="eyebrow"><span lang="en">How a game goes</span><span lang="vi">Vòng chơi</span></span>
+    <h2 id="h-vong-choi"><span lang="en">From trader to King of the Northern Sea</span><span lang="vi">Từ lái buôn đến Vua Bắc Hải Đảo</span></h2>
     <ol class="loop">
-      <li><b>Buôn hàng</b><span>Mỗi cảng có đặc sản giá rẻ và mặt hàng khan hiếm giá cao. Mua chỗ rẻ, chở sang bán chỗ đắt; giá dao động theo thời gian.</span></li>
-      <li><b>Chiến đấu</b><span>Giặc Tàu Ô tuần tra khắp vịnh. Đánh chìm chúng để lấy chiến lợi phẩm và uy danh. Xuôi gió chạy nhanh, ngược gió ì ạch.</span></li>
-      <li><b>Nâng cấp</b><span>Ở xưởng tàu: thân gỗ lim, buồm lớn, thêm nòng thần công, mở rộng khoang hàng. Mộ thủy thủ ở quán rượu.</span></li>
-      <li><b>Bão biển</b><span>Khi bão nổi phải hạ buồm — căng buồm to trong bão sẽ vỡ tàu.</span></li>
-      <li><b>Rồng thiêng Hạ Long</b><span>Thỉnh thoảng hiện lên giữa các đảo đá. Chèo đến gần để được hồi máu, thuận buồm và cộng uy danh.</span></li>
-      <li><b>Trận cuối</b><span>Đạt 10 uy danh, trùm Hắc Giao xuất trận gần Bạch Long Vĩ. Đánh chìm soái hạm của hắn để xưng Vua Bắc Hải Đảo.</span></li>
+      <li><b><span lang="en">Trade</span><span lang="vi">Buôn hàng</span></b><span lang="en">Every port has cheap local goods and scarce goods that sell high. Buy low, ship it, sell high. Prices drift over time.</span><span lang="vi">Mỗi cảng có đặc sản giá rẻ và mặt hàng khan hiếm giá cao. Mua chỗ rẻ, chở sang bán chỗ đắt; giá dao động theo thời gian.</span></li>
+      <li><b><span lang="en">Fight</span><span lang="vi">Chiến đấu</span></b><span lang="en">Tàu Ô raiders patrol the gulf. Sink them for loot and renown, and mind the wind: you fly downwind and crawl against it.</span><span lang="vi">Giặc Tàu Ô tuần tra khắp vịnh. Đánh chìm chúng để lấy chiến lợi phẩm và uy danh. Xuôi gió chạy nhanh, ngược gió ì ạch.</span></li>
+      <li><b><span lang="en">Upgrade</span><span lang="vi">Nâng cấp</span></b><span lang="en">At the shipyard: an ironwood hull, bigger sails, more cannon, a larger hold. Hire crew at the tavern.</span><span lang="vi">Ở xưởng tàu: thân gỗ lim, buồm lớn, thêm nòng thần công, mở rộng khoang hàng. Mộ thủy thủ ở quán rượu.</span></li>
+      <li><b><span lang="en">Storms</span><span lang="vi">Bão biển</span></b><span lang="en">When a storm blows in, shorten sail: full sail in a storm will wreck the ship.</span><span lang="vi">Khi bão nổi phải hạ buồm, vì căng buồm to trong bão sẽ vỡ tàu.</span></li>
+      <li><b><span lang="en">The Dragon of Hạ Long</span><span lang="vi">Rồng thiêng Hạ Long</span></b><span lang="en">It sometimes rises among the rocks. Sail close to be healed, given a fair wind and more renown.</span><span lang="vi">Thỉnh thoảng hiện lên giữa các đảo đá. Chèo đến gần để được hồi máu, thuận buồm và cộng uy danh.</span></li>
+      <li><b><span lang="en">The final battle</span><span lang="vi">Trận cuối</span></b><span lang="en">At 10 renown, Hắc Giao sails out near Bạch Long Vĩ. Sink his flagship to be crowned King of the Northern Sea.</span><span lang="vi">Đạt 10 uy danh, trùm Hắc Giao xuất trận gần Bạch Long Vĩ. Đánh chìm soái hạm của hắn để xưng Vua Bắc Hải Đảo.</span></li>
     </ol>
-    <p class="note">Thua trận không mất hết: dân chài Vân Đồn vớt bạn về bến, chỉ mất nửa số bạc.</p>
+    <p class="note"><span lang="en">Losing isn’t the end: Vân Đồn fishermen tow you home, and you lose only half your silver.</span><span lang="vi">Thua trận không mất hết: dân chài Vân Đồn vớt bạn về bến, chỉ mất nửa số bạc.</span></p>
   </section>
 
-  <section class="blk twoCol" aria-label="Thương cảng và cách điều khiển">
+  <section class="blk twoCol" aria-label="Ports and controls" data-vi-aria-label="Thương cảng và cách điều khiển">
     <div>
-      <span class="eyebrow">Hải trình</span>
-      <h2>Sáu thương cảng</h2>
+      <span class="eyebrow"><span lang="en">Voyage</span><span lang="vi">Hải trình</span></span>
+      <h2><span lang="en">Six trading ports</span><span lang="vi">Sáu thương cảng</span></h2>
       <ol class="ports">
         <li>Vân Đồn</li><li>Hòn Gai</li><li>Cát Bà</li><li>Quan Lạn</li><li>Cô Tô</li><li>Bạch Long Vĩ</li>
       </ol>
-      <span class="h3">Hàng hóa</span>
+      <span class="h3"><span lang="en">Cargo</span><span lang="vi">Hàng hóa</span></span>
       <ul class="goods">
-        <li>Muối</li><li>Nước mắm Cát Hải</li><li>Chè Thái Nguyên</li><li>Gốm Chu Đậu</li>
-        <li>Lụa</li><li>Quế</li><li>Ngọc trai Cô Tô</li><li>Trầm hương</li>
+        <li><span lang="en">Salt</span><span lang="vi">Muối</span></li><li><span lang="en">Cát Hải fish sauce</span><span lang="vi">Nước mắm Cát Hải</span></li>
+        <li><span lang="en">Thái Nguyên tea</span><span lang="vi">Chè Thái Nguyên</span></li><li><span lang="en">Chu Đậu ceramics</span><span lang="vi">Gốm Chu Đậu</span></li>
+        <li><span lang="en">Silk</span><span lang="vi">Lụa</span></li><li><span lang="en">Cinnamon</span><span lang="vi">Quế</span></li>
+        <li><span lang="en">Cô Tô pearls</span><span lang="vi">Ngọc trai Cô Tô</span></li><li><span lang="en">Agarwood</span><span lang="vi">Trầm hương</span></li>
       </ul>
     </div>
     <div>
-      <span class="eyebrow">Điều khiển</span>
-      <h2>Cách chơi</h2>
-      <span class="h3">Máy tính</span>
+      <span class="eyebrow"><span lang="en">Controls</span><span lang="vi">Điều khiển</span></span>
+      <h2><span lang="en">How to play</span><span lang="vi">Cách chơi</span></h2>
+      <span class="h3"><span lang="en">Computer</span><span lang="vi">Máy tính</span></span>
       <dl class="keys">
-        <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Căng / hạ buồm (3 cấp)</dd></div>
-        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Bẻ lái</dd></div>
-        <div><dt><kbd>Space</kbd></dt><dd>Khai hỏa thần công hai mạn</dd></div>
-        <div><dt><kbd>E</kbd></dt><dd>Cập bến khi đến gần cảng</dd></div>
-        <div><dt><kbd>P</kbd></dt><dd>Tạm dừng</dd></div>
-        <div><dt><kbd>M</kbd></dt><dd>Bật / tắt nhạc</dd></div>
+        <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd><span lang="en">Raise / lower sail (3 levels)</span><span lang="vi">Căng / hạ buồm (3 cấp)</span></dd></div>
+        <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd><span lang="en">Steer</span><span lang="vi">Bẻ lái</span></dd></div>
+        <div><dt><kbd>Space</kbd></dt><dd><span lang="en">Fire cannon on both sides</span><span lang="vi">Khai hỏa thần công hai mạn</span></dd></div>
+        <div><dt><kbd>E</kbd></dt><dd><span lang="en">Dock when near a port</span><span lang="vi">Cập bến khi đến gần cảng</span></dd></div>
+        <div><dt><kbd>P</kbd></dt><dd><span lang="en">Pause</span><span lang="vi">Tạm dừng</span></dd></div>
+        <div><dt><kbd>M</kbd></dt><dd><span lang="en">Music on / off</span><span lang="vi">Bật / tắt nhạc</span></dd></div>
       </dl>
-      <span class="h3">Điện thoại, máy tính bảng</span>
-      <p class="note">Nút cảm ứng tự hiện: góc trái để bẻ lái và căng/hạ buồm, góc phải giữ để khai hỏa liên tục.
+      <span class="h3"><span lang="en">Phone and tablet</span><span lang="vi">Điện thoại, máy tính bảng</span></span>
+      <p class="note" lang="en">Touch buttons appear automatically: bottom-left to steer and set sail, hold bottom-right to keep firing.
+        Tap the docking prompt to enter a port. Landscape works best.</p>
+      <p class="note" lang="vi">Nút cảm ứng tự hiện: góc trái để bẻ lái và căng/hạ buồm, góc phải giữ để khai hỏa liên tục.
         Chạm dòng «Nhấn E để cập bến» để vào cảng. Nên xoay ngang màn hình.</p>
     </div>
   </section>
 
   <section class="band" aria-labelledby="h-bai-hat">
-    <img src="assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy" alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
+    <img src="assets/nhac/bac-hai-dao-bia.jpg" width="260" height="360" loading="lazy" alt="Cover art for the song Theo cánh buồm quê hương" data-vi-alt="Ảnh bìa bài hát Theo cánh buồm quê hương">
     <div class="bandTxt">
-      <span class="eyebrow">Bài hát chủ đề</span>
+      <span class="eyebrow"><span lang="en">Theme song</span><span lang="vi">Bài hát chủ đề</span></span>
       <h2 id="h-bai-hat">«Theo cánh buồm quê hương»</h2>
-      <p>Bài hát dài 5 phút 47 giây, vang lên ở màn mở đầu và khi xưng Vua, trong cả bản 2D và 3D.
+      <p lang="en">“Following the Sails of Home”, 5 min 47 s, sung in Vietnamese. It plays on the title screen and when you are crowned,
+        in both the 2D and 3D editions. While you sail, a pentatonic score of zither and monochord is generated live in the game.</p>
+      <p lang="vi">Bài hát dài 5 phút 47 giây, vang lên ở màn mở đầu và khi xưng Vua, trong cả bản 2D và 3D.
         Lúc ra khơi, nhạc nền ngũ cung đàn tranh, đàn bầu được tạo trực tiếp trong game.</p>
       <audio controls preload="none" src="assets/nhac/bac-hai-dao-theo-canh-buom-que-huong.mp3">
-        Trình duyệt của bạn chưa phát được âm thanh.
+        <span lang="en">Your browser cannot play this audio.</span><span lang="vi">Trình duyệt của bạn chưa phát được âm thanh.</span>
       </audio>
+      <a href="../index.html#music"><span lang="en">Also: «Người trao ta chân trời», the song shared by Vân Đồn and Bắc Hải Đảo</span><span lang="vi">Nghe thêm «Người trao ta chân trời», bài hát chung của Vân Đồn và Bắc Hải Đảo</span></a>
     </div>
   </section>
 
   <div class="cta">
-    <h2>Sẵn sàng ra khơi?</h2>
+    <h2><span lang="en">Ready to set sail?</span><span lang="vi">Sẵn sàng ra khơi?</span></h2>
     <div class="row">
-      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Chơi bản 2D</a>
-      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html">Chơi bản 3D</a>
+      <a class="btn btnFill" href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><span lang="en">Play 2D</span><span lang="vi">Chơi bản 2D</span></a>
+      <a class="btn btnLine" href="../bac-hai-dao-3d/index.html"><span lang="en">Play 3D</span><span lang="vi">Chơi bản 3D</span></a>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="wrap footIn">
-    <span>© 2026 ThuyHuong Digital · Trò chơi HTML5 thuần</span>
-    <span><a href="../index.html">Về cổng trò chơi</a> · <a href="../privacy.html">Quyền riêng tư</a></span>
+    <span>© 2026 ThuyHuong Digital · <span lang="en">Pure HTML5 games</span><span lang="vi">Trò chơi HTML5 thuần</span></span>
+    <span><a href="../index.html"><span lang="en">All games</span><span lang="vi">Về cổng trò chơi</span></a> · <a href="../privacy.html"><span lang="en">Privacy</span><span lang="vi">Quyền riêng tư</span></a></span>
   </div>
 </footer>
 
+<script src="../assets/portal/site.js"></script>
+<script src="../assets/portal/gallery.js"></script>
 <script>
 'use strict';
-// Thư viện ảnh: bấm ảnh nhỏ để đổi ảnh lớn
-const shot=document.getElementById('shot'), cap=document.getElementById('shotCap');
-const btns=document.querySelectorAll('.thumbs button');
-btns.forEach(b => b.addEventListener('click', () => {
-  btns.forEach(x => x.setAttribute('aria-pressed', x===b ? 'true' : 'false'));
-  shot.src=b.dataset.src; shot.alt=b.dataset.alt; cap.textContent=b.dataset.cap;
-}));
 if('serviceWorker' in navigator){
   addEventListener('load', () => { navigator.serviceWorker.register('../sw.js').catch(()=>{}); });
 }

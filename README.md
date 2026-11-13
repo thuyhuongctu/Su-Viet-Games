@@ -74,24 +74,24 @@ web. It is free to play and to teach with, but it is not open-source software: s
 <td width="50%"><img src="docs/screenshots/van-don.png" alt="Vân Đồn: a developed trading port with piers, kilns, workshops and a watchtower"></td>
 </tr>
 <tr>
-<td><b>Portal</b> — the games on a chronological timeline, labelled by historical basis.</td>
-<td><b>Vân Đồn (1149)</b> — the port after several rounds of construction: piers, pottery kilns, silk workshops, shrines and a naval watchtower.</td>
+<td><b>Portal</b>: the games on a chronological timeline, labelled by historical basis.</td>
+<td><b>Vân Đồn (1149)</b>: the port after several rounds of construction: piers, pottery kilns, silk workshops, shrines and a naval watchtower.</td>
 </tr>
 <tr>
 <td><img src="docs/screenshots/van-don-3d.jpg" alt="Vân Đồn 3D: the player, a clay figure of a court official, walking on the quay with a pottery kiln and silk workshop behind"></td>
 <td><img src="docs/screenshots/bac-hai-dao-captains.jpg" alt="Captain selection screen showing four illustrated captains and their abilities"></td>
 </tr>
 <tr>
-<td><b>Vân Đồn 3D (1149–1348)</b> — walking the quay as a clay figure; ships wait at the piers with orders against the clock.</td>
-<td><b>Bắc Hải Đảo (1780)</b> — four playable captains, each with distinct starting conditions and abilities.</td>
+<td><b>Vân Đồn 3D (1149–1348)</b>: walking the quay as a clay figure; ships wait at the piers with orders against the clock.</td>
+<td><b>Bắc Hải Đảo (1780)</b>: four playable captains, each with distinct starting conditions and abilities.</td>
 </tr>
 <tr>
 <td><img src="docs/screenshots/bac-hai-dao-3d.jpg" alt="Third-person view behind a junk sailing among limestone islands in 3D"></td>
 <td><img src="docs/screenshots/cho-noi.png" alt="Chợ Nổi title screen showing the sampan and the scoring rules"></td>
 </tr>
 <tr>
-<td><b>Bắc Hải Đảo 3D (1780)</b> — the same world under a chase camera, with limestone karsts, sea surface and weather in three dimensions.</td>
-<td><b>Chợ Nổi (19th century)</b> — a ninety-second market session on the canals of the Mekong Delta.</td>
+<td><b>Bắc Hải Đảo 3D (1780)</b>: the same world under a chase camera, with limestone karsts, sea surface and weather in three dimensions.</td>
+<td><b>Chợ Nổi (19th century)</b>: a ninety-second market session on the canals of the Mekong Delta.</td>
 </tr>
 </table>
 
@@ -99,13 +99,13 @@ web. It is free to play and to teach with, but it is not open-source software: s
 
 | | Game | Setting | Basis | Genre | Play |
 |---|---|---|---|---|---|
-| 🏮 | **Vân Đồn** — The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://game.jemappellehuong.com/van-don/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
-| 🚶 | **Vân Đồn 3D** — Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://game.jemappellehuong.com/van-don-3d/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
-| 🏴‍☠️ | **Bắc Hải Đảo** — Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://game.jemappellehuong.com/bac-hai-dao/) · [About](https://game.jemappellehuong.com/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
+| 🏮 | **Vân Đồn**: The First Trading Port | 1149 | Historical records | City building, port management | [Play](https://game.jemappellehuong.com/van-don/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don/README.md) |
+| 🚶 | **Vân Đồn 3D**: Walking the Quay | 1149–1348 | Historical records | 3D trading, time pressure, building | [Play](https://game.jemappellehuong.com/van-don-3d/) · [About](https://game.jemappellehuong.com/van-don/gioi-thieu.html) · [Guide](van-don-3d/README.md) |
+| 🏴‍☠️ | **Bắc Hải Đảo**: Pirates of the Gulf of Tonkin | 1780 | Fiction | Adventure, trading, naval combat | [Play](https://game.jemappellehuong.com/bac-hai-dao/) · [About](https://game.jemappellehuong.com/bac-hai-dao/gioi-thieu.html) · [Guide](bac-hai-dao/README.md) |
 | 🌊 | **Bắc Hải Đảo 3D** | 1780 | Fiction | The same world rendered in 3D | [Play](https://game.jemappellehuong.com/bac-hai-dao-3d/) · [Guide](bac-hai-dao-3d/README.md) |
-| 🛶 | **Chợ Nổi** — Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://game.jemappellehuong.com/cho-noi/) · [About](https://game.jemappellehuong.com/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
+| 🛶 | **Chợ Nổi**: Floating Market | 19th century | Historical setting | Arcade, reaction and timing | [Play](https://game.jemappellehuong.com/cho-noi/) · [About](https://game.jemappellehuong.com/cho-noi/gioi-thieu.html) · [Guide](cho-noi/README.md) |
 
-### Vân Đồn — The First Trading Port (1149)
+### Vân Đồn: The First Trading Port (1149)
 
 In 1149, in the reign of King Lý Anh Tông, the court established Vân Đồn, commonly
 regarded as the first international trading port of Đại Việt. The player develops
@@ -116,7 +116,7 @@ includes tiered building upgrades, royal tribute quests, an in-game history code
 an achievements board, and a challenge mode recreating the Battle of Vân Đồn (1288),
 in which Trần Khánh Dư intercepted the Yuan supply fleet.
 
-### Vân Đồn 3D — Walking the Quay (1149–1348)
+### Vân Đồn 3D: Walking the Quay (1149–1348)
 
 The player walks the quay in three dimensions as a court official or a woman
 merchant, across six chapters. Three chapters follow entries in the *Đại Việt sử ký
@@ -129,7 +129,7 @@ sea shrine. A player whose reputation falls below zero is dismissed. Every chara
 is a photographed clay figure, cut out and placed in the scene; the player's figure
 walks on separate feet. The game has its own theme song, *Vân Đồn – Tiếng vọng non sông*.
 
-### Bắc Hải Đảo — Pirates of the Gulf of Tonkin (1780)
+### Bắc Hải Đảo: Pirates of the Gulf of Tonkin (1780)
 
 A maritime adventure among the limestone karsts of Hạ Long Bay. The player sails a
 bat-wing junk between six ports, trades fish sauce, silk, agarwood and pearls,
@@ -146,7 +146,7 @@ vessels, storm weather, and the Dragon of Hạ Long. All gameplay systems of the
 version are retained, and both versions remain available so that the portal still
 works on low-powered devices.
 
-### Chợ Nổi — Floating Market (19th century)
+### Chợ Nổi: Floating Market (19th century)
 
 An arcade game set in the floating markets that formed along the canals of the
 Mekong Delta as settlers opened up the southern provinces. A merchant barge crosses
@@ -160,7 +160,7 @@ and the drop rate increases progressively. Built on the Phaser 3 engine.
 The portal labels the Vân Đồn and Bắc Hải Đảo settings so that players and teachers
 can tell record from invention:
 
-- **📜 Based on historical records** — the Vân Đồn games. Dates, nations and events
+- **📜 Based on historical records**: the Vân Đồn games. Dates, nations and events
   cited in the games come from the *Đại Việt sử ký toàn thư*; each game has a
   history codex or stele that lists what is recorded and, separately, what the game
   simplifies or invents (tax rates, prices, the title «quan trấn thủ» in 1149,
@@ -168,7 +168,7 @@ can tell record from invention:
   the period: no blue-and-white porcelain, no dragon embroidery for officials, no
   Quốc ngữ signs. The prompts and checklist used for the figures are kept in
   [`van-don-3d/PROMPT-NHAN-VAT.md`](van-don-3d/PROMPT-NHAN-VAT.md).
-- **🎭 Fiction** — the Bắc Hải Đảo games. The year, the bay and the Tàu Ô pirates
+- **🎭 Fiction**: the Bắc Hải Đảo games. The year, the bay and the Tàu Ô pirates
   give the setting; captains, villains, the dragon and the kingship are invented.
   Fictional characters do not appear in the history-based games.
 
@@ -197,7 +197,9 @@ invest in buildings, how tax rates affect demand) that can open a class discussi
   strings and *đàn bầu* pitch bends
 - **Theme songs**: two sung theme songs in Vietnamese (Vân Đồn and Bắc Hải Đảo),
   played from the title screen and the victory screen, with lyrics; each song is
-  downloaded only when the player first listens, then cached for offline use
+  downloaded only when the player first listens, then cached for offline use. A
+  third song shared by both games, *Người trao ta chân trời*, and the portal's own
+  song, *Trong tôi có một nước Nam*, play from the portal homepage, with their lyrics
 - **Desktop and mobile input**: keyboard on desktop, touch joystick and buttons on
   phones and tablets
 - **Local progress storage**: saved games and high scores stay in browser storage on
@@ -256,6 +258,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 ├── cho-noi/                 Chợ Nổi: floating market, Phaser 3 (19th century); gioi-thieu.html About page
 ├── lib/three.min.js         Vendored three.js r147
 ├── assets/vendor/           Vendored Phaser 3.90.0 and its licence
+├── assets/nhac/             Songs for the portal homepage: Người trao ta chân trời, Trong tôi có một nước Nam
 ├── assets/portal/           Portal thumbnails and the shared CSS of the About pages
 ├── icons/                   Application icon set (192, 512, maskable)
 ├── docs/                    Screenshots and the Zenodo description
@@ -276,7 +279,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 | 3D games (Vân Đồn 3D, Bắc Hải Đảo 3D) | [three.js](https://threejs.org/) r147, vendored locally |
 | Characters in Vân Đồn 3D | Photographed clay figures, background removed, shown as camera-facing cut-outs (WebP with alpha); the player figure is split into body and two feet for walking |
 | 2D game engine (Chợ Nổi) | [Phaser 3](https://phaser.io/) v3.90.0, vendored locally |
-| Audio | Web Audio API for generated music and sound effects; two MP3 theme songs fetched on demand |
+| Audio | Web Audio API for generated music and sound effects; four MP3 songs fetched on demand |
 | Application platform | Progressive Web App: manifest, service worker, shortcuts |
 | Persistence | Browser `localStorage`, device-local only |
 | Distribution | GitHub Pages; Trusted Web Activity build for Google Play; home-screen installation on iOS |
@@ -285,7 +288,7 @@ listings is in [`HUONG-DAN-PHAT-HANH.md`](HUONG-DAN-PHAT-HANH.md) (in Vietnamese
 The project uses no build tooling and no content delivery networks. The two external
 libraries are vendored so that the application works fully offline and each archived
 release is complete and independently executable. The service worker pre-caches the
-pages, libraries and images at installation; the theme songs (about 4–6 MB each) are
+pages, libraries and images at installation; the songs (about 4–6 MB each) are
 left out of the pre-cache and cached on first play, to keep the first installation
 light.
 
@@ -380,6 +383,11 @@ Correspondence: [thuyhuongctu@gmail.com](mailto:thuyhuongctu@gmail.com)
 
 Issues and suggestions are welcome through the repository
 [issue tracker](https://github.com/thuyhuongctu/Vietnamese-History-Games/issues).
+
+Related project by the same author: [BizOn](https://bizonland.com/), a set of simulation
+games for learning international business. BizOn lists *Vân Đồn* among its extended games,
+and the portal footer, the Vân Đồn introduction page and the Vân Đồn achievements panel link
+back to it. BizOn is a separate site with its own privacy policy.
 
 ---
 
